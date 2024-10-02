@@ -1,5 +1,5 @@
 # 💫 About Me:
-👋 Hello! I'm Karmanya Singh Ravindra, a passionate and dynamic 21-year-old final-year student pursuing a Bachelor of Engineering (B.E.) in Computer Science & Design.<br><br>💻 I thrive in various domains of computer science, eagerly adapting to learn new technologies as needed. Currently, my primary focus areas include Cyber Security, Game Development, and XR (AR/VR) Development.<br><br>🚀 I am always excited to explore innovative solutions and contribute to meaningful projects. Let’s connect and collaborate!
+👋 Hello! I'm Karmanya Singh Ravindra, a passionate and dynamic 21-year-old final-year student pursuing a Bachelor of Engineering (B.E.) in Computer Science & Design.<br><br>💻 I thrive in various domains of computer science, eagerly adapting to learn new technologies as needed. Currently, my primary focus areas include Cyber Security & Ethical Hacking, Game Development, and XR (AR/VR) Development.<br><br>🚀 I am always excited to explore innovative solutions and contribute to meaningful projects. Let’s connect and collaborate!
 
 
 ## 🌐 Socials:
