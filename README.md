@@ -4,23 +4,16 @@
 
 Hey there! I'm **Karmanya Singh Ravindra**, a 22-year-old B.E. Computer Science & Design graduate who loves breaking things (ethically) and building them back stronger.
 
- ╔═══════════════════════════════════════════════════════╗
- ║                    🎯 FOCUS AREAS                     ║
- ╠═══════════════════════════════════════════════════════╣
- ║                                                       ║
- ║    ⚔️   Red Teaming & Offensive Security              ║
- ║    🛡️   Cyber Security & Ethical Hacking              ║
- ║    🎮   Game Development                              ║
- ║    🥽   XR Development (AR/VR)                        ║
- ║                                                       ║
- ╚═══════════════════════════════════════════════════════╝
+| 🎯 Focus Areas |  |
+|----------------|--|
+| ⚔️ Red Teaming & Offensive Security | 🛡️ Cyber Security & Ethical Hacking |
+| 🎮 Game Development | 🥽 XR Development (AR/VR) |
 
 🦀 Currently building blazingly fast security tools in **Rust**<br>
 🚀 Always hunting for vulnerabilities and innovative solutions<br>
 🤝 Open to collaborations on security research & cool projects
 
 > *"The quieter you become, the more you can hear."* — Kali Linux
-
 
 ## 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/karmanya03) [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white)](https://youtube.com/@Karmanya03) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:karmanya.ravindra@gmail.com) [![TryHackMe](https://img.shields.io/badge/TryHackMe-%23212C42?style=for-the-badge&logo=tryhackme&logoColor=white)](https://tryhackme.com/p/Karmanya03)
@@ -51,15 +44,15 @@ Hey there! I'm **Karmanya Singh Ravindra**, a 22-year-old B.E. Computer Science 
 
 
 # 📊 GitHub Stats:
-!<br/>
-!<br/>
-!
+![](https://github-readme-stats.vercel.app/api?username=Karmanya03&theme=radical&hide_border=true&include_all_commits=true&count_private=true)<br/>
+![](https://github-readme-streak-stats.herokuapp.com/?user=Karmanya03&theme=radical&hide_border=true)<br/>
+![](https://github-readme-stats.vercel.app/api/top-langs/?username=Karmanya03&theme=radical&hide_border=true&include_all_commits=true&count_private=true&layout=compact)
 
 ## 🏆 GitHub Trophies
-!
+![](https://github-profile-trophy.vercel.app/?username=Karmanya03&theme=radical&no-frame=true&no-bg=true&margin-w=4)
 
 ### 🔝 Top Contributed Repo
-!
+![](https://github-contributor-stats.vercel.app/api?username=Karmanya03&limit=5&theme=radical&combine_all_yearly_contributions=true)
 
 ---
-[!](https://visitcount.itsvg.in)
+[![](https://visitcount.itsvg.in/api?id=Karmanya03&icon=0&color=6)](https://visitcount.itsvg.in)
