@@ -2,7 +2,7 @@
 
 🔐 **Certified Red Team Professional (CRTP)** | Cyber Security Enthusiast | Game & XR Developer
 
-Hey there! I'm **Karmanya Singh Ravindra**, a 22-year-old B.E. Computer Science & Design graduate who loves breaking things (ethically) and building them back stronger.
+Hey there! I'm **Karmanya Ravindra**, a 22-year-old B.E. Computer Science & Design graduate who loves breaking things (ethically) and building them back stronger.
 
 | 🎯 Focus Areas |  |
 |----------------|--|
