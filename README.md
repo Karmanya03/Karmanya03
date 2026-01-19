@@ -16,7 +16,7 @@ Hey there! I'm **Karmanya Ravindra**, a 22-year-old B.E. Computer Science & Desi
 > *"The quieter you become, the more you can hear."* — Kali Linux
 
 ## 🌐 Socials:
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/karmanya03) [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white)](https://youtube.com/@Karmanya03) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:karmanya.ravindra@gmail.com) [![TryHackMe](https://img.shields.io/badge/TryHackMe-%23212C42?style=for-the-badge&logo=tryhackme&logoColor=white)](https://tryhackme.com/p/Karmanya03)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/karmanya03) [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white)](https://youtube.com/@Karmanya03) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:karmanya03@proton.me) [![TryHackMe](https://img.shields.io/badge/TryHackMe-%23212C42?style=for-the-badge&logo=tryhackme&logoColor=white)](https://tryhackme.com/p/Karmanya03)
 
 
 # 💻 Tech Stack:
