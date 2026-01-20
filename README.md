@@ -1,6 +1,6 @@
 # 💫 About Me:
 
-🔐 **Certified Red Team Professional (CRTP)** | Cyber Security Enthusiast | Game & XR Developer
+🔐 **Certified Red Team Professional (CRTP)** | Cyber Security Enthusiast | Engineer | Game & XR Developer
 
 Hey there! I'm **Karmanya Ravindra**, a 22-year-old B.E. Computer Science & Design graduate who loves breaking things (ethically) and building them back stronger.
 
