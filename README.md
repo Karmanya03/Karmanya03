@@ -52,8 +52,7 @@ Hey there! I'm **Karmanya Ravindra**, a 22-year-old B.E. Computer Science & Desi
 ![](https://github-profile-trophy.vercel.app/?username=Karmanya03&theme=radical&no-frame=true&no-bg=true&margin-w=4)
 
 ### 🔝 Top Contributed Repo
-![](https://github-readme-stats.vercel.app/api/pin/?username=Karmanya03&repo=Overthrone&theme=radical&hide_border=true)
-![](https://github-readme-stats.vercel.app/api/pin/?username=Karmanya03&repo=Deadrop&theme=radical&hide_border=true)
+![](https://github-contributor-stats.vercel.app/api?username=Karmanya03&limit=5&theme=radical&combine_all_yearly_contributions=true&v=2)
 
 ---
 [![](https://visitcount.itsvg.in/api?id=Karmanya03&icon=0&color=6)](https://visitcount.itsvg.in)
