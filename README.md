@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="https://i.postimg.cc/fbbfChpL/Karmanya03-Logo-New.gif" alt="Karmanya03 Logo" width="250" />
+</div>
+
+---
+
 # 💫 About Me:
 
 🔐 **Certified Red Team Professional (CRTP)** | Cyber Security Enthusiast | Engineer | Game & XR Developer
