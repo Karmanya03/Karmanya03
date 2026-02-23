@@ -1,6 +1,5 @@
-<div align="center">
-  <img src="[![Karmanya03-Logo-opti-Apng1.png](https://i.postimg.cc/prPTQP12/Karmanya03-Logo-opti-Apng1.png)](https://postimg.cc/R6b44xB8)" alt="Karmanya03 Logo" width="250" />
-</div>
+
+[![Karmanya03-Logo-opti-Apng1.png](https://i.postimg.cc/prPTQP12/Karmanya03-Logo-opti-Apng1.png)](https://postimg.cc/R6b44xB8)
 
 ---
 
