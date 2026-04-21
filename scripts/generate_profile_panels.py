@@ -206,33 +206,33 @@ def build_data(username: str) -> dict:
 
 
 def wrap_svg(title: str, subtitle: str, body: str, height: int) -> str:
-    return f"""<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1200\" height=\"{height}\" viewBox=\"0 0 1200 {height}\" role=\"img\" aria-label=\"{escape(title)}\">
-  <defs>
-    <linearGradient id=\"bg\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">
-      <stop offset=\"0%\" stop-color=\"#050505\"/>
-      <stop offset=\"50%\" stop-color=\"#110909\"/>
-      <stop offset=\"100%\" stop-color=\"#0a0a0a\"/>
-    </linearGradient>
+        return f"""<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1200\" height=\"{height}\" viewBox=\"0 0 1200 {height}\" role=\"img\" aria-label=\"{escape(title)}\">
+    <defs>
+        <linearGradient id=\"bg\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">
+            <stop offset=\"0%\" stop-color=\"#040406\"/>
+            <stop offset=\"48%\" stop-color=\"#0f090b\"/>
+            <stop offset=\"100%\" stop-color=\"#050507\"/>
+        </linearGradient>
         <radialGradient id=\"vignette\" cx=\"50%\" cy=\"45%\" r=\"70%\">
             <stop offset=\"0%\" stop-color=\"#000000\" stop-opacity=\"0\"/>
-            <stop offset=\"100%\" stop-color=\"#000000\" stop-opacity=\"0.62\"/>
+            <stop offset=\"100%\" stop-color=\"#000000\" stop-opacity=\"0.66\"/>
         </radialGradient>
-    <linearGradient id=\"accent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">
-      <stop offset=\"0%\" stop-color=\"#b30000\"/>
-      <stop offset=\"50%\" stop-color=\"#f4c35a\"/>
-      <stop offset=\"100%\" stop-color=\"#ffffff\"/>
-    </linearGradient>
+        <linearGradient id=\"accent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">
+            <stop offset=\"0%\" stop-color=\"#a80000\"/>
+            <stop offset=\"52%\" stop-color=\"#f4c35a\"/>
+            <stop offset=\"100%\" stop-color=\"#ffffff\"/>
+        </linearGradient>
         <linearGradient id=\"shine\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">
             <stop offset=\"0%\" stop-color=\"#ffffff\" stop-opacity=\"0\"/>
             <stop offset=\"45%\" stop-color=\"#f4c35a\" stop-opacity=\"0\"/>
-            <stop offset=\"50%\" stop-color=\"#f4c35a\" stop-opacity=\"0.85\"/>
+            <stop offset=\"50%\" stop-color=\"#f4c35a\" stop-opacity=\"0.88\"/>
             <stop offset=\"55%\" stop-color=\"#f4c35a\" stop-opacity=\"0\"/>
             <stop offset=\"100%\" stop-color=\"#ffffff\" stop-opacity=\"0\"/>
         </linearGradient>
-    <linearGradient id=\"gold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">
-      <stop offset=\"0%\" stop-color=\"#8c6a1a\"/>
-      <stop offset=\"100%\" stop-color=\"#f4c35a\"/>
-    </linearGradient>
+        <linearGradient id=\"gold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">
+            <stop offset=\"0%\" stop-color=\"#8c6a1a\"/>
+            <stop offset=\"100%\" stop-color=\"#f4c35a\"/>
+        </linearGradient>
         <pattern id=\"scan\" width=\"8\" height=\"8\" patternUnits=\"userSpaceOnUse\">
             <rect width=\"8\" height=\"8\" fill=\"transparent\"/>
             <path d=\"M0 0 L8 0\" stroke=\"#ffffff\" stroke-opacity=\"0.04\"/>
@@ -244,35 +244,58 @@ def wrap_svg(title: str, subtitle: str, body: str, height: int) -> str:
                 <feMergeNode in=\"SourceGraphic\"/>
             </feMerge>
         </filter>
-    <style>
-      .title {{ fill: #ffffff; font: 700 42px 'Segoe UI', 'Trebuchet MS', sans-serif; letter-spacing: 1px; }}
-      .subtitle {{ fill: #f6d489; font: 500 20px 'Segoe UI', 'Trebuchet MS', sans-serif; }}
-      .label {{ fill: #e8e8e8; font: 600 18px 'Segoe UI', 'Trebuchet MS', sans-serif; }}
-      .value {{ fill: #ffffff; font: 700 36px 'Segoe UI', 'Trebuchet MS', sans-serif; }}
-      .small {{ fill: #f7f7f7; font: 500 16px 'Segoe UI', 'Trebuchet MS', sans-serif; }}
-      .muted {{ fill: #d6d6d6; font: 500 14px 'Segoe UI', 'Trebuchet MS', sans-serif; }}
-      .stamp {{ fill: #ffffff; font: 600 13px 'Segoe UI', 'Trebuchet MS', sans-serif; opacity: 0.8; }}
-      .mono {{ fill: #ffffff; font: 600 15px 'Consolas', 'Segoe UI Mono', monospace; }}
-    </style>
-  </defs>
+        <style>
+            .title {{ fill: #ffffff; font: 700 42px 'Segoe UI', 'Trebuchet MS', sans-serif; letter-spacing: 1px; }}
+            .subtitle {{ fill: #f6d489; font: 500 20px 'Segoe UI', 'Trebuchet MS', sans-serif; }}
+            .label {{ fill: #e8e8e8; font: 600 18px 'Segoe UI', 'Trebuchet MS', sans-serif; }}
+            .value {{ fill: #ffffff; font: 700 36px 'Segoe UI', 'Trebuchet MS', sans-serif; }}
+            .small {{ fill: #f7f7f7; font: 500 16px 'Segoe UI', 'Trebuchet MS', sans-serif; }}
+            .muted {{ fill: #d6d6d6; font: 500 14px 'Segoe UI', 'Trebuchet MS', sans-serif; }}
+            .stamp {{ fill: #ffffff; font: 600 13px 'Segoe UI', 'Trebuchet MS', sans-serif; opacity: 0.8; }}
+            .mono {{ fill: #ffffff; font: 600 15px 'Consolas', 'Segoe UI Mono', monospace; }}
+        </style>
+    </defs>
 
-  <rect width=\"1200\" height=\"{height}\" fill=\"url(#bg)\"/>
+    <rect width=\"1200\" height=\"{height}\" fill=\"url(#bg)\"/>
     <rect width=\"1200\" height=\"{height}\" fill=\"url(#vignette)\"/>
-  <rect x=\"24\" y=\"24\" width=\"1152\" height=\"{height - 48}\" rx=\"24\" fill=\"#0d0d0f\" stroke=\"#f4c35a\" stroke-opacity=\"0.55\" stroke-width=\"2\"/>
+    <rect x=\"24\" y=\"24\" width=\"1152\" height=\"{height - 48}\" rx=\"24\" fill=\"#0d0d0f\" stroke=\"#f4c35a\" stroke-opacity=\"0.55\" stroke-width=\"2\"/>
     <rect x=\"24\" y=\"24\" width=\"1152\" height=\"{height - 48}\" rx=\"24\" fill=\"url(#scan)\" opacity=\"0.35\"/>
-  <rect x=\"24\" y=\"24\" width=\"1152\" height=\"7\" fill=\"url(#accent)\" rx=\"24\"/>
+    <rect x=\"24\" y=\"24\" width=\"1152\" height=\"7\" fill=\"url(#accent)\" rx=\"24\"/>
     <rect x=\"24\" y=\"24\" width=\"180\" height=\"7\" fill=\"url(#shine)\" rx=\"24\" filter=\"url(#softGlow)\">
         <animate attributeName=\"x\" values=\"24;996;24\" dur=\"8s\" repeatCount=\"indefinite\"/>
     </rect>
     <rect x=\"24\" y=\"34\" width=\"1152\" height=\"1.5\" fill=\"url(#accent)\" opacity=\"0.32\">
         <animate attributeName=\"y\" values=\"36;{height - 36};36\" dur=\"9s\" repeatCount=\"indefinite\"/>
     </rect>
+    <g opacity=\"0.36\">
+        <path d=\"M52 52 L122 52\" stroke=\"#f4c35a\" stroke-width=\"2\" stroke-linecap=\"round\">
+            <animate attributeName=\"stroke-opacity\" values=\"0.2;0.9;0.2\" dur=\"3.2s\" repeatCount=\"indefinite\"/>
+        </path>
+        <path d=\"M52 52 L52 122\" stroke=\"#f4c35a\" stroke-width=\"2\" stroke-linecap=\"round\">
+            <animate attributeName=\"stroke-opacity\" values=\"0.8;0.2;0.8\" dur=\"3.2s\" repeatCount=\"indefinite\"/>
+        </path>
+        <path d=\"M1148 52 L1078 52\" stroke=\"#f4c35a\" stroke-width=\"2\" stroke-linecap=\"round\">
+            <animate attributeName=\"stroke-opacity\" values=\"0.2;0.9;0.2\" dur=\"3.2s\" begin=\"0.6s\" repeatCount=\"indefinite\"/>
+        </path>
+        <path d=\"M1148 52 L1148 122\" stroke=\"#f4c35a\" stroke-width=\"2\" stroke-linecap=\"round\">
+            <animate attributeName=\"stroke-opacity\" values=\"0.8;0.2;0.8\" dur=\"3.2s\" begin=\"0.6s\" repeatCount=\"indefinite\"/>
+        </path>
+    </g>
+    <g opacity=\"0.55\">
+        <circle cx=\"1088\" cy=\"92\" r=\"7\" fill=\"#b30000\" filter=\"url(#softGlow)\">
+            <animate attributeName=\"r\" values=\"6;9;6\" dur=\"2.4s\" repeatCount=\"indefinite\"/>
+        </circle>
+        <circle cx=\"1088\" cy=\"92\" r=\"17\" fill=\"none\" stroke=\"#f4c35a\" stroke-width=\"1.2\">
+            <animate attributeName=\"r\" values=\"14;22;14\" dur=\"4.8s\" repeatCount=\"indefinite\"/>
+            <animate attributeName=\"stroke-opacity\" values=\"0.25;0.7;0.25\" dur=\"4.8s\" repeatCount=\"indefinite\"/>
+        </circle>
+    </g>
 
-  <text x=\"64\" y=\"92\" class=\"title\">{escape(title)}</text>
-  <text x=\"64\" y=\"126\" class=\"subtitle\">{escape(subtitle)}</text>
-  <text x=\"1136\" y=\"126\" class=\"stamp\" text-anchor=\"end\">Updated {dt.datetime.now(dt.timezone.utc).strftime('%d %b %Y %H:%M UTC')}</text>
+    <text x=\"64\" y=\"92\" class=\"title\">{escape(title)}</text>
+    <text x=\"64\" y=\"126\" class=\"subtitle\">{escape(subtitle)}</text>
+    <text x=\"1136\" y=\"126\" class=\"stamp\" text-anchor=\"end\">Updated {dt.datetime.now(dt.timezone.utc).strftime('%d %b %Y %H:%M UTC')}</text>
 
-  {body}
+    {body}
 </svg>
 """
 
@@ -318,8 +341,7 @@ def render_overview(data: dict) -> str:
   <text x=\"944\" y=\"{y}\" class=\"muted\">{count} repos</text>
 """
 
-    body += f"\n  <text x=\"64\" y=\"534\" class=\"muted\">Profile: {escape(data['username'])} | Command center is live</text>"
-    return wrap_svg("COMMAND CENTER", "Live profile telemetry and project momentum", body, 560)
+    return wrap_svg("COMMAND CENTER", "Live profile telemetry and project momentum", body, 540)
 
 
 def render_achievements(data: dict) -> str:
@@ -347,8 +369,7 @@ def render_achievements(data: dict) -> str:
   <text x=\"{x + 16}\" y=\"{y + 90}\" class=\"mono\">{state}</text>
 """
 
-    body += "\n  <text x=\"64\" y=\"478\" class=\"muted\">Custom milestones generated from repository, social, and activity signals.</text>"
-    return wrap_svg("ACHIEVEMENTS", "Milestones forged from live GitHub telemetry", body, 510)
+    return wrap_svg("ACHIEVEMENTS", "Milestones forged from live GitHub telemetry", body, 490)
 
 
 def render_trophies(data: dict) -> str:
@@ -393,8 +414,7 @@ def render_trophies(data: dict) -> str:
   <text x=\"1088\" y=\"{y - 6}\" class=\"mono\" text-anchor=\"end\">Rating {score}/100 [{tier}]</text>
 """
 
-    body += "\n  <text x=\"64\" y=\"548\" class=\"muted\">Ratings are computed from stars, forks, and placement in the trophy board.</text>"
-    return wrap_svg("TROPHY CASE", "Repository standings with trophy ratings", body, 580)
+        return wrap_svg("TROPHY CASE", "Repository standings with trophy ratings", body, 560)
 
 
 def render_recent_activity(data: dict) -> str:
@@ -417,8 +437,7 @@ def render_recent_activity(data: dict) -> str:
   <text x=\"98\" y=\"{y - 2}\" class=\"small\">{escape(truncate(line, 98))}</text>
 """
 
-    body += "\n  <text x=\"64\" y=\"510\" class=\"muted\">Source: GitHub public events API. Auto-refreshed by workflow.</text>"
-    return wrap_svg("RECENT ACTIVITY", "Ops timeline from live event feed", body, 540)
+    return wrap_svg("RECENT ACTIVITY", "Ops timeline from live event feed", body, 520)
 
 
 def render_radar(data: dict) -> str:
@@ -438,8 +457,7 @@ def render_radar(data: dict) -> str:
   <text x=\"1094\" y=\"{y}\" class=\"mono\" text-anchor=\"end\">{score:>3}/100</text>
 """
 
-    body += "\n  <text x=\"64\" y=\"488\" class=\"muted\">A custom cyber-style profile signature panel replacing snake animation.</text>"
-    return wrap_svg("ARSENAL RADAR", "Unique profile signature and capability bands", body, 520)
+    return wrap_svg("ARSENAL RADAR", "Unique profile signature and capability bands", body, 500)
 
 
 def write_file(path: str, content: str) -> None:

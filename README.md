@@ -31,8 +31,7 @@ Open to collaborations on security research and practical engineering projects
 ## SOCIAL CHANNELS
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-FFFFFF?style=for-the-badge&logo=linkedin&logoColor=0A66C2&labelColor=000000&color=8B0000)](https://linkedin.com/in/karmanya03)
-[![YouTube](https://img.shields.io/badge/YouTube-Watch-C9A227?style=for-the-badge&logo=youtube&logoColor=FF0000&labelColor=000000&color=8B0000)](https://youtube.com/@Karmanya03)
-[![Email](https://img.shields.io/badge/Email-Contact-8B0000?style=for-the-badge&logo=gmail&logoColor=FFFFFF&labelColor=000000&color=C9A227)](mailto:karmanya03@proton.me)
+[![Email](https://img.shields.io/badge/Email-Contact-8B0000?style=for-the-badge&logo=protonmail&logoColor=FFFFFF&labelColor=000000&color=C9A227)](mailto:karmanya03@proton.me)
 [![TryHackMe](https://img.shields.io/badge/TryHackMe-Profile-FFFFFF?style=for-the-badge&logo=tryhackme&logoColor=000000&labelColor=000000&color=8B0000)](https://tryhackme.com/p/Karmanya03)
 
 ## TECH ARSENAL
@@ -95,7 +94,7 @@ Open to collaborations on security research and practical engineering projects
 
 ### TROPHY CASE
 
-[![GitHub trophies](https://github-profile-trophy.vercel.app/?username=Karmanya03&theme=onedark&no-frame=true&no-bg=true&row=1&column=6&margin-w=8&margin-h=8)](https://github.com/ryo-ma/github-profile-trophy)
+![Trophy case panel](assets/panels/trophies.svg)
 
 ### RECENT ACTIVITY
 
