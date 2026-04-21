@@ -49,22 +49,27 @@ Hey there! I'm **Karmanya Ravindra**, a 22-year-old B.E. Computer Science & Desi
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) ![GitLab](https://img.shields.io/badge/gitlab-%23181717.svg?style=for-the-badge&logo=gitlab&logoColor=white) ![TOR](https://img.shields.io/badge/tor-%237E4798.svg?style=for-the-badge&logo=tor-project&logoColor=white) ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white) ![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white) ![Adobe](https://img.shields.io/badge/adobe-%23FF0000.svg?style=for-the-badge&logo=adobe&logoColor=white) ![Adobe After Effects](https://img.shields.io/badge/Adobe%20After%20Effects-9999FF.svg?style=for-the-badge&logo=Adobe%20After%20Effects&logoColor=white) ![Adobe Premiere Pro](https://img.shields.io/badge/Adobe%20Premiere%20Pro-9999FF.svg?style=for-the-badge&logo=Adobe%20Premiere%20Pro&logoColor=white) ![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white)
 
 
-# 📊 GitHub Stats:
-![](https://github-readme-stats-ruddy-eight-24.vercel.app/api?username=Karmanya03&theme=radical&hide_border=true&include_all_commits=true&count_private=true)<br/>
-![](https://github-readme-streak-stats.herokuapp.com/?user=Karmanya03&theme=radical&hide_border=true)<br/>
-![](https://github-readme-stats-ruddy-eight-24.vercel.app/api/top-langs/?username=Karmanya03&theme=radical&hide_border=true&include_all_commits=true&count_private=true&layout=compact)
+# 📊 GitHub Pulse
+![](https://raw.githubusercontent.com/Karmanya03/Karmanya03/main/github-metrics.svg)
 
-## 🏆 GitHub Trophies
-![](https://github-profile-trophy-flax-xi.vercel.app/?username=Karmanya03&theme=kimbie_dark&no-frame=true&no-bg=true&column=-1&margin-w=4)
+## 🏆 Achievements
+![](https://raw.githubusercontent.com/Karmanya03/Karmanya03/main/metrics.plugin.achievements.compact.svg)
 
-### 🔝 Top Repositories
-[![](https://github-readme-stats-ruddy-eight-24.vercel.app/api/pin/?username=Karmanya03&repo=Overthrone&theme=radical&hide_border=true)](https://github.com/Karmanya03/Overthrone)
-[![](https://github-readme-stats-ruddy-eight-24.vercel.app/api/pin/?username=Karmanya03&repo=Deadrop&theme=radical&hide_border=true)](https://github.com/Karmanya03/Deadrop)
-[![](https://github-readme-stats-ruddy-eight-24.vercel.app/api/pin/?username=Karmanya03&repo=PassMann&theme=radical&hide_border=true)](https://github.com/Karmanya03/PassMann)
-[![](https://github-readme-stats-ruddy-eight-24.vercel.app/api/pin/?username=Karmanya03&repo=Rustify&theme=radical&hide_border=true)](https://github.com/Karmanya03/Rustify)
-[![](https://github-readme-stats-ruddy-eight-24.vercel.app/api/pin/?username=Karmanya03&repo=Ferret-rs&theme=radical&hide_border=true)](https://github.com/Karmanya03/Ferret-rs)
+## 📅 Contribution Calendar
+![](https://raw.githubusercontent.com/Karmanya03/Karmanya03/main/metrics.plugin.isocalendar.fullyear.svg)
 
-### 📈 Contribution Graph
-![](https://github-readme-activity-graph.vercel.app/graph?username=Karmanya03&theme=redical&hide_border=true)
+## 🔝 Top Repositories
+![](https://raw.githubusercontent.com/Karmanya03/Karmanya03/main/metrics.plugin.repositories.pinned.svg)
+
+## 📰 Recent Activity
+![](https://raw.githubusercontent.com/Karmanya03/Karmanya03/main/metrics.plugin.activity.svg)
+
+## 🐍 Contribution Snake
+<picture>
+	<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Karmanya03/Karmanya03/output/github-snake-dark.svg" />
+	<source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Karmanya03/Karmanya03/output/github-snake.svg" />
+	<img alt="github-snake" src="https://raw.githubusercontent.com/Karmanya03/Karmanya03/output/github-snake.svg" />
+</picture>
+
 ---
-[![](https://visitcount.itsvg.in/api?id=Karmanya03&icon=0&color=6)](https://visitcount.itsvg.in)
+[![](https://komarev.com/ghpvc/?username=Karmanya03&style=for-the-badge&abbreviated=true)](https://github.com/Karmanya03)
