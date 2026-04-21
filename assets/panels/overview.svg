@@ -32,7 +32,7 @@
 
   <text x="64" y="92" class="title">COMMAND CENTER</text>
   <text x="64" y="126" class="subtitle">Live profile telemetry and project momentum</text>
-  <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 10:22 UTC</text>
+  <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 10:31 UTC</text>
 
   
   <rect x="64" y="162" width="256" height="124" rx="16" fill="#141417" stroke="#b30000" stroke-opacity="0.65"/>
@@ -63,26 +63,26 @@
   <text x="64" y="382" class="small">Python</text>
   <rect x="228" y="369" width="700" height="12" rx="6" fill="#1f1f24"/>
   <rect x="228" y="369" width="620" height="12" rx="6" fill="url(#accent)"/>
-  <text x="944" y="382" class="muted">11 repos</text>
+  <text x="944" y="382" class="muted">12 repos</text>
 
   <text x="64" y="410" class="small">Rust</text>
   <rect x="228" y="397" width="700" height="12" rx="6" fill="#1f1f24"/>
-  <rect x="228" y="397" width="281" height="12" rx="6" fill="url(#accent)"/>
+  <rect x="228" y="397" width="258" height="12" rx="6" fill="url(#accent)"/>
   <text x="944" y="410" class="muted">5 repos</text>
 
   <text x="64" y="438" class="small">CSS</text>
   <rect x="228" y="425" width="700" height="12" rx="6" fill="#1f1f24"/>
-  <rect x="228" y="425" width="225" height="12" rx="6" fill="url(#accent)"/>
+  <rect x="228" y="425" width="206" height="12" rx="6" fill="url(#accent)"/>
   <text x="944" y="438" class="muted">4 repos</text>
 
   <text x="64" y="466" class="small">JavaScript</text>
   <rect x="228" y="453" width="700" height="12" rx="6" fill="#1f1f24"/>
-  <rect x="228" y="453" width="169" height="12" rx="6" fill="url(#accent)"/>
+  <rect x="228" y="453" width="155" height="12" rx="6" fill="url(#accent)"/>
   <text x="944" y="466" class="muted">3 repos</text>
 
   <text x="64" y="494" class="small">HTML</text>
   <rect x="228" y="481" width="700" height="12" rx="6" fill="#1f1f24"/>
-  <rect x="228" y="481" width="112" height="12" rx="6" fill="url(#accent)"/>
+  <rect x="228" y="481" width="103" height="12" rx="6" fill="url(#accent)"/>
   <text x="944" y="494" class="muted">2 repos</text>
 
   <text x="64" y="534" class="muted">Profile: Karmanya03 | Theme: RED x GOLD x WHITE x BLACK</text>

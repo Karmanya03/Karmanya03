@@ -32,7 +32,7 @@
 
   <text x="64" y="92" class="title">TROPHY CASE</text>
   <text x="64" y="126" class="subtitle">Repository standings and project dominance</text>
-  <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 10:22 UTC</text>
+  <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 10:31 UTC</text>
 
   
   <text x="64" y="170" class="label">Top repositories by stars and forks</text>
@@ -56,7 +56,7 @@
   <circle cx="88" cy="289" r="13" fill="#c88956"/>
   <text x="88" y="293" text-anchor="middle" class="mono">3</text>
   <text x="112" y="294" class="small">Karmanya03</text>
-  <text x="760" y="294" class="muted">Lang: N/A</text>
+  <text x="760" y="294" class="muted">Lang: Python</text>
   <text x="930" y="294" class="muted">Stars: 0</text>
   <text x="1060" y="294" class="muted">Forks: 0</text>
 
