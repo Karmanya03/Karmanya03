@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "23 2 * * *"
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - README.md
+      - .github/workflows/update-profile-metrics.yml
 
 permissions:
   contents: write
