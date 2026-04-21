@@ -4,7 +4,6 @@
 
 ![Profile](https://img.shields.io/badge/KARMANYA_RAVINDRA-CYBER%20OPS-8B0000?style=for-the-badge&labelColor=000000&color=C9A227)
 ![CRTP](https://img.shields.io/badge/CRTP-Certified_Red_Team_Professional-FFFFFF?style=for-the-badge&labelColor=8B0000&color=000000)
-![Theme](https://img.shields.io/badge/THEME-RED%20x%20WHITE%20x%20GOLD%20x%20BLACK-C9A227?style=for-the-badge&labelColor=000000&color=8B0000)
 
 ---
 
@@ -29,7 +28,7 @@ Security engineer and offensive security enthusiast focused on red teaming, secu
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-FFFFFF?style=for-the-badge&logo=linkedin&logoColor=0A66C2&labelColor=000000&color=8B0000)](https://linkedin.com/in/karmanya03)
 [![YouTube](https://img.shields.io/badge/YouTube-Watch-C9A227?style=for-the-badge&logo=youtube&logoColor=FF0000&labelColor=000000&color=8B0000)](https://youtube.com/@Karmanya03)
 [![Email](https://img.shields.io/badge/Email-Contact-8B0000?style=for-the-badge&logo=gmail&logoColor=FFFFFF&labelColor=000000&color=C9A227)](mailto:karmanya03@proton.me)
-[![TryHackMe](https://img.shields.io/badge/TryHackMe-Profile-FFFFFF?style=for-the-badge&logo=tryhackme&logoColor=000000&labelColor=C9A227&color=8B0000)](https://tryhackme.com/p/Karmanya03)
+[![TryHackMe](https://img.shields.io/badge/TryHackMe-Profile-FFFFFF?style=for-the-badge&logo=tryhackme&logoColor=000000&labelColor=000000&color=8B0000)](https://tryhackme.com/p/Karmanya03)
 
 ## TECH ARSENAL
 

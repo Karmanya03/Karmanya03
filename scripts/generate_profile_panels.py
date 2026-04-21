@@ -270,7 +270,7 @@ def render_overview(data: dict) -> str:
   <text x=\"944\" y=\"{y}\" class=\"muted\">{count} repos</text>
 """
 
-    body += f"\n  <text x=\"64\" y=\"534\" class=\"muted\">Profile: {escape(data['username'])} | Theme: RED x GOLD x WHITE x BLACK</text>"
+    body += f"\n  <text x=\"64\" y=\"534\" class=\"muted\">Profile: {escape(data['username'])} | Command center is live</text>"
     return wrap_svg("COMMAND CENTER", "Live profile telemetry and project momentum", body, 560)
 
 
@@ -307,34 +307,46 @@ def render_trophies(data: dict) -> str:
     top_repos = data["top_repos"]
 
     medal_colors = ["#f4c35a", "#d9d9d9", "#c88956", "#b30000", "#b30000", "#b30000"]
-    medals = ["1", "2", "3", "4", "5", "6"]
+    trophy_labels = ["GOLD", "SILVER", "BRONZE", "CRIMSON", "CRIMSON", "CRIMSON"]
 
     body = ""
-    body += "\n  <text x=\"64\" y=\"170\" class=\"label\">Top repositories by stars and forks</text>"
+    body += "\n  <text x=\"64\" y=\"170\" class=\"label\">Top repositories with trophy class and rating</text>"
 
     if not top_repos:
         body += "\n  <text x=\"64\" y=\"220\" class=\"small\">No repositories available yet.</text>"
     else:
         for index, repo in enumerate(top_repos[:6]):
-            y = 198 + index * 48
+            y = 210 + index * 56
             color = medal_colors[index]
+            trophy_label = trophy_labels[index]
             language = repo.get("language") or "N/A"
             stars = int(repo.get("stargazers_count", 0))
             forks = int(repo.get("forks_count", 0))
             name = repo.get("name", "unknown-repo")
+            score = min(100, stars * 12 + forks * 8 + max(0, 35 - index * 4))
+            if score >= 95:
+                tier = "S+"
+            elif score >= 85:
+                tier = "S"
+            elif score >= 70:
+                tier = "A"
+            elif score >= 55:
+                tier = "B"
+            else:
+                tier = "C"
 
             body += f"""
-  <rect x=\"64\" y=\"{y - 24}\" width=\"1072\" height=\"38\" rx=\"10\" fill=\"#141417\" stroke=\"#2a2a2d\"/>
-  <circle cx=\"88\" cy=\"{y - 5}\" r=\"13\" fill=\"{color}\"/>
-  <text x=\"88\" y=\"{y - 1}\" text-anchor=\"middle\" class=\"mono\">{medals[index]}</text>
-  <text x=\"112\" y=\"{y}\" class=\"small\">{escape(name)}</text>
-  <text x=\"760\" y=\"{y}\" class=\"muted\">Lang: {escape(language)}</text>
-  <text x=\"930\" y=\"{y}\" class=\"muted\">Stars: {stars}</text>
-  <text x=\"1060\" y=\"{y}\" class=\"muted\">Forks: {forks}</text>
+  <rect x=\"64\" y=\"{y - 28}\" width=\"1072\" height=\"46\" rx=\"10\" fill=\"#141417\" stroke=\"#2a2a2d\"/>
+  <circle cx=\"92\" cy=\"{y - 7}\" r=\"14\" fill=\"{color}\"/>
+  <text x=\"92\" y=\"{y - 2}\" text-anchor=\"middle\" class=\"mono\">{index + 1}</text>
+  <text x=\"120\" y=\"{y - 6}\" class=\"small\">{escape(name)}</text>
+  <text x=\"120\" y=\"{y + 12}\" class=\"muted\">Lang: {escape(language)} | Stars: {stars} | Forks: {forks}</text>
+  <text x=\"760\" y=\"{y - 6}\" class=\"small\">Trophy: {trophy_label}</text>
+  <text x=\"1088\" y=\"{y - 6}\" class=\"mono\" text-anchor=\"end\">Rating {score}/100 [{tier}]</text>
 """
 
-    body += "\n  <text x=\"64\" y=\"492\" class=\"muted\">Trophy colors: Gold (1st), Silver (2nd), Bronze (3rd), Crimson (combat rank).</text>"
-    return wrap_svg("TROPHY CASE", "Repository standings and project dominance", body, 520)
+    body += "\n  <text x=\"64\" y=\"548\" class=\"muted\">Ratings are computed from stars, forks, and placement in the trophy board.</text>"
+    return wrap_svg("TROPHY CASE", "Repository standings with trophy ratings", body, 580)
 
 
 def render_recent_activity(data: dict) -> str:
@@ -376,7 +388,7 @@ def render_radar(data: dict) -> str:
 """
 
     body += "\n  <text x=\"64\" y=\"488\" class=\"muted\">A custom cyber-style profile signature panel replacing snake animation.</text>"
-    return wrap_svg("ARSENAL RADAR", "Unique profile signature, tuned for red-white-gold-black aesthetics", body, 520)
+    return wrap_svg("ARSENAL RADAR", "Unique profile signature and capability bands", body, 520)
 
 
 def write_file(path: str, content: str) -> None:
