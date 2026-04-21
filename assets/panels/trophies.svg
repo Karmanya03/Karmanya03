@@ -1,140 +1,316 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="TROPHY CASE">
-    <defs>
-        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#040406"/>
-            <stop offset="48%" stop-color="#0f090b"/>
-            <stop offset="100%" stop-color="#050507"/>
-        </linearGradient>
-        <radialGradient id="vignette" cx="50%" cy="45%" r="70%">
-            <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
-            <stop offset="100%" stop-color="#000000" stop-opacity="0.66"/>
-        </radialGradient>
-        <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#a80000"/>
-            <stop offset="52%" stop-color="#f4c35a"/>
-            <stop offset="100%" stop-color="#ffffff"/>
-        </linearGradient>
-        <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
-            <stop offset="45%" stop-color="#f4c35a" stop-opacity="0"/>
-            <stop offset="50%" stop-color="#f4c35a" stop-opacity="0.88"/>
-            <stop offset="55%" stop-color="#f4c35a" stop-opacity="0"/>
-            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-        </linearGradient>
-        <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#8c6a1a"/>
-            <stop offset="100%" stop-color="#f4c35a"/>
-        </linearGradient>
-        <pattern id="scan" width="8" height="8" patternUnits="userSpaceOnUse">
-            <rect width="8" height="8" fill="transparent"/>
-            <path d="M0 0 L8 0" stroke="#ffffff" stroke-opacity="0.04"/>
-        </pattern>
-        <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="2.2" result="blur"/>
-            <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-        <style>
-            .title { fill: #ffffff; font: 700 42px 'Segoe UI', 'Trebuchet MS', sans-serif; letter-spacing: 1px; }
-            .subtitle { fill: #f6d489; font: 500 20px 'Segoe UI', 'Trebuchet MS', sans-serif; }
-            .label { fill: #e8e8e8; font: 600 18px 'Segoe UI', 'Trebuchet MS', sans-serif; }
-            .value { fill: #ffffff; font: 700 36px 'Segoe UI', 'Trebuchet MS', sans-serif; }
-            .small { fill: #f7f7f7; font: 500 16px 'Segoe UI', 'Trebuchet MS', sans-serif; }
-            .muted { fill: #d6d6d6; font: 500 14px 'Segoe UI', 'Trebuchet MS', sans-serif; }
-            .stamp { fill: #ffffff; font: 600 13px 'Segoe UI', 'Trebuchet MS', sans-serif; opacity: 0.8; }
-            .mono { fill: #ffffff; font: 600 15px 'Consolas', 'Segoe UI Mono', monospace; }
-        </style>
-    </defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-label="TROPHY CASE">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#060710"/>
+      <stop offset="55%"  stop-color="#100b06"/>
+      <stop offset="100%" stop-color="#06070e"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#131520"/>
+      <stop offset="100%" stop-color="#0c0d18"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#8b0000"/>
+      <stop offset="50%"  stop-color="#f1bd52"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#845e16"/>
+      <stop offset="100%" stop-color="#f1bd52"/>
+    </linearGradient>
+    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.7" fill="#fff" opacity="0.04"/>
+    </pattern>
+    <filter id="softGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowHard" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .title   { fill:#ffffff; font:800 26px 'Bahnschrift','Segoe UI',sans-serif; letter-spacing:4px; }
+      .tsub    { fill:#e8b840; font:600 10.5px 'Segoe UI',sans-serif; letter-spacing:3px; }
+      .label   { fill:#d0d8e8; font:600 14px 'Segoe UI','Trebuchet MS',sans-serif; }
+      .value   { fill:#ffffff; font:800 32px 'Bahnschrift','Segoe UI',sans-serif; }
+      .small   { fill:#c8d0e0; font:600 13px 'Segoe UI','Trebuchet MS',sans-serif; }
+      .muted   { fill:#8890a8; font:500 11px 'Segoe UI','Trebuchet MS',sans-serif; }
+      .stamp   { fill:#555; font:500 10px 'Segoe UI','Trebuchet MS',sans-serif; }
+      .mono    { fill:#d8e0f0; font:700 12px 'Consolas','Segoe UI Mono',monospace; }
+    </style>
+  </defs>
 
-    <rect width="1200" height="560" fill="url(#bg)"/>
-    <rect width="1200" height="560" fill="url(#vignette)"/>
-    <rect x="24" y="24" width="1152" height="512" rx="24" fill="#0d0d0f" stroke="#f4c35a" stroke-opacity="0.55" stroke-width="2"/>
-    <rect x="24" y="24" width="1152" height="512" rx="24" fill="url(#scan)" opacity="0.35"/>
-    <rect x="24" y="24" width="1152" height="7" fill="url(#accent)" rx="24"/>
-    <rect x="24" y="24" width="180" height="7" fill="url(#shine)" rx="24" filter="url(#softGlow)">
-        <animate attributeName="x" values="24;996;24" dur="8s" repeatCount="indefinite"/>
-    </rect>
-    <rect x="24" y="34" width="1152" height="1.5" fill="url(#accent)" opacity="0.32">
-        <animate attributeName="y" values="36;524;36" dur="9s" repeatCount="indefinite"/>
-    </rect>
-    <g opacity="0.36">
-        <path d="M52 52 L122 52" stroke="#f4c35a" stroke-width="2" stroke-linecap="round">
-            <animate attributeName="stroke-opacity" values="0.2;0.9;0.2" dur="3.2s" repeatCount="indefinite"/>
-        </path>
-        <path d="M52 52 L52 122" stroke="#f4c35a" stroke-width="2" stroke-linecap="round">
-            <animate attributeName="stroke-opacity" values="0.8;0.2;0.8" dur="3.2s" repeatCount="indefinite"/>
-        </path>
-        <path d="M1148 52 L1078 52" stroke="#f4c35a" stroke-width="2" stroke-linecap="round">
-            <animate attributeName="stroke-opacity" values="0.2;0.9;0.2" dur="3.2s" begin="0.6s" repeatCount="indefinite"/>
-        </path>
-        <path d="M1148 52 L1148 122" stroke="#f4c35a" stroke-width="2" stroke-linecap="round">
-            <animate attributeName="stroke-opacity" values="0.8;0.2;0.8" dur="3.2s" begin="0.6s" repeatCount="indefinite"/>
-        </path>
-    </g>
-    <g opacity="0.55">
-        <circle cx="1088" cy="92" r="7" fill="#b30000" filter="url(#softGlow)">
-            <animate attributeName="r" values="6;9;6" dur="2.4s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="1088" cy="92" r="17" fill="none" stroke="#f4c35a" stroke-width="1.2">
-            <animate attributeName="r" values="14;22;14" dur="4.8s" repeatCount="indefinite"/>
-            <animate attributeName="stroke-opacity" values="0.25;0.7;0.25" dur="4.8s" repeatCount="indefinite"/>
-        </circle>
-    </g>
+  <!-- Background -->
+  <rect width="1200" height="430" fill="url(#bg)"/>
+  <!-- Main panel -->
+  <rect x="14" y="14" width="1172" height="402" rx="20" fill="url(#panel)" stroke="#b87e28" stroke-width="1.5" stroke-opacity="0.65"/>
+  <rect x="14" y="14" width="1172" height="402" rx="20" fill="url(#dots)"/>
+  <!-- Top accent bar (gradient, full width) -->
+  <rect x="14" y="14" width="1172" height="5" rx="20" fill="url(#accent)"/>
 
-    <text x="64" y="92" class="title">TROPHY CASE</text>
-    <text x="64" y="126" class="subtitle">Repository standings with trophy ratings</text>
-    <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 12:38 UTC</text>
+  <!-- ── Animated header section (72px tall) ── -->
+  <!-- Subtle header bg strip -->
+  <rect x="14" y="14" width="1172" height="72" rx="20" fill="#ffffff" fill-opacity="0.025"/>
+  <rect x="14" y="80" width="1172" height="1" fill="url(#accent)" opacity="0.3"/>
 
-    
-  <text x="64" y="170" class="label">Top repositories with trophy class and rating</text>
-  <rect x="64" y="182" width="1072" height="46" rx="10" fill="#141417" stroke="#2a2a2d"/>
-  <circle cx="92" cy="203" r="14" fill="#f4c35a"/>
-  <text x="92" y="208" text-anchor="middle" class="mono">1</text>
-    <text x="120" y="204" class="small">Deadrop</text>
-  <text x="120" y="222" class="muted">Lang: Rust | Stars: 3 | Forks: 0</text>
-  <text x="760" y="204" class="small">Trophy: GOLD</text>
-  <text x="1088" y="204" class="mono" text-anchor="end">Rating 71/100 [A]</text>
+  <!-- Corner HUD brackets -->
+  <g stroke="#e8b840" stroke-width="1.5" fill="none" opacity="0.55">
+    <path d="M30 30 L30 48 L48 48"/>
+    <path d="M1170 30 L1170 48 L1152 48"/>
+    <path d="M30 414 L30 396 L48 396"/>
+    <path d="M1170 414 L1170 396 L1152 396"/>
+  </g>
 
-  <rect x="64" y="238" width="1072" height="46" rx="10" fill="#141417" stroke="#2a2a2d"/>
-  <circle cx="92" cy="259" r="14" fill="#d9d9d9"/>
-  <text x="92" y="264" text-anchor="middle" class="mono">2</text>
-    <text x="120" y="260" class="small">Ferret-rs</text>
-  <text x="120" y="278" class="muted">Lang: Rust | Stars: 3 | Forks: 0</text>
-  <text x="760" y="260" class="small">Trophy: SILVER</text>
-  <text x="1088" y="260" class="mono" text-anchor="end">Rating 67/100 [B]</text>
+  <!-- Animated scanner line across header -->
+  <rect x="56" y="50" width="1000" height="1" fill="url(#accent)" opacity="0.18"/>
+  <rect x="0" y="50" width="180" height="1" fill="url(#accent)" opacity="0.9" filter="url(#softGlow)">
+    <animateTransform attributeName="transform" type="translate" from="-180,0" to="1200,0" dur="3.8s" repeatCount="indefinite"/>
+  </rect>
 
-  <rect x="64" y="294" width="1072" height="46" rx="10" fill="#141417" stroke="#2a2a2d"/>
-  <circle cx="92" cy="315" r="14" fill="#c88956"/>
-  <text x="92" y="320" text-anchor="middle" class="mono">3</text>
-    <text x="120" y="316" class="small">Karmanya03</text>
-  <text x="120" y="334" class="muted">Lang: Python | Stars: 0 | Forks: 0</text>
-  <text x="760" y="316" class="small">Trophy: BRONZE</text>
-  <text x="1088" y="316" class="mono" text-anchor="end">Rating 27/100 [C]</text>
+  <!-- Pulsing live indicator -->
+  <circle cx="1152" cy="44" r="5" fill="#9f0000" filter="url(#glowHard)">
+    <animate attributeName="r" values="4;8;4" dur="2.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="1152" cy="44" r="14" fill="none" stroke="#f1bd52" stroke-width="1" opacity="0.2">
+    <animate attributeName="r" values="10;20;10" dur="3.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;0;0.3" dur="3.5s" repeatCount="indefinite"/>
+  </circle>
+  <!-- LIVE label -->
+  <text x="1136" y="42" fill="#e8b840" font-size="8" font-family="Segoe UI" font-weight="700" letter-spacing="2" text-anchor="end" opacity="0.7">LIVE</text>
 
-  <rect x="64" y="350" width="1072" height="46" rx="10" fill="#141417" stroke="#2a2a2d"/>
-  <circle cx="92" cy="371" r="14" fill="#b30000"/>
-  <text x="92" y="376" text-anchor="middle" class="mono">4</text>
-    <text x="120" y="372" class="small">Overthrone</text>
-  <text x="120" y="390" class="muted">Lang: Rust | Stars: 0 | Forks: 0</text>
-  <text x="760" y="372" class="small">Trophy: CRIMSON</text>
-  <text x="1088" y="372" class="mono" text-anchor="end">Rating 23/100 [C]</text>
+  <!-- Section title and subtitle -->
+  <text x="56" y="52" class="title">TROPHY CASE</text>
+  <text x="56" y="70" class="tsub">GITHUB PROFILE TROPHIES · RYO-MA REAL RANKS · AUTO-SORTED HIGHEST FIRST</text>
+  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 21 Apr 2026 14:31 UTC</text>
 
-  <rect x="64" y="406" width="1072" height="46" rx="10" fill="#141417" stroke="#2a2a2d"/>
-  <circle cx="92" cy="427" r="14" fill="#b30000"/>
-  <text x="92" y="432" text-anchor="middle" class="mono">5</text>
-    <text x="120" y="428" class="small">Kaizen-JAM</text>
-  <text x="120" y="446" class="muted">Lang: JavaScript | Stars: 0 | Forks: 0</text>
-  <text x="760" y="428" class="small">Trophy: CRIMSON</text>
-  <text x="1088" y="428" class="mono" text-anchor="end">Rating 19/100 [C]</text>
+  
+  <defs>
+    <linearGradient id="shimmerSweep" x1="-1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      <animate attributeName="x1" from="-1" to="2" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="x2" from="0" to="3" dur="3s" repeatCount="indefinite"/>
+    </linearGradient>
+  </defs>
 
-  <rect x="64" y="462" width="1072" height="46" rx="10" fill="#141417" stroke="#2a2a2d"/>
-  <circle cx="92" cy="483" r="14" fill="#b30000"/>
-  <text x="92" y="488" text-anchor="middle" class="mono">6</text>
-    <text x="120" y="484" class="small">Sigil</text>
-  <text x="120" y="502" class="muted">Lang: Rust | Stars: 0 | Forks: 0</text>
-  <text x="760" y="484" class="small">Trophy: CRIMSON</text>
-  <text x="1088" y="484" class="mono" text-anchor="end">Rating 15/100 [C]</text>
+  <!-- TROPHY 1: MultiLanguage [SECRET] -->
+  <rect x="46" y="96" width="182" height="300" rx="14" fill="#180828" stroke="#8020c0" stroke-width="1.4"/>
+  <rect x="46" y="96" width="182" height="4" rx="14" fill="#501080"/>
+  <text x="137" y="118" text-anchor="middle" style="fill:#df80ff;font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">🌈 MULTILANGUAGE</text>
+<ellipse cx="99" cy="221" rx="7" ry="13" transform="rotate(-40,99,221)" fill="#ff8c00"/><ellipse cx="103" cy="221" rx="4.5" ry="9" transform="rotate(-40,103,221)" fill="#ffa820"/><ellipse cx="91" cy="208" rx="7" ry="13" transform="rotate(-55,91,208)" fill="#ff8c00"/><ellipse cx="95" cy="208" rx="4.5" ry="9" transform="rotate(-55,95,208)" fill="#ffa820"/><ellipse cx="87" cy="194" rx="7" ry="13" transform="rotate(-65,87,194)" fill="#ff8c00"/><ellipse cx="91" cy="194" rx="4.5" ry="9" transform="rotate(-65,91,194)" fill="#ffa820"/><ellipse cx="92" cy="180" rx="7" ry="13" transform="rotate(-75,92,180)" fill="#ff8c00"/><ellipse cx="96" cy="180" rx="4.5" ry="9" transform="rotate(-75,96,180)" fill="#ffa820"/><ellipse cx="102" cy="173" rx="7" ry="13" transform="rotate(-85,102,173)" fill="#ff8c00"/><ellipse cx="106" cy="173" rx="4.5" ry="9" transform="rotate(-85,106,173)" fill="#ffa820"/><ellipse cx="175" cy="221" rx="7" ry="13" transform="rotate(40,175,221)" fill="#ff8c00"/><ellipse cx="171" cy="221" rx="4.5" ry="9" transform="rotate(40,171,221)" fill="#ffa820"/><ellipse cx="183" cy="208" rx="7" ry="13" transform="rotate(55,183,208)" fill="#ff8c00"/><ellipse cx="179" cy="208" rx="4.5" ry="9" transform="rotate(55,179,208)" fill="#ffa820"/><ellipse cx="187" cy="194" rx="7" ry="13" transform="rotate(65,187,194)" fill="#ff8c00"/><ellipse cx="183" cy="194" rx="4.5" ry="9" transform="rotate(65,183,194)" fill="#ffa820"/><ellipse cx="182" cy="180" rx="7" ry="13" transform="rotate(75,182,180)" fill="#ff8c00"/><ellipse cx="178" cy="180" rx="4.5" ry="9" transform="rotate(75,178,180)" fill="#ffa820"/><ellipse cx="172" cy="173" rx="7" ry="13" transform="rotate(85,172,173)" fill="#ff8c00"/><ellipse cx="168" cy="173" rx="4.5" ry="9" transform="rotate(85,168,173)" fill="#ffa820"/>
+  <path d="M101,144 h72 c0,40 -12,65 -36,75 c-24,-10 -36,-35 -36,-75z" fill="#df80ff"/>
+  <!-- inner highlight -->
+  <path d="M113,144 h16 c0,28 -6,45 -16,52 c-10,-7 -16,-24 -16,-52z" fill="#a030e0"/>
+  <!-- rim -->
+  <ellipse cx="137" cy="144" rx="36" ry="7" fill="#501080"/>
+  <!-- stem & base -->
+  <rect x="131" y="211" width="12" height="18" fill="#df80ff"/>
+  <path d="M117,229 h40 v6 r4,4 h-40 r4,4 v-6z" fill="#501080"/>
+  <ellipse cx="137" cy="229" rx="20" ry="4" fill="#a030e0"/>
+  <!-- handles -->
+  <path d="M101,166 c-20,0 -20,30 -6,40" fill="none" stroke="#501080" stroke-width="6" stroke-linecap="round"/>
+  <path d="M173,166 c20,0 20,30 6,40" fill="none" stroke="#501080" stroke-width="6" stroke-linecap="round"/>
+
+  <circle cx="137" cy="206" r="18" fill="#180828" opacity="0.7"/>
+  <text x="137" y="214" text-anchor="middle" style="fill:#501080;font:900 14px 'Bahnschrift','Arial Black',sans-serif;">SECRET</text>
+  <line x1="60" y1="268" x2="214" y2="268" stroke="#8020c0" stroke-width="0.7" opacity="0.4"/>
+  <text x="137" y="288" text-anchor="middle" style="fill:#df80ff;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">Rainbow Lang User</text>
+  <text x="137" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">12</text>
+  <rect x="60" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
+  <rect x="60" y="318" width="154" height="7" rx="3.5" fill="#501080">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2.2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="137" y="341" text-anchor="middle" style="fill:#8020c0;font:600 9px 'Consolas',monospace;">SECRET · 100% MAX</text>
+  <rect x="60" y="378" width="154" height="3" rx="1.5" fill="#df80ff" opacity="0.5" filter="url(#softGlow)"/>
+  <rect x="46" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
+
+  <!-- TROPHY 2: Repositories [AAA] -->
+  <rect x="238" y="96" width="182" height="300" rx="14" fill="#180808" stroke="#c03030" stroke-width="1.4"/>
+  <rect x="238" y="96" width="182" height="4" rx="14" fill="#8b0000"/>
+  <text x="329" y="118" text-anchor="middle" style="fill:#ff7070;font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">⊞ REPOSITORIES</text>
+<ellipse cx="291" cy="221" rx="7" ry="13" transform="rotate(-40,291,221)" fill="#ff8c00"/><ellipse cx="295" cy="221" rx="4.5" ry="9" transform="rotate(-40,295,221)" fill="#ffa820"/><ellipse cx="283" cy="208" rx="7" ry="13" transform="rotate(-55,283,208)" fill="#ff8c00"/><ellipse cx="287" cy="208" rx="4.5" ry="9" transform="rotate(-55,287,208)" fill="#ffa820"/><ellipse cx="279" cy="194" rx="7" ry="13" transform="rotate(-65,279,194)" fill="#ff8c00"/><ellipse cx="283" cy="194" rx="4.5" ry="9" transform="rotate(-65,283,194)" fill="#ffa820"/><ellipse cx="284" cy="180" rx="7" ry="13" transform="rotate(-75,284,180)" fill="#ff8c00"/><ellipse cx="288" cy="180" rx="4.5" ry="9" transform="rotate(-75,288,180)" fill="#ffa820"/><ellipse cx="294" cy="173" rx="7" ry="13" transform="rotate(-85,294,173)" fill="#ff8c00"/><ellipse cx="298" cy="173" rx="4.5" ry="9" transform="rotate(-85,298,173)" fill="#ffa820"/><ellipse cx="367" cy="221" rx="7" ry="13" transform="rotate(40,367,221)" fill="#ff8c00"/><ellipse cx="363" cy="221" rx="4.5" ry="9" transform="rotate(40,363,221)" fill="#ffa820"/><ellipse cx="375" cy="208" rx="7" ry="13" transform="rotate(55,375,208)" fill="#ff8c00"/><ellipse cx="371" cy="208" rx="4.5" ry="9" transform="rotate(55,371,208)" fill="#ffa820"/><ellipse cx="379" cy="194" rx="7" ry="13" transform="rotate(65,379,194)" fill="#ff8c00"/><ellipse cx="375" cy="194" rx="4.5" ry="9" transform="rotate(65,375,194)" fill="#ffa820"/><ellipse cx="374" cy="180" rx="7" ry="13" transform="rotate(75,374,180)" fill="#ff8c00"/><ellipse cx="370" cy="180" rx="4.5" ry="9" transform="rotate(75,370,180)" fill="#ffa820"/><ellipse cx="364" cy="173" rx="7" ry="13" transform="rotate(85,364,173)" fill="#ff8c00"/><ellipse cx="360" cy="173" rx="4.5" ry="9" transform="rotate(85,360,173)" fill="#ffa820"/>
+  <path d="M293,144 h72 c0,40 -12,65 -36,75 c-24,-10 -36,-35 -36,-75z" fill="#ff7070"/>
+  <!-- inner highlight -->
+  <path d="M305,144 h16 c0,28 -6,45 -16,52 c-10,-7 -16,-24 -16,-52z" fill="#e03030"/>
+  <!-- rim -->
+  <ellipse cx="329" cy="144" rx="36" ry="7" fill="#8b0000"/>
+  <!-- stem & base -->
+  <rect x="323" y="211" width="12" height="18" fill="#ff7070"/>
+  <path d="M309,229 h40 v6 r4,4 h-40 r4,4 v-6z" fill="#8b0000"/>
+  <ellipse cx="329" cy="229" rx="20" ry="4" fill="#e03030"/>
+  <!-- handles -->
+  <path d="M293,166 c-20,0 -20,30 -6,40" fill="none" stroke="#8b0000" stroke-width="6" stroke-linecap="round"/>
+  <path d="M365,166 c20,0 20,30 6,40" fill="none" stroke="#8b0000" stroke-width="6" stroke-linecap="round"/>
+
+  <circle cx="329" cy="206" r="18" fill="#180808" opacity="0.7"/>
+  <text x="329" y="214" text-anchor="middle" style="fill:#8b0000;font:900 14px 'Bahnschrift','Arial Black',sans-serif;">AAA</text>
+  <line x1="252" y1="268" x2="406" y2="268" stroke="#c03030" stroke-width="0.7" opacity="0.4"/>
+  <text x="329" y="288" text-anchor="middle" style="fill:#ff7070;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">Ultra Repo Creator</text>
+  <text x="329" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">36</text>
+  <rect x="252" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
+  <rect x="252" y="318" width="30" height="7" rx="3.5" fill="#8b0000">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2.4s" repeatCount="indefinite"/>
+  </rect>
+  <text x="329" y="341" text-anchor="middle" style="fill:#c03030;font:600 9px 'Consolas',monospace;">AAA · 20% →40</text>
+  <rect x="252" y="378" width="30" height="3" rx="1.5" fill="#ff7070" opacity="0.5" filter="url(#softGlow)"/>
+  <rect x="238" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
+
+  <!-- TROPHY 3: Commits [AA] -->
+  <rect x="430" y="96" width="182" height="300" rx="14" fill="#180808" stroke="#c03030" stroke-width="1.4"/>
+  <rect x="430" y="96" width="182" height="4" rx="14" fill="#8b0000"/>
+  <text x="521" y="118" text-anchor="middle" style="fill:#ff7070;font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">↑ COMMITS</text>
+<ellipse cx="483" cy="221" rx="7" ry="13" transform="rotate(-40,483,221)" fill="#ff8c00"/><ellipse cx="487" cy="221" rx="4.5" ry="9" transform="rotate(-40,487,221)" fill="#ffa820"/><ellipse cx="475" cy="208" rx="7" ry="13" transform="rotate(-55,475,208)" fill="#ff8c00"/><ellipse cx="479" cy="208" rx="4.5" ry="9" transform="rotate(-55,479,208)" fill="#ffa820"/><ellipse cx="471" cy="194" rx="7" ry="13" transform="rotate(-65,471,194)" fill="#ff8c00"/><ellipse cx="475" cy="194" rx="4.5" ry="9" transform="rotate(-65,475,194)" fill="#ffa820"/><ellipse cx="476" cy="180" rx="7" ry="13" transform="rotate(-75,476,180)" fill="#ff8c00"/><ellipse cx="480" cy="180" rx="4.5" ry="9" transform="rotate(-75,480,180)" fill="#ffa820"/><ellipse cx="486" cy="173" rx="7" ry="13" transform="rotate(-85,486,173)" fill="#ff8c00"/><ellipse cx="490" cy="173" rx="4.5" ry="9" transform="rotate(-85,490,173)" fill="#ffa820"/><ellipse cx="559" cy="221" rx="7" ry="13" transform="rotate(40,559,221)" fill="#ff8c00"/><ellipse cx="555" cy="221" rx="4.5" ry="9" transform="rotate(40,555,221)" fill="#ffa820"/><ellipse cx="567" cy="208" rx="7" ry="13" transform="rotate(55,567,208)" fill="#ff8c00"/><ellipse cx="563" cy="208" rx="4.5" ry="9" transform="rotate(55,563,208)" fill="#ffa820"/><ellipse cx="571" cy="194" rx="7" ry="13" transform="rotate(65,571,194)" fill="#ff8c00"/><ellipse cx="567" cy="194" rx="4.5" ry="9" transform="rotate(65,567,194)" fill="#ffa820"/><ellipse cx="566" cy="180" rx="7" ry="13" transform="rotate(75,566,180)" fill="#ff8c00"/><ellipse cx="562" cy="180" rx="4.5" ry="9" transform="rotate(75,562,180)" fill="#ffa820"/><ellipse cx="556" cy="173" rx="7" ry="13" transform="rotate(85,556,173)" fill="#ff8c00"/><ellipse cx="552" cy="173" rx="4.5" ry="9" transform="rotate(85,552,173)" fill="#ffa820"/>
+  <path d="M485,144 h72 c0,40 -12,65 -36,75 c-24,-10 -36,-35 -36,-75z" fill="#ff7070"/>
+  <!-- inner highlight -->
+  <path d="M497,144 h16 c0,28 -6,45 -16,52 c-10,-7 -16,-24 -16,-52z" fill="#e03030"/>
+  <!-- rim -->
+  <ellipse cx="521" cy="144" rx="36" ry="7" fill="#8b0000"/>
+  <!-- stem & base -->
+  <rect x="515" y="211" width="12" height="18" fill="#ff7070"/>
+  <path d="M501,229 h40 v6 r4,4 h-40 r4,4 v-6z" fill="#8b0000"/>
+  <ellipse cx="521" cy="229" rx="20" ry="4" fill="#e03030"/>
+  <!-- handles -->
+  <path d="M485,166 c-20,0 -20,30 -6,40" fill="none" stroke="#8b0000" stroke-width="6" stroke-linecap="round"/>
+  <path d="M557,166 c20,0 20,30 6,40" fill="none" stroke="#8b0000" stroke-width="6" stroke-linecap="round"/>
+
+  <circle cx="521" cy="206" r="18" fill="#180808" opacity="0.7"/>
+  <text x="521" y="214" text-anchor="middle" style="fill:#8b0000;font:900 20px 'Bahnschrift','Arial Black',sans-serif;">AA</text>
+  <line x1="444" y1="268" x2="598" y2="268" stroke="#c03030" stroke-width="0.7" opacity="0.4"/>
+  <text x="521" y="288" text-anchor="middle" style="fill:#ff7070;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">Hyper Committer</text>
+  <text x="521" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">441</text>
+  <rect x="444" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
+  <rect x="444" y="318" width="123" height="7" rx="3.5" fill="#8b0000">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2.6s" repeatCount="indefinite"/>
+  </rect>
+  <text x="521" y="341" text-anchor="middle" style="fill:#c03030;font:600 9px 'Consolas',monospace;">AA · 80% →500</text>
+  <rect x="444" y="378" width="123" height="3" rx="1.5" fill="#ff7070" opacity="0.5" filter="url(#softGlow)"/>
+  <rect x="430" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
+
+  <!-- TROPHY 4: Followers [B] -->
+  <rect x="622" y="96" width="182" height="300" rx="14" fill="#081008" stroke="#204020" stroke-width="1.4"/>
+  <rect x="622" y="96" width="182" height="4" rx="14" fill="#103010"/>
+  <text x="713" y="118" text-anchor="middle" style="fill:#60d060;font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">👥 FOLLOWERS</text>
+<ellipse cx="675" cy="221" rx="7" ry="13" transform="rotate(-40,675,221)" fill="#ff8c00"/><ellipse cx="679" cy="221" rx="4.5" ry="9" transform="rotate(-40,679,221)" fill="#ffa820"/><ellipse cx="667" cy="208" rx="7" ry="13" transform="rotate(-55,667,208)" fill="#ff8c00"/><ellipse cx="671" cy="208" rx="4.5" ry="9" transform="rotate(-55,671,208)" fill="#ffa820"/><ellipse cx="663" cy="194" rx="7" ry="13" transform="rotate(-65,663,194)" fill="#ff8c00"/><ellipse cx="667" cy="194" rx="4.5" ry="9" transform="rotate(-65,667,194)" fill="#ffa820"/><ellipse cx="668" cy="180" rx="7" ry="13" transform="rotate(-75,668,180)" fill="#ff8c00"/><ellipse cx="672" cy="180" rx="4.5" ry="9" transform="rotate(-75,672,180)" fill="#ffa820"/><ellipse cx="678" cy="173" rx="7" ry="13" transform="rotate(-85,678,173)" fill="#ff8c00"/><ellipse cx="682" cy="173" rx="4.5" ry="9" transform="rotate(-85,682,173)" fill="#ffa820"/><ellipse cx="751" cy="221" rx="7" ry="13" transform="rotate(40,751,221)" fill="#ff8c00"/><ellipse cx="747" cy="221" rx="4.5" ry="9" transform="rotate(40,747,221)" fill="#ffa820"/><ellipse cx="759" cy="208" rx="7" ry="13" transform="rotate(55,759,208)" fill="#ff8c00"/><ellipse cx="755" cy="208" rx="4.5" ry="9" transform="rotate(55,755,208)" fill="#ffa820"/><ellipse cx="763" cy="194" rx="7" ry="13" transform="rotate(65,763,194)" fill="#ff8c00"/><ellipse cx="759" cy="194" rx="4.5" ry="9" transform="rotate(65,759,194)" fill="#ffa820"/><ellipse cx="758" cy="180" rx="7" ry="13" transform="rotate(75,758,180)" fill="#ff8c00"/><ellipse cx="754" cy="180" rx="4.5" ry="9" transform="rotate(75,754,180)" fill="#ffa820"/><ellipse cx="748" cy="173" rx="7" ry="13" transform="rotate(85,748,173)" fill="#ff8c00"/><ellipse cx="744" cy="173" rx="4.5" ry="9" transform="rotate(85,744,173)" fill="#ffa820"/>
+  <path d="M677,144 h72 c0,40 -12,65 -36,75 c-24,-10 -36,-35 -36,-75z" fill="#60d060"/>
+  <!-- inner highlight -->
+  <path d="M689,144 h16 c0,28 -6,45 -16,52 c-10,-7 -16,-24 -16,-52z" fill="#30a030"/>
+  <!-- rim -->
+  <ellipse cx="713" cy="144" rx="36" ry="7" fill="#103010"/>
+  <!-- stem & base -->
+  <rect x="707" y="211" width="12" height="18" fill="#60d060"/>
+  <path d="M693,229 h40 v6 r4,4 h-40 r4,4 v-6z" fill="#103010"/>
+  <ellipse cx="713" cy="229" rx="20" ry="4" fill="#30a030"/>
+  <!-- handles -->
+  <path d="M677,166 c-20,0 -20,30 -6,40" fill="none" stroke="#103010" stroke-width="6" stroke-linecap="round"/>
+  <path d="M749,166 c20,0 20,30 6,40" fill="none" stroke="#103010" stroke-width="6" stroke-linecap="round"/>
+
+  <circle cx="713" cy="206" r="18" fill="#081008" opacity="0.7"/>
+  <text x="713" y="214" text-anchor="middle" style="fill:#103010;font:900 20px 'Bahnschrift','Arial Black',sans-serif;">B</text>
+  <line x1="636" y1="268" x2="790" y2="268" stroke="#204020" stroke-width="0.7" opacity="0.4"/>
+  <text x="713" y="288" text-anchor="middle" style="fill:#60d060;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">Many Friends</text>
+  <text x="713" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">13</text>
+  <rect x="636" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
+  <rect x="636" y="318" width="46" height="7" rx="3.5" fill="#103010">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2.8s" repeatCount="indefinite"/>
+  </rect>
+  <text x="713" y="341" text-anchor="middle" style="fill:#204020;font:600 9px 'Consolas',monospace;">B · 30% →20</text>
+  <rect x="636" y="378" width="46" height="3" rx="1.5" fill="#60d060" opacity="0.5" filter="url(#softGlow)"/>
+  <rect x="622" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
+
+  <!-- TROPHY 5: Stars [C] -->
+  <rect x="814" y="96" width="182" height="300" rx="14" fill="#0e1018" stroke="#404040" stroke-width="1.4"/>
+  <rect x="814" y="96" width="182" height="4" rx="14" fill="#282828"/>
+  <text x="905" y="118" text-anchor="middle" style="fill:#909090;font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">⭐ STARS</text>
+<ellipse cx="867" cy="221" rx="7" ry="13" transform="rotate(-40,867,221)" fill="#ff8c00"/><ellipse cx="871" cy="221" rx="4.5" ry="9" transform="rotate(-40,871,221)" fill="#ffa820"/><ellipse cx="859" cy="208" rx="7" ry="13" transform="rotate(-55,859,208)" fill="#ff8c00"/><ellipse cx="863" cy="208" rx="4.5" ry="9" transform="rotate(-55,863,208)" fill="#ffa820"/><ellipse cx="855" cy="194" rx="7" ry="13" transform="rotate(-65,855,194)" fill="#ff8c00"/><ellipse cx="859" cy="194" rx="4.5" ry="9" transform="rotate(-65,859,194)" fill="#ffa820"/><ellipse cx="860" cy="180" rx="7" ry="13" transform="rotate(-75,860,180)" fill="#ff8c00"/><ellipse cx="864" cy="180" rx="4.5" ry="9" transform="rotate(-75,864,180)" fill="#ffa820"/><ellipse cx="870" cy="173" rx="7" ry="13" transform="rotate(-85,870,173)" fill="#ff8c00"/><ellipse cx="874" cy="173" rx="4.5" ry="9" transform="rotate(-85,874,173)" fill="#ffa820"/><ellipse cx="943" cy="221" rx="7" ry="13" transform="rotate(40,943,221)" fill="#ff8c00"/><ellipse cx="939" cy="221" rx="4.5" ry="9" transform="rotate(40,939,221)" fill="#ffa820"/><ellipse cx="951" cy="208" rx="7" ry="13" transform="rotate(55,951,208)" fill="#ff8c00"/><ellipse cx="947" cy="208" rx="4.5" ry="9" transform="rotate(55,947,208)" fill="#ffa820"/><ellipse cx="955" cy="194" rx="7" ry="13" transform="rotate(65,955,194)" fill="#ff8c00"/><ellipse cx="951" cy="194" rx="4.5" ry="9" transform="rotate(65,951,194)" fill="#ffa820"/><ellipse cx="950" cy="180" rx="7" ry="13" transform="rotate(75,950,180)" fill="#ff8c00"/><ellipse cx="946" cy="180" rx="4.5" ry="9" transform="rotate(75,946,180)" fill="#ffa820"/><ellipse cx="940" cy="173" rx="7" ry="13" transform="rotate(85,940,173)" fill="#ff8c00"/><ellipse cx="936" cy="173" rx="4.5" ry="9" transform="rotate(85,936,173)" fill="#ffa820"/>
+  <path d="M869,144 h72 c0,40 -12,65 -36,75 c-24,-10 -36,-35 -36,-75z" fill="#909090"/>
+  <!-- inner highlight -->
+  <path d="M881,144 h16 c0,28 -6,45 -16,52 c-10,-7 -16,-24 -16,-52z" fill="#606060"/>
+  <!-- rim -->
+  <ellipse cx="905" cy="144" rx="36" ry="7" fill="#282828"/>
+  <!-- stem & base -->
+  <rect x="899" y="211" width="12" height="18" fill="#909090"/>
+  <path d="M885,229 h40 v6 r4,4 h-40 r4,4 v-6z" fill="#282828"/>
+  <ellipse cx="905" cy="229" rx="20" ry="4" fill="#606060"/>
+  <!-- handles -->
+  <path d="M869,166 c-20,0 -20,30 -6,40" fill="none" stroke="#282828" stroke-width="6" stroke-linecap="round"/>
+  <path d="M941,166 c20,0 20,30 6,40" fill="none" stroke="#282828" stroke-width="6" stroke-linecap="round"/>
+
+  <circle cx="905" cy="206" r="18" fill="#0e1018" opacity="0.7"/>
+  <text x="905" y="214" text-anchor="middle" style="fill:#282828;font:900 20px 'Bahnschrift','Arial Black',sans-serif;">C</text>
+  <line x1="828" y1="268" x2="982" y2="268" stroke="#404040" stroke-width="0.7" opacity="0.4"/>
+  <text x="905" y="288" text-anchor="middle" style="fill:#909090;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">First Star</text>
+  <text x="905" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">6</text>
+  <rect x="828" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
+  <rect x="828" y="318" width="84" height="7" rx="3.5" fill="#282828">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3.0s" repeatCount="indefinite"/>
+  </rect>
+  <text x="905" y="341" text-anchor="middle" style="fill:#404040;font:600 9px 'Consolas',monospace;">C · 55% →10</text>
+  <rect x="828" y="378" width="84" height="3" rx="1.5" fill="#909090" opacity="0.5" filter="url(#softGlow)"/>
+  <rect x="814" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
+
+  <!-- TROPHY 6: PullRequest [C] -->
+  <rect x="1006" y="96" width="182" height="300" rx="14" fill="#0e1018" stroke="#404040" stroke-width="1.4"/>
+  <rect x="1006" y="96" width="182" height="4" rx="14" fill="#282828"/>
+  <text x="1097" y="118" text-anchor="middle" style="fill:#909090;font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">⑂ PULL REQUEST</text>
+<ellipse cx="1059" cy="221" rx="7" ry="13" transform="rotate(-40,1059,221)" fill="#ff8c00"/><ellipse cx="1063" cy="221" rx="4.5" ry="9" transform="rotate(-40,1063,221)" fill="#ffa820"/><ellipse cx="1051" cy="208" rx="7" ry="13" transform="rotate(-55,1051,208)" fill="#ff8c00"/><ellipse cx="1055" cy="208" rx="4.5" ry="9" transform="rotate(-55,1055,208)" fill="#ffa820"/><ellipse cx="1047" cy="194" rx="7" ry="13" transform="rotate(-65,1047,194)" fill="#ff8c00"/><ellipse cx="1051" cy="194" rx="4.5" ry="9" transform="rotate(-65,1051,194)" fill="#ffa820"/><ellipse cx="1052" cy="180" rx="7" ry="13" transform="rotate(-75,1052,180)" fill="#ff8c00"/><ellipse cx="1056" cy="180" rx="4.5" ry="9" transform="rotate(-75,1056,180)" fill="#ffa820"/><ellipse cx="1062" cy="173" rx="7" ry="13" transform="rotate(-85,1062,173)" fill="#ff8c00"/><ellipse cx="1066" cy="173" rx="4.5" ry="9" transform="rotate(-85,1066,173)" fill="#ffa820"/><ellipse cx="1135" cy="221" rx="7" ry="13" transform="rotate(40,1135,221)" fill="#ff8c00"/><ellipse cx="1131" cy="221" rx="4.5" ry="9" transform="rotate(40,1131,221)" fill="#ffa820"/><ellipse cx="1143" cy="208" rx="7" ry="13" transform="rotate(55,1143,208)" fill="#ff8c00"/><ellipse cx="1139" cy="208" rx="4.5" ry="9" transform="rotate(55,1139,208)" fill="#ffa820"/><ellipse cx="1147" cy="194" rx="7" ry="13" transform="rotate(65,1147,194)" fill="#ff8c00"/><ellipse cx="1143" cy="194" rx="4.5" ry="9" transform="rotate(65,1143,194)" fill="#ffa820"/><ellipse cx="1142" cy="180" rx="7" ry="13" transform="rotate(75,1142,180)" fill="#ff8c00"/><ellipse cx="1138" cy="180" rx="4.5" ry="9" transform="rotate(75,1138,180)" fill="#ffa820"/><ellipse cx="1132" cy="173" rx="7" ry="13" transform="rotate(85,1132,173)" fill="#ff8c00"/><ellipse cx="1128" cy="173" rx="4.5" ry="9" transform="rotate(85,1128,173)" fill="#ffa820"/>
+  <path d="M1061,144 h72 c0,40 -12,65 -36,75 c-24,-10 -36,-35 -36,-75z" fill="#909090"/>
+  <!-- inner highlight -->
+  <path d="M1073,144 h16 c0,28 -6,45 -16,52 c-10,-7 -16,-24 -16,-52z" fill="#606060"/>
+  <!-- rim -->
+  <ellipse cx="1097" cy="144" rx="36" ry="7" fill="#282828"/>
+  <!-- stem & base -->
+  <rect x="1091" y="211" width="12" height="18" fill="#909090"/>
+  <path d="M1077,229 h40 v6 r4,4 h-40 r4,4 v-6z" fill="#282828"/>
+  <ellipse cx="1097" cy="229" rx="20" ry="4" fill="#606060"/>
+  <!-- handles -->
+  <path d="M1061,166 c-20,0 -20,30 -6,40" fill="none" stroke="#282828" stroke-width="6" stroke-linecap="round"/>
+  <path d="M1133,166 c20,0 20,30 6,40" fill="none" stroke="#282828" stroke-width="6" stroke-linecap="round"/>
+
+  <circle cx="1097" cy="206" r="18" fill="#0e1018" opacity="0.7"/>
+  <text x="1097" y="214" text-anchor="middle" style="fill:#282828;font:900 20px 'Bahnschrift','Arial Black',sans-serif;">C</text>
+  <line x1="1020" y1="268" x2="1174" y2="268" stroke="#404040" stroke-width="0.7" opacity="0.4"/>
+  <text x="1097" y="288" text-anchor="middle" style="fill:#909090;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">First Pull</text>
+  <text x="1097" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">6</text>
+  <rect x="1020" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
+  <rect x="1020" y="318" width="84" height="7" rx="3.5" fill="#282828">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3.2s" repeatCount="indefinite"/>
+  </rect>
+  <text x="1097" y="341" text-anchor="middle" style="fill:#404040;font:600 9px 'Consolas',monospace;">C · 55% →10</text>
+  <rect x="1020" y="378" width="84" height="3" rx="1.5" fill="#909090" opacity="0.5" filter="url(#softGlow)"/>
+  <rect x="1006" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
+
+  <!-- TROPHY 7: Issues [C] -->
+  <rect x="1198" y="96" width="182" height="300" rx="14" fill="#0e1018" stroke="#404040" stroke-width="1.4"/>
+  <rect x="1198" y="96" width="182" height="4" rx="14" fill="#282828"/>
+  <text x="1289" y="118" text-anchor="middle" style="fill:#909090;font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">! ISSUES</text>
+<ellipse cx="1251" cy="221" rx="7" ry="13" transform="rotate(-40,1251,221)" fill="#ff8c00"/><ellipse cx="1255" cy="221" rx="4.5" ry="9" transform="rotate(-40,1255,221)" fill="#ffa820"/><ellipse cx="1243" cy="208" rx="7" ry="13" transform="rotate(-55,1243,208)" fill="#ff8c00"/><ellipse cx="1247" cy="208" rx="4.5" ry="9" transform="rotate(-55,1247,208)" fill="#ffa820"/><ellipse cx="1239" cy="194" rx="7" ry="13" transform="rotate(-65,1239,194)" fill="#ff8c00"/><ellipse cx="1243" cy="194" rx="4.5" ry="9" transform="rotate(-65,1243,194)" fill="#ffa820"/><ellipse cx="1244" cy="180" rx="7" ry="13" transform="rotate(-75,1244,180)" fill="#ff8c00"/><ellipse cx="1248" cy="180" rx="4.5" ry="9" transform="rotate(-75,1248,180)" fill="#ffa820"/><ellipse cx="1254" cy="173" rx="7" ry="13" transform="rotate(-85,1254,173)" fill="#ff8c00"/><ellipse cx="1258" cy="173" rx="4.5" ry="9" transform="rotate(-85,1258,173)" fill="#ffa820"/><ellipse cx="1327" cy="221" rx="7" ry="13" transform="rotate(40,1327,221)" fill="#ff8c00"/><ellipse cx="1323" cy="221" rx="4.5" ry="9" transform="rotate(40,1323,221)" fill="#ffa820"/><ellipse cx="1335" cy="208" rx="7" ry="13" transform="rotate(55,1335,208)" fill="#ff8c00"/><ellipse cx="1331" cy="208" rx="4.5" ry="9" transform="rotate(55,1331,208)" fill="#ffa820"/><ellipse cx="1339" cy="194" rx="7" ry="13" transform="rotate(65,1339,194)" fill="#ff8c00"/><ellipse cx="1335" cy="194" rx="4.5" ry="9" transform="rotate(65,1335,194)" fill="#ffa820"/><ellipse cx="1334" cy="180" rx="7" ry="13" transform="rotate(75,1334,180)" fill="#ff8c00"/><ellipse cx="1330" cy="180" rx="4.5" ry="9" transform="rotate(75,1330,180)" fill="#ffa820"/><ellipse cx="1324" cy="173" rx="7" ry="13" transform="rotate(85,1324,173)" fill="#ff8c00"/><ellipse cx="1320" cy="173" rx="4.5" ry="9" transform="rotate(85,1320,173)" fill="#ffa820"/>
+  <path d="M1253,144 h72 c0,40 -12,65 -36,75 c-24,-10 -36,-35 -36,-75z" fill="#909090"/>
+  <!-- inner highlight -->
+  <path d="M1265,144 h16 c0,28 -6,45 -16,52 c-10,-7 -16,-24 -16,-52z" fill="#606060"/>
+  <!-- rim -->
+  <ellipse cx="1289" cy="144" rx="36" ry="7" fill="#282828"/>
+  <!-- stem & base -->
+  <rect x="1283" y="211" width="12" height="18" fill="#909090"/>
+  <path d="M1269,229 h40 v6 r4,4 h-40 r4,4 v-6z" fill="#282828"/>
+  <ellipse cx="1289" cy="229" rx="20" ry="4" fill="#606060"/>
+  <!-- handles -->
+  <path d="M1253,166 c-20,0 -20,30 -6,40" fill="none" stroke="#282828" stroke-width="6" stroke-linecap="round"/>
+  <path d="M1325,166 c20,0 20,30 6,40" fill="none" stroke="#282828" stroke-width="6" stroke-linecap="round"/>
+
+  <circle cx="1289" cy="206" r="18" fill="#0e1018" opacity="0.7"/>
+  <text x="1289" y="214" text-anchor="middle" style="fill:#282828;font:900 20px 'Bahnschrift','Arial Black',sans-serif;">C</text>
+  <line x1="1212" y1="268" x2="1366" y2="268" stroke="#404040" stroke-width="0.7" opacity="0.4"/>
+  <text x="1289" y="288" text-anchor="middle" style="fill:#909090;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">First Issue</text>
+  <text x="1289" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">0</text>
+  <rect x="1212" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
+  <rect x="1212" y="318" width="2" height="7" rx="3.5" fill="#282828">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3.4s" repeatCount="indefinite"/>
+  </rect>
+  <text x="1289" y="341" text-anchor="middle" style="fill:#404040;font:600 9px 'Consolas',monospace;">C · 0% →10</text>
+  <rect x="1212" y="378" width="2" height="3" rx="1.5" fill="#909090" opacity="0.5" filter="url(#softGlow)"/>
+  <rect x="1198" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
 
 </svg>
