@@ -78,7 +78,6 @@ Currently crafting **blazingly fast** security tools in **Rust** and hunting for
 ![Trophy Case](assets/panels/trophies.svg)
 
 <!-- GitHub Profile Trophy (onestar theme matches the reference image) -->
-![GitHub Trophies](https://github-profile-trophy.vercel.app/?username=Karmanya03&theme=onestar&no-frame=true&row=1&column=6&margin-w=8)
 
 </div>
 
