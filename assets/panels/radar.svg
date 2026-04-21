@@ -32,7 +32,7 @@
 
   <text x="64" y="92" class="title">ARSENAL RADAR</text>
   <text x="64" y="126" class="subtitle">Unique profile signature and capability bands</text>
-  <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 10:31 UTC</text>
+  <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 12:02 UTC</text>
 
   
   <text x="64" y="170" class="label">Operational score bands</text>
@@ -58,8 +58,8 @@
 
   <text x="64" y="418" class="small">Collaboration Pulse</text>
   <rect x="320" y="404" width="760" height="16" rx="8" fill="#1f1f24"/>
-  <rect x="320" y="404" width="453" height="16" rx="8" fill="url(#accent)"/>
-  <text x="1094" y="418" class="mono" text-anchor="end"> 63/100</text>
+  <rect x="320" y="404" width="475" height="16" rx="8" fill="url(#accent)"/>
+  <text x="1094" y="418" class="mono" text-anchor="end"> 66/100</text>
 
   <text x="64" y="488" class="muted">A custom cyber-style profile signature panel replacing snake animation.</text>
 </svg>

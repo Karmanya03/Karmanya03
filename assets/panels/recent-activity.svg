@@ -32,7 +32,7 @@
 
   <text x="64" y="92" class="title">RECENT ACTIVITY</text>
   <text x="64" y="126" class="subtitle">Ops timeline from live event feed</text>
-  <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 10:31 UTC</text>
+  <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 12:02 UTC</text>
 
   
   <text x="64" y="170" class="label">Latest public events</text>
@@ -50,7 +50,7 @@
 
   <rect x="64" y="290" width="1072" height="31" rx="8" fill="#141417" stroke="#2a2a2d"/>
   <circle cx="84" cy="305" r="4" fill="#f4c35a"/>
-  <text x="98" y="311" class="small">[18 Apr] Pushed 0 commits to Karmanya03/Overthrone</text>
+  <text x="98" y="311" class="small">[21 Apr] Pushed 0 commits to Karmanya03/Karmanya03</text>
 
   <rect x="64" y="329" width="1072" height="31" rx="8" fill="#141417" stroke="#2a2a2d"/>
   <circle cx="84" cy="344" r="4" fill="#f4c35a"/>
@@ -66,7 +66,7 @@
 
   <rect x="64" y="446" width="1072" height="31" rx="8" fill="#141417" stroke="#2a2a2d"/>
   <circle cx="84" cy="461" r="4" fill="#f4c35a"/>
-  <text x="98" y="467" class="small">[17 Apr] Pushed 0 commits to Karmanya03/Overthrone</text>
+  <text x="98" y="467" class="small">[18 Apr] Pushed 0 commits to Karmanya03/Overthrone</text>
 
   <text x="64" y="510" class="muted">Source: GitHub public events API. Auto-refreshed by workflow.</text>
 </svg>
