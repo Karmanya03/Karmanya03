@@ -34,7 +34,7 @@
 │  ▷  DIRECTIVE    :  Offensive Security · Secure Engineering           │
 │  ▷  SPECIALTIES  :  Game Dev (Unity/Unreal) · XR Development (AR/VR)  │
 │  ▷  ARSENAL      :  Rust 🦀 · WebAssembly 🕸️ · C/C++ ⚙️              │
-│  ▷  SYS_STATUS   :  [PANIC] Rust compiler won, send coffee...                   │
+│  ▷  SYS_STATUS   :  [PANIC] Rust compiler won, send coffee...         │
 ╰───────────────────────────────────────────────────────────────────────╯
 ```
 
@@ -42,7 +42,7 @@
 
 <div align="center">
 
-**B.E. Computer Science & Design** graduate who loves breaking things (ethically) and building them back stronger.  
+**B.E. Computer Science & Design** graduate & working as a Software Engineer who loves breaking things (ethically) and building them back stronger.  
 Currently crafting **blazingly fast** security tools in **Rust** and hunting for innovative red-team techniques.
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=000000)](https://linkedin.com/in/karmanya03)
