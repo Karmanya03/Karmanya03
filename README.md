@@ -1,75 +1,106 @@
+# Karmanya Ravindra | Cyber Ops
 
 [![Banner-3L2.gif](https://i.postimg.cc/zBBGQtGy/Banner-3L2.gif)](https://postimg.cc/TyzxLcmx)
 
----
-
-# 💫 About Me: 
-[![Portfolio](https://img.shields.io/badge/Portfolio-%238B0000?style=for-the-badge&logo=firefox&logoColor=white)](https://karmanya03-secdev.pro/)
-
-🔐 **Certified Red Team Professional (CRTP)** | Cyber Security Enthusiast | Engineer | Game & XR Developer
-
-Hey there! I'm **Karmanya Ravindra**, a 22-year-old B.E. Computer Science & Design graduate who loves breaking things (ethically) and building them back stronger.
-
-| 🎯 Focus Areas |  |
-|----------------|--|
-| ⚔️ Red Teaming & Offensive Security | 🛡️ Cyber Security & Ethical Hacking |
-| 🎮 Game Development | 🥽 XR Development (AR/VR) |
-
-🦀 Currently building blazingly fast security tools in **Rust**<br>
-🚀 Always hunting for vulnerabilities and innovative solutions<br>
-🤝 Open to collaborations on security research & cool projects
-
-> *"The quieter you become, the more you can hear."* — Kali Linux
-
-## 🌐 Socials:
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/karmanya03) [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white)](https://youtube.com/@Karmanya03) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:karmanya03@proton.me) [![TryHackMe](https://img.shields.io/badge/TryHackMe-%23212C42?style=for-the-badge&logo=tryhackme&logoColor=white)](https://tryhackme.com/p/Karmanya03)
-
-
-# 💻 Tech Stack:
-
-### 🔥 Languages
-![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white) ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white) ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![PowerShell](https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white) ![R](https://img.shields.io/badge/r-%23276DC3.svg?style=for-the-badge&logo=r&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-
-### ☁️ Cloud & Platforms
-![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) ![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white) ![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white) ![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white) ![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7) ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
-
-### 🛠️ Frameworks & Tools
-![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
-
-### 🏢 Enterprise & Project Management
-![PeopleSoft](https://img.shields.io/badge/PeopleSoft-%23C74634.svg?style=for-the-badge&logo=oracle&logoColor=white) ![PeopleTools](https://img.shields.io/badge/PeopleTools-%23C74634.svg?style=for-the-badge&logo=oracle&logoColor=white) ![Jira](https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white)
-
-### 🗄️ Databases & Servers
-![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white) ![Apache](https://img.shields.io/badge/apache-%23D42029.svg?style=for-the-badge&logo=apache&logoColor=white) ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
-
-### 🎮 Game & XR Development
-![Unity](https://img.shields.io/badge/unity-%23000000.svg?style=for-the-badge&logo=unity&logoColor=white) ![Unreal Engine](https://img.shields.io/badge/unrealengine-%23313131.svg?style=for-the-badge&logo=unrealengine&logoColor=white) ![Sidequest](https://img.shields.io/badge/sidequest-%23101227.svg?style=for-the-badge&logo=sidequest&logoColor=white)
-
-### 🔧 DevOps & Other
-![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) ![GitLab](https://img.shields.io/badge/gitlab-%23181717.svg?style=for-the-badge&logo=gitlab&logoColor=white) ![TOR](https://img.shields.io/badge/tor-%237E4798.svg?style=for-the-badge&logo=tor-project&logoColor=white) ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white) ![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white) ![Adobe](https://img.shields.io/badge/adobe-%23FF0000.svg?style=for-the-badge&logo=adobe&logoColor=white) ![Adobe After Effects](https://img.shields.io/badge/Adobe%20After%20Effects-9999FF.svg?style=for-the-badge&logo=Adobe%20After%20Effects&logoColor=white) ![Adobe Premiere Pro](https://img.shields.io/badge/Adobe%20Premiere%20Pro-9999FF.svg?style=for-the-badge&logo=Adobe%20Premiere%20Pro&logoColor=white) ![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white)
-
-
-# 📊 GitHub Pulse
-![](https://raw.githubusercontent.com/Karmanya03/Karmanya03/main/github-metrics.svg)
-
-## 🏆 Achievements
-![](https://raw.githubusercontent.com/Karmanya03/Karmanya03/main/metrics.plugin.achievements.compact.svg)
-
-## 📅 Contribution Calendar
-![](https://raw.githubusercontent.com/Karmanya03/Karmanya03/main/metrics.plugin.isocalendar.fullyear.svg)
-
-## 🔝 Top Repositories
-![](https://raw.githubusercontent.com/Karmanya03/Karmanya03/main/metrics.plugin.repositories.pinned.svg)
-
-## 📰 Recent Activity
-![](https://raw.githubusercontent.com/Karmanya03/Karmanya03/main/metrics.plugin.activity.svg)
-
-## 🐍 Contribution Snake
-<picture>
-	<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Karmanya03/Karmanya03/output/github-snake-dark.svg" />
-	<source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Karmanya03/Karmanya03/output/github-snake.svg" />
-	<img alt="github-snake" src="https://raw.githubusercontent.com/Karmanya03/Karmanya03/output/github-snake.svg" />
-</picture>
+![Profile](https://img.shields.io/badge/KARMANYA_RAVINDRA-CYBER%20OPS-8B0000?style=for-the-badge&labelColor=000000&color=C9A227)
+![CRTP](https://img.shields.io/badge/CRTP-Certified_Red_Team_Professional-FFFFFF?style=for-the-badge&labelColor=8B0000&color=000000)
+![Theme](https://img.shields.io/badge/THEME-RED%20x%20WHITE%20x%20GOLD%20x%20BLACK-C9A227?style=for-the-badge&labelColor=000000&color=8B0000)
 
 ---
-[![](https://komarev.com/ghpvc/?username=Karmanya03&style=for-the-badge&abbreviated=true)](https://github.com/Karmanya03)
+
+## OPERATOR DOSSIER
+
+[![Portfolio](https://img.shields.io/badge/Portfolio-Live%20Site-C9A227?style=for-the-badge&labelColor=000000&color=8B0000)](https://karmanya03-secdev.pro/)
+
+Security engineer and offensive security enthusiast focused on red teaming, secure engineering, and high-performance tooling.
+
+> "The quieter you become, the more you can hear." - Kali Linux
+
+| Field | Details |
+| --- | --- |
+| Name | Karmanya Ravindra |
+| Degree | B.E. Computer Science and Design |
+| Core Track | Offensive Security, Cyber Security, Red Teaming |
+| Builder Side | Rust tools, game systems, XR experiences |
+| Collaboration | Security research and practical engineering projects |
+
+## SOCIAL CHANNELS
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-FFFFFF?style=for-the-badge&logo=linkedin&logoColor=0A66C2&labelColor=000000&color=8B0000)](https://linkedin.com/in/karmanya03)
+[![YouTube](https://img.shields.io/badge/YouTube-Watch-C9A227?style=for-the-badge&logo=youtube&logoColor=FF0000&labelColor=000000&color=8B0000)](https://youtube.com/@Karmanya03)
+[![Email](https://img.shields.io/badge/Email-Contact-8B0000?style=for-the-badge&logo=gmail&logoColor=FFFFFF&labelColor=000000&color=C9A227)](mailto:karmanya03@proton.me)
+[![TryHackMe](https://img.shields.io/badge/TryHackMe-Profile-FFFFFF?style=for-the-badge&logo=tryhackme&logoColor=000000&labelColor=C9A227&color=8B0000)](https://tryhackme.com/p/Karmanya03)
+
+## TECH ARSENAL
+
+### Languages
+
+![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
+![Python](https://img.shields.io/badge/Python-8B0000?style=for-the-badge&logo=python&logoColor=white)
+![C](https://img.shields.io/badge/C-C9A227?style=for-the-badge&logo=c&logoColor=000000)
+![C++](https://img.shields.io/badge/C++-FFFFFF?style=for-the-badge&logo=c%2B%2B&logoColor=000000)
+![C#](https://img.shields.io/badge/C%23-000000?style=for-the-badge&logo=csharp&logoColor=C9A227)
+![Java](https://img.shields.io/badge/Java-8B0000?style=for-the-badge&logo=openjdk&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-C9A227?style=for-the-badge&logo=javascript&logoColor=000000)
+![PowerShell](https://img.shields.io/badge/PowerShell-FFFFFF?style=for-the-badge&logo=powershell&logoColor=000000)
+![R](https://img.shields.io/badge/R-000000?style=for-the-badge&logo=r&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-8B0000?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-C9A227?style=for-the-badge&logo=css3&logoColor=000000)
+
+### Cloud, Backend, and Data
+
+![AWS](https://img.shields.io/badge/AWS-000000?style=for-the-badge&logo=amazon-aws&logoColor=C9A227)
+![Azure](https://img.shields.io/badge/Azure-8B0000?style=for-the-badge&logo=microsoftazure&logoColor=white)
+![Google Cloud](https://img.shields.io/badge/GCP-C9A227?style=for-the-badge&logo=google-cloud&logoColor=000000)
+![Cloudflare](https://img.shields.io/badge/Cloudflare-FFFFFF?style=for-the-badge&logo=cloudflare&logoColor=000000)
+![Django](https://img.shields.io/badge/Django-000000?style=for-the-badge&logo=django&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-8B0000?style=for-the-badge&logo=flask&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-C9A227?style=for-the-badge&logo=fastapi&logoColor=000000)
+![Node.js](https://img.shields.io/badge/Node.js-FFFFFF?style=for-the-badge&logo=node.js&logoColor=000000)
+![MySQL](https://img.shields.io/badge/MySQL-000000?style=for-the-badge&logo=mysql&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-8B0000?style=for-the-badge&logo=mongodb&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-C9A227?style=for-the-badge&logo=postgresql&logoColor=000000)
+![SQLite](https://img.shields.io/badge/SQLite-FFFFFF?style=for-the-badge&logo=sqlite&logoColor=000000)
+
+### Security, DevOps, Enterprise, and Creative
+
+![Git](https://img.shields.io/badge/Git-000000?style=for-the-badge&logo=git&logoColor=C9A227)
+![GitHub](https://img.shields.io/badge/GitHub-8B0000?style=for-the-badge&logo=github&logoColor=white)
+![GitLab](https://img.shields.io/badge/GitLab-C9A227?style=for-the-badge&logo=gitlab&logoColor=000000)
+![Nginx](https://img.shields.io/badge/Nginx-FFFFFF?style=for-the-badge&logo=nginx&logoColor=000000)
+![Apache](https://img.shields.io/badge/Apache-000000?style=for-the-badge&logo=apache&logoColor=white)
+![PeopleSoft](https://img.shields.io/badge/PeopleSoft-8B0000?style=for-the-badge&logo=oracle&logoColor=white)
+![PeopleTools](https://img.shields.io/badge/PeopleTools-C9A227?style=for-the-badge&logo=oracle&logoColor=000000)
+![Jira](https://img.shields.io/badge/Jira-FFFFFF?style=for-the-badge&logo=jira&logoColor=000000)
+![Unity](https://img.shields.io/badge/Unity-000000?style=for-the-badge&logo=unity&logoColor=white)
+![Unreal Engine](https://img.shields.io/badge/Unreal-8B0000?style=for-the-badge&logo=unrealengine&logoColor=white)
+![SideQuest](https://img.shields.io/badge/SideQuest-C9A227?style=for-the-badge&logo=oculus&logoColor=000000)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FFFFFF?style=for-the-badge&logo=tensorflow&logoColor=000000)
+![NumPy](https://img.shields.io/badge/NumPy-000000?style=for-the-badge&logo=numpy&logoColor=white)
+![Adobe](https://img.shields.io/badge/Adobe-8B0000?style=for-the-badge&logo=adobe&logoColor=white)
+![Premiere Pro](https://img.shields.io/badge/Premiere_Pro-C9A227?style=for-the-badge&logo=adobepremierepro&logoColor=000000)
+![After Effects](https://img.shields.io/badge/After_Effects-FFFFFF?style=for-the-badge&logo=adobeaftereffects&logoColor=000000)
+
+## COMMAND CENTER
+
+![Command center overview panel](assets/panels/overview.svg)
+
+### ACHIEVEMENTS
+
+![Achievements panel](assets/panels/achievements.svg)
+
+### TROPHY CASE
+
+![Trophy case panel](assets/panels/trophies.svg)
+
+### RECENT ACTIVITY
+
+![Recent activity panel](assets/panels/recent-activity.svg)
+
+### ARSENAL RADAR
+
+![Arsenal radar panel](assets/panels/radar.svg)
+
+---
+
+[![Profile views](https://komarev.com/ghpvc/?username=Karmanya03&style=for-the-badge&abbreviated=true&color=8B0000&label=PROFILE+VIEWS)](https://github.com/Karmanya03)

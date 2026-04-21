@@ -1,96 +1,52 @@
-name: Update Profile Metrics
+name: Render Profile Panels
 
 on:
   schedule:
-    - cron: "23 2 * * *"
+    - cron: "17 2 * * *"
   workflow_dispatch:
   push:
     branches:
       - main
     paths:
       - README.md
+      - scripts/generate_profile_panels.py
       - .github/workflows/update-profile-metrics.yml
 
 permissions:
   contents: write
 
 concurrency:
-  group: profile-metrics
+  group: profile-panels
   cancel-in-progress: true
 
 jobs:
-  metrics:
+  render-panels:
     runs-on: ubuntu-latest
     steps:
-      - name: Overview stats and languages
-        uses: lowlighter/metrics@latest
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          user: Karmanya03
-          filename: github-metrics.svg
-          output_action: commit
-          committer_branch: main
-          committer_message: "chore: update profile metrics"
-          config_timezone: Asia/Kolkata
-          base: header, activity, community, repositories, metadata
-          plugin_languages: yes
-          plugin_languages_limit: 8
-          plugin_languages_ignored: >-
-            html, css, tex, less, dockerfile, makefile, qmake, lex, cmake, shell, gnuplot
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Trophy achievements
-        uses: lowlighter/metrics@latest
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          user: Karmanya03
-          filename: metrics.plugin.achievements.compact.svg
-          output_action: commit
-          committer_branch: main
-          committer_message: "chore: update profile metrics"
-          base: ""
-          plugin_achievements: yes
-          plugin_achievements_display: compact
-          plugin_achievements_threshold: C
-          plugin_achievements_only: >-
-            polyglot, stargazer, deployer, member, maintainer, developer, scripter, explorer, infographile, manager
+          python-version: "3.12"
 
-      - name: Isometric contribution calendar
-        uses: lowlighter/metrics@latest
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          user: Karmanya03
-          filename: metrics.plugin.isocalendar.fullyear.svg
-          output_action: commit
-          committer_branch: main
-          committer_message: "chore: update profile metrics"
-          base: ""
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year
+      - name: Generate custom SVG panels
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROFILE_USERNAME: Karmanya03
+          PROFILE_OUT_DIR: assets/panels
+        run: |
+          python scripts/generate_profile_panels.py
 
-      - name: Pinned repositories
-        uses: lowlighter/metrics@latest
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          user: Karmanya03
-          filename: metrics.plugin.repositories.pinned.svg
-          output_action: commit
-          committer_branch: main
-          committer_message: "chore: update profile metrics"
-          base: ""
-          plugin_repositories: yes
-          plugin_repositories_pinned: 5
-
-      - name: Recent activity
-        uses: lowlighter/metrics@latest
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          user: Karmanya03
-          filename: metrics.plugin.activity.svg
-          output_action: commit
-          committer_branch: main
-          committer_message: "chore: update profile metrics"
-          base: ""
-          plugin_activity: yes
-          plugin_activity_limit: 6
-          plugin_activity_days: 30
-          plugin_activity_filter: issue, pr, release, fork, review, ref/create
+      - name: Commit rendered panels
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No panel changes detected"
+            exit 0
+          fi
+          git add assets/panels/*.svg assets/panels/profile-metadata.json
+          git commit -m "chore: refresh profile command-center panels"
+          git push

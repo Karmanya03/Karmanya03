@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" role="img" aria-label="RECENT ACTIVITY">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050505"/>
+      <stop offset="50%" stop-color="#110909"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b30000"/>
+      <stop offset="50%" stop-color="#f4c35a"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8c6a1a"/>
+      <stop offset="100%" stop-color="#f4c35a"/>
+    </linearGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 42px 'Segoe UI', 'Trebuchet MS', sans-serif; letter-spacing: 1px; }
+      .subtitle { fill: #f6d489; font: 500 20px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .label { fill: #e8e8e8; font: 600 18px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .value { fill: #ffffff; font: 700 36px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .small { fill: #f7f7f7; font: 500 16px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .muted { fill: #d6d6d6; font: 500 14px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .stamp { fill: #ffffff; font: 600 13px 'Segoe UI', 'Trebuchet MS', sans-serif; opacity: 0.8; }
+      .mono { fill: #ffffff; font: 600 15px 'Consolas', 'Segoe UI Mono', monospace; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="540" fill="url(#bg)"/>
+  <rect x="24" y="24" width="1152" height="492" rx="24" fill="#0d0d0f" stroke="#f4c35a" stroke-opacity="0.55" stroke-width="2"/>
+  <rect x="24" y="24" width="1152" height="7" fill="url(#accent)" rx="24"/>
+
+  <text x="64" y="92" class="title">RECENT ACTIVITY</text>
+  <text x="64" y="126" class="subtitle">Ops timeline from live event feed</text>
+  <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 10:22 UTC</text>
+
+  
+  <text x="64" y="170" class="label">Latest public events</text>
+  <rect x="64" y="173" width="1072" height="31" rx="8" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="84" cy="188" r="4" fill="#f4c35a"/>
+  <text x="98" y="194" class="small">[21 Apr] Pushed 0 commits to Karmanya03/Karmanya03</text>
+
+  <rect x="64" y="212" width="1072" height="31" rx="8" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="84" cy="227" r="4" fill="#f4c35a"/>
+  <text x="98" y="233" class="small">[21 Apr] Pushed 0 commits to Karmanya03/Karmanya03</text>
+
+  <rect x="64" y="251" width="1072" height="31" rx="8" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="84" cy="266" r="4" fill="#f4c35a"/>
+  <text x="98" y="272" class="small">[18 Apr] Pushed 0 commits to Karmanya03/Overthrone</text>
+
+  <rect x="64" y="290" width="1072" height="31" rx="8" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="84" cy="305" r="4" fill="#f4c35a"/>
+  <text x="98" y="311" class="small">[18 Apr] Pushed 0 commits to Karmanya03/Overthrone</text>
+
+  <rect x="64" y="329" width="1072" height="31" rx="8" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="84" cy="344" r="4" fill="#f4c35a"/>
+  <text x="98" y="350" class="small">[18 Apr] Pushed 0 commits to Karmanya03/Overthrone</text>
+
+  <rect x="64" y="368" width="1072" height="31" rx="8" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="84" cy="383" r="4" fill="#f4c35a"/>
+  <text x="98" y="389" class="small">[18 Apr] Pushed 0 commits to Karmanya03/Overthrone</text>
+
+  <rect x="64" y="407" width="1072" height="31" rx="8" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="84" cy="422" r="4" fill="#f4c35a"/>
+  <text x="98" y="428" class="small">[17 Apr] Pushed 0 commits to Karmanya03/Overthrone</text>
+
+  <rect x="64" y="446" width="1072" height="31" rx="8" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="84" cy="461" r="4" fill="#f4c35a"/>
+  <text x="98" y="467" class="small">[17 Apr] Pushed 0 commits to Karmanya03/Overthrone</text>
+
+  <text x="64" y="510" class="muted">Source: GitHub public events API. Auto-refreshed by workflow.</text>
+</svg>

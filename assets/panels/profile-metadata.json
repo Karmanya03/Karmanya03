@@ -1,0 +1,33 @@
+{
+  "username": "Karmanya03",
+  "updated": "21 Apr 2026 10:22 UTC",
+  "totals": {
+    "repos": 36,
+    "stars": 6,
+    "forks": 0,
+    "active_90": 9,
+    "unique_languages": 5
+  },
+  "top_languages": [
+    [
+      "Python",
+      11
+    ],
+    [
+      "Rust",
+      5
+    ],
+    [
+      "CSS",
+      4
+    ],
+    [
+      "JavaScript",
+      3
+    ],
+    [
+      "HTML",
+      2
+    ]
+  ]
+}

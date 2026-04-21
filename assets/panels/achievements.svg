@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="510" viewBox="0 0 1200 510" role="img" aria-label="ACHIEVEMENTS">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050505"/>
+      <stop offset="50%" stop-color="#110909"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b30000"/>
+      <stop offset="50%" stop-color="#f4c35a"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8c6a1a"/>
+      <stop offset="100%" stop-color="#f4c35a"/>
+    </linearGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 42px 'Segoe UI', 'Trebuchet MS', sans-serif; letter-spacing: 1px; }
+      .subtitle { fill: #f6d489; font: 500 20px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .label { fill: #e8e8e8; font: 600 18px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .value { fill: #ffffff; font: 700 36px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .small { fill: #f7f7f7; font: 500 16px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .muted { fill: #d6d6d6; font: 500 14px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .stamp { fill: #ffffff; font: 600 13px 'Segoe UI', 'Trebuchet MS', sans-serif; opacity: 0.8; }
+      .mono { fill: #ffffff; font: 600 15px 'Consolas', 'Segoe UI Mono', monospace; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="510" fill="url(#bg)"/>
+  <rect x="24" y="24" width="1152" height="462" rx="24" fill="#0d0d0f" stroke="#f4c35a" stroke-opacity="0.55" stroke-width="2"/>
+  <rect x="24" y="24" width="1152" height="7" fill="url(#accent)" rx="24"/>
+
+  <text x="64" y="92" class="title">ACHIEVEMENTS</text>
+  <text x="64" y="126" class="subtitle">Milestones forged from live GitHub telemetry</text>
+  <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 10:22 UTC</text>
+
+  
+  <text x="64" y="168" class="label">Unlocked 2/6</text>
+  <rect x="64" y="194" width="334" height="112" rx="14" fill="#141417" stroke="#f4c35a" stroke-width="1.6"/>
+  <rect x="64" y="194" width="334" height="6" rx="14" fill="#b30000"/>
+  <text x="80" y="228" class="label">Repo Architect</text>
+  <text x="80" y="256" class="small">36 repositories built</text>
+  <text x="80" y="284" class="mono">UNLOCKED</text>
+
+  <rect x="420" y="194" width="334" height="112" rx="14" fill="#141417" stroke="#595959" stroke-width="1.6"/>
+  <rect x="420" y="194" width="334" height="6" rx="14" fill="#2b2b2e"/>
+  <text x="436" y="228" class="label">Star Vanguard</text>
+  <text x="436" y="256" class="small">6 stars collected</text>
+  <text x="436" y="284" class="mono">LOCKED</text>
+
+  <rect x="776" y="194" width="334" height="112" rx="14" fill="#141417" stroke="#595959" stroke-width="1.6"/>
+  <rect x="776" y="194" width="334" height="6" rx="14" fill="#2b2b2e"/>
+  <text x="792" y="228" class="label">Fork Commander</text>
+  <text x="792" y="256" class="small">0 forks across projects</text>
+  <text x="792" y="284" class="mono">LOCKED</text>
+
+  <rect x="64" y="326" width="334" height="112" rx="14" fill="#141417" stroke="#595959" stroke-width="1.6"/>
+  <rect x="64" y="326" width="334" height="6" rx="14" fill="#2b2b2e"/>
+  <text x="80" y="360" class="label">Polyglot Operator</text>
+  <text x="80" y="388" class="small">5 primary languages</text>
+  <text x="80" y="416" class="mono">LOCKED</text>
+
+  <rect x="420" y="326" width="334" height="112" rx="14" fill="#141417" stroke="#595959" stroke-width="1.6"/>
+  <rect x="420" y="326" width="334" height="6" rx="14" fill="#2b2b2e"/>
+  <text x="436" y="360" class="label">Signal Reach</text>
+  <text x="436" y="388" class="small">13 followers</text>
+  <text x="436" y="416" class="mono">LOCKED</text>
+
+  <rect x="776" y="326" width="334" height="112" rx="14" fill="#141417" stroke="#f4c35a" stroke-width="1.6"/>
+  <rect x="776" y="326" width="334" height="6" rx="14" fill="#b30000"/>
+  <text x="792" y="360" class="label">Release Tempo</text>
+  <text x="792" y="388" class="small">9 active repos in 90d</text>
+  <text x="792" y="416" class="mono">UNLOCKED</text>
+
+  <text x="64" y="478" class="muted">Custom milestones generated from repository, social, and activity signals.</text>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-label="TROPHY CASE">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050505"/>
+      <stop offset="50%" stop-color="#110909"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b30000"/>
+      <stop offset="50%" stop-color="#f4c35a"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8c6a1a"/>
+      <stop offset="100%" stop-color="#f4c35a"/>
+    </linearGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 42px 'Segoe UI', 'Trebuchet MS', sans-serif; letter-spacing: 1px; }
+      .subtitle { fill: #f6d489; font: 500 20px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .label { fill: #e8e8e8; font: 600 18px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .value { fill: #ffffff; font: 700 36px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .small { fill: #f7f7f7; font: 500 16px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .muted { fill: #d6d6d6; font: 500 14px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .stamp { fill: #ffffff; font: 600 13px 'Segoe UI', 'Trebuchet MS', sans-serif; opacity: 0.8; }
+      .mono { fill: #ffffff; font: 600 15px 'Consolas', 'Segoe UI Mono', monospace; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="520" fill="url(#bg)"/>
+  <rect x="24" y="24" width="1152" height="472" rx="24" fill="#0d0d0f" stroke="#f4c35a" stroke-opacity="0.55" stroke-width="2"/>
+  <rect x="24" y="24" width="1152" height="7" fill="url(#accent)" rx="24"/>
+
+  <text x="64" y="92" class="title">TROPHY CASE</text>
+  <text x="64" y="126" class="subtitle">Repository standings and project dominance</text>
+  <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 10:22 UTC</text>
+
+  
+  <text x="64" y="170" class="label">Top repositories by stars and forks</text>
+  <rect x="64" y="174" width="1072" height="38" rx="10" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="88" cy="193" r="13" fill="#f4c35a"/>
+  <text x="88" y="197" text-anchor="middle" class="mono">1</text>
+  <text x="112" y="198" class="small">Deadrop</text>
+  <text x="760" y="198" class="muted">Lang: Rust</text>
+  <text x="930" y="198" class="muted">Stars: 3</text>
+  <text x="1060" y="198" class="muted">Forks: 0</text>
+
+  <rect x="64" y="222" width="1072" height="38" rx="10" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="88" cy="241" r="13" fill="#d9d9d9"/>
+  <text x="88" y="245" text-anchor="middle" class="mono">2</text>
+  <text x="112" y="246" class="small">Ferret-rs</text>
+  <text x="760" y="246" class="muted">Lang: Rust</text>
+  <text x="930" y="246" class="muted">Stars: 3</text>
+  <text x="1060" y="246" class="muted">Forks: 0</text>
+
+  <rect x="64" y="270" width="1072" height="38" rx="10" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="88" cy="289" r="13" fill="#c88956"/>
+  <text x="88" y="293" text-anchor="middle" class="mono">3</text>
+  <text x="112" y="294" class="small">Karmanya03</text>
+  <text x="760" y="294" class="muted">Lang: N/A</text>
+  <text x="930" y="294" class="muted">Stars: 0</text>
+  <text x="1060" y="294" class="muted">Forks: 0</text>
+
+  <rect x="64" y="318" width="1072" height="38" rx="10" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="88" cy="337" r="13" fill="#b30000"/>
+  <text x="88" y="341" text-anchor="middle" class="mono">4</text>
+  <text x="112" y="342" class="small">Overthrone</text>
+  <text x="760" y="342" class="muted">Lang: Rust</text>
+  <text x="930" y="342" class="muted">Stars: 0</text>
+  <text x="1060" y="342" class="muted">Forks: 0</text>
+
+  <rect x="64" y="366" width="1072" height="38" rx="10" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="88" cy="385" r="13" fill="#b30000"/>
+  <text x="88" y="389" text-anchor="middle" class="mono">5</text>
+  <text x="112" y="390" class="small">Kaizen-JAM</text>
+  <text x="760" y="390" class="muted">Lang: JavaScript</text>
+  <text x="930" y="390" class="muted">Stars: 0</text>
+  <text x="1060" y="390" class="muted">Forks: 0</text>
+
+  <rect x="64" y="414" width="1072" height="38" rx="10" fill="#141417" stroke="#2a2a2d"/>
+  <circle cx="88" cy="433" r="13" fill="#b30000"/>
+  <text x="88" y="437" text-anchor="middle" class="mono">6</text>
+  <text x="112" y="438" class="small">Sigil</text>
+  <text x="760" y="438" class="muted">Lang: Rust</text>
+  <text x="930" y="438" class="muted">Stars: 0</text>
+  <text x="1060" y="438" class="muted">Forks: 0</text>
+
+  <text x="64" y="492" class="muted">Trophy colors: Gold (1st), Silver (2nd), Bronze (3rd), Crimson (combat rank).</text>
+</svg>

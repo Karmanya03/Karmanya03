@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="COMMAND CENTER">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050505"/>
+      <stop offset="50%" stop-color="#110909"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b30000"/>
+      <stop offset="50%" stop-color="#f4c35a"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8c6a1a"/>
+      <stop offset="100%" stop-color="#f4c35a"/>
+    </linearGradient>
+    <style>
+      .title { fill: #ffffff; font: 700 42px 'Segoe UI', 'Trebuchet MS', sans-serif; letter-spacing: 1px; }
+      .subtitle { fill: #f6d489; font: 500 20px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .label { fill: #e8e8e8; font: 600 18px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .value { fill: #ffffff; font: 700 36px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .small { fill: #f7f7f7; font: 500 16px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .muted { fill: #d6d6d6; font: 500 14px 'Segoe UI', 'Trebuchet MS', sans-serif; }
+      .stamp { fill: #ffffff; font: 600 13px 'Segoe UI', 'Trebuchet MS', sans-serif; opacity: 0.8; }
+      .mono { fill: #ffffff; font: 600 15px 'Consolas', 'Segoe UI Mono', monospace; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="560" fill="url(#bg)"/>
+  <rect x="24" y="24" width="1152" height="512" rx="24" fill="#0d0d0f" stroke="#f4c35a" stroke-opacity="0.55" stroke-width="2"/>
+  <rect x="24" y="24" width="1152" height="7" fill="url(#accent)" rx="24"/>
+
+  <text x="64" y="92" class="title">COMMAND CENTER</text>
+  <text x="64" y="126" class="subtitle">Live profile telemetry and project momentum</text>
+  <text x="1136" y="126" class="stamp" text-anchor="end">Updated 21 Apr 2026 10:22 UTC</text>
+
+  
+  <rect x="64" y="162" width="256" height="124" rx="16" fill="#141417" stroke="#b30000" stroke-opacity="0.65"/>
+  <rect x="64" y="162" width="256" height="6" rx="16" fill="url(#gold)"/>
+  <text x="82" y="196" class="label">Repositories</text>
+  <text x="82" y="244" class="value">36</text>
+  <text x="82" y="270" class="muted">9 active in last 90 days</text>
+
+  <rect x="336" y="162" width="256" height="124" rx="16" fill="#141417" stroke="#b30000" stroke-opacity="0.65"/>
+  <rect x="336" y="162" width="256" height="6" rx="16" fill="url(#gold)"/>
+  <text x="354" y="196" class="label">Followers</text>
+  <text x="354" y="244" class="value">13</text>
+  <text x="354" y="270" class="muted">Following 13</text>
+
+  <rect x="608" y="162" width="256" height="124" rx="16" fill="#141417" stroke="#b30000" stroke-opacity="0.65"/>
+  <rect x="608" y="162" width="256" height="6" rx="16" fill="url(#gold)"/>
+  <text x="626" y="196" class="label">Total Stars</text>
+  <text x="626" y="244" class="value">6</text>
+  <text x="626" y="270" class="muted">Across all public repositories</text>
+
+  <rect x="880" y="162" width="256" height="124" rx="16" fill="#141417" stroke="#b30000" stroke-opacity="0.65"/>
+  <rect x="880" y="162" width="256" height="6" rx="16" fill="url(#gold)"/>
+  <text x="898" y="196" class="label">Total Forks</text>
+  <text x="898" y="244" class="value">0</text>
+  <text x="898" y="270" class="muted">Community reuse signal</text>
+
+  <text x="64" y="348" class="label">Language Signal</text>
+  <text x="64" y="382" class="small">Python</text>
+  <rect x="228" y="369" width="700" height="12" rx="6" fill="#1f1f24"/>
+  <rect x="228" y="369" width="620" height="12" rx="6" fill="url(#accent)"/>
+  <text x="944" y="382" class="muted">11 repos</text>
+
+  <text x="64" y="410" class="small">Rust</text>
+  <rect x="228" y="397" width="700" height="12" rx="6" fill="#1f1f24"/>
+  <rect x="228" y="397" width="281" height="12" rx="6" fill="url(#accent)"/>
+  <text x="944" y="410" class="muted">5 repos</text>
+
+  <text x="64" y="438" class="small">CSS</text>
+  <rect x="228" y="425" width="700" height="12" rx="6" fill="#1f1f24"/>
+  <rect x="228" y="425" width="225" height="12" rx="6" fill="url(#accent)"/>
+  <text x="944" y="438" class="muted">4 repos</text>
+
+  <text x="64" y="466" class="small">JavaScript</text>
+  <rect x="228" y="453" width="700" height="12" rx="6" fill="#1f1f24"/>
+  <rect x="228" y="453" width="169" height="12" rx="6" fill="url(#accent)"/>
+  <text x="944" y="466" class="muted">3 repos</text>
+
+  <text x="64" y="494" class="small">HTML</text>
+  <rect x="228" y="481" width="700" height="12" rx="6" fill="#1f1f24"/>
+  <rect x="228" y="481" width="112" height="12" rx="6" fill="url(#accent)"/>
+  <text x="944" y="494" class="muted">2 repos</text>
+
+  <text x="64" y="534" class="muted">Profile: Karmanya03 | Theme: RED x GOLD x WHITE x BLACK</text>
+</svg>
