@@ -41,6 +41,12 @@ def compact(value: int) -> str:
     return str(value)
 
 
+def truncate(text: str, max_len: int) -> str:
+    if len(text) <= max_len:
+        return text
+    return text[: max_len - 3].rstrip() + "..."
+
+
 def fetch_repos(username: str):
     repos = []
     page = 1
@@ -62,9 +68,13 @@ def format_event(event: dict) -> str:
     repo_name = event.get("repo", {}).get("name", "unknown/repo")
 
     if event_type == "PushEvent":
-        commits = payload.get("size", 0)
-        suffix = "commit" if commits == 1 else "commits"
-        return f"Pushed {commits} {suffix} to {repo_name}"
+        commits = int(payload.get("size", 0) or 0)
+        distinct = int(payload.get("distinct_size", 0) or 0)
+        commit_count = commits if commits > 0 else distinct
+        if commit_count > 0:
+            suffix = "commit" if commit_count == 1 else "commits"
+            return f"Pushed {commit_count} {suffix} to {repo_name}"
+        return f"Pushed updates to {repo_name}"
     if event_type == "PullRequestEvent":
         action = payload.get("action", "updated")
         return f"{action.title()} pull request in {repo_name}"
@@ -117,13 +127,20 @@ def build_data(username: str) -> dict:
     )[:6]
 
     activity_lines = []
-    for event in events[:8]:
+    seen_lines = set()
+    for event in events[:30]:
         created_at = event.get("created_at")
         if created_at:
             stamp = parse_iso(created_at).strftime("%d %b")
         else:
             stamp = "--"
-        activity_lines.append(f"[{stamp}] {format_event(event)}")
+        line = f"[{stamp}] {format_event(event)}"
+        if line in seen_lines:
+            continue
+        seen_lines.add(line)
+        activity_lines.append(line)
+        if len(activity_lines) == 8:
+            break
 
     unique_languages = len(languages)
 
@@ -196,15 +213,37 @@ def wrap_svg(title: str, subtitle: str, body: str, height: int) -> str:
       <stop offset=\"50%\" stop-color=\"#110909\"/>
       <stop offset=\"100%\" stop-color=\"#0a0a0a\"/>
     </linearGradient>
+        <radialGradient id=\"vignette\" cx=\"50%\" cy=\"45%\" r=\"70%\">
+            <stop offset=\"0%\" stop-color=\"#000000\" stop-opacity=\"0\"/>
+            <stop offset=\"100%\" stop-color=\"#000000\" stop-opacity=\"0.62\"/>
+        </radialGradient>
     <linearGradient id=\"accent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">
       <stop offset=\"0%\" stop-color=\"#b30000\"/>
       <stop offset=\"50%\" stop-color=\"#f4c35a\"/>
       <stop offset=\"100%\" stop-color=\"#ffffff\"/>
     </linearGradient>
+        <linearGradient id=\"shine\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">
+            <stop offset=\"0%\" stop-color=\"#ffffff\" stop-opacity=\"0\"/>
+            <stop offset=\"45%\" stop-color=\"#f4c35a\" stop-opacity=\"0\"/>
+            <stop offset=\"50%\" stop-color=\"#f4c35a\" stop-opacity=\"0.85\"/>
+            <stop offset=\"55%\" stop-color=\"#f4c35a\" stop-opacity=\"0\"/>
+            <stop offset=\"100%\" stop-color=\"#ffffff\" stop-opacity=\"0\"/>
+        </linearGradient>
     <linearGradient id=\"gold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">
       <stop offset=\"0%\" stop-color=\"#8c6a1a\"/>
       <stop offset=\"100%\" stop-color=\"#f4c35a\"/>
     </linearGradient>
+        <pattern id=\"scan\" width=\"8\" height=\"8\" patternUnits=\"userSpaceOnUse\">
+            <rect width=\"8\" height=\"8\" fill=\"transparent\"/>
+            <path d=\"M0 0 L8 0\" stroke=\"#ffffff\" stroke-opacity=\"0.04\"/>
+        </pattern>
+        <filter id=\"softGlow\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">
+            <feGaussianBlur stdDeviation=\"2.2\" result=\"blur\"/>
+            <feMerge>
+                <feMergeNode in=\"blur\"/>
+                <feMergeNode in=\"SourceGraphic\"/>
+            </feMerge>
+        </filter>
     <style>
       .title {{ fill: #ffffff; font: 700 42px 'Segoe UI', 'Trebuchet MS', sans-serif; letter-spacing: 1px; }}
       .subtitle {{ fill: #f6d489; font: 500 20px 'Segoe UI', 'Trebuchet MS', sans-serif; }}
@@ -218,8 +257,16 @@ def wrap_svg(title: str, subtitle: str, body: str, height: int) -> str:
   </defs>
 
   <rect width=\"1200\" height=\"{height}\" fill=\"url(#bg)\"/>
+    <rect width=\"1200\" height=\"{height}\" fill=\"url(#vignette)\"/>
   <rect x=\"24\" y=\"24\" width=\"1152\" height=\"{height - 48}\" rx=\"24\" fill=\"#0d0d0f\" stroke=\"#f4c35a\" stroke-opacity=\"0.55\" stroke-width=\"2\"/>
+    <rect x=\"24\" y=\"24\" width=\"1152\" height=\"{height - 48}\" rx=\"24\" fill=\"url(#scan)\" opacity=\"0.35\"/>
   <rect x=\"24\" y=\"24\" width=\"1152\" height=\"7\" fill=\"url(#accent)\" rx=\"24\"/>
+    <rect x=\"24\" y=\"24\" width=\"180\" height=\"7\" fill=\"url(#shine)\" rx=\"24\" filter=\"url(#softGlow)\">
+        <animate attributeName=\"x\" values=\"24;996;24\" dur=\"8s\" repeatCount=\"indefinite\"/>
+    </rect>
+    <rect x=\"24\" y=\"34\" width=\"1152\" height=\"1.5\" fill=\"url(#accent)\" opacity=\"0.32\">
+        <animate attributeName=\"y\" values=\"36;{height - 36};36\" dur=\"9s\" repeatCount=\"indefinite\"/>
+    </rect>
 
   <text x=\"64\" y=\"92\" class=\"title\">{escape(title)}</text>
   <text x=\"64\" y=\"126\" class=\"subtitle\">{escape(subtitle)}</text>
@@ -234,6 +281,7 @@ def metric_box(x: int, y: int, label: str, value: str, hint: str) -> str:
     return f"""
   <rect x=\"{x}\" y=\"{y}\" width=\"256\" height=\"124\" rx=\"16\" fill=\"#141417\" stroke=\"#b30000\" stroke-opacity=\"0.65\"/>
   <rect x=\"{x}\" y=\"{y}\" width=\"256\" height=\"6\" rx=\"16\" fill=\"url(#gold)\"/>
+    <rect x=\"{x + 10}\" y=\"{y + 14}\" width=\"236\" height=\"1\" fill=\"#f4c35a\" opacity=\"0.22\"/>
   <text x=\"{x + 18}\" y=\"{y + 34}\" class=\"label\">{escape(label)}</text>
   <text x=\"{x + 18}\" y=\"{y + 82}\" class=\"value\">{escape(value)}</text>
   <text x=\"{x + 18}\" y=\"{y + 108}\" class=\"muted\">{escape(hint)}</text>
@@ -339,7 +387,7 @@ def render_trophies(data: dict) -> str:
   <rect x=\"64\" y=\"{y - 28}\" width=\"1072\" height=\"46\" rx=\"10\" fill=\"#141417\" stroke=\"#2a2a2d\"/>
   <circle cx=\"92\" cy=\"{y - 7}\" r=\"14\" fill=\"{color}\"/>
   <text x=\"92\" y=\"{y - 2}\" text-anchor=\"middle\" class=\"mono\">{index + 1}</text>
-  <text x=\"120\" y=\"{y - 6}\" class=\"small\">{escape(name)}</text>
+    <text x=\"120\" y=\"{y - 6}\" class=\"small\">{escape(truncate(name, 28))}</text>
   <text x=\"120\" y=\"{y + 12}\" class=\"muted\">Lang: {escape(language)} | Stars: {stars} | Forks: {forks}</text>
   <text x=\"760\" y=\"{y - 6}\" class=\"small\">Trophy: {trophy_label}</text>
   <text x=\"1088\" y=\"{y - 6}\" class=\"mono\" text-anchor=\"end\">Rating {score}/100 [{tier}]</text>
@@ -360,10 +408,13 @@ def render_recent_activity(data: dict) -> str:
     else:
         for index, line in enumerate(lines[:8]):
             y = 196 + index * 39
+            row_fill = "#141417" if index % 2 == 0 else "#111115"
             body += f"""
-  <rect x=\"64\" y=\"{y - 23}\" width=\"1072\" height=\"31\" rx=\"8\" fill=\"#141417\" stroke=\"#2a2a2d\"/>
-  <circle cx=\"84\" cy=\"{y - 8}\" r=\"4\" fill=\"#f4c35a\"/>
-  <text x=\"98\" y=\"{y - 2}\" class=\"small\">{escape(line)}</text>
+  <rect x=\"64\" y=\"{y - 23}\" width=\"1072\" height=\"31\" rx=\"8\" fill=\"{row_fill}\" stroke=\"#2a2a2d\"/>
+  <circle cx=\"84\" cy=\"{y - 8}\" r=\"4\" fill=\"#f4c35a\">
+    <animate attributeName=\"r\" values=\"3;4.8;3\" dur=\"2.2s\" begin=\"{index * 0.22}s\" repeatCount=\"indefinite\"/>
+  </circle>
+  <text x=\"98\" y=\"{y - 2}\" class=\"small\">{escape(truncate(line, 98))}</text>
 """
 
     body += "\n  <text x=\"64\" y=\"510\" class=\"muted\">Source: GitHub public events API. Auto-refreshed by workflow.</text>"

@@ -7,21 +7,26 @@
 
 ---
 
-## OPERATOR DOSSIER
+## ABOUT ME
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-Live%20Site-C9A227?style=for-the-badge&labelColor=000000&color=8B0000)](https://karmanya03-secdev.pro/)
 
 Security engineer and offensive security enthusiast focused on red teaming, secure engineering, and high-performance tooling.
 
-> "The quieter you become, the more you can hear." - Kali Linux
+**Certified Red Team Professional (CRTP)** | Cyber Security Enthusiast | Engineer | Game and XR Developer
 
-| Field | Details |
+Hey there! I'm **Karmanya Ravindra**, a B.E. Computer Science and Design graduate who loves breaking things (ethically) and building them back stronger.
+
+| Focus Areas | Details |
 | --- | --- |
-| Name | Karmanya Ravindra |
-| Degree | B.E. Computer Science and Design |
-| Core Track | Offensive Security, Cyber Security, Red Teaming |
-| Builder Side | Rust tools, game systems, XR experiences |
-| Collaboration | Security research and practical engineering projects |
+| Red Teaming and Offensive Security | Cyber Security and Ethical Hacking |
+| Game Development | XR Development (AR/VR) |
+
+Currently building blazingly fast security tools in **Rust**  
+Always hunting for vulnerabilities and innovative solutions  
+Open to collaborations on security research and practical engineering projects
+
+> "The quieter you become, the more you can hear." - Kali Linux
 
 ## SOCIAL CHANNELS
 
@@ -90,7 +95,7 @@ Security engineer and offensive security enthusiast focused on red teaming, secu
 
 ### TROPHY CASE
 
-![Trophy case panel](assets/panels/trophies.svg)
+[![GitHub trophies](https://github-profile-trophy.vercel.app/?username=Karmanya03&theme=onedark&no-frame=true&no-bg=true&row=1&column=6&margin-w=8&margin-h=8)](https://github.com/ryo-ma/github-profile-trophy)
 
 ### RECENT ACTIVITY
 
