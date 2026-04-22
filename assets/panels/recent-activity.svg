@@ -83,7 +83,7 @@
   <!-- Section title and subtitle -->
   <text x="56" y="52" class="title">RECENT ACTIVITY</text>
   <text x="56" y="70" class="tsub">OPS TIMELINE · LIVE GITHUB EVENT FEED</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 21 Apr 2026 16:11 UTC</text>
+  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 22 Apr 2026 05:07 UTC</text>
 
   
   <text x="46" y="108" class="label" style="fill:#e8b840;letter-spacing:2px;">LATEST PUBLIC EVENTS</text>
@@ -135,13 +135,5 @@
   <rect x="112" y="334" width="44" height="16" rx="8" fill="#1e0808" stroke="#c43030" stroke-width="0.9"/>
   <text x="134" y="345" text-anchor="middle" style="fill:#e86060;font:700 9px 'Segoe UI',sans-serif;letter-spacing:1px;">PUSH</text>
   <text x="164" y="347" class="small" style="font-size:12px">[23 Mar] Pushed updates to Karmanya03/Kaizen-JAM</text>
-
-  <rect x="104" y="374" width="1066" height="36" rx="10" fill="#1a1e2e" stroke="#222838" stroke-width="0.8"/>
-  <circle cx="84" cy="392" r="6" fill="#e86060" filter="url(#softGlow)">
-    <animate attributeName="r" values="4;7;4" dur="2.4s" begin="1.7999999999999998s" repeatCount="indefinite"/>
-  </circle>
-  <rect x="112" y="378" width="44" height="16" rx="8" fill="#1e0808" stroke="#c43030" stroke-width="0.9"/>
-  <text x="134" y="389" text-anchor="middle" style="fill:#e86060;font:700 9px 'Segoe UI',sans-serif;letter-spacing:1px;">PUSH</text>
-  <text x="164" y="391" class="small" style="font-size:12px">[22 Mar] Pushed updates to Karmanya03/Kaizen-JAM</text>
 
 </svg>
