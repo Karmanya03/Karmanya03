@@ -83,7 +83,7 @@
   <!-- Section title and subtitle -->
   <text x="56" y="52" class="title">ARSENAL RADAR</text>
   <text x="56" y="70" class="tsub">CAPABILITY BANDS · OPERATIONAL PROFILE SCORE</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 23 Apr 2026 05:11 UTC</text>
+  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 24 Apr 2026 05:16 UTC</text>
 
   
   <text x="46" y="108" class="label" style="fill:#e8b840;letter-spacing:2px;">OPERATIONAL CAPABILITY BANDS</text>
@@ -179,17 +179,17 @@
   </defs>
   <!-- Score circle -->
   <circle cx="62" cy="356" r="20" fill="#0e1020" stroke="#e87030" stroke-width="1.5"/>
-  <text x="62" y="362" text-anchor="middle" style="fill:#f0c060;font:800 13px 'Bahnschrift',sans-serif;">66</text>
+  <text x="62" y="362" text-anchor="middle" style="fill:#f0c060;font:800 13px 'Bahnschrift',sans-serif;">70</text>
   <!-- Label -->
   <text x="88" y="354" class="small" style="font-size:12px">Collaboration Pulse</text>
-  <text x="88" y="368" class="muted">score 66/100</text>
+  <text x="88" y="368" class="muted">score 70/100</text>
   <!-- Bar track (fixed width, never overflows) -->
   <rect x="280" y="348" width="670" height="18" rx="9" fill="#1a1d2e"/>
   <!-- Bar fill (clamped to BAR_TRACK) -->
-  <rect x="280" y="348" width="442" height="18" rx="9" fill="url(#rbar4)">
+  <rect x="280" y="348" width="468" height="18" rx="9" fill="url(#rbar4)">
     <animate attributeName="opacity" values="0.8;1;0.8" dur="3.6s" repeatCount="indefinite"/>
   </rect>
   <!-- Score text -->
-  <text x="960" y="362" class="mono" style="fill:#f0c060;font-size:13px;font-weight:800;"> 66 / 100</text>
+  <text x="960" y="362" class="mono" style="fill:#f0c060;font-size:13px;font-weight:800;"> 70 / 100</text>
 
 </svg>
