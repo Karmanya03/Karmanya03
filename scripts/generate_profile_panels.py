@@ -136,8 +136,19 @@ def gh_get(url: str):
         headers["Authorization"] = f"Bearer {TOKEN}"
 
     request = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(request, timeout=25) as response:
-        return json.loads(response.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(request, timeout=25) as response:
+            data = json.loads(response.read().decode("utf-8"))
+            return data
+    except (urllib.error.HTTPError, urllib.error.URLError, Exception) as e:
+        print(f"API error for {url}: {e}")
+        # Return fallback: list endpoints get [], dict endpoints get None
+        # Using None for dict endpoints so callers can distinguish "API failed"
+        # from "API returned empty data"
+        list_keywords = ("events", "repos", "commits", "issues")
+        if any(kw in url for kw in list_keywords) and "/search/" not in url:
+            return []
+        return None
 
 
 def parse_iso(raw: str) -> dt.datetime:
@@ -209,6 +220,8 @@ def fetch_pr_count(username: str) -> int:
     try:
         url = f"{API_BASE}/search/issues?q=type:pr+author:{username}&per_page=1"
         data = gh_get(url)
+        if data is None:
+            return 0
         return int(data.get("total_count", 0))
     except Exception:
         return 0
@@ -218,6 +231,8 @@ def fetch_issue_count(username: str) -> int:
     try:
         url = f"{API_BASE}/search/issues?q=type:issue+author:{username}&per_page=1"
         data = gh_get(url)
+        if data is None:
+            return 0
         return int(data.get("total_count", 0))
     except Exception:
         return 0
@@ -268,8 +283,14 @@ def fetch_all_languages(repos: list) -> Counter:
             continue
         try:
             lang_data = gh_get(f"{API_BASE}/repos/{full_name}/languages")
-            for lang, byte_count in lang_data.items():
-                lang_bytes[lang] += byte_count
+            if lang_data and isinstance(lang_data, dict):
+                for lang, byte_count in lang_data.items():
+                    lang_bytes[lang] += byte_count
+            else:
+                # API failed for this repo; use primary language from metadata
+                lang = repo.get("language")
+                if lang:
+                    lang_bytes[lang] += 1
         except Exception:
             # Fall back to primary language from repo metadata
             lang = repo.get("language")
@@ -295,15 +316,40 @@ def get_rank(key: str, value: int) -> tuple:
     return rank, prev_t, next_t
 
 
+def get_fallback_metadata() -> dict:
+    fallback_path = os.path.join(OUT_DIR, "profile-metadata.json")
+    if os.path.exists(fallback_path):
+        try:
+            with open(fallback_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                # Restore top_languages from list-of-pairs back to Counter
+                if "top_languages" in data and isinstance(data["top_languages"], list):
+                    restored = Counter()
+                    for item in data["top_languages"]:
+                        if isinstance(item, (list, tuple)) and len(item) == 2:
+                            restored[item[0]] = item[1]
+                    data["_lang_counter"] = restored
+                return data
+        except Exception:
+            pass
+    return {}
+
 def build_data(username: str) -> dict:
     now = dt.datetime.now(dt.timezone.utc)
+    fallback = get_fallback_metadata()
+    fallback_totals = fallback.get("totals", {})
+    fallback_langs = fallback.get("_lang_counter", Counter())
 
     user = gh_get(f"{API_BASE}/users/{username}")
+    # If user API failed entirely, use fallback shell
+    if user is None:
+        user = {}
+    api_ok = bool(user.get("login"))  # True when the user API actually responded
+
     repos = fetch_repos(username)
 
-    try:
-        events = gh_get(f"{API_BASE}/users/{username}/events/public?per_page=30")
-    except urllib.error.HTTPError:
+    events = gh_get(f"{API_BASE}/users/{username}/events/public?per_page=30")
+    if not isinstance(events, list):
         events = []
 
     total_stars = sum(int(repo.get("stargazers_count", 0)) for repo in repos)
@@ -317,6 +363,9 @@ def build_data(username: str) -> dict:
             lang = repo.get("language")
             if lang:
                 lang_bytes[lang] += 1
+    # If still empty after all attempts, use saved fallback
+    if not lang_bytes and fallback_langs:
+        lang_bytes = fallback_langs
     unique_languages = len(lang_bytes)
 
     active_repos_90 = 0
@@ -347,14 +396,36 @@ def build_data(username: str) -> dict:
         if len(activity_lines) == 8:
             break
 
-    followers = int(user.get("followers", 0))
-    following = int(user.get("following", 0))
-    total_repos = len(repos)
+    # Use API values when the API succeeded; fall back to saved metadata only
+    # when the API genuinely failed (not when a stat is legitimately 0).
+    if api_ok:
+        followers = int(user.get("followers", 0))
+        following = int(user.get("following", 0))
+    else:
+        followers = fallback_totals.get("followers", 0)
+        following = fallback_totals.get("following", 0)
 
-    # Fetch live commit, PR, issue counts
+    if repos:
+        total_repos = len(repos)
+    else:
+        total_repos = fallback_totals.get("repos", 0)
+
+    if not total_stars and not repos:
+        total_stars = fallback_totals.get("stars", 0)
+
+    if not unique_languages:
+        unique_languages = fallback_totals.get("unique_languages", 0)
+
+    # Fetch live commit, PR, issue counts — use fallback only on API failure (None)
     commit_count = fetch_commit_count(username)
-    pr_count     = fetch_pr_count(username)
-    issue_count  = fetch_issue_count(username)
+    if commit_count == 0 and not repos:
+        commit_count = fallback_totals.get("commits", 0)
+    pr_count = fetch_pr_count(username)
+    if pr_count == 0 and not repos:
+        pr_count = fallback_totals.get("prs", 0)
+    issue_count = fetch_issue_count(username)
+    if issue_count == 0 and not repos:
+        issue_count = fallback_totals.get("issues", 0)
 
     # ── Trophy raw scores (exact ryo-ma trophy keys) ──
     trophy_raw = {
@@ -368,10 +439,10 @@ def build_data(username: str) -> dict:
     }
 
     # ── GitHub's real native achievement system ──
-    # Pull Shark: Silver = 16+ merged PRs (user has 66 PRs → Silver confirmed)
+    # Pull Shark: Silver = 16+ merged PRs
     # YOLO: merged PR without review (solo dev — very likely)
     # Quickdraw: closed issue/PR within 5 min (plausible)
-    # Starstruck: 16+ stars on ONE repo (user has 6 total — LOCKED)
+    # Starstruck: 16+ stars on ONE repo
     # Pair Extraordinaire: co-authored commit (unknown)
     # Galaxy Brain: accepted Discussion answer (unknown)
     pull_shark_tier = "Silver" if pr_count >= 16 else ("Default" if pr_count >= 2 else None)
@@ -465,6 +536,8 @@ def build_data(username: str) -> dict:
             "commits":          commit_count,
             "prs":              pr_count,
             "issues":           issue_count,
+            "followers":        followers,
+            "following":        following,
         },
         "achievements": achievements,
         "radar":        radar_scores,
@@ -573,13 +646,12 @@ def wrap_svg(title: str, subtitle: str, body: str, height: int) -> str:
 # ─────────────────────────────────────────────────────────────────────────────
 def render_overview(data: dict) -> str:
     totals = data["totals"]
-    user   = data["user"]
     languages = data["languages"].most_common(6)
 
     body = ""
     metrics = [
         ("Repositories", compact(totals["repos"]),   f"{totals['active_90']} active · 90d"),
-        ("Followers",    compact(int(user.get("followers", 0))), f"Following {int(user.get('following', 0))}"),
+        ("Followers",    compact(totals["followers"]), f"Following {totals.get('following', 0)}"),
         ("Total Stars",  compact(totals["stars"]),   "Open-source impact"),
         ("Commits",      compact(totals.get("commits", 0)), "Public pushes"),
     ]
@@ -704,51 +776,32 @@ def render_trophies(data: dict) -> str:
     }
 
     def cup_svg(cx: int, cy: int, cup_fill: str, hi_fill: str, rim_fill: str) -> str:
-        """Draw a flat-design trophy cup centred at cx,cy (cup body ~80×90px)."""
-        # Cup body bezier
+        """Use the custom winner.svg asset but colorize the base to match rank."""
         bx, by = cx - 36, cy - 42
         return f"""
-  <path d="M{bx},{by} h72 c0,40 -12,65 -36,75 c-24,-10 -36,-35 -36,-75z" fill="{cup_fill}"/>
-  <!-- inner highlight -->
-  <path d="M{cx - 24},{cy - 42} h16 c0,28 -6,45 -16,52 c-10,-7 -16,-24 -16,-52z" fill="{hi_fill}"/>
-  <!-- rim -->
-  <ellipse cx="{cx}" cy="{cy - 42}" rx="36" ry="7" fill="{rim_fill}"/>
-  <!-- stem & base -->
-  <rect x="{cx - 6}" y="{cy + 25}" width="12" height="18" fill="{cup_fill}"/>
-  <path d="M{cx - 20},{cy + 43} h40 v6 r4,4 h-40 r4,4 v-6z" fill="{rim_fill}"/>
-  <ellipse cx="{cx}" cy="{cy + 43}" rx="20" ry="4" fill="{hi_fill}"/>
-  <!-- handles -->
-  <path d="M{cx - 36},{cy - 20} c-20,0 -20,30 -6,40" fill="none" stroke="{rim_fill}" stroke-width="6" stroke-linecap="round"/>
-  <path d="M{cx + 36},{cy - 20} c20,0 20,30 6,40" fill="none" stroke="{rim_fill}" stroke-width="6" stroke-linecap="round"/>
+  <image x="{cx - 45}" y="{by - 10}" width="90" height="90" href="../winner.svg" opacity="0.9" />
+  <!-- Under-glow / highlight to ground the trophy to the rank theme -->
+  <!-- base -->
+  <rect x="{cx - 28}" y="{by + 96}" width="56" height="8" rx="4" fill="{cup_fill}"/>
+  <rect x="{cx - 34}" y="{by + 102}" width="68" height="9" rx="4" fill="{hi_fill}" opacity="0.7"/>
 """
 
-    def laurel_svg(cx: int, bottom_y: int, color_outer: str, color_inner: str) -> str:
-        """Draw laurel wreath on both sides, centred at cx, starting from bottom_y sweeping upwards."""
+    def laurel_svg(cx: int, top_y: int, color_outer: str, color_inner: str) -> str:
+        """Draw laurel wreath on both sides, centred at cx."""
         out = ""
-        # Left side leaves fanning out from the base (bottom_y)
-        # Shifted Y offsets so they are positioned near the bottom of the cup, not the top
-        offsets_l = [(-38, -5, -40), (-46, -18, -55), (-50, -32, -65), (-45, -46, -75), (-35, -53, -85)]
+        # Left side leaves (5 leaves fanning up-left)
+        offsets_l = [(-38, 52, -50), (-44, 38, -62), (-46, 24, -74), (-42, 12, -86), (-36, 2, -96)]
         for (lx, ly, angle) in offsets_l:
-            out += f'<ellipse cx="{cx + lx}" cy="{bottom_y + ly}" rx="7" ry="13" transform="rotate({angle},{cx+lx},{bottom_y+ly})" fill="{color_outer}"/>'
-            out += f'<ellipse cx="{cx + lx + 4}" cy="{bottom_y + ly}" rx="4.5" ry="9" transform="rotate({angle},{cx+lx+4},{bottom_y+ly})" fill="{color_inner}"/>'
+            out += f'<ellipse cx="{cx + lx}" cy="{top_y + ly}" rx="7" ry="13" transform="rotate({angle},{cx+lx},{top_y+ly})" fill="{color_outer}"/>'
+            out += f'<ellipse cx="{cx + lx + 4}" cy="{top_y + ly}" rx="4.5" ry="9" transform="rotate({angle},{cx+lx+4},{top_y+ly})" fill="{color_inner}"/>'
         # Right side (mirrored)
-        offsets_r = [(38, -5, 40), (46, -18, 55), (50, -32, 65), (45, -46, 75), (35, -53, 85)]
+        offsets_r = [(38, 52, 50), (44, 38, 62), (46, 24, 74), (42, 12, 86), (36, 2, 96)]
         for (lx, ly, angle) in offsets_r:
-            out += f'<ellipse cx="{cx + lx}" cy="{bottom_y + ly}" rx="7" ry="13" transform="rotate({angle},{cx+lx},{bottom_y+ly})" fill="{color_outer}"/>'
-            out += f'<ellipse cx="{cx + lx - 4}" cy="{bottom_y + ly}" rx="4.5" ry="9" transform="rotate({angle},{cx+lx-4},{bottom_y+ly})" fill="{color_inner}"/>'
+            out += f'<ellipse cx="{cx + lx}" cy="{top_y + ly}" rx="7" ry="13" transform="rotate({angle},{cx+lx},{top_y+ly})" fill="{color_outer}"/>'
+            out += f'<ellipse cx="{cx + lx - 4}" cy="{top_y + ly}" rx="4.5" ry="9" transform="rotate({angle},{cx+lx-4},{top_y+ly})" fill="{color_inner}"/>'
         return out
 
-    body = """
-  <defs>
-    <linearGradient id="shimmerSweep" x1="-1" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-      <animate attributeName="x1" from="-1" to="2" dur="3s" repeatCount="indefinite"/>
-      <animate attributeName="x2" from="0" to="3" dur="3s" repeatCount="indefinite"/>
-    </linearGradient>
-  </defs>
-"""
+    body = ""
 
     # ── Build list of all trophies with their computed rank, then sort highest→lowest ──
     all_keys = list(TROPHY_META.keys())
@@ -801,10 +854,10 @@ def render_trophies(data: dict) -> str:
   <rect x="{card_x}" y="{card_y}" width="{CARD_W}" height="4" rx="14" fill="{rim_c}"/>
   <text x="{cx}" y="{card_y + 22}" text-anchor="middle" style="fill:{cup_c};font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">{escape(icon + ' ' + category_label.upper())}</text>
 """
-        # laurel wreaths (feathers) drawn from the bottom base line of the cup up
-        body += laurel_svg(cx, card_y + 130, "#ff8c00", "#ffa820")
-        # cup drawn on top
-        body += cup_svg(cx, card_y + 90, cup_c, hi_c, rim_c)
+        # laurel wreath
+        body += laurel_svg(cx, card_y + 32, "#ff8c00", "#ffa820")
+        # cup
+        body += cup_svg(cx, card_y + 110, cup_c, hi_c, rim_c)
         # grade badge
         body += f"""
   <circle cx="{cx}" cy="{card_y + 110}" r="18" fill="{card_bg_c}" opacity="0.7"/>
@@ -818,7 +871,6 @@ def render_trophies(data: dict) -> str:
   </rect>
   <text x="{cx}" y="{card_y + 245}" text-anchor="middle" style="fill:{stroke_c};font:600 9px 'Consolas',monospace;">{rank} · {progress}% {next_label}</text>
   <rect x="{card_x + 14}" y="{card_y + 282}" width="{prog_px}" height="3" rx="1.5" fill="{cup_c}" opacity="0.5" filter="url(#softGlow)"/>
-  <rect x="{card_x}" y="{card_y}" width="{CARD_W}" height="{CARD_H}" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
 """
 
     return wrap_svg("TROPHY CASE", "GitHub profile trophies · ryo-ma real ranks · auto-sorted highest first", body, 430)
@@ -921,34 +973,6 @@ def render_radar(data: dict) -> str:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-#  TELEMETRY GRAPH WITH SHIMMER OVERLAY
-# ─────────────────────────────────────────────────────────────────────────────
-def render_telemetry_panel(username: str) -> str:
-    # Use image href for github-readme-activity-graph, and overlay the shimmer
-    url = f"https://github-readme-activity-graph.vercel.app/graph?username={username}&bg_color=060710&color=d0d8e8&line=8B0000&point=FF0000&area=true&hide_border=true&custom_title=LIVE%20COMMIT%20HEARTBEAT"
-
-    # Similar width to Command Center (1000px width), 300px height.
-    body = f"""
-  <defs>
-    <linearGradient id="shimmerGraph" x1="-1" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-      <animate attributeName="x1" from="-1" to="2" dur="3.5s" repeatCount="indefinite"/>
-      <animate attributeName="x2" from="0" to="3" dur="3.5s" repeatCount="indefinite"/>
-    </linearGradient>
-  </defs>
-
-  <!-- Embed the external graph -->
-  <image href="{url}" x="0" y="80" width="1000" height="300" />
-  
-  <!-- Add our signature shimmer and borders overlay to match the environment -->
-  <rect x="46" y="80" width="910" height="280" rx="14" fill="url(#shimmerGraph)" style="pointer-events:none;MIX-BLEND-MODE:overlay"/>
-"""
-    return wrap_svg("TELEMETRY", "Live commit heartbeat graph · external sync", body, 380)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
 #  FILE WRITE + MAIN
 # ─────────────────────────────────────────────────────────────────────────────
 def write_file(path: str, content: str) -> None:
@@ -965,13 +989,13 @@ def main() -> None:
     write_file(os.path.join(OUT_DIR, "trophies.svg"),       render_trophies(data))
     write_file(os.path.join(OUT_DIR, "recent-activity.svg"), render_recent_activity(data))
     write_file(os.path.join(OUT_DIR, "radar.svg"),          render_radar(data))
-    write_file(os.path.join(OUT_DIR, "telemetry.svg"),        render_telemetry_panel(USERNAME))
 
+    # Save ALL languages (not just top 6) so fallback can restore the full Counter
     metadata = {
         "username":     data["username"],
         "updated":      data["updated"],
         "totals":       data["totals"],
-        "top_languages": data["languages"].most_common(6),
+        "top_languages": data["languages"].most_common(),
     }
     write_file(os.path.join(OUT_DIR, "profile-metadata.json"), json.dumps(metadata, indent=2))
 

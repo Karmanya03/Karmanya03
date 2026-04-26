@@ -2,15 +2,11 @@ name: Render Profile Panels
 
 on:
   schedule:
-    - cron: "17 2 * * *"
+    - cron: "17 */6 * * *"
   workflow_dispatch:
   push:
     branches:
       - main
-    paths:
-      - README.md
-      - scripts/generate_profile_panels.py
-      - .github/workflows/update-profile-metrics.yml
 
 permissions:
   contents: write
