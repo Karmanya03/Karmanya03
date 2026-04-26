@@ -186,23 +186,61 @@ def fetch_repos(username: str):
     return repos
 
 
-def fetch_commit_count(username: str) -> int:
-    """Fetch total commit count via search API (public commits only)."""
-    try:
-        url = f"{API_BASE}/search/commits?q=author:{username}&per_page=1"
-        headers = {
-            "Accept": "application/vnd.github.cloak-preview+json",
-            "User-Agent": "profile-panels-generator",
-            "X-GitHub-Api-Version": "2022-11-28",
-        }
-        if TOKEN:
-            headers["Authorization"] = f"Bearer {TOKEN}"
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=25) as r:
-            data = json.loads(r.read().decode("utf-8"))
-            return int(data.get("total_count", 0))
-    except Exception:
-        return 0
+def fetch_commit_count(username: str, user_data: dict) -> int:
+    """Fetch total commit count via GraphQL for all time (public + private)."""
+    created_at = user_data.get("created_at")
+    if not created_at or not TOKEN:
+        # Fallback to search API if no token
+        try:
+            url = f"{API_BASE}/search/commits?q=author:{username}&per_page=1"
+            headers = {
+                "Accept": "application/vnd.github.cloak-preview+json",
+                "User-Agent": "profile-panels-generator",
+                "X-GitHub-Api-Version": "2022-11-28",
+            }
+            if TOKEN:
+                headers["Authorization"] = f"Bearer {TOKEN}"
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=25) as r:
+                data = json.loads(r.read().decode("utf-8"))
+                return int(data.get("total_count", 0))
+        except Exception:
+            return 0
+
+    join_year = int(created_at[:4])
+    current_year = dt.datetime.now(dt.timezone.utc).year
+    total_commits = 0
+    headers = {
+        "Authorization": f"Bearer {TOKEN}",
+        "Content-Type": "application/json",
+        "User-Agent": "profile-panels-generator"
+    }
+
+    for year in range(join_year, current_year + 1):
+        from_date = f"{year}-01-01T00:00:00Z"
+        to_date = f"{year}-12-31T23:59:59Z"
+        query = f"""
+        {{
+          user(login: "{username}") {{
+            contributionsCollection(from: "{from_date}", to: "{to_date}") {{
+              totalCommitContributions
+              restrictedContributionsCount
+            }}
+          }}
+        }}
+        """
+        try:
+            req = urllib.request.Request("https://api.github.com/graphql", json.dumps({"query": query}).encode("utf-8"), headers=headers)
+            with urllib.request.urlopen(req, timeout=10) as r:
+                data = json.loads(r.read().decode("utf-8"))
+                col = data.get("data", {}).get("user", {}).get("contributionsCollection", {})
+                if col:
+                    total_commits += col.get("totalCommitContributions", 0)
+                    total_commits += col.get("restrictedContributionsCount", 0)
+        except Exception:
+            pass
+
+    return total_commits
 
 
 def fetch_pr_count(username: str) -> int:
@@ -352,7 +390,7 @@ def build_data(username: str) -> dict:
     total_repos = len(repos)
 
     # Fetch live commit, PR, issue counts
-    commit_count = fetch_commit_count(username)
+    commit_count = fetch_commit_count(username, user)
     pr_count     = fetch_pr_count(username)
     issue_count  = fetch_issue_count(username)
 

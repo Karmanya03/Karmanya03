@@ -2,7 +2,7 @@ name: Render Profile Panels
 
 on:
   schedule:
-    - cron: "17 2 * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
   push:
     branches:
@@ -33,7 +33,7 @@ jobs:
 
       - name: Generate custom SVG panels
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           PROFILE_USERNAME: Karmanya03
           PROFILE_OUT_DIR: assets/panels
         run: |
