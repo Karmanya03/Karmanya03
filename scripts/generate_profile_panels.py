@@ -233,12 +233,16 @@ def fetch_commit_count(username: str, user_data: dict) -> int:
             req = urllib.request.Request("https://api.github.com/graphql", json.dumps({"query": query}).encode("utf-8"), headers=headers)
             with urllib.request.urlopen(req, timeout=10) as r:
                 data = json.loads(r.read().decode("utf-8"))
+                if "errors" in data:
+                    print(f"GraphQL Error in response for {year}: {data['errors']}")
                 col = data.get("data", {}).get("user", {}).get("contributionsCollection", {})
                 if col:
                     total_commits += col.get("totalCommitContributions", 0)
                     total_commits += col.get("restrictedContributionsCount", 0)
-        except Exception:
-            pass
+        except urllib.error.HTTPError as e:
+            print(f"GraphQL HTTPError for {year}: {e.code} {e.reason} - {e.read().decode('utf-8')}")
+        except Exception as e:
+            print(f"GraphQL Error for {year}: {e}")
 
     return total_commits
 
