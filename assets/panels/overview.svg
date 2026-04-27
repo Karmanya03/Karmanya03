@@ -83,7 +83,7 @@
   <!-- Section title and subtitle -->
   <text x="56" y="52" class="title">COMMAND CENTER</text>
   <text x="56" y="70" class="tsub">LIVE PROFILE TELEMETRY · PROJECT MOMENTUM</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 27 Apr 2026 09:08 UTC</text>
+  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 27 Apr 2026 11:17 UTC</text>
 
   
   <rect x="46" y="104" width="310" height="66" rx="12" fill="#0e1020" stroke="#2a3050" stroke-width="1.1"/>
