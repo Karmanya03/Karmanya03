@@ -83,7 +83,7 @@
   <!-- Section title and subtitle -->
   <text x="56" y="52" class="title">TROPHY CASE</text>
   <text x="56" y="70" class="tsub">GITHUB PROFILE TROPHIES · RYO-MA REAL RANKS · AUTO-SORTED HIGHEST FIRST</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 27 Apr 2026 15:12 UTC</text>
+  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 27 Apr 2026 16:58 UTC</text>
 
   
   <defs>
@@ -273,13 +273,13 @@
   <text x="1097" y="214" text-anchor="middle" style="fill:#282828;font:900 20px 'Bahnschrift','Arial Black',sans-serif;">C</text>
   <line x1="1020" y1="268" x2="1174" y2="268" stroke="#404040" stroke-width="0.7" opacity="0.4"/>
   <text x="1097" y="288" text-anchor="middle" style="fill:#909090;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">First Pull</text>
-  <text x="1097" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">6</text>
+  <text x="1097" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">0</text>
   <rect x="1020" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
-  <rect x="1020" y="318" width="84" height="7" rx="3.5" fill="#282828">
+  <rect x="1020" y="318" width="2" height="7" rx="3.5" fill="#282828">
     <animate attributeName="opacity" values="0.7;1;0.7" dur="3.2s" repeatCount="indefinite"/>
   </rect>
-  <text x="1097" y="341" text-anchor="middle" style="fill:#404040;font:600 9px 'Consolas',monospace;">C · 55% →10</text>
-  <rect x="1020" y="378" width="84" height="3" rx="1.5" fill="#909090" opacity="0.5" filter="url(#softGlow)"/>
+  <text x="1097" y="341" text-anchor="middle" style="fill:#404040;font:600 9px 'Consolas',monospace;">C · 0% →10</text>
+  <rect x="1020" y="378" width="2" height="3" rx="1.5" fill="#909090" opacity="0.5" filter="url(#softGlow)"/>
   <rect x="1006" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
 
   <!-- TROPHY 7: Issues [C] -->
