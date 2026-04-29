@@ -83,7 +83,7 @@
   <!-- Section title and subtitle -->
   <text x="56" y="52" class="title">ACHIEVEMENTS</text>
   <text x="56" y="70" class="tsub">GITHUB NATIVE BADGES · EARNED FROM REAL PROFILE ACTIVITY</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 29 Apr 2026 12:22 UTC</text>
+  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 29 Apr 2026 14:37 UTC</text>
 
   
   <text x="46" y="108" class="label" style="fill:#e8b840;letter-spacing:2px;">GITHUB NATIVE ACHIEVEMENTS · 3/6 EARNED</text>
@@ -92,13 +92,13 @@
   <rect x="46" y="142" width="354" height="4" rx="14" fill="#b30000"/>
   <text x="92" y="172" class="small" style="font-weight:700;font-size:13px">Pull Shark</text>
   <text x="60" y="172" style="font-size:18px;dominant-baseline:auto">🦈</text>
-  <text x="60" y="192" class="muted">4 pull requests merged · Silver tier</text>
+  <text x="60" y="192" class="muted">6 pull requests merged · Silver tier</text>
   <text x="60" y="208" style="fill:#404858;font:500 9px 'Segoe UI',sans-serif;">GitHub Native Achievement</text>
   <rect x="60" y="218" width="326" height="8" rx="4" fill="#1a1d28"/>
-  <rect x="60" y="218" width="9" height="8" rx="4" fill="url(#gold)"><animate attributeName="opacity" values="0.8;1;0.8" dur="2.2s" repeatCount="indefinite"/></rect>
-  <rect x="60" y="232" width="9" height="2" rx="1" fill="#e8b840" opacity="0.5"/>
+  <rect x="60" y="218" width="12" height="8" rx="4" fill="url(#gold)"><animate attributeName="opacity" values="0.8;1;0.8" dur="2.2s" repeatCount="indefinite"/></rect>
+  <rect x="60" y="232" width="12" height="2" rx="1" fill="#e8b840" opacity="0.5"/>
   <text x="60" y="254" class="muted" style="font-size:9px;fill:#f5c020">✓ DEFAULT UNLOCKED</text>
-  <text x="386" y="254" class="mono" text-anchor="end" style="fill:#8890a8;font-size:9px">4/128 → Gold</text>
+  <text x="386" y="254" class="mono" text-anchor="end" style="fill:#8890a8;font-size:9px">6/128 → Gold</text>
 
   <rect x="422" y="142" width="354" height="130" rx="14" fill="#1a1600" stroke="#e8b840" stroke-width="1.5"/>
   <rect x="422" y="142" width="354" height="4" rx="14" fill="#b30000"/>
