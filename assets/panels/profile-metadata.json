@@ -1,20 +1,20 @@
 {
   "username": "Karmanya03",
-  "updated": "29 Apr 2026 17:53 UTC",
+  "updated": "29 Apr 2026 19:27 UTC",
   "totals": {
-    "repos": 36,
+    "repos": 38,
     "stars": 6,
     "forks": 0,
-    "active_90": 10,
+    "active_90": 12,
     "unique_languages": 12,
-    "commits": 470,
+    "commits": 479,
     "prs": 6,
     "issues": 0
   },
   "top_languages": [
     [
       "Rust",
-      4360096
+      4510001
     ],
     [
       "JavaScript",
@@ -34,7 +34,7 @@
     ],
     [
       "Shell",
-      42330
+      42898
     ]
   ]
 }

@@ -83,7 +83,7 @@
   <!-- Section title and subtitle -->
   <text x="56" y="52" class="title">TROPHY CASE</text>
   <text x="56" y="70" class="tsub">GITHUB PROFILE TROPHIES · RYO-MA REAL RANKS · AUTO-SORTED HIGHEST FIRST</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 29 Apr 2026 17:54 UTC</text>
+  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 29 Apr 2026 19:27 UTC</text>
 
   
   <defs>
@@ -149,13 +149,13 @@
   <text x="329" y="214" text-anchor="middle" style="fill:#8b0000;font:900 14px 'Bahnschrift','Arial Black',sans-serif;">AAA</text>
   <line x1="252" y1="268" x2="406" y2="268" stroke="#c03030" stroke-width="0.7" opacity="0.4"/>
   <text x="329" y="288" text-anchor="middle" style="fill:#ff7070;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">Ultra Repo Creator</text>
-  <text x="329" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">36</text>
+  <text x="329" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">38</text>
   <rect x="252" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
-  <rect x="252" y="318" width="30" height="7" rx="3.5" fill="#8b0000">
+  <rect x="252" y="318" width="92" height="7" rx="3.5" fill="#8b0000">
     <animate attributeName="opacity" values="0.7;1;0.7" dur="2.4s" repeatCount="indefinite"/>
   </rect>
-  <text x="329" y="341" text-anchor="middle" style="fill:#c03030;font:600 9px 'Consolas',monospace;">AAA · 20% →40</text>
-  <rect x="252" y="378" width="30" height="3" rx="1.5" fill="#ff7070" opacity="0.5" filter="url(#softGlow)"/>
+  <text x="329" y="341" text-anchor="middle" style="fill:#c03030;font:600 9px 'Consolas',monospace;">AAA · 60% →40</text>
+  <rect x="252" y="378" width="92" height="3" rx="1.5" fill="#ff7070" opacity="0.5" filter="url(#softGlow)"/>
   <rect x="238" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
 
   <!-- TROPHY 3: Commits [AA] -->
@@ -180,13 +180,13 @@
   <text x="521" y="214" text-anchor="middle" style="fill:#8b0000;font:900 20px 'Bahnschrift','Arial Black',sans-serif;">AA</text>
   <line x1="444" y1="268" x2="598" y2="268" stroke="#c03030" stroke-width="0.7" opacity="0.4"/>
   <text x="521" y="288" text-anchor="middle" style="fill:#ff7070;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">Hyper Committer</text>
-  <text x="521" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">470</text>
+  <text x="521" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">479</text>
   <rect x="444" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
-  <rect x="444" y="318" width="138" height="7" rx="3.5" fill="#8b0000">
+  <rect x="444" y="318" width="143" height="7" rx="3.5" fill="#8b0000">
     <animate attributeName="opacity" values="0.7;1;0.7" dur="2.6s" repeatCount="indefinite"/>
   </rect>
-  <text x="521" y="341" text-anchor="middle" style="fill:#c03030;font:600 9px 'Consolas',monospace;">AA · 90% →500</text>
-  <rect x="444" y="378" width="138" height="3" rx="1.5" fill="#ff7070" opacity="0.5" filter="url(#softGlow)"/>
+  <text x="521" y="341" text-anchor="middle" style="fill:#c03030;font:600 9px 'Consolas',monospace;">AA · 93% →500</text>
+  <rect x="444" y="378" width="143" height="3" rx="1.5" fill="#ff7070" opacity="0.5" filter="url(#softGlow)"/>
   <rect x="430" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
 
   <!-- TROPHY 4: Followers [B] -->
