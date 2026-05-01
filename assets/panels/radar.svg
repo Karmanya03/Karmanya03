@@ -83,7 +83,7 @@
   <!-- Section title and subtitle -->
   <text x="56" y="52" class="title">ARSENAL RADAR</text>
   <text x="56" y="70" class="tsub">CAPABILITY BANDS · OPERATIONAL PROFILE SCORE</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 30 Apr 2026 23:55 UTC</text>
+  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 01 May 2026 03:43 UTC</text>
 
   
   <text x="46" y="108" class="label" style="fill:#e8b840;letter-spacing:2px;">OPERATIONAL CAPABILITY BANDS</text>
