@@ -83,7 +83,7 @@
   <!-- Section title and subtitle -->
   <text x="56" y="52" class="title">ACHIEVEMENTS</text>
   <text x="56" y="70" class="tsub">GITHUB NATIVE BADGES · EARNED FROM REAL PROFILE ACTIVITY</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 01 May 2026 11:33 UTC</text>
+  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 01 May 2026 12:39 UTC</text>
 
   
   <text x="46" y="108" class="label" style="fill:#e8b840;letter-spacing:2px;">GITHUB NATIVE ACHIEVEMENTS · 3/6 EARNED</text>
@@ -128,13 +128,13 @@
   <rect x="46" y="290" width="354" height="4" rx="14" fill="#1a1d28"/>
   <text x="92" y="320" class="small" style="font-weight:700;font-size:13px">Starstruck</text>
   <text x="60" y="320" style="font-size:18px;dominant-baseline:auto">⭐</text>
-  <text x="60" y="340" class="muted">Earn 16 stars on one repo (best: 6 total)</text>
+  <text x="60" y="340" class="muted">Earn 16 stars on one repo (best: 7 total)</text>
   <text x="60" y="356" style="fill:#404858;font:500 9px 'Segoe UI',sans-serif;">GitHub Native Achievement</text>
   <rect x="60" y="366" width="326" height="8" rx="4" fill="#1a1d28"/>
-  <rect x="60" y="366" width="114" height="8" rx="4" fill="#2a3050"></rect>
-  <rect x="60" y="380" width="114" height="2" rx="1" fill="#2a3050" opacity="0.2"/>
+  <rect x="60" y="366" width="133" height="8" rx="4" fill="#2a3050"></rect>
+  <rect x="60" y="380" width="133" height="2" rx="1" fill="#2a3050" opacity="0.2"/>
   <text x="60" y="402" class="muted" style="font-size:9px;fill:#4a5578">🔒 LOCKED</text>
-  <text x="386" y="402" class="mono" text-anchor="end" style="fill:#8890a8;font-size:9px">6/16 stars needed</text>
+  <text x="386" y="402" class="mono" text-anchor="end" style="fill:#8890a8;font-size:9px">7/16 stars needed</text>
 
   <rect x="422" y="290" width="354" height="130" rx="14" fill="#0e1020" stroke="#2a3050" stroke-width="1.0"/>
   <rect x="422" y="290" width="354" height="4" rx="14" fill="#1a1d28"/>
