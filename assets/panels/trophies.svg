@@ -83,7 +83,7 @@
   <!-- Section title and subtitle -->
   <text x="56" y="52" class="title">TROPHY CASE</text>
   <text x="56" y="70" class="tsub">GITHUB PROFILE TROPHIES · RYO-MA REAL RANKS · AUTO-SORTED HIGHEST FIRST</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 02 May 2026 16:27 UTC</text>
+  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 02 May 2026 17:25 UTC</text>
 
   
   <defs>
@@ -189,10 +189,10 @@
   <rect x="444" y="378" width="2" height="3" rx="1.5" fill="#ff7070" opacity="0.5" filter="url(#softGlow)"/>
   <rect x="430" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
 
-  <!-- TROPHY 4: Followers [B] -->
+  <!-- TROPHY 4: Stars [B] -->
   <rect x="622" y="96" width="182" height="300" rx="14" fill="#081008" stroke="#204020" stroke-width="1.4"/>
   <rect x="622" y="96" width="182" height="4" rx="14" fill="#103010"/>
-  <text x="713" y="118" text-anchor="middle" style="fill:#60d060;font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">👥 FOLLOWERS</text>
+  <text x="713" y="118" text-anchor="middle" style="fill:#60d060;font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">⭐ STARS</text>
 <ellipse cx="675" cy="221" rx="7" ry="13" transform="rotate(-40,675,221)" fill="#ff8c00"/><ellipse cx="679" cy="221" rx="4.5" ry="9" transform="rotate(-40,679,221)" fill="#ffa820"/><ellipse cx="667" cy="208" rx="7" ry="13" transform="rotate(-55,667,208)" fill="#ff8c00"/><ellipse cx="671" cy="208" rx="4.5" ry="9" transform="rotate(-55,671,208)" fill="#ffa820"/><ellipse cx="663" cy="194" rx="7" ry="13" transform="rotate(-65,663,194)" fill="#ff8c00"/><ellipse cx="667" cy="194" rx="4.5" ry="9" transform="rotate(-65,667,194)" fill="#ffa820"/><ellipse cx="668" cy="180" rx="7" ry="13" transform="rotate(-75,668,180)" fill="#ff8c00"/><ellipse cx="672" cy="180" rx="4.5" ry="9" transform="rotate(-75,672,180)" fill="#ffa820"/><ellipse cx="678" cy="173" rx="7" ry="13" transform="rotate(-85,678,173)" fill="#ff8c00"/><ellipse cx="682" cy="173" rx="4.5" ry="9" transform="rotate(-85,682,173)" fill="#ffa820"/><ellipse cx="751" cy="221" rx="7" ry="13" transform="rotate(40,751,221)" fill="#ff8c00"/><ellipse cx="747" cy="221" rx="4.5" ry="9" transform="rotate(40,747,221)" fill="#ffa820"/><ellipse cx="759" cy="208" rx="7" ry="13" transform="rotate(55,759,208)" fill="#ff8c00"/><ellipse cx="755" cy="208" rx="4.5" ry="9" transform="rotate(55,755,208)" fill="#ffa820"/><ellipse cx="763" cy="194" rx="7" ry="13" transform="rotate(65,763,194)" fill="#ff8c00"/><ellipse cx="759" cy="194" rx="4.5" ry="9" transform="rotate(65,759,194)" fill="#ffa820"/><ellipse cx="758" cy="180" rx="7" ry="13" transform="rotate(75,758,180)" fill="#ff8c00"/><ellipse cx="754" cy="180" rx="4.5" ry="9" transform="rotate(75,754,180)" fill="#ffa820"/><ellipse cx="748" cy="173" rx="7" ry="13" transform="rotate(85,748,173)" fill="#ff8c00"/><ellipse cx="744" cy="173" rx="4.5" ry="9" transform="rotate(85,744,173)" fill="#ffa820"/>
   <path d="M677,144 h72 c0,40 -12,65 -36,75 c-24,-10 -36,-35 -36,-75z" fill="#60d060"/>
   <!-- inner highlight -->
@@ -210,45 +210,45 @@
   <circle cx="713" cy="206" r="18" fill="#081008" opacity="0.7"/>
   <text x="713" y="214" text-anchor="middle" style="fill:#103010;font:900 20px 'Bahnschrift','Arial Black',sans-serif;">B</text>
   <line x1="636" y1="268" x2="790" y2="268" stroke="#204020" stroke-width="0.7" opacity="0.4"/>
-  <text x="713" y="288" text-anchor="middle" style="fill:#60d060;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">Many Friends</text>
-  <text x="713" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">14</text>
+  <text x="713" y="288" text-anchor="middle" style="fill:#60d060;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">Middle Star</text>
+  <text x="713" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">10</text>
   <rect x="636" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
-  <rect x="636" y="318" width="61" height="7" rx="3.5" fill="#103010">
+  <rect x="636" y="318" width="2" height="7" rx="3.5" fill="#103010">
     <animate attributeName="opacity" values="0.7;1;0.7" dur="2.8s" repeatCount="indefinite"/>
   </rect>
-  <text x="713" y="341" text-anchor="middle" style="fill:#204020;font:600 9px 'Consolas',monospace;">B · 40% →20</text>
-  <rect x="636" y="378" width="61" height="3" rx="1.5" fill="#60d060" opacity="0.5" filter="url(#softGlow)"/>
+  <text x="713" y="341" text-anchor="middle" style="fill:#204020;font:600 9px 'Consolas',monospace;">B · 0% →30</text>
+  <rect x="636" y="378" width="2" height="3" rx="1.5" fill="#60d060" opacity="0.5" filter="url(#softGlow)"/>
   <rect x="622" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
 
-  <!-- TROPHY 5: Stars [C] -->
-  <rect x="814" y="96" width="182" height="300" rx="14" fill="#0e1018" stroke="#404040" stroke-width="1.4"/>
-  <rect x="814" y="96" width="182" height="4" rx="14" fill="#282828"/>
-  <text x="905" y="118" text-anchor="middle" style="fill:#909090;font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">⭐ STARS</text>
+  <!-- TROPHY 5: Followers [B] -->
+  <rect x="814" y="96" width="182" height="300" rx="14" fill="#081008" stroke="#204020" stroke-width="1.4"/>
+  <rect x="814" y="96" width="182" height="4" rx="14" fill="#103010"/>
+  <text x="905" y="118" text-anchor="middle" style="fill:#60d060;font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">👥 FOLLOWERS</text>
 <ellipse cx="867" cy="221" rx="7" ry="13" transform="rotate(-40,867,221)" fill="#ff8c00"/><ellipse cx="871" cy="221" rx="4.5" ry="9" transform="rotate(-40,871,221)" fill="#ffa820"/><ellipse cx="859" cy="208" rx="7" ry="13" transform="rotate(-55,859,208)" fill="#ff8c00"/><ellipse cx="863" cy="208" rx="4.5" ry="9" transform="rotate(-55,863,208)" fill="#ffa820"/><ellipse cx="855" cy="194" rx="7" ry="13" transform="rotate(-65,855,194)" fill="#ff8c00"/><ellipse cx="859" cy="194" rx="4.5" ry="9" transform="rotate(-65,859,194)" fill="#ffa820"/><ellipse cx="860" cy="180" rx="7" ry="13" transform="rotate(-75,860,180)" fill="#ff8c00"/><ellipse cx="864" cy="180" rx="4.5" ry="9" transform="rotate(-75,864,180)" fill="#ffa820"/><ellipse cx="870" cy="173" rx="7" ry="13" transform="rotate(-85,870,173)" fill="#ff8c00"/><ellipse cx="874" cy="173" rx="4.5" ry="9" transform="rotate(-85,874,173)" fill="#ffa820"/><ellipse cx="943" cy="221" rx="7" ry="13" transform="rotate(40,943,221)" fill="#ff8c00"/><ellipse cx="939" cy="221" rx="4.5" ry="9" transform="rotate(40,939,221)" fill="#ffa820"/><ellipse cx="951" cy="208" rx="7" ry="13" transform="rotate(55,951,208)" fill="#ff8c00"/><ellipse cx="947" cy="208" rx="4.5" ry="9" transform="rotate(55,947,208)" fill="#ffa820"/><ellipse cx="955" cy="194" rx="7" ry="13" transform="rotate(65,955,194)" fill="#ff8c00"/><ellipse cx="951" cy="194" rx="4.5" ry="9" transform="rotate(65,951,194)" fill="#ffa820"/><ellipse cx="950" cy="180" rx="7" ry="13" transform="rotate(75,950,180)" fill="#ff8c00"/><ellipse cx="946" cy="180" rx="4.5" ry="9" transform="rotate(75,946,180)" fill="#ffa820"/><ellipse cx="940" cy="173" rx="7" ry="13" transform="rotate(85,940,173)" fill="#ff8c00"/><ellipse cx="936" cy="173" rx="4.5" ry="9" transform="rotate(85,936,173)" fill="#ffa820"/>
-  <path d="M869,144 h72 c0,40 -12,65 -36,75 c-24,-10 -36,-35 -36,-75z" fill="#909090"/>
+  <path d="M869,144 h72 c0,40 -12,65 -36,75 c-24,-10 -36,-35 -36,-75z" fill="#60d060"/>
   <!-- inner highlight -->
-  <path d="M881,144 h16 c0,28 -6,45 -16,52 c-10,-7 -16,-24 -16,-52z" fill="#606060"/>
+  <path d="M881,144 h16 c0,28 -6,45 -16,52 c-10,-7 -16,-24 -16,-52z" fill="#30a030"/>
   <!-- rim -->
-  <ellipse cx="905" cy="144" rx="36" ry="7" fill="#282828"/>
+  <ellipse cx="905" cy="144" rx="36" ry="7" fill="#103010"/>
   <!-- stem & base -->
-  <rect x="899" y="211" width="12" height="18" fill="#909090"/>
-  <path d="M885,229 h40 v6 r4,4 h-40 r4,4 v-6z" fill="#282828"/>
-  <ellipse cx="905" cy="229" rx="20" ry="4" fill="#606060"/>
+  <rect x="899" y="211" width="12" height="18" fill="#60d060"/>
+  <path d="M885,229 h40 v6 r4,4 h-40 r4,4 v-6z" fill="#103010"/>
+  <ellipse cx="905" cy="229" rx="20" ry="4" fill="#30a030"/>
   <!-- handles -->
-  <path d="M869,166 c-20,0 -20,30 -6,40" fill="none" stroke="#282828" stroke-width="6" stroke-linecap="round"/>
-  <path d="M941,166 c20,0 20,30 6,40" fill="none" stroke="#282828" stroke-width="6" stroke-linecap="round"/>
+  <path d="M869,166 c-20,0 -20,30 -6,40" fill="none" stroke="#103010" stroke-width="6" stroke-linecap="round"/>
+  <path d="M941,166 c20,0 20,30 6,40" fill="none" stroke="#103010" stroke-width="6" stroke-linecap="round"/>
 
-  <circle cx="905" cy="206" r="18" fill="#0e1018" opacity="0.7"/>
-  <text x="905" y="214" text-anchor="middle" style="fill:#282828;font:900 20px 'Bahnschrift','Arial Black',sans-serif;">C</text>
-  <line x1="828" y1="268" x2="982" y2="268" stroke="#404040" stroke-width="0.7" opacity="0.4"/>
-  <text x="905" y="288" text-anchor="middle" style="fill:#909090;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">First Star</text>
-  <text x="905" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">9</text>
+  <circle cx="905" cy="206" r="18" fill="#081008" opacity="0.7"/>
+  <text x="905" y="214" text-anchor="middle" style="fill:#103010;font:900 20px 'Bahnschrift','Arial Black',sans-serif;">B</text>
+  <line x1="828" y1="268" x2="982" y2="268" stroke="#204020" stroke-width="0.7" opacity="0.4"/>
+  <text x="905" y="288" text-anchor="middle" style="fill:#60d060;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">Many Friends</text>
+  <text x="905" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">15</text>
   <rect x="828" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
-  <rect x="828" y="318" width="135" height="7" rx="3.5" fill="#282828">
+  <rect x="828" y="318" width="77" height="7" rx="3.5" fill="#103010">
     <animate attributeName="opacity" values="0.7;1;0.7" dur="3.0s" repeatCount="indefinite"/>
   </rect>
-  <text x="905" y="341" text-anchor="middle" style="fill:#404040;font:600 9px 'Consolas',monospace;">C · 88% →10</text>
-  <rect x="828" y="378" width="135" height="3" rx="1.5" fill="#909090" opacity="0.5" filter="url(#softGlow)"/>
+  <text x="905" y="341" text-anchor="middle" style="fill:#204020;font:600 9px 'Consolas',monospace;">B · 50% →20</text>
+  <rect x="828" y="378" width="77" height="3" rx="1.5" fill="#60d060" opacity="0.5" filter="url(#softGlow)"/>
   <rect x="814" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
 
   <!-- TROPHY 6: PullRequest [C] -->
