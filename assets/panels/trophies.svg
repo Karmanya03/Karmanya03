@@ -83,7 +83,7 @@
   <!-- Section title and subtitle -->
   <text x="56" y="52" class="title">TROPHY CASE</text>
   <text x="56" y="70" class="tsub">GITHUB PROFILE TROPHIES · RYO-MA REAL RANKS · AUTO-SORTED HIGHEST FIRST</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 03 May 2026 04:52 UTC</text>
+  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 03 May 2026 07:16 UTC</text>
 
   
   <defs>
@@ -180,7 +180,7 @@
   <text x="521" y="214" text-anchor="middle" style="fill:#8b0000;font:900 14px 'Bahnschrift','Arial Black',sans-serif;">AAA</text>
   <line x1="444" y1="268" x2="598" y2="268" stroke="#c03030" stroke-width="0.7" opacity="0.4"/>
   <text x="521" y="288" text-anchor="middle" style="fill:#ff7070;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">Ultra Committer</text>
-  <text x="521" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">507</text>
+  <text x="521" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">508</text>
   <rect x="444" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
   <rect x="444" y="318" width="2" height="7" rx="3.5" fill="#8b0000">
     <animate attributeName="opacity" values="0.7;1;0.7" dur="2.6s" repeatCount="indefinite"/>
