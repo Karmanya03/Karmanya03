@@ -83,7 +83,7 @@
   <!-- Section title and subtitle -->
   <text x="56" y="52" class="title">TROPHY CASE</text>
   <text x="56" y="70" class="tsub">GITHUB PROFILE TROPHIES · RYO-MA REAL RANKS · AUTO-SORTED HIGHEST FIRST</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 04 Jun 2026 10:24 UTC</text>
+  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 04 Jun 2026 13:40 UTC</text>
 
   
   <defs>
@@ -211,13 +211,13 @@
   <text x="713" y="214" text-anchor="middle" style="fill:#1a3050;font:900 20px 'Bahnschrift','Arial Black',sans-serif;">A</text>
   <line x1="636" y1="268" x2="790" y2="268" stroke="#3060a0" stroke-width="0.7" opacity="0.4"/>
   <text x="713" y="288" text-anchor="middle" style="fill:#80b0d0;font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">Dynamic User</text>
-  <text x="713" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">23</text>
+  <text x="713" y="306" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">24</text>
   <rect x="636" y="318" width="154" height="7" rx="3.5" fill="#1a1d28"/>
-  <rect x="636" y="318" width="15" height="7" rx="3.5" fill="#1a3050">
+  <rect x="636" y="318" width="20" height="7" rx="3.5" fill="#1a3050">
     <animate attributeName="opacity" values="0.7;1;0.7" dur="2.8s" repeatCount="indefinite"/>
   </rect>
-  <text x="713" y="341" text-anchor="middle" style="fill:#3060a0;font:600 9px 'Consolas',monospace;">A · 10% →50</text>
-  <rect x="636" y="378" width="15" height="3" rx="1.5" fill="#80b0d0" opacity="0.5" filter="url(#softGlow)"/>
+  <text x="713" y="341" text-anchor="middle" style="fill:#3060a0;font:600 9px 'Consolas',monospace;">A · 13% →50</text>
+  <rect x="636" y="378" width="20" height="3" rx="1.5" fill="#80b0d0" opacity="0.5" filter="url(#softGlow)"/>
   <rect x="622" y="96" width="182" height="300" rx="14" fill="url(#shimmerSweep)" style="pointer-events:none;mix-blend-mode:overlay;"/>
 
   <!-- TROPHY 5: Stars [B] -->
