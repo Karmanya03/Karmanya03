@@ -25,7 +25,9 @@
       .quote-word{animation:quoteWord 5.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
       .quote-word-late{animation:quoteWord 5.2s ease-in-out infinite 1.8s;transform-box:fill-box;transform-origin:center}
       .quote-bar-glow{animation:quoteBar 7.2s ease-in-out infinite}
+      .quote-spark{filter:drop-shadow(0 0 4px #d5ad52)}
       .quote-rail{stroke-dasharray:112 566;animation:quoteRail 7.8s cubic-bezier(.35,0,.22,1) infinite}
+      .toolkit-sweep{transform-box:view-box;transform-origin:0 0;transform:translate(350px,350px);animation:toolkitSweep 22s linear -10s infinite}
       .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
       .warmth{animation:warmth 5.8s ease-in-out infinite}
       .heat-cell{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}
@@ -44,6 +46,7 @@
       @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
       @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
       @keyframes heat{0%,100%{filter:brightness(.9);opacity:.8}50%{filter:brightness(1.7);opacity:1}}
+      @keyframes toolkitSweep{from{transform:translate(-1800px,-1800px)}to{transform:translate(1450px,1450px)}}
       @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
       @keyframes quoteWord{0%,100%{opacity:.78}45%{opacity:1}}
       @keyframes quoteBar{0%,100%{opacity:.06}50%{opacity:.28}}
@@ -65,18 +68,18 @@
   <path d="M47 136H587V305H47Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
   <defs>
   <clipPath id="repo-sheen-0-clip"><rect x="47" y="136" width="540" height="169" rx="2"/></clipPath>
-  <linearGradient id="repo-sheen-0-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="repo-sheen-0-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
-    <stop offset=".42" stop-color="#d5ad52" stop-opacity=".10"/>
-    <stop offset=".52" stop-color="#fffaf0" stop-opacity=".92"/>
-    <stop offset=".62" stop-color="#d5ad52" stop-opacity=".18"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#repo-sheen-0-clip)" opacity=".18">
-  <rect x="-50" y="136" width="97" height="169" fill="url(#repo-sheen-0-light)">
-    <animateTransform attributeName="transform" type="translate" values="0,0;637,0" dur="8.60s" begin="0.00s" repeatCount="indefinite"/>
-  </rect>
+<g clip-path="url(#repo-sheen-0-clip)" opacity=".10">
+  <path d="M-222 405h54l889 -889h-54Z" fill="url(#repo-sheen-0-light)">
+    <animateTransform attributeName="transform" type="translate" values="-536.0,-202.1;536.0,202.1" dur="12.40s" begin="0.00s" repeatCount="indefinite"/>
+  </path>
 </g>
   <path d="M47 136V122H121L133 136" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="62" y="164" class="micro red">01</text>
@@ -92,18 +95,18 @@
   <path d="M607 136H1147V305H607Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
   <defs>
   <clipPath id="repo-sheen-1-clip"><rect x="607" y="136" width="540" height="169" rx="2"/></clipPath>
-  <linearGradient id="repo-sheen-1-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="repo-sheen-1-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d12f37" stop-opacity="0"/>
-    <stop offset=".42" stop-color="#d12f37" stop-opacity=".10"/>
-    <stop offset=".52" stop-color="#fffaf0" stop-opacity=".92"/>
-    <stop offset=".62" stop-color="#d12f37" stop-opacity=".18"/>
+    <stop offset=".46" stop-color="#d12f37" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d12f37" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d12f37" stop-opacity=".12"/>
     <stop offset="1" stop-color="#d12f37" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#repo-sheen-1-clip)" opacity=".18">
-  <rect x="510" y="136" width="97" height="169" fill="url(#repo-sheen-1-light)">
-    <animateTransform attributeName="transform" type="translate" values="0,0;637,0" dur="9.13s" begin="0.37s" repeatCount="indefinite"/>
-  </rect>
+<g clip-path="url(#repo-sheen-1-clip)" opacity=".10">
+  <path d="M338 405h54l889 -889h-54Z" fill="url(#repo-sheen-1-light)">
+    <animateTransform attributeName="transform" type="translate" values="-536.0,-202.1;536.0,202.1" dur="13.02s" begin="0.41s" repeatCount="indefinite"/>
+  </path>
 </g>
   <path d="M607 136V122H681L693 136" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="622" y="164" class="micro red">02</text>
@@ -119,18 +122,18 @@
   <path d="M47 341H587V510H47Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
   <defs>
   <clipPath id="repo-sheen-2-clip"><rect x="47" y="341" width="540" height="169" rx="2"/></clipPath>
-  <linearGradient id="repo-sheen-2-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="repo-sheen-2-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
-    <stop offset=".42" stop-color="#d5ad52" stop-opacity=".10"/>
-    <stop offset=".52" stop-color="#fffaf0" stop-opacity=".92"/>
-    <stop offset=".62" stop-color="#d5ad52" stop-opacity=".18"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#repo-sheen-2-clip)" opacity=".18">
-  <rect x="-50" y="341" width="97" height="169" fill="url(#repo-sheen-2-light)">
-    <animateTransform attributeName="transform" type="translate" values="0,0;637,0" dur="9.66s" begin="0.74s" repeatCount="indefinite"/>
-  </rect>
+<g clip-path="url(#repo-sheen-2-clip)" opacity=".10">
+  <path d="M-222 610h54l889 -889h-54Z" fill="url(#repo-sheen-2-light)">
+    <animateTransform attributeName="transform" type="translate" values="-536.0,-202.1;536.0,202.1" dur="13.64s" begin="0.82s" repeatCount="indefinite"/>
+  </path>
 </g>
   <path d="M47 341V327H121L133 341" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="62" y="369" class="micro red">03</text>
@@ -146,18 +149,18 @@
   <path d="M607 341H1147V510H607Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
   <defs>
   <clipPath id="repo-sheen-3-clip"><rect x="607" y="341" width="540" height="169" rx="2"/></clipPath>
-  <linearGradient id="repo-sheen-3-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="repo-sheen-3-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d12f37" stop-opacity="0"/>
-    <stop offset=".42" stop-color="#d12f37" stop-opacity=".10"/>
-    <stop offset=".52" stop-color="#fffaf0" stop-opacity=".92"/>
-    <stop offset=".62" stop-color="#d12f37" stop-opacity=".18"/>
+    <stop offset=".46" stop-color="#d12f37" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d12f37" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d12f37" stop-opacity=".12"/>
     <stop offset="1" stop-color="#d12f37" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#repo-sheen-3-clip)" opacity=".18">
-  <rect x="510" y="341" width="97" height="169" fill="url(#repo-sheen-3-light)">
-    <animateTransform attributeName="transform" type="translate" values="0,0;637,0" dur="10.19s" begin="1.11s" repeatCount="indefinite"/>
-  </rect>
+<g clip-path="url(#repo-sheen-3-clip)" opacity=".10">
+  <path d="M338 610h54l889 -889h-54Z" fill="url(#repo-sheen-3-light)">
+    <animateTransform attributeName="transform" type="translate" values="-536.0,-202.1;536.0,202.1" dur="14.26s" begin="1.23s" repeatCount="indefinite"/>
+  </path>
 </g>
   <path d="M607 341V327H681L693 341" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="622" y="369" class="micro red">04</text>
@@ -173,18 +176,18 @@
   <path d="M47 546H587V715H47Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
   <defs>
   <clipPath id="repo-sheen-4-clip"><rect x="47" y="546" width="540" height="169" rx="2"/></clipPath>
-  <linearGradient id="repo-sheen-4-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="repo-sheen-4-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
-    <stop offset=".42" stop-color="#d5ad52" stop-opacity=".10"/>
-    <stop offset=".52" stop-color="#fffaf0" stop-opacity=".92"/>
-    <stop offset=".62" stop-color="#d5ad52" stop-opacity=".18"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#repo-sheen-4-clip)" opacity=".18">
-  <rect x="-50" y="546" width="97" height="169" fill="url(#repo-sheen-4-light)">
-    <animateTransform attributeName="transform" type="translate" values="0,0;637,0" dur="10.72s" begin="1.48s" repeatCount="indefinite"/>
-  </rect>
+<g clip-path="url(#repo-sheen-4-clip)" opacity=".10">
+  <path d="M-222 815h54l889 -889h-54Z" fill="url(#repo-sheen-4-light)">
+    <animateTransform attributeName="transform" type="translate" values="-536.0,-202.1;536.0,202.1" dur="14.88s" begin="1.64s" repeatCount="indefinite"/>
+  </path>
 </g>
   <path d="M47 546V532H121L133 546" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="62" y="574" class="micro red">05</text>
@@ -200,18 +203,18 @@
   <path d="M607 546H1147V715H607Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
   <defs>
   <clipPath id="repo-sheen-5-clip"><rect x="607" y="546" width="540" height="169" rx="2"/></clipPath>
-  <linearGradient id="repo-sheen-5-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="repo-sheen-5-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d12f37" stop-opacity="0"/>
-    <stop offset=".42" stop-color="#d12f37" stop-opacity=".10"/>
-    <stop offset=".52" stop-color="#fffaf0" stop-opacity=".92"/>
-    <stop offset=".62" stop-color="#d12f37" stop-opacity=".18"/>
+    <stop offset=".46" stop-color="#d12f37" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d12f37" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d12f37" stop-opacity=".12"/>
     <stop offset="1" stop-color="#d12f37" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#repo-sheen-5-clip)" opacity=".18">
-  <rect x="510" y="546" width="97" height="169" fill="url(#repo-sheen-5-light)">
-    <animateTransform attributeName="transform" type="translate" values="0,0;637,0" dur="11.25s" begin="1.85s" repeatCount="indefinite"/>
-  </rect>
+<g clip-path="url(#repo-sheen-5-clip)" opacity=".10">
+  <path d="M338 815h54l889 -889h-54Z" fill="url(#repo-sheen-5-light)">
+    <animateTransform attributeName="transform" type="translate" values="-536.0,-202.1;536.0,202.1" dur="15.50s" begin="2.05s" repeatCount="indefinite"/>
+  </path>
 </g>
   <path d="M607 546V532H681L693 546" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="622" y="574" class="micro red">06</text>

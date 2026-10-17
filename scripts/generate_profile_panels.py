@@ -739,7 +739,9 @@ def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: boo
       .quote-word{{animation:quoteWord 5.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}}
       .quote-word-late{{animation:quoteWord 5.2s ease-in-out infinite 1.8s;transform-box:fill-box;transform-origin:center}}
       .quote-bar-glow{{animation:quoteBar 7.2s ease-in-out infinite}}
+      .quote-spark{{filter:drop-shadow(0 0 4px #d5ad52)}}
       .quote-rail{{stroke-dasharray:112 566;animation:quoteRail 7.8s cubic-bezier(.35,0,.22,1) infinite}}
+      .toolkit-sweep{{transform-box:view-box;transform-origin:0 0;transform:translate(350px,350px);animation:toolkitSweep 22s linear -10s infinite}}
       .pulse{{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}}
       .warmth{{animation:warmth 5.8s ease-in-out infinite}}
       .heat-cell{{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}}
@@ -758,6 +760,7 @@ def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: boo
       @keyframes pulse{{0%,100%{{opacity:.72;transform:scale(.94)}}50%{{opacity:1;transform:scale(1.06)}}}}
       @keyframes warmth{{0%,100%{{opacity:.2}}50%{{opacity:.55}}}}
       @keyframes heat{{0%,100%{{filter:brightness(.9);opacity:.8}}50%{{filter:brightness(1.7);opacity:1}}}}
+      @keyframes toolkitSweep{{from{{transform:translate(-1800px,-1800px)}}to{{transform:translate(1450px,1450px)}}}}
       @keyframes rankGlow{{0%,100%{{opacity:.74}}50%{{opacity:1}}}}
       @keyframes quoteWord{{0%,100%{{opacity:.78}}45%{{opacity:1}}}}
       @keyframes quoteBar{{0%,100%{{opacity:.06}}50%{{opacity:.28}}}}
@@ -793,8 +796,8 @@ def render_overview(data: dict[str, Any]) -> str:
         body.append(diagonal_sheen(
             x - 8, 91, 252, 103, f'overview-sheen-{index}',
             tint="#d12f37" if index == 0 else "#d5ad52",
-            duration=f'{10.4 + index * 1.1:.2f}s', delay=f'{index * .8:.2f}s',
-            opacity=".11", radius=3,
+            duration=f'{13.2 + index * 1.15:.2f}s', delay=f'{index * .8:.2f}s',
+            opacity=".075", radius=3,
         ))
         body.append(f"""
   <text x="{x}" y="112" class="micro soft">{icon}  {label}</text>
@@ -816,12 +819,18 @@ def render_overview(data: dict[str, Any]) -> str:
         share = int(size) / max(1, total_bytes)
         width = int(278 * share)
         color = colors[index % len(colors)]
+        bar_glint = horizontal_sheen(
+            x, y + 11, max(1, width), 5, f'overview-bar-glint-{index}',
+            tint=color, duration=f'{12.8 + index * .75:.2f}s',
+            delay=f'{index * .63:.2f}s', opacity=".34", radius=2,
+        )
         body.append(f"""
   <text x="{x}" y="{y}" class="small white">{svg_escape(language)}</text>
   <text x="{x + 325}" y="{y}" text-anchor="end" class="mono gold">{share * 100:.1f}%</text>
   <rect x="{x}" y="{y + 11}" width="278" height="5" rx="2.5" fill="#312d29"/>
   <rect x="{x}" y="{y + 11}" width="{width}" height="5" rx="2.5" fill="{color}" class="warmth"/>
 """)
+        body.append(bar_glint)
 
     secondary = [
         ("FORKS RECEIVED", fmt_count(totals["forks"]) if totals.get("forks") is not None else "—"),
@@ -883,7 +892,7 @@ def render_repositories(data: dict[str, Any]) -> str:
             )
         body.append(f"""
   <path d="M{x} {y + 15}H{x + width}V{y + 184}H{x}Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
-  {horizontal_sheen(x, y + 15, width, 169, f'repo-sheen-{index}', tint="#d5ad52" if index % 2 == 0 else "#d12f37", duration=f'{8.6 + index * .53:.2f}s', delay=f'{index * .37:.2f}s', opacity=".18", radius=2)}
+  {diagonal_sheen(x, y + 15, width, 169, f'repo-sheen-{index}', tint="#d5ad52" if index % 2 == 0 else "#d12f37", duration=f'{12.4 + index * .62:.2f}s', delay=f'{index * .41:.2f}s', opacity=".10", radius=2)}
   <path d="M{x} {y + 15}V{y + 1}H{x + 74}L{x + 86} {y + 15}" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="{x + 15}" y="{y + 43}" class="micro red">{index + 1:02}</text>
   <a xlink:href="{url}" target="_blank" rel="noopener noreferrer">
@@ -968,7 +977,7 @@ def render_trophies(data: dict[str, Any]) -> str:
             x, y, width, 226, f'trophy-sheen-{index}',
             tint="#d7a6ff" if is_s_rank else "#d5ad52",
             duration=f'{7.1 + index * .63:.2f}s', delay=f'{index * .42:.2f}s',
-            opacity=".22" if is_s_rank else ".10", radius=7,
+            opacity=".25" if is_s_rank else ".13", radius=7,
         )
         center = x + width // 2
         rank_font_size = 19 if len(rank) > 4 else 28
@@ -1041,6 +1050,12 @@ def render_achievements(data: dict[str, Any]) -> str:
 
 def render_whoami(data: dict[str, Any]) -> str:
     name = svg_escape(data.get("name") or "Karmanya Ravindra")
+    identity_cells = "".join(
+        f'<rect x="{162 + cell * 7}" y="{row_y - 7}" width="5" height="5" rx="1.5" '
+        f'fill="{["#d12f37", "#d5ad52", "#f4f0e9"][(row + cell) % 3]}" '
+        f'class="heat-cell" style="--delay:{(row * .31 + cell * .12):.2f}s"/>'
+        for row, row_y in enumerate((250, 281, 312, 343, 374)) for cell in range(3)
+    )
     body = f"""
   <rect x="34" y="83" width="1132" height="320" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>
   {diagonal_sheen(34, 83, 1132, 320, "whoami-main-sheen", tint="#d12f37", duration="11.8s", delay="1.1s", opacity=".07", radius=5)}
@@ -1062,10 +1077,11 @@ def render_whoami(data: dict[str, Any]) -> str:
   <text x="183" y="343" class="small white">Cybersecurity Professor · College</text>
   <text x="60" y="374" class="micro red">CERTIFIED</text>
   <text x="183" y="374" class="small white">CRTP Certified  ·  PT1 Certified  ·  CNSP Certified</text>
+  {identity_cells}
 
   <path d="M814 98V388" stroke="#3e352b"/>
   <rect x="837" y="104" width="304" height="274" rx="4" fill="#121011" stroke="#5a3031" class="card-edge"/>
-  {diagonal_sheen(837, 104, 304, 274, "whoami-status-sheen", tint="#d5ad52", duration="9.4s", delay="2.4s", opacity=".12", radius=4)}
+  {diagonal_sheen(837, 104, 304, 274, "whoami-status-sheen", tint="#d5ad52", duration="9.4s", delay="2.4s", opacity=".15", radius=4)}
   <path d="M837 104H1141" stroke="#d12f37" stroke-width="3"/>
   <text x="861" y="135" class="micro gold">BUILD STATUS</text>
   <circle cx="1109" cy="129" r="5" fill="#e2464d" class="pulse"/>
@@ -1258,7 +1274,7 @@ def toolkit_icon_markup(label: str, x: int, y: int, accent: str, foreground: str
     }
     mark = marks[label].format(color=f"#{accent}", ink=f"#{foreground}")
     return (
-        f'<g transform="translate({x + 7} {y + 8}) scale(.95)" fill="none" '
+        f'<g transform="translate({x + 3.6} {y + 4.6}) scale(.95)" fill="none" '
         f'stroke="#{foreground}" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">'
         f'{mark}</g>'
     )
@@ -1266,6 +1282,8 @@ def toolkit_icon_markup(label: str, x: int, y: int, accent: str, foreground: str
 
 def render_toolkit() -> str:
     colors = [("D5AD52", "09090A"), ("F4F0E9", "09090A"), ("D12F37", "F4F0E9")]
+    sweep_colors = ["#d5ad52", "#f4f0e9", "#d12f37"]
+    badge_masks: list[list[str]] = [[], [], []]
     defs = [
         '<clipPath id="toolkit-panel-clip"><rect x="34" y="82" width="1132" height="508" rx="5"/></clipPath>',
     ]
@@ -1293,30 +1311,48 @@ def render_toolkit() -> str:
                 f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="4" fill="#151414" '
                 f'stroke="#{color}" stroke-opacity=".72" stroke-width=".8"/>'
                 f'<rect x="{x + 4}" y="{y + 4}" width="30" height="32" rx="3" fill="#{color}" fill-opacity=".88"/>'
-                f'{toolkit_icon_markup(label, x + 4, y + 1, color, logo_color)}'
+                f'{toolkit_icon_markup(label, x + 4, y + 4, color, logo_color)}'
                 f'<text x="{x + 43}" y="{y + 25}" fill="#f4f0e9" class="badge-label">{svg_escape(label)}</text>'
                 f'</g>'
+            )
+            badge_masks[badge_count % len(sweep_colors)].append(
+                f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="4" fill="#fff"/>'
             )
             x += width + 10
             badge_count += 1
 
-    body.insert(0, f'''<defs>{"".join(defs)}
-      <linearGradient id="toolkit-glass-color" gradientUnits="userSpaceOnUse" x1="-460" y1="660" x2="1150" y2="-950">
-        <stop offset="0" stop-color="#f4f0e9" stop-opacity="0"/>
-        <stop offset=".43" stop-color="#f4f0e9" stop-opacity=".08"/>
-        <stop offset=".49" stop-color="#fff9eb" stop-opacity=".78"/>
-        <stop offset=".53" stop-color="#d5ad52" stop-opacity=".72"/>
-        <stop offset=".57" stop-color="#f2cfc5" stop-opacity=".56"/>
-        <stop offset=".63" stop-color="#f4f0e9" stop-opacity=".08"/>
-        <stop offset="1" stop-color="#f4f0e9" stop-opacity="0"/>
-      </linearGradient>
-      <filter id="toolkit-glass-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
+    section_defs: list[str] = []
+    section_layers: list[str] = []
+    for index, tint in enumerate(sweep_colors):
+        mask_id = f"toolkit-colour-mask-{index}"
+        gradient_id = f"toolkit-glass-{index}"
+        section_defs.append(
+            f'<mask id="{mask_id}" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" mask-type="luminance" x="34" y="82" width="1132" height="508">'
+            f'<rect x="34" y="82" width="1132" height="508" fill="#000"/>'
+            f'{"".join(badge_masks[index])}</mask>'
+        )
+        section_defs.append(
+            f'<linearGradient id="{gradient_id}" gradientUnits="userSpaceOnUse" x1="-460" y1="660" x2="1150" y2="-950">'
+            f'<stop offset="0" stop-color="{tint}" stop-opacity="0"/>'
+            f'<stop offset=".43" stop-color="{tint}" stop-opacity=".10"/>'
+            f'<stop offset=".49" stop-color="{tint}" stop-opacity=".72"/>'
+            f'<stop offset=".53" stop-color="#fffaf0" stop-opacity=".56"/>'
+            f'<stop offset=".57" stop-color="{tint}" stop-opacity=".62"/>'
+            f'<stop offset=".63" stop-color="{tint}" stop-opacity=".10"/>'
+            f'<stop offset="1" stop-color="{tint}" stop-opacity="0"/>'
+            f'</linearGradient>'
+        )
+        section_layers.append(
+            f'<path d="M-460 660h46l1610 -1610h-46Z" fill="url(#{gradient_id})" '
+            f'mask="url(#{mask_id})"/>'
+        )
+    body.insert(0, f'''<defs>{"".join(defs)}{"".join(section_defs)}
+      <filter id="toolkit-glass-glow" x="-15%" y="-15%" width="130%" height="130%"><feGaussianBlur stdDeviation="4"/></filter>
     </defs>''')
-    body.append('''<g clip-path="url(#toolkit-panel-clip)" style="mix-blend-mode:screen;isolation:isolate" aria-label="One colour-responsive toolkit glass sweep">
-      <g>
-        <animateTransform attributeName="transform" type="translate" values="-1800,-1800;1450,1450" dur="14.8s" begin="-10s" repeatCount="indefinite"/>
-        <path d="M-460 660h52l1610 -1610h-52Z" fill="url(#toolkit-glass-color)" opacity=".34" filter="url(#toolkit-glass-glow)"/>
-        <path d="M-460 660h52l1610 -1610h-52Z" fill="url(#toolkit-glass-color)" opacity=".70"/>
+    body.append(f'''<g clip-path="url(#toolkit-panel-clip)" style="mix-blend-mode:screen;isolation:isolate" aria-label="One shared, colour-matched toolkit glass sweep">
+      <g class="toolkit-sweep">
+        <g opacity=".10" filter="url(#toolkit-glass-glow)">{"".join(section_layers)}</g>
+        <g opacity=".34">{"".join(section_layers)}</g>
       </g>
     </g>''')
     body.append('<text x="58" y="568" class="micro soft">LANGUAGES  ·  CLOUD  ·  SECURITY  ·  GAME DEVELOPMENT  ·  CREATIVE TOOLS</text>')
@@ -1341,14 +1377,19 @@ def render_footer_quote() -> str:
   <path d="M150 65H1050" stroke="url(#footer-sweep-color)" stroke-width="2.5" stroke-linecap="round" class="footer-sweep"/>
   <circle cx="150" cy="65" r="3" fill="#d5ad52" class="pulse"/>
   <circle cx="1050" cy="65" r="3" fill="#d5ad52" class="pulse"/>
-  <text x="600" y="48" text-anchor="middle" class="serif white" font-size="24">
+  <text x="600" y="44" text-anchor="middle" class="serif white" font-size="21">
     <tspan fill="#d12f37">/dev/null</tspan><tspan fill="#f4f0e9"> is my </tspan>
     <tspan fill="#d5ad52">inspiration</tspan><tspan fill="#aba59c"> · </tspan>
     <tspan fill="#d5ad52">Rust</tspan><tspan fill="#f4f0e9"> is my </tspan>
     <tspan fill="#d12f37">weapon</tspan><tspan fill="#f4f0e9"> of </tspan><tspan fill="#d5ad52">choice</tspan>
   </text>
+  <text x="600" y="99" text-anchor="middle" class="serif white" font-size="19">
+    <tspan fill="#f4f0e9">The network is the </tspan><tspan fill="#d12f37">battlefield</tspan>
+    <tspan fill="#aba59c"> · </tspan><tspan fill="#d5ad52">Stay curious</tspan>
+    <tspan fill="#f4f0e9">, </tspan><tspan fill="#d5ad52">stay paranoid</tspan>
+  </text>
 '''
-    return wrap_svg("Closing quote", body, 88, "07", show_header=False)
+    return wrap_svg("Closing quote", body, 122, "07", show_header=False)
 
 
 def render_kali_quote() -> str:
@@ -1364,6 +1405,7 @@ def render_kali_quote() -> str:
   <rect x="44" y="12" width="1112" height="76" rx="5" fill="#0d0d0e" stroke="#332a28"/>
   <path d="M45 18V82" stroke="#d12f37" stroke-width="4"/>
   <path d="M45 18V82" stroke="#ff7378" stroke-opacity=".22" stroke-width="8" class="quote-bar-glow"/>
+  <circle cx="45" cy="19" r="2.2" fill="#f4d28a" class="quote-spark"><animateMotion path="M0 0V60" dur="6.8s" repeatCount="indefinite"/></circle>
   <text x="75" y="39" class="micro red">FIELD NOTE  /  ATTENTION</text>
   <text x="75" y="67" class="serif white" font-size="23">
     “The <tspan fill="#d5ad52" class="quote-word">quieter</tspan> you become, the more you can <tspan fill="#e2464d" class="quote-word-late">hear.</tspan>”
@@ -1390,7 +1432,7 @@ def render_recent_activity(data: dict[str, Any]) -> str:
         date = time.strftime("%d %b · %H:%M UTC") if time else "time unavailable"
         link = svg_escape(event.get("url", ""))
         body.append(f"""
-  <circle cx="66" cy="{y - 4}" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2" class="pulse"/>
+  <rect x="62" y="{y - 8}" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:{(index * .31) % 3.4:.2f}s"/>
   <text x="91" y="{y}" class="micro red">{date.upper()}</text>
   <text x="286" y="{y}" class="small white">{summary}</text>
   <a xlink:href="{link}" target="_blank" rel="noopener noreferrer">
@@ -1446,8 +1488,9 @@ def render_event_trace(data: dict[str, Any]) -> str:
             for index, (x, y, _, _) in enumerate(points)
         )
         body.append(f'<path d="{trace}" fill="none" stroke="#d5ad52" stroke-opacity=".42" stroke-width="2" class="inkline"/>')
-        for x, y, color, description in points:
-            body.append(f'<circle cx="{x:.1f}" cy="{y}" r="6" fill="{color}" stroke="#09090a" stroke-width="2" class="pulse"><title>{svg_escape(description)}</title></circle>')
+        for index, (x, y, color, description) in enumerate(points):
+            delay = (index * .17) % 3.4
+            body.append(f'<rect x="{x - 4:.1f}" y="{y - 4}" width="8" height="8" rx="2" fill="{color}" stroke="#09090a" stroke-width="1.5" class="heat-cell" style="--delay:{delay:.2f}s"><title>{svg_escape(description)}</title></rect>')
         oldest = iso_time(events[0].get("created_at"))
         newest = iso_time(events[-1].get("created_at"))
         left_date = oldest.strftime("%d %b %Y").upper() if oldest else ""

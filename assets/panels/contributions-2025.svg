@@ -19,7 +19,15 @@
       .num{font:500 45px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
       .inkline{stroke-dasharray:28 10;animation:ink 8s linear infinite}
       .ambient-line{stroke-dasharray:46 1500;animation:rail 18s linear infinite}
+      .footer-sweep-glow{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite;filter:url(#footer-glow)}
+      .footer-sweep{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite}
       .card-edge{animation:edge 6s ease-in-out infinite}
+      .quote-word{animation:quoteWord 5.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+      .quote-word-late{animation:quoteWord 5.2s ease-in-out infinite 1.8s;transform-box:fill-box;transform-origin:center}
+      .quote-bar-glow{animation:quoteBar 7.2s ease-in-out infinite}
+      .quote-spark{filter:drop-shadow(0 0 4px #d5ad52)}
+      .quote-rail{stroke-dasharray:112 566;animation:quoteRail 7.8s cubic-bezier(.35,0,.22,1) infinite}
+      .toolkit-sweep{transform-box:view-box;transform-origin:0 0;transform:translate(350px,350px);animation:toolkitSweep 22s linear -10s infinite}
       .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
       .warmth{animation:warmth 5.8s ease-in-out infinite}
       .heat-cell{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}
@@ -27,15 +35,24 @@
       .month{font:700 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}
       .weekday{font:700 12px 'Segoe UI',Arial,sans-serif}
       .yearnum{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
-      .badge-label{font:600 17px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}
+      .badge-label{font:600 15px 'Segoe UI',Arial,sans-serif;letter-spacing:.15px}
       .badge-glyph{font:700 16px Consolas,'Courier New',monospace}
+      .trophy-orbit{transform-box:fill-box;transform-origin:center;animation:trophyOrbit 11s linear infinite}
+      .achievement-bloom{transform-box:fill-box;transform-origin:center;animation:achievementBloom 6.4s ease-in-out infinite}
       @keyframes ink{to{stroke-dashoffset:-304}}
       @keyframes rail{to{stroke-dashoffset:-1546}}
+      @keyframes footerSweep{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
       @keyframes edge{0%,100%{stroke-opacity:.48}50%{stroke-opacity:.92}}
       @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
       @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
       @keyframes heat{0%,100%{filter:brightness(.9);opacity:.8}50%{filter:brightness(1.7);opacity:1}}
+      @keyframes toolkitSweep{from{transform:translate(-1800px,-1800px)}to{transform:translate(1450px,1450px)}}
       @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
+      @keyframes quoteWord{0%,100%{opacity:.78}45%{opacity:1}}
+      @keyframes quoteBar{0%,100%{opacity:.06}50%{opacity:.28}}
+      @keyframes quoteRail{from{stroke-dashoffset:678}to{stroke-dashoffset:0}}
+      @keyframes trophyOrbit{to{transform:rotate(360deg)}}
+      @keyframes achievementBloom{0%,100%{opacity:.52;transform:scale(.92)}50%{opacity:1;transform:scale(1.06)}}
       @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>

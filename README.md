@@ -126,5 +126,5 @@ I’m drawn to systems that reward careful exploration: tracing an Active Direct
 </p>
 
 <p align="center">
-  <img src="assets/panels/footer-quote.svg" alt="/dev/null is my inspiration · Rust is my weapon of choice" width="100%">
+  <img src="assets/panels/footer-quote.svg" alt="/dev/null is my inspiration · Rust is my weapon of choice · The network is the battlefield · Stay curious, stay paranoid" width="100%">
 </p>

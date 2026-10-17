@@ -25,7 +25,9 @@
       .quote-word{animation:quoteWord 5.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
       .quote-word-late{animation:quoteWord 5.2s ease-in-out infinite 1.8s;transform-box:fill-box;transform-origin:center}
       .quote-bar-glow{animation:quoteBar 7.2s ease-in-out infinite}
+      .quote-spark{filter:drop-shadow(0 0 4px #d5ad52)}
       .quote-rail{stroke-dasharray:112 566;animation:quoteRail 7.8s cubic-bezier(.35,0,.22,1) infinite}
+      .toolkit-sweep{transform-box:view-box;transform-origin:0 0;transform:translate(350px,350px);animation:toolkitSweep 22s linear -10s infinite}
       .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
       .warmth{animation:warmth 5.8s ease-in-out infinite}
       .heat-cell{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}
@@ -33,8 +35,10 @@
       .month{font:700 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}
       .weekday{font:700 12px 'Segoe UI',Arial,sans-serif}
       .yearnum{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
-      .badge-label{font:600 17px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}
+      .badge-label{font:600 15px 'Segoe UI',Arial,sans-serif;letter-spacing:.15px}
       .badge-glyph{font:700 16px Consolas,'Courier New',monospace}
+      .trophy-orbit{transform-box:fill-box;transform-origin:center;animation:trophyOrbit 11s linear infinite}
+      .achievement-bloom{transform-box:fill-box;transform-origin:center;animation:achievementBloom 6.4s ease-in-out infinite}
       @keyframes ink{to{stroke-dashoffset:-304}}
       @keyframes rail{to{stroke-dashoffset:-1546}}
       @keyframes footerSweep{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
@@ -42,10 +46,13 @@
       @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
       @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
       @keyframes heat{0%,100%{filter:brightness(.9);opacity:.8}50%{filter:brightness(1.7);opacity:1}}
+      @keyframes toolkitSweep{from{transform:translate(-1800px,-1800px)}to{transform:translate(1450px,1450px)}}
       @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
       @keyframes quoteWord{0%,100%{opacity:.78}45%{opacity:1}}
       @keyframes quoteBar{0%,100%{opacity:.06}50%{opacity:.28}}
       @keyframes quoteRail{from{stroke-dashoffset:678}to{stroke-dashoffset:0}}
+      @keyframes trophyOrbit{to{transform:rotate(360deg)}}
+      @keyframes achievementBloom{0%,100%{opacity:.52;transform:scale(.92)}50%{opacity:1;transform:scale(1.06)}}
       @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>
@@ -64,6 +71,7 @@
   <rect x="44" y="12" width="1112" height="76" rx="5" fill="#0d0d0e" stroke="#332a28"/>
   <path d="M45 18V82" stroke="#d12f37" stroke-width="4"/>
   <path d="M45 18V82" stroke="#ff7378" stroke-opacity=".22" stroke-width="8" class="quote-bar-glow"/>
+  <circle cx="45" cy="19" r="2.2" fill="#f4d28a" class="quote-spark"><animateMotion path="M0 0V60" dur="6.8s" repeatCount="indefinite"/></circle>
   <text x="75" y="39" class="micro red">FIELD NOTE  /  ATTENTION</text>
   <text x="75" y="67" class="serif white" font-size="23">
     “The <tspan fill="#d5ad52" class="quote-word">quieter</tspan> you become, the more you can <tspan fill="#e2464d" class="quote-word-late">hear.</tspan>”

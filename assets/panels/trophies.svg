@@ -25,7 +25,9 @@
       .quote-word{animation:quoteWord 5.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
       .quote-word-late{animation:quoteWord 5.2s ease-in-out infinite 1.8s;transform-box:fill-box;transform-origin:center}
       .quote-bar-glow{animation:quoteBar 7.2s ease-in-out infinite}
+      .quote-spark{filter:drop-shadow(0 0 4px #d5ad52)}
       .quote-rail{stroke-dasharray:112 566;animation:quoteRail 7.8s cubic-bezier(.35,0,.22,1) infinite}
+      .toolkit-sweep{transform-box:view-box;transform-origin:0 0;transform:translate(350px,350px);animation:toolkitSweep 22s linear -10s infinite}
       .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
       .warmth{animation:warmth 5.8s ease-in-out infinite}
       .heat-cell{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}
@@ -44,6 +46,7 @@
       @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
       @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
       @keyframes heat{0%,100%{filter:brightness(.9);opacity:.8}50%{filter:brightness(1.7);opacity:1}}
+      @keyframes toolkitSweep{from{transform:translate(-1800px,-1800px)}to{transform:translate(1450px,1450px)}}
       @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
       @keyframes quoteWord{0%,100%{opacity:.78}45%{opacity:1}}
       @keyframes quoteBar{0%,100%{opacity:.06}50%{opacity:.28}}
@@ -72,7 +75,7 @@
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#trophy-sheen-0-clip)" opacity=".10">
+<g clip-path="url(#trophy-sheen-0-clip)" opacity=".13">
   <path d="M-284 422h54l673 -673h-54Z" fill="url(#trophy-sheen-0-light)">
     <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="7.10s" begin="0.00s" repeatCount="indefinite"/>
   </path>
@@ -101,7 +104,7 @@
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#trophy-sheen-1-clip)" opacity=".10">
+<g clip-path="url(#trophy-sheen-1-clip)" opacity=".13">
   <path d="M-1 422h54l673 -673h-54Z" fill="url(#trophy-sheen-1-light)">
     <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="7.73s" begin="0.42s" repeatCount="indefinite"/>
   </path>
@@ -130,7 +133,7 @@
     <stop offset="1" stop-color="#d7a6ff" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#trophy-sheen-2-clip)" opacity=".22">
+<g clip-path="url(#trophy-sheen-2-clip)" opacity=".25">
   <path d="M282 422h54l673 -673h-54Z" fill="url(#trophy-sheen-2-light)">
     <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="8.36s" begin="0.84s" repeatCount="indefinite"/>
   </path>
@@ -159,7 +162,7 @@
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#trophy-sheen-3-clip)" opacity=".10">
+<g clip-path="url(#trophy-sheen-3-clip)" opacity=".13">
   <path d="M565 422h54l673 -673h-54Z" fill="url(#trophy-sheen-3-light)">
     <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="8.99s" begin="1.26s" repeatCount="indefinite"/>
   </path>
@@ -188,7 +191,7 @@
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#trophy-sheen-4-clip)" opacity=".10">
+<g clip-path="url(#trophy-sheen-4-clip)" opacity=".13">
   <path d="M-284 670h54l673 -673h-54Z" fill="url(#trophy-sheen-4-light)">
     <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="9.62s" begin="1.68s" repeatCount="indefinite"/>
   </path>
@@ -217,7 +220,7 @@
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#trophy-sheen-5-clip)" opacity=".10">
+<g clip-path="url(#trophy-sheen-5-clip)" opacity=".13">
   <path d="M-1 670h54l673 -673h-54Z" fill="url(#trophy-sheen-5-light)">
     <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="10.25s" begin="2.10s" repeatCount="indefinite"/>
   </path>
@@ -246,7 +249,7 @@
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#trophy-sheen-6-clip)" opacity=".10">
+<g clip-path="url(#trophy-sheen-6-clip)" opacity=".13">
   <path d="M282 670h54l673 -673h-54Z" fill="url(#trophy-sheen-6-light)">
     <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="10.88s" begin="2.52s" repeatCount="indefinite"/>
   </path>
