@@ -678,13 +678,12 @@ def background_multishimmer(
     height: int,
     key: str,
     *,
-    delay: str,
     radius: int = 5,
 ) -> str:
-    """Wide diagonal background rails pulsing with the contribution calendar rhythm."""
+    """Soft, moving monochrome rails behind card content."""
     start_x, start_y = x - height - 100, y + height + 100
     band = width + height + 180
-    # Broad rails leave an unmistakable quiet gap between each dark and light pass.
+    # Broad rails blend into one another instead of reading as hard-edged bars.
     stripe_width = 126
     spacing = 82
     repeat_step = spacing * 2
@@ -693,15 +692,13 @@ def background_multishimmer(
     for index in range(-4, stripe_count):
         color, opacity = ("#000000", ".17") if index % 2 == 0 else ("#f4f0e9", ".12")
         offset = index * spacing
-        # Advancing two bands preserves color and pulse phase at each motion loop.
-        phase_delay = -(float(delay.removesuffix("s")) + (index % 2) * .17)
         stripes.append(
             f'<path d="M{start_x + offset} {start_y + offset}h{stripe_width}l{band} -{band}h-{stripe_width}Z" '
-            f'fill="{color}" fill-opacity="{opacity}" class="heat-cell" style="--delay:{phase_delay:.2f}s"/>'
+            f'fill="{color}" fill-opacity="{opacity}"/>'
         )
     return f'''<defs>
   <clipPath id="{key}-clip"><rect x="{x}" y="{y}" width="{width}" height="{height}" rx="{radius}"/></clipPath>
-  <filter id="{key}-soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="0.65"/></filter>
+  <filter id="{key}-soft" x="-15%" y="-15%" width="130%" height="130%"><feGaussianBlur stdDeviation="18"/></filter>
 </defs>
 <g clip-path="url(#{key}-clip)" filter="url(#{key}-soft)">
   <g>
@@ -830,7 +827,7 @@ def render_overview(data: dict[str, Any]) -> str:
     ]
     body: list[str] = [background_multishimmer(
         34, 82, 1132, 404, "overview-background-multishimmer",
-        delay="1.6s", radius=5,
+        radius=5,
     )]
     for index, (label, key, icon) in enumerate(counters):
         x = 47 + index * 280
@@ -1095,7 +1092,7 @@ def render_whoami(data: dict[str, Any]) -> str:
     name = svg_escape(data.get("name") or "Karmanya Ravindra")
     body = f"""
   <rect x="34" y="83" width="1132" height="320" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>
-  {background_multishimmer(34, 83, 780, 320, "whoami-background-multishimmer", delay="1.1s", radius=5)}
+  {background_multishimmer(34, 83, 780, 320, "whoami-background-multishimmer", radius=5)}
   <path d="M34 88V397" stroke="#d12f37" stroke-width="4"/>
   <rect x="58" y="104" width="136" height="24" rx="12" fill="#301316" stroke="#8f312f"/>
   <text x="126" y="121" text-anchor="middle" class="micro white">IDENTITY / 01</text>
@@ -1457,7 +1454,7 @@ def render_kali_quote() -> str:
 def render_recent_activity(data: dict[str, Any]) -> str:
     entries = data.get("activity", [])[:8]
     body = [
-        background_multishimmer(34, 82, 1132, 378, "activity-background-multishimmer", delay="2.2s", radius=5),
+        background_multishimmer(34, 82, 1132, 378, "activity-background-multishimmer", radius=5),
         '<path d="M66 105V459" stroke="#8a262d" stroke-width="2" stroke-dasharray="3 7" class="inkline"/>',
     ]
     if not entries:
@@ -1496,7 +1493,7 @@ def render_event_trace(data: dict[str, Any]) -> str:
         "OTHER": (335, "#78736c"),
     }
     body: list[str] = []
-    body.append(background_multishimmer(34, 82, 1132, 320, "telemetry-background-multishimmer", delay=".8s", radius=5))
+    body.append(background_multishimmer(34, 82, 1132, 320, "telemetry-background-multishimmer", radius=5))
     for label, (y, color) in lanes.items():
         body.append(f'<text x="47" y="{y + 5}" class="micro soft">{label}</text>')
         body.append(f'<path d="M{x_start} {y}H{x_end}" stroke="#312d29" stroke-width="1"/>')
