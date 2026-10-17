@@ -6,6 +6,7 @@
   "totals": {
     "repositories": 42,
     "followers": 32,
+    "following": 30,
     "stars_on_owned_repos": 42
   },
   "languages": {
@@ -23,6 +24,69 @@
     "Ruby": 1166,
     "Procfile": 39
   },
+  "repository_selection": "pinned",
+  "top_repos": [
+    {
+      "name": "Overthrone",
+      "full_name": "Karmanya03/Overthrone",
+      "description": "Overthrone - The First All-Rust Active Directory exploitation framework. A single static binary that takes you from network access to Domain Admin to finished report - zero external dependencies, pure native protocol implementations, full kill-chain.",
+      "url": "https://github.com/Karmanya03/Overthrone",
+      "stars": 30,
+      "forks": 2,
+      "language": "Rust",
+      "pushed_at": ""
+    },
+    {
+      "name": "Deadrop",
+      "full_name": "Karmanya03/Deadrop",
+      "description": "Zero-knowledge file drops that self-destruct. One command. One link. Gone. Like it never happened.",
+      "url": "https://github.com/Karmanya03/Deadrop",
+      "stars": 7,
+      "forks": 0,
+      "language": "Rust",
+      "pushed_at": ""
+    },
+    {
+      "name": "Ferret-rs",
+      "full_name": "Karmanya03/Ferret-rs",
+      "description": "Ferret-rs - A blazingly fast file finder and organizer for Linux/Unix systems.",
+      "url": "https://github.com/Karmanya03/Ferret-rs",
+      "stars": 4,
+      "forks": 0,
+      "language": "Rust",
+      "pushed_at": ""
+    },
+    {
+      "name": "PassMann",
+      "full_name": "Karmanya03/PassMann",
+      "description": "Zero-knowledge password manager browser extension built in Rust and WebAssembly, with client-side encryption and offline operation.",
+      "url": "https://github.com/Karmanya03/PassMann",
+      "stars": 0,
+      "forks": 0,
+      "language": "JavaScript",
+      "pushed_at": ""
+    },
+    {
+      "name": "Rustify",
+      "full_name": "Karmanya03/Rustify",
+      "description": "Rust-based modern YouTube video and playlist converter.",
+      "url": "https://github.com/Karmanya03/Rustify",
+      "stars": 0,
+      "forks": 0,
+      "language": "Rust",
+      "pushed_at": ""
+    },
+    {
+      "name": "AbstractStudio",
+      "full_name": "Karmanya03/AbstractStudio",
+      "description": "test",
+      "url": "https://github.com/Karmanya03/AbstractStudio",
+      "stars": 0,
+      "forks": 0,
+      "language": "CSS",
+      "pushed_at": ""
+    }
+  ],
   "repositories": [
     {
       "name": "Karmanya03",

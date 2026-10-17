@@ -77,7 +77,7 @@
   <text x="1120" y="312" text-anchor="end" class="mono gold">0.5%</text>
   <rect x="795" y="323" width="278" height="5" rx="2.5" fill="#312d29"/>
   <rect x="795" y="323" width="1" height="5" rx="2.5" fill="#78736c"/>
-<path d="M47 376H1152" class="rule"/><text x="47" y="403" class="micro gold">—</text><text x="47" y="421" class="micro soft">FORKS RECEIVED</text><text x="267" y="403" class="micro gold">—</text><text x="267" y="421" class="micro soft">OPENED PULL REQUESTS</text><text x="487" y="403" class="micro gold">—</text><text x="487" y="421" class="micro soft">OPENED ISSUES</text><text x="707" y="403" class="micro gold">—</text><text x="707" y="421" class="micro soft">LANGUAGES</text><text x="927" y="403" class="micro gold">—</text><text x="927" y="421" class="micro soft">ACTIVE REPOS · 90D</text>
+<path d="M47 376H1152" class="rule"/><text x="47" y="403" class="micro gold">—</text><text x="47" y="421" class="micro soft">FORKS RECEIVED</text><text x="232" y="403" class="micro gold">30</text><text x="232" y="421" class="micro soft">FOLLOWING</text><text x="417" y="403" class="micro gold">—</text><text x="417" y="421" class="micro soft">PULL REQUESTS</text><text x="602" y="403" class="micro gold">—</text><text x="602" y="421" class="micro soft">ISSUES</text><text x="787" y="403" class="micro gold">—</text><text x="787" y="421" class="micro soft">LANGUAGES</text><text x="972" y="403" class="micro gold">—</text><text x="972" y="421" class="micro soft">ACTIVE REPOS · 90D</text>
   <path d="M47 456H1152" stroke="#d5ad52" stroke-width="1"/>
   <text x="47" y="482" class="micro soft">AS OF 17 OCT 2026 · 15:21 UTC</text>
   <path d="M869 479H1134" stroke="#d12f37" stroke-width="2" class="inkline"/>

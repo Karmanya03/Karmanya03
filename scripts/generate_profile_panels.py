@@ -277,7 +277,7 @@ def fetch_snapshot(username: str) -> dict[str, Any]:
                 "payload": event.get("payload", {}),
                 "summary": event_summary(event),
             }
-            for event in events[:8]
+            for event in events[:30]
             if event.get("created_at") and event.get("repo", {}).get("name")
         ],
         "repository_selection": "stars",
@@ -392,15 +392,16 @@ def render_overview(data: dict[str, Any]) -> str:
 
     secondary = [
         ("FORKS RECEIVED", fmt_count(totals["forks"]) if totals.get("forks") is not None else "—"),
-        ("OPENED PULL REQUESTS", fmt_count(totals["prs"], limits.get("prs", False)) if totals.get("prs") is not None else "—"),
-        ("OPENED ISSUES", fmt_count(totals["issues"], limits.get("issues", False)) if totals.get("issues") is not None else "—"),
+        ("FOLLOWING", fmt_count(totals["following"]) if totals.get("following") is not None else "—"),
+        ("PULL REQUESTS", fmt_count(totals["prs"], limits.get("prs", False)) if totals.get("prs") is not None else "—"),
+        ("ISSUES", fmt_count(totals["issues"], limits.get("issues", False)) if totals.get("issues") is not None else "—"),
         ("LANGUAGES", fmt_count(totals["unique_languages"]) if totals.get("unique_languages") is not None else "—"),
         ("ACTIVE REPOS · 90D", fmt_count(totals["active_90"]) if totals.get("active_90") is not None else "—"),
     ]
     yline = 376
     body.append(f'<path d="M47 {yline}H1152" class="rule"/>')
     for index, (label, value) in enumerate(secondary):
-        x = 47 + index * 220
+        x = 47 + index * 185
         body.append(f'<text x="{x}" y="{yline + 27}" class="micro gold">{value}</text><text x="{x}" y="{yline + 45}" class="micro soft">{label}</text>')
     state = f"AS OF {stamp_label(data.get('generated_at', ''))}"
     body.append(f"""
@@ -413,7 +414,10 @@ def render_overview(data: dict[str, Any]) -> str:
 
 def render_repositories(data: dict[str, Any]) -> str:
     repos = data.get("top_repos", [])[:6]
-    selection = "MOST STARRED" if data.get("repository_selection") == "stars" else "RECENT WORK"
+    selection = {
+        "stars": "MOST STARRED",
+        "pinned": "PINNED PROJECTS",
+    }.get(data.get("repository_selection"), "SELECTED WORK")
     body: list[str] = [
         f'<text x="47" y="99" class="micro gold">{selection}</text>'
     ]
@@ -436,6 +440,14 @@ def render_repositories(data: dict[str, Any]) -> str:
         )
         url = svg_escape(repo.get("url"))
         language = svg_escape(short_text(repo.get("language", "Various"), 16))
+        pushed_at = repo.get("pushed_at", "")
+        date_line = ""
+        if iso_time(pushed_at):
+            date_label = svg_escape(repo.get("date_label", "PUSHED"))
+            date_line = (
+                f'<text x="{x + width - 16}" y="{y + 169}" text-anchor="end" '
+                f'class="micro soft">{date_label} {day_label(pushed_at).upper()}</text>'
+            )
         body.append(f"""
   <path d="M{x} {y + 15}H{x + width}V{y + 184}H{x}Z" fill="#101011" stroke="#3b3630" stroke-width="1"/>
   <path d="M{x} {y + 15}V{y + 1}H{x + 74}L{x + 86} {y + 15}" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
@@ -447,7 +459,7 @@ def render_repositories(data: dict[str, Any]) -> str:
   <path d="M{x + 16} {y + 116}H{x + width - 16}" class="rule"/>
   <text x="{x + 16}" y="{y + 145}" class="micro gold">{language.upper()}</text>
   <text x="{x + width - 16}" y="{y + 145}" text-anchor="end" class="micro white">✳ {int(repo.get('stars', 0))}   ⑂ {int(repo.get('forks', 0))}</text>
-  <text x="{x + width - 16}" y="{y + 169}" text-anchor="end" class="micro soft">{svg_escape(repo.get('date_label', 'UPDATED'))} {day_label(repo.get('pushed_at', '')).upper()}</text>
+  {date_line}
 """)
     panel_height = 121 + rows * 205 + 15
     return wrap_svg("Selected work", "".join(body), panel_height, "01")
@@ -542,6 +554,66 @@ def render_recent_activity(data: dict[str, Any]) -> str:
     return wrap_svg("Recent activity", "".join(body), 490, "03")
 
 
+def render_event_trace(data: dict[str, Any]) -> str:
+    events = [
+        event for event in data.get("activity", [])
+        if iso_time(event.get("created_at"))
+    ]
+    events.sort(key=lambda event: iso_time(event.get("created_at")) or dt.datetime.min.replace(tzinfo=dt.timezone.utc))
+    events = events[-30:]
+    x_start, x_end = 202, 1152
+    lanes = {
+        "PUSH": (119, "#d12f37"),
+        "STAR": (173, "#d5ad52"),
+        "PULL": (227, "#f4f0e9"),
+        "ISSUE": (281, "#b7aea2"),
+        "OTHER": (335, "#78736c"),
+    }
+    body: list[str] = []
+    for label, (y, color) in lanes.items():
+        body.append(f'<text x="47" y="{y + 5}" class="micro soft">{label}</text>')
+        body.append(f'<path d="M{x_start} {y}H{x_end}" stroke="#312d29" stroke-width="1"/>')
+
+    if events:
+        points: list[tuple[float, int, str, str]] = []
+        denominator = max(1, len(events) - 1)
+        for index, event in enumerate(events):
+            kind = event.get("type", "")
+            if kind == "PushEvent":
+                lane = "PUSH"
+            elif kind == "WatchEvent":
+                lane = "STAR"
+            elif kind == "PullRequestEvent":
+                lane = "PULL"
+            elif kind in {"IssuesEvent", "IssueCommentEvent"}:
+                lane = "ISSUE"
+            else:
+                lane = "OTHER"
+            y, color = lanes[lane]
+            x = x_start + (x_end - x_start) * index / denominator
+            event_time = iso_time(event.get("created_at"))
+            when = event_time.strftime("%d %b %Y · %H:%M UTC") if event_time else ""
+            description = event.get("summary") or event_summary(event)
+            points.append((x, y, color, f"{when} · {description}"))
+        trace = " ".join(
+            f'{"M" if index == 0 else "L"}{x:.1f} {y}'
+            for index, (x, y, _, _) in enumerate(points)
+        )
+        body.append(f'<path d="{trace}" fill="none" stroke="#d5ad52" stroke-opacity=".42" stroke-width="2" class="inkline"/>')
+        for x, y, color, description in points:
+            body.append(f'<circle cx="{x:.1f}" cy="{y}" r="6" fill="{color}" stroke="#09090a" stroke-width="2"><title>{svg_escape(description)}</title></circle>')
+        oldest = iso_time(events[0].get("created_at"))
+        newest = iso_time(events[-1].get("created_at"))
+        left_date = oldest.strftime("%d %b %Y").upper() if oldest else ""
+        right_date = newest.strftime("%d %b %Y").upper() if newest else ""
+        body.append(f'<text x="{x_start}" y="382" class="micro soft">{left_date}</text>')
+        body.append(f'<text x="{x_end}" y="382" text-anchor="end" class="micro soft">{right_date}</text>')
+    else:
+        body.append('<text x="600" y="245" text-anchor="middle" class="small soft">NO EVENTS</text>')
+
+    return wrap_svg("Event trace", "".join(body), 415, "04")
+
+
 def write_file(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
@@ -565,7 +637,8 @@ def main() -> None:
     write_file(OUT_DIR / "repositories.svg", render_repositories(data))
     write_file(OUT_DIR / "trophies.svg", render_trophies(data))
     write_file(OUT_DIR / "recent-activity.svg", render_recent_activity(data))
-    print(f"Rendered 4 panels from the {'cached' if cached else 'current'} GitHub snapshot dated {data.get('generated_at', 'unknown')}.")
+    write_file(OUT_DIR / "telemetry.svg", render_event_trace(data))
+    print(f"Rendered 5 panels from the {'cached' if cached else 'current'} GitHub snapshot dated {data.get('generated_at', 'unknown')}.")
 
 
 if __name__ == "__main__":

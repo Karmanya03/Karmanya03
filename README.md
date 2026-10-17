@@ -45,6 +45,12 @@ B.E. Computer Science & Design graduate, CRTP-certified, and working as a Softwa
   <img src="assets/panels/recent-activity.svg" alt="Recent public GitHub events" width="100%">
 </p>
 
+## Log telemetry
+
+<p align="center">
+  <img src="assets/panels/telemetry.svg" alt="Timeline of recent public GitHub events by type" width="100%">
+</p>
+
 ## Contributions
 
 [![Contribution calendar](https://img.shields.io/badge/CONTRIBUTION_CALENDAR-OPEN_ON_GITHUB-D12F37?style=for-the-badge&labelColor=09090A&logo=github&logoColor=F4F0E9)](https://github.com/Karmanya03#contribution-activity)
