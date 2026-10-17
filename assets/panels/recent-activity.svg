@@ -66,14 +66,20 @@
   <path d="M30 62H1170" class="rule"/>
   <defs>
   <clipPath id="activity-background-multishimmer-clip"><rect x="34" y="82" width="1132" height="378" rx="5"/></clipPath>
-  <filter id="activity-background-multishimmer-soft" x="-15%" y="-15%" width="130%" height="130%"><feGaussianBlur stdDeviation="18"/></filter>
+  <linearGradient id="activity-background-multishimmer-gradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="164" y2="164" spreadMethod="repeat">
+    <stop offset="0" stop-color="#000000" stop-opacity="0"/>
+    <stop offset=".12" stop-color="#f4f0e9" stop-opacity=".008"/>
+    <stop offset=".25" stop-color="#f4f0e9" stop-opacity=".022"/>
+    <stop offset=".38" stop-color="#f4f0e9" stop-opacity=".034"/>
+    <stop offset=".5" stop-color="#f4f0e9" stop-opacity="0"/>
+    <stop offset=".62" stop-color="#000000" stop-opacity=".008"/>
+    <stop offset=".75" stop-color="#000000" stop-opacity=".018"/>
+    <stop offset=".88" stop-color="#000000" stop-opacity=".028"/>
+    <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    <animateTransform attributeName="gradientTransform" type="translate" values="0,0;164,164" dur="6.8s" begin="0s" repeatCount="indefinite" calcMode="linear"/>
+  </linearGradient>
 </defs>
-<g clip-path="url(#activity-background-multishimmer-clip)" filter="url(#activity-background-multishimmer-soft)">
-  <g>
-    <animateTransform attributeName="transform" type="translate" values="0,0;164,164" dur="3.4s" begin="0s" repeatCount="indefinite" calcMode="linear"/>
-    <path d="M-772 232h126l1690 -1690h-126Z" fill="#000000" fill-opacity=".17"/><path d="M-690 314h126l1690 -1690h-126Z" fill="#f4f0e9" fill-opacity=".12"/><path d="M-608 396h126l1690 -1690h-126Z" fill="#000000" fill-opacity=".17"/><path d="M-526 478h126l1690 -1690h-126Z" fill="#f4f0e9" fill-opacity=".12"/><path d="M-444 560h126l1690 -1690h-126Z" fill="#000000" fill-opacity=".17"/><path d="M-362 642h126l1690 -1690h-126Z" fill="#f4f0e9" fill-opacity=".12"/><path d="M-280 724h126l1690 -1690h-126Z" fill="#000000" fill-opacity=".17"/><path d="M-198 806h126l1690 -1690h-126Z" fill="#f4f0e9" fill-opacity=".12"/><path d="M-116 888h126l1690 -1690h-126Z" fill="#000000" fill-opacity=".17"/><path d="M-34 970h126l1690 -1690h-126Z" fill="#f4f0e9" fill-opacity=".12"/><path d="M48 1052h126l1690 -1690h-126Z" fill="#000000" fill-opacity=".17"/><path d="M130 1134h126l1690 -1690h-126Z" fill="#f4f0e9" fill-opacity=".12"/><path d="M212 1216h126l1690 -1690h-126Z" fill="#000000" fill-opacity=".17"/><path d="M294 1298h126l1690 -1690h-126Z" fill="#f4f0e9" fill-opacity=".12"/><path d="M376 1380h126l1690 -1690h-126Z" fill="#000000" fill-opacity=".17"/><path d="M458 1462h126l1690 -1690h-126Z" fill="#f4f0e9" fill-opacity=".12"/><path d="M540 1544h126l1690 -1690h-126Z" fill="#000000" fill-opacity=".17"/><path d="M622 1626h126l1690 -1690h-126Z" fill="#f4f0e9" fill-opacity=".12"/>
-  </g>
-</g><path d="M66 105V459" stroke="#8a262d" stroke-width="2" stroke-dasharray="3 7" class="inkline"/>
+<rect x="34" y="82" width="1132" height="378" rx="5" fill="url(#activity-background-multishimmer-gradient)" clip-path="url(#activity-background-multishimmer-clip)"/><path d="M66 105V459" stroke="#8a262d" stroke-width="2" stroke-dasharray="3 7" class="inkline"/>
   <rect x="62" y="116" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:0.00s"/>
   <text x="91" y="124" class="micro red">30 SEP · 15:58 UTC</text>
   <text x="286" y="124" class="small white">Starred repository</text>

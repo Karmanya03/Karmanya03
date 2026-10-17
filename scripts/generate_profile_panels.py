@@ -537,8 +537,13 @@ def fetch_snapshot(username: str, previous: dict[str, Any] | None = None) -> dic
     prs, prs_capped = optional_search_count(f"author:{username} type:pr is:public")
     issues, issues_capped = optional_search_count(f"author:{username} type:issue is:public")
 
+    profile_repository = f"{username}/{username}".casefold()
     top_repos = sorted(
-        (repo for repo in repos if not repo.get("fork")),
+        (
+            repo for repo in repos
+            if not repo.get("fork")
+            and str(repo.get("full_name") or "").casefold() != profile_repository
+        ),
         key=lambda repo: (
             int(repo.get("stargazers_count", 0)),
             int(repo.get("forks_count", 0)),
@@ -680,32 +685,24 @@ def background_multishimmer(
     *,
     radius: int = 5,
 ) -> str:
-    """Soft, moving monochrome rails behind card content."""
-    start_x, start_y = x - height - 100, y + height + 100
-    band = width + height + 180
-    # Broad rails blend into one another instead of reading as hard-edged bars.
-    stripe_width = 126
-    spacing = 82
-    repeat_step = spacing * 2
-    stripe_count = (width + height + repeat_step - 1) // repeat_step + 4
-    stripes = []
-    for index in range(-4, stripe_count):
-        color, opacity = ("#000000", ".17") if index % 2 == 0 else ("#f4f0e9", ".12")
-        offset = index * spacing
-        stripes.append(
-            f'<path d="M{start_x + offset} {start_y + offset}h{stripe_width}l{band} -{band}h-{stripe_width}Z" '
-            f'fill="{color}" fill-opacity="{opacity}"/>'
-        )
+    """A low-contrast monochrome glass wave with feathered, repeating edges."""
+    repeat_step = 164
     return f'''<defs>
   <clipPath id="{key}-clip"><rect x="{x}" y="{y}" width="{width}" height="{height}" rx="{radius}"/></clipPath>
-  <filter id="{key}-soft" x="-15%" y="-15%" width="130%" height="130%"><feGaussianBlur stdDeviation="18"/></filter>
+  <linearGradient id="{key}-gradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="{repeat_step}" y2="{repeat_step}" spreadMethod="repeat">
+    <stop offset="0" stop-color="#000000" stop-opacity="0"/>
+    <stop offset=".12" stop-color="#f4f0e9" stop-opacity=".008"/>
+    <stop offset=".25" stop-color="#f4f0e9" stop-opacity=".022"/>
+    <stop offset=".38" stop-color="#f4f0e9" stop-opacity=".034"/>
+    <stop offset=".5" stop-color="#f4f0e9" stop-opacity="0"/>
+    <stop offset=".62" stop-color="#000000" stop-opacity=".008"/>
+    <stop offset=".75" stop-color="#000000" stop-opacity=".018"/>
+    <stop offset=".88" stop-color="#000000" stop-opacity=".028"/>
+    <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    <animateTransform attributeName="gradientTransform" type="translate" values="0,0;{repeat_step},{repeat_step}" dur="6.8s" begin="0s" repeatCount="indefinite" calcMode="linear"/>
+  </linearGradient>
 </defs>
-<g clip-path="url(#{key}-clip)" filter="url(#{key}-soft)">
-  <g>
-    <animateTransform attributeName="transform" type="translate" values="0,0;{repeat_step},{repeat_step}" dur="3.4s" begin="0s" repeatCount="indefinite" calcMode="linear"/>
-    {''.join(stripes)}
-  </g>
-</g>'''
+<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="{radius}" fill="url(#{key}-gradient)" clip-path="url(#{key}-clip)"/>'''
 
 
 def horizontal_sheen(
