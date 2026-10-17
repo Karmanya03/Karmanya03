@@ -35,6 +35,29 @@ TROPHY_RULES = {
     "Languages": ([10], "〈/〉"),
 }
 
+SHIELD_GROUPS = {
+    "LANGUAGES & SYSTEMS": [
+        ("Rust", "rust"), ("WebAssembly", "webassembly"), ("C", "c"),
+        ("C++", "cplusplus"), ("C Sharp", "csharp"), ("Java", "openjdk"),
+        ("JavaScript", "javascript"), ("Python", "python"), ("PowerShell", "powershell"),
+        ("HTML5", "html5"), ("CSS3", "css3"), ("R", "r"),
+    ],
+    "CLOUD, SERVICES & DATA": [
+        ("AWS", "amazonwebservices"), ("Azure", "microsoftazure"),
+        ("Google Cloud", "googlecloud"), ("Cloudflare", "cloudflare"),
+        ("Django", "django"), ("Flask", "flask"), ("FastAPI", "fastapi"),
+        ("Node.js", "nodedotjs"), ("MySQL", "mysql"), ("MongoDB", "mongodb"),
+        ("PostgreSQL", "postgresql"), ("SQLite", "sqlite"),
+    ],
+    "SECURITY, BUILD & CREATIVE": [
+        ("Git", "git"), ("GitHub", "github"), ("GitLab", "gitlab"),
+        ("Nginx", "nginx"), ("Jira", "jira"), ("Unity", "unity"),
+        ("Unreal Engine", "unrealengine"), ("TensorFlow", "tensorflow"),
+        ("NumPy", "numpy"), ("Adobe", "adobe"),
+        ("Premiere Pro", "adobepremierepro"), ("After Effects", "adobeaftereffects"),
+    ],
+}
+
 
 class GitHubAPIError(RuntimeError):
     """Raised when a complete snapshot cannot be fetched."""
@@ -108,9 +131,9 @@ def parse_contribution_calendar(page: str, *, expected_year: int | None = None) 
             continue
         days.append({"date": date.isoformat(), "count": count, "level": int(cell["level"])})
 
+    days.sort(key=lambda day: day["date"])
     if expected_year is not None:
         expected_days = (dt.date(expected_year + 1, 1, 1) - dt.date(expected_year, 1, 1)).days
-        days.sort(key=lambda day: day["date"])
         expected_dates = [
             (dt.date(expected_year, 1, 1) + dt.timedelta(days=index)).isoformat()
             for index in range(expected_days)
@@ -166,10 +189,24 @@ def fetch_contribution_history(username: str, created_at: str, today: dt.date) -
     trailing = parse_contribution_calendar(
         github_page(f"/users/{urllib.parse.quote(username)}/contributions")
     )
+    trailing_days = trailing["days"]
+    if not trailing_days:
+        raise GitHubAPIError("GitHub's rolling calendar did not include daily contribution counts.")
+    first_date = dt.date.fromisoformat(trailing_days[0]["date"])
+    if [day["date"] for day in trailing_days] != [
+        (first_date + dt.timedelta(days=index)).isoformat()
+        for index in range(len(trailing_days))
+    ]:
+        raise GitHubAPIError("GitHub's rolling contribution calendar had missing or duplicate dates.")
     return {
         "created_at": created_at,
         "last_year": trailing["total"],
         "last_year_heading": trailing["heading"],
+        "last_year_days": {
+            "from": trailing_days[0]["date"],
+            "counts": ",".join(str(day["count"]) for day in trailing_days),
+            "levels": "".join(str(day["level"]) for day in trailing_days),
+        },
         "years": years,
         "updated_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes").replace("+00:00", "Z"),
     }
@@ -476,15 +513,19 @@ def wrap_svg(title: str, body: str, height: int, index: str) -> str:
       .pulse{{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}}
       .warmth{{animation:warmth 5.8s ease-in-out infinite}}
       .heat-cell{{animation:heat 6.5s ease-in-out infinite;animation-delay:var(--delay,0s)}}
+      .rank-meter{{animation:rankGlow 4.2s ease-in-out infinite}}
       .month{{font:700 12px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}}
       .weekday{{font:700 11px 'Segoe UI',Arial,sans-serif}}
       .yearnum{{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}}
+      .badge-label{{font:600 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}}
+      .badge-glyph{{font:700 11px Consolas,'Courier New',monospace}}
       @keyframes ink{{to{{stroke-dashoffset:-304}}}}
       @keyframes rail{{to{{stroke-dashoffset:-1546}}}}
       @keyframes edge{{0%,100%{{stroke-opacity:.48}}50%{{stroke-opacity:.92}}}}
       @keyframes pulse{{0%,100%{{opacity:.72;transform:scale(.94)}}50%{{opacity:1;transform:scale(1.06)}}}}
       @keyframes warmth{{0%,100%{{opacity:.2}}50%{{opacity:.55}}}}
       @keyframes heat{{0%,100%{{filter:brightness(1)}}50%{{filter:brightness(1.24)}}}}
+      @keyframes rankGlow{{0%,100%{{opacity:.74}}50%{{opacity:1}}}}
       @media (prefers-reduced-motion:reduce){{*,*::before,*::after{{animation:none!important;scroll-behavior:auto!important}}}}
     </style>
   </defs>
@@ -690,7 +731,7 @@ def render_trophies(data: dict[str, Any]) -> str:
   <text x="{center}" y="{y + 153}" text-anchor="middle" fill="{rank_color}" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">{svg_escape(rank)}</text>
   <text x="{center}" y="{y + 176}" text-anchor="middle" class="micro white">{score_text} <tspan fill="{rank_color}">· {svg_escape(icon)}</tspan></text>
   <rect x="{x + 20}" y="{y + 192}" width="{width - 40}" height="5" rx="2.5" fill="#3b3630"/>
-  <rect x="{x + 20}" y="{y + 192}" width="{bar_w}" height="5" rx="2.5" fill="{rank_color}"/>
+  <rect x="{x + 20}" y="{y + 192}" width="{bar_w}" height="5" rx="2.5" fill="{rank_color}" class="rank-meter"/>
   <text x="{center}" y="{y + 216}" text-anchor="middle" class="micro soft">{"NO SNAPSHOT" if missing else target_label}</text>
 """)
     panel_height = 96 + rows * 248 + 8
@@ -700,134 +741,238 @@ def render_trophies(data: dict[str, Any]) -> str:
 def render_whoami(data: dict[str, Any]) -> str:
     name = svg_escape(data.get("name") or "Karmanya Ravindra")
     body = f"""
-  <rect x="34" y="83" width="1132" height="284" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>
-  <path d="M34 88V361" stroke="#d12f37" stroke-width="4"/>
+  <rect x="34" y="83" width="1132" height="320" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>
+  <path d="M34 88V397" stroke="#d12f37" stroke-width="4"/>
   <rect x="58" y="104" width="136" height="24" rx="12" fill="#301316" stroke="#8f312f"/>
   <text x="126" y="121" text-anchor="middle" class="micro white">IDENTITY / 01</text>
-  <rect x="209" y="104" width="178" height="24" rx="12" fill="#282116" stroke="#8a6b34"/>
-  <text x="298" y="121" text-anchor="middle" class="micro gold">CRTP CERTIFIED</text>
+  <rect x="209" y="104" width="220" height="24" rx="12" fill="#282116" stroke="#8a6b34"/>
+  <text x="319" y="121" text-anchor="middle" class="micro gold">CRTP · PT1 · CNSP</text>
   <text x="58" y="175" class="serif white" font-size="42">{name}</text>
-  <text x="60" y="202" class="mono soft">@{svg_escape(USERNAME)}  ·  RED TEAM PROFESSIONAL</text>
+  <text x="60" y="202" class="mono soft">@{svg_escape(USERNAME)}  ·  PENETRATION TESTER / RED TEAMING</text>
   <path d="M58 221H782" class="rule"/>
-  <text x="60" y="250" class="micro red">MISSION</text>
-  <text x="183" y="250" class="small white">Offensive security  ·  Secure engineering</text>
-  <text x="60" y="282" class="micro red">MAKES</text>
-  <text x="183" y="282" class="small white">Game worlds · Unity / Unreal   /   XR · AR / VR</text>
-  <text x="60" y="314" class="micro red">TOOLCHAIN</text>
-  <text x="183" y="314" class="small white">Rust · WebAssembly · C / C++</text>
+  <text x="60" y="250" class="micro red">FOCUS</text>
+  <text x="183" y="250" class="small white">Penetration testing  ·  Red Teaming</text>
+  <text x="60" y="281" class="micro red">ENGINEER</text>
+  <text x="183" y="281" class="small white">Security engineering  ·  Programming</text>
+  <text x="60" y="312" class="micro red">FOUNDER</text>
+  <text x="183" y="312" class="small white">Game Developer  ·  game-development startup</text>
+  <text x="60" y="343" class="micro red">PROFESSOR</text>
+  <text x="183" y="343" class="small white">College cybersecurity department</text>
+  <text x="60" y="374" class="micro red">CERTIFIED</text>
+  <text x="183" y="374" class="small white">CRTP  ·  PT1  ·  CNSP</text>
 
-  <path d="M814 98V350" stroke="#3e352b"/>
-  <rect x="837" y="104" width="304" height="238" rx="4" fill="#121011" stroke="#5a3031" class="card-edge"/>
+  <path d="M814 98V388" stroke="#3e352b"/>
+  <rect x="837" y="104" width="304" height="274" rx="4" fill="#121011" stroke="#5a3031" class="card-edge"/>
   <path d="M837 104H1141" stroke="#d12f37" stroke-width="3"/>
-  <text x="861" y="135" class="micro gold">CURRENT PROCESS</text>
+  <text x="861" y="135" class="micro gold">BUILD STATUS</text>
   <circle cx="1109" cy="129" r="5" fill="#e2464d" class="pulse"/>
   <circle cx="1109" cy="129" r="11" fill="none" stroke="#e2464d" stroke-opacity=".35" class="pulse"/>
-  <circle cx="989" cy="217" r="47" fill="#201719" stroke="#6e2d32" stroke-width="1"/>
-  <circle cx="989" cy="217" r="37" fill="none" stroke="#d5ad52" stroke-opacity=".6" stroke-dasharray="3 6" class="inkline"/>
-  <text x="989" y="231" text-anchor="middle" fill="#d5ad52" font-family="Georgia,'Times New Roman',serif" font-size="38">☕</text>
-  <text x="989" y="290" text-anchor="middle" class="micro white">[ PANIC ]</text>
-  <text x="989" y="315" text-anchor="middle" class="small soft">Rust compiler won. Send coffee...</text>
-  <path d="M58 349H782" stroke="#d5ad52" stroke-opacity=".72" stroke-width="1" class="ambient-line"/>
+  <circle cx="989" cy="220" r="49" fill="#201719" stroke="#6e2d32" stroke-width="1"/>
+  <circle cx="989" cy="220" r="39" fill="none" stroke="#d5ad52" stroke-opacity=".6" stroke-dasharray="3 6" class="inkline"/>
+  <text x="989" y="234" text-anchor="middle" fill="#d5ad52" font-family="Georgia,'Times New Roman',serif" font-size="38">☕</text>
+  <text x="989" y="300" text-anchor="middle" class="micro white">[ PANIC ]</text>
+  <text x="989" y="327" text-anchor="middle" class="small soft">Rust compiler won. Send coffee...</text>
+  <text x="989" y="352" text-anchor="middle" class="micro red">OPERATOR STILL DEBUGGING</text>
+  <path d="M58 395H782" stroke="#d5ad52" stroke-opacity=".72" stroke-width="1" class="ambient-line"/>
 """
-    return wrap_svg("Who I am", body, 390, "ID")
+    return wrap_svg("Who I am", body, 426, "ID")
 
 
-def render_contributions(data: dict[str, Any]) -> str:
+def contribution_values(year_data: dict[str, Any]) -> list[tuple[int, int]]:
+    if "counts" in year_data and "levels" in year_data:
+        return list(zip(
+            (int(value) for value in year_data["counts"].split(",")),
+            (int(value) for value in year_data["levels"]),
+        ))
+    days = year_data.get("days", [])
+    if days and isinstance(days[0], dict):
+        return [(int(day.get("count", 0)), int(day.get("level", 0))) for day in days]
+    return [(int(day[0]), int(day[1])) for day in days]
+
+
+def render_contributions(
+    data: dict[str, Any], year_data: dict[str, Any] | None = None, *, trailing: bool = False
+) -> str:
     contributions = data.get("contributions", {})
     years = sorted(contributions.get("years", []), key=lambda item: int(item.get("year", 0)), reverse=True)
-    if not years:
+    if year_data is None:
+        year_data = years[0] if years else None
+    if not year_data:
         body = '<text x="48" y="118" class="serif white">The public GitHub contribution history is not in this saved snapshot yet.</text>'
         return wrap_svg("Contribution history", body, 190, "05")
 
-    grid_x = 87
-    step_x = 14
-    step_y = 12
-    cell_w = 10
-    cell_h = 9
-    row_start = 160
-    row_height = 126
+    year = int(year_data.get("year", 0))
+    values = contribution_values(year_data)
+    day_total = sum(count for count, _ in values)
+    active_days = sum(1 for count, _ in values if count > 0)
+    if trailing:
+        expected_total = int(contributions.get("last_year", -1))
+        stamp = iso_time(contributions.get("updated_at") or data.get("generated_at"))
+        rolling_end = stamp.date() if stamp else dt.datetime.now(dt.timezone.utc).date()
+        rolling_dates = [rolling_end - dt.timedelta(days=364 - index) for index in range(365)]
+        rolling_values: list[tuple[int, int]] = []
+        recent = contributions.get("last_year_days") or {}
+        if recent.get("counts") and recent.get("levels"):
+            recent_values = list(zip(
+                (int(value) for value in recent["counts"].split(",")),
+                (int(value) for value in recent["levels"]),
+            ))
+            recent_start = dt.date.fromisoformat(recent["from"])
+            recent_by_date = {
+                recent_start + dt.timedelta(days=index): value
+                for index, value in enumerate(recent_values)
+            }
+            if all(date in recent_by_date for date in rolling_dates):
+                rolling_values = [recent_by_date[date] for date in rolling_dates]
+
+        if not rolling_values:
+            # Older snapshots have complete daily calendars by year. Recompose the rolling
+            # window from those verified days, and use it only when its sum matches GitHub's
+            # independently reported trailing-year total.
+            yearly_values: dict[dt.date, tuple[int, int]] = {}
+            for item in contributions.get("years", []):
+                item_year = int(item.get("year", 0))
+                item_start = dt.date(item_year, 1, 1)
+                for index, value in enumerate(contribution_values(item)):
+                    yearly_values[item_start + dt.timedelta(days=index)] = value
+            if all(date in yearly_values for date in rolling_dates):
+                rolling_values = [yearly_values[date] for date in rolling_dates]
+
+        rolling_total = sum(count for count, _ in rolling_values)
+        if len(rolling_values) == len(rolling_dates) and rolling_total == expected_total:
+            dates = rolling_dates
+            values = rolling_values
+            day_total = expected_total
+            heading = contributions.get("last_year_heading", "contributions in the last year")
+        else:
+            # Keep the real current-year cells and label them as such rather than
+            # presenting a mismatched daily window as a rolling-year calendar.
+            dates = [dt.date(year, 1, 1) + dt.timedelta(days=index) for index in range(len(values))]
+            heading = f"{fmt_count(day_total)} contributions in {year}"
+    else:
+        first_date = dt.date(year, 1, 1)
+        dates = [first_date + dt.timedelta(days=index) for index in range(len(values))]
+        heading = f"{fmt_count(day_total)} contributions in {year}"
+
+    if len(dates) != len(values):
+        raise GitHubAPIError(f"The saved {year} contribution calendar did not match its daily counts.")
+    active_days = sum(1 for count, _ in values if count > 0)
+    end_date = dates[-1] if dates else first_date
+    grid_start = dates[0] - dt.timedelta(days=(dates[0].weekday() + 1) % 7)
+    grid_x = 100
+    step_x = 20
+    step_y = 14
+    cell_w = 13
+    cell_h = 10
+    row_start = 157
     greens = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
-    body: list[str] = []
-    last_year = contributions.get("last_year")
-    last_year_text = fmt_count(last_year) if last_year is not None else "—"
-    first_year = min(int(item.get("year", 0)) for item in years)
-    last_calendar_year = max(int(item.get("year", 0)) for item in years)
+    body: list[str] = [
+        '<rect x="34" y="82" width="1132" height="206" rx="5" fill="#0d0d0e" stroke="#3c3732" class="card-edge"/>',
+        '<path d="M34 87H1166" stroke="#d12f37" stroke-opacity=".9" stroke-width="2"/>',
+    ]
+    count_text = fmt_count(day_total)
     body.append(f'''
-  <text x="48" y="119" class="num gold">{svg_escape(last_year_text)}</text>
-  <text x="51" y="144" class="micro soft">CONTRIBUTIONS · LAST YEAR</text>
-  <text x="456" y="122" class="micro white">{first_year} — {last_calendar_year}</text>
-  <text x="456" y="145" class="micro soft">DAY BY DAY · EVERY PROFILE YEAR</text>
-  <text x="806" y="117" class="micro soft">LESS</text>
+  <text x="52" y="128" class="num gold">{svg_escape(count_text)}</text>
+  <text x="196" y="111" class="micro white">{svg_escape(heading.upper())}</text>
+  <text x="196" y="133" class="micro soft">{dates[0].strftime('%d %b %Y').upper()} — {end_date.strftime('%d %b %Y').upper()}  ·  {active_days} ACTIVE DAYS</text>
+  <text x="893" y="111" text-anchor="end" class="micro soft">LESS</text>
 ''')
-    legend_start = 860
+    legend_start = 912
     for level, color in enumerate(greens):
-        body.append(f'<rect x="{legend_start + level * 22}" y="106" width="12" height="12" rx="2" fill="{color}" stroke="#39423c" stroke-width=".5"/>')
-    body.append('<text x="982" y="117" class="micro soft">MORE</text>')
+        body.append(f'<rect x="{legend_start + level * 22}" y="99" width="12" height="12" rx="2" fill="{color}" stroke="#39423c" stroke-width=".5"/>')
+    body.append('<text x="1036" y="111" class="micro soft">MORE</text>')
 
     month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    week_names = ["S", "M", "T", "W", "T", "F", "S"]
-    for year_index, year_data in enumerate(years):
-        year = int(year_data.get("year", 0))
-        y = row_start + year_index * row_height
-        body.append(f'<rect x="34" y="{y}" width="1132" height="118" rx="4" fill="#0d0d0e" stroke="#3c3732" class="card-edge"/>')
-        body.append(f'<path d="M34 {y + 4}H1166" stroke="#d5ad52" stroke-opacity=".65" stroke-width="1"/>')
-        jan1 = dt.date(year, 1, 1)
-        grid_start = jan1 - dt.timedelta(days=(jan1.weekday() + 1) % 7)
-        for month_num, month_name in enumerate(month_names, start=1):
-            month_day = dt.date(year, month_num, 1)
-            week = (month_day - grid_start).days // 7
-            body.append(f'<text x="{grid_x + week * step_x}" y="{y + 19}" class="month soft">{month_name}</text>')
-        for day_index, label in enumerate(week_names):
-            body.append(f'<text x="58" y="{y + 40 + day_index * step_y}" text-anchor="middle" class="weekday soft">{label}</text>')
+    week_names = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    seen_months: set[tuple[int, int]] = set()
+    for date in dates:
+        if (date.year, date.month) in seen_months:
+            continue
+        seen_months.add((date.year, date.month))
+        week = (date - grid_start).days // 7
+        body.append(f'<text x="{grid_x + week * step_x}" y="151" class="month soft">{month_names[date.month - 1]}</text>')
 
-        days = year_data.get("days", [])
-        if "counts" in year_data and "levels" in year_data:
-            day_values = list(zip(
-                (int(value) for value in year_data["counts"].split(",")),
-                (int(value) for value in year_data["levels"]),
-            ))
-            day_total = sum(count for count, _ in day_values)
-            active_days = sum(1 for count, _ in day_values if count > 0)
-        elif days and isinstance(days[0], dict):
-            day_values = [
-                (int(day.get("count", 0)), int(day.get("level", 0)))
-                for day in days
-            ]
-            day_total = sum(int(day.get("count", 0)) for day in days)
-            active_days = sum(1 for day in days if int(day.get("count", 0)) > 0)
-        else:
-            day_values = [(int(day[0]), int(day[1])) for day in days]
-            day_total = sum(int(day[0]) for day in days)
-            active_days = sum(1 for day in days if int(day[0]) > 0)
-        year_start = dt.date(year, 1, 1)
-        for day_index, (count, level_value) in enumerate(day_values):
-            date = (
-                dt.date.fromisoformat(days[day_index]["date"])
-                if days and isinstance(days[0], dict)
-                else year_start + dt.timedelta(days=day_index)
-            )
-            week = (date - grid_start).days // 7
-            weekday = (date.weekday() + 1) % 7
-            level = max(0, min(4, int(level_value)))
-            color = greens[level]
-            rect = (
-                f'<rect x="{grid_x + week * step_x}" y="{y + 30 + weekday * step_y}" '
-                f'width="{cell_w}" height="{cell_h}" rx="2" fill="{color}"'
-            )
-            if count or level:
-                delay = ((week * .11) + (weekday * .07) + (year_index * .35)) % 5.5
-                title = f"{date.isoformat()} · {count} {'contribution' if count == 1 else 'contributions'}"
-                body.append(f'{rect} class="heat-cell" style="--delay:{delay:.2f}s"><title>{svg_escape(title)}</title></rect>')
-            else:
-                body.append(f"{rect}/>")
-        body.append(f'<text x="884" y="{y + 55}" class="yearnum white">{year}</text>')
-        body.append(f'<text x="1144" y="{y + 52}" text-anchor="end" class="micro gold">{fmt_count(day_total)} CONTRIBUTIONS</text>')
-        body.append(f'<text x="1144" y="{y + 76}" text-anchor="end" class="micro soft">{active_days} ACTIVE DAYS</text>')
-        body.append(f'<path d="M884 {y + 90}H1144" stroke="#3b3630"/>')
-        body.append(f'<path d="M884 {y + 90}H{884 + int(260 * active_days / max(1, len(days)))}" stroke="#d12f37" stroke-width="2" class="inkline"/>')
+    for index, label in enumerate(week_names):
+        if index in (0, 2, 4, 6):
+            body.append(f'<text x="65" y="{row_start + index * step_y + 9}" text-anchor="middle" class="weekday soft">{label}</text>')
+    for index, (count, level_value) in enumerate(values):
+        date = dates[index]
+        week = (date - grid_start).days // 7
+        weekday = (date.weekday() + 1) % 7
+        level = max(0, min(4, int(level_value)))
+        color = greens[level]
+        delay = ((week * .11) + (weekday * .07)) % 6.5
+        title = f"{date.isoformat()} · {count} {'contribution' if count == 1 else 'contributions'}"
+        body.append(
+            f'<rect x="{grid_x + week * step_x}" y="{row_start + weekday * step_y}" '
+            f'width="{cell_w}" height="{cell_h}" rx="2" fill="{color}" '
+            f'class="heat-cell" style="--delay:{delay:.2f}s"><title>{svg_escape(title)}</title></rect>'
+        )
+    body.append(f'<text x="{grid_x}" y="277" class="micro soft">{year}</text>')
+    body.append(f'<path d="M{grid_x + 52} 273H{grid_x + 52 + int(950 * active_days / max(1, len(values)))}" stroke="#d12f37" stroke-width="2" class="inkline"/>')
+    return wrap_svg(f"Contribution calendar {year}", "".join(body), 304, "05")
 
-    height = row_start + len(years) * row_height + 6
-    return wrap_svg("Contribution history", "".join(body), height, "05")
+
+def render_toolkit() -> str:
+    colors = [("D5AD52", "09090A"), ("F4F0E9", "09090A"), ("D12F37", "F4F0E9")]
+    marks = {
+        "Rust": "R", "WebAssembly": "WASM", "C": "C", "C++": "C++", "C Sharp": "C#",
+        "Java": "J", "JavaScript": "JS", "Python": "Py", "PowerShell": "PS", "HTML5": "H5",
+        "CSS3": "C3", "R": "R", "AWS": "AWS", "Azure": "Az", "Google Cloud": "GC",
+        "Cloudflare": "CF", "Django": "Dj", "Flask": "Fl", "FastAPI": "API", "Node.js": "JS",
+        "MySQL": "SQL", "MongoDB": "Mg", "PostgreSQL": "Pg", "SQLite": "Sq", "Git": "Git",
+        "GitHub": "GH", "GitLab": "GL", "Nginx": "N", "Jira": "J", "Unity": "U",
+        "Unreal Engine": "UE", "TensorFlow": "TF", "NumPy": "NP", "Adobe": "Ae",
+        "Premiere Pro": "Pr", "After Effects": "Ae",
+    }
+    body: list[str] = ['<rect x="34" y="82" width="1132" height="470" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>']
+    badge_clips: list[str] = []
+    badge_count = 0
+    top = 98
+    for group_index, (group, items) in enumerate(SHIELD_GROUPS.items()):
+        y_title = top + group_index * 142
+        body.append(f'<text x="58" y="{y_title + 16}" class="micro gold">{svg_escape(group)}</text>')
+        body.append(f'<path d="M58 {y_title + 28}H1142" stroke="#3d3834"/>')
+        x = 58
+        y = y_title + 43
+        for label, _logo in items:
+            color, logo_color = colors[badge_count % len(colors)]
+            width = min(196, max(74, 48 + len(label) * 7.3))
+            if x + width > 1142:
+                x = 58
+                y += 31
+            badge_clips.append(f'<rect x="{x}" y="{y}" width="{width}" height="21" rx="3"/>')
+            body.append(
+                f'<rect x="{x}" y="{y}" width="{width}" height="21" rx="3" fill="#151414" '
+                f'stroke="#{color}" stroke-opacity=".72" stroke-width=".8" class="card-edge"/>'
+                f'<path d="M{x + 3} {y + 3}H{x + 22}V{y + 18}H{x + 3}Z" fill="#{color}" fill-opacity=".94"/>'
+                f'<text x="{x + 12.5}" y="{y + 14.5}" text-anchor="middle" fill="#{logo_color}" class="badge-glyph">{svg_escape(marks.get(label, label[:2]))}</text>'
+                f'<text x="{x + 29}" y="{y + 15}" fill="#f4f0e9" class="badge-label">{svg_escape(label)}</text>'
+            )
+            x += width + 12
+            badge_count += 1
+
+    clips = ''.join(badge_clips)
+    body.append(f'<defs><clipPath id="shield-mask">{clips}</clipPath></defs>')
+    body.append('<rect x="-120" y="140" width="84" height="360" fill="url(#shieldShine)" opacity=".44" clip-path="url(#shield-mask)" class="shield-sweep"/>')
+    body.append('<text x="58" y="529" class="micro soft">LANGUAGES  ·  CLOUD  ·  SECURITY  ·  GAME DEVELOPMENT  ·  CREATIVE TOOLS</text>')
+    svg = wrap_svg("Toolkit", "".join(body), 572, "06")
+    svg = svg.replace(
+        '<defs>\n    <pattern id="grain"',
+        '<defs>\n    <linearGradient id="shieldShine" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".54"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>\n    <pattern id="grain"',
+        1,
+    )
+    svg = svg.replace(
+        '.heat-cell{animation:heat 6.5s ease-in-out infinite;animation-delay:var(--delay,0s)}',
+        '.heat-cell{animation:heat 6.5s ease-in-out infinite;animation-delay:var(--delay,0s)}\n      .shield-sweep{animation:shieldSweep 8.5s ease-in-out infinite;}',
+        1,
+    )
+    svg = svg.replace(
+        '@keyframes heat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.24)}}',
+        '@keyframes heat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.24)}}\n      @keyframes shieldSweep{0%,8%{transform:translateX(0);opacity:0}14%{opacity:.55}28%,100%{transform:translateX(1370px);opacity:0}}',
+        1,
+    )
+    return svg
 
 
 def render_recent_activity(data: dict[str, Any]) -> str:
@@ -918,6 +1063,45 @@ def write_file(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8")
 
 
+def update_readme_contribution_years(data: dict[str, Any]) -> None:
+    readme = Path("README.md")
+    if not readme.exists():
+        return
+    source = readme.read_text(encoding="utf-8")
+    start_marker = "<!-- CONTRIBUTION_YEARS_START -->"
+    end_marker = "<!-- CONTRIBUTION_YEARS_END -->"
+    if start_marker not in source or end_marker not in source:
+        raise GitHubAPIError("README.md is missing the generated contribution-year markers.")
+
+    years = sorted(
+        data.get("contributions", {}).get("years", []),
+        key=lambda item: int(item.get("year", 0)),
+        reverse=True,
+    )
+    latest_year = int(years[0].get("year", 0)) if years else None
+    rows: list[str] = []
+    for year_data in years:
+        year = int(year_data.get("year", 0))
+        if year == latest_year:
+            label = data.get("contributions", {}).get(
+                "last_year_heading", f"{fmt_count(year_data.get('total', 0))} contributions in the last year"
+            )
+        else:
+            label = f"{fmt_count(year_data.get('total', 0))} contributions in {year}"
+        is_open = " open" if year == latest_year else ""
+        rows.append(
+            f'<details name="contribution-calendar" id="contribution-{year}"{is_open}>\n'
+            f"<summary><strong>{year}</strong> · {html.escape(label)}</summary>\n\n"
+            f'<p align="center"><img src="assets/panels/contributions-{year}.svg" '
+            f'alt="Daily GitHub contributions for {year}" width="100%"></p>\n'
+            f"</details>"
+        )
+    replacement = f"{start_marker}\n\n" + "\n\n".join(rows) + f"\n\n{end_marker}"
+    before, _, remainder = source.partition(start_marker)
+    _, _, after = remainder.partition(end_marker)
+    readme.write_text(before + replacement + after, encoding="utf-8")
+
+
 def main() -> None:
     old = read_metadata()
     try:
@@ -958,8 +1142,20 @@ def main() -> None:
     write_file(OUT_DIR / "trophies.svg", render_trophies(data))
     write_file(OUT_DIR / "recent-activity.svg", render_recent_activity(data))
     write_file(OUT_DIR / "telemetry.svg", render_event_trace(data))
-    write_file(OUT_DIR / "contributions.svg", render_contributions(data))
-    print(f"Rendered 7 panels from the {'cached' if cached else 'current'} GitHub snapshot dated {data.get('generated_at', 'unknown')}.")
+    write_file(OUT_DIR / "toolkit.svg", render_toolkit())
+    years = sorted(data.get("contributions", {}).get("years", []), key=lambda item: int(item.get("year", 0)), reverse=True)
+    if years:
+        write_file(OUT_DIR / "contributions.svg", render_contributions(data, years[0], trailing=True))
+        for year_data in years:
+            year = int(year_data.get("year", 0))
+            write_file(
+                OUT_DIR / f"contributions-{year}.svg",
+                render_contributions(data, year_data, trailing=year == int(years[0].get("year", 0))),
+            )
+    else:
+        write_file(OUT_DIR / "contributions.svg", render_contributions(data))
+    update_readme_contribution_years(data)
+    print(f"Rendered profile panels and {len(years)} single-year calendars from the {'cached' if cached else 'current'} GitHub snapshot dated {data.get('generated_at', 'unknown')}.")
 
 
 if __name__ == "__main__":

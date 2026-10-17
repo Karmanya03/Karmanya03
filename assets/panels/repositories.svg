@@ -23,15 +23,19 @@
       .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
       .warmth{animation:warmth 5.8s ease-in-out infinite}
       .heat-cell{animation:heat 6.5s ease-in-out infinite;animation-delay:var(--delay,0s)}
+      .rank-meter{animation:rankGlow 4.2s ease-in-out infinite}
       .month{font:700 12px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}
       .weekday{font:700 11px 'Segoe UI',Arial,sans-serif}
       .yearnum{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
+      .badge-label{font:600 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}
+      .badge-glyph{font:700 11px Consolas,'Courier New',monospace}
       @keyframes ink{to{stroke-dashoffset:-304}}
       @keyframes rail{to{stroke-dashoffset:-1546}}
       @keyframes edge{0%,100%{stroke-opacity:.48}50%{stroke-opacity:.92}}
       @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
       @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
       @keyframes heat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.24)}}
+      @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
       @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>
