@@ -76,7 +76,7 @@
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#repo-sheen-0-clip)" opacity=".15">
+<g clip-path="url(#repo-sheen-0-clip)" opacity=".21">
   <path d="M-222 405h54l889 -889h-54Z" fill="url(#repo-sheen-0-light)">
     <animateTransform attributeName="transform" type="translate" values="-536.0,-202.1;536.0,202.1" dur="12.40s" begin="0.00s" repeatCount="indefinite"/>
   </path>
@@ -103,7 +103,7 @@
     <stop offset="1" stop-color="#d12f37" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#repo-sheen-1-clip)" opacity=".15">
+<g clip-path="url(#repo-sheen-1-clip)" opacity=".21">
   <path d="M338 405h54l889 -889h-54Z" fill="url(#repo-sheen-1-light)">
     <animateTransform attributeName="transform" type="translate" values="-536.0,-202.1;536.0,202.1" dur="13.02s" begin="0.41s" repeatCount="indefinite"/>
   </path>
@@ -130,7 +130,7 @@
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#repo-sheen-2-clip)" opacity=".15">
+<g clip-path="url(#repo-sheen-2-clip)" opacity=".21">
   <path d="M-222 610h54l889 -889h-54Z" fill="url(#repo-sheen-2-light)">
     <animateTransform attributeName="transform" type="translate" values="-536.0,-202.1;536.0,202.1" dur="13.64s" begin="0.82s" repeatCount="indefinite"/>
   </path>
@@ -157,7 +157,7 @@
     <stop offset="1" stop-color="#d12f37" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#repo-sheen-3-clip)" opacity=".15">
+<g clip-path="url(#repo-sheen-3-clip)" opacity=".21">
   <path d="M338 610h54l889 -889h-54Z" fill="url(#repo-sheen-3-light)">
     <animateTransform attributeName="transform" type="translate" values="-536.0,-202.1;536.0,202.1" dur="14.26s" begin="1.23s" repeatCount="indefinite"/>
   </path>
@@ -184,7 +184,7 @@
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#repo-sheen-4-clip)" opacity=".15">
+<g clip-path="url(#repo-sheen-4-clip)" opacity=".21">
   <path d="M-222 815h54l889 -889h-54Z" fill="url(#repo-sheen-4-light)">
     <animateTransform attributeName="transform" type="translate" values="-536.0,-202.1;536.0,202.1" dur="14.88s" begin="1.64s" repeatCount="indefinite"/>
   </path>
@@ -211,7 +211,7 @@
     <stop offset="1" stop-color="#d12f37" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#repo-sheen-5-clip)" opacity=".15">
+<g clip-path="url(#repo-sheen-5-clip)" opacity=".21">
   <path d="M338 815h54l889 -889h-54Z" fill="url(#repo-sheen-5-light)">
     <animateTransform attributeName="transform" type="translate" values="-536.0,-202.1;536.0,202.1" dur="15.50s" begin="2.05s" repeatCount="indefinite"/>
   </path>
