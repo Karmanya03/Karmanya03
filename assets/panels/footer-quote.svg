@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="1200" height="88" viewBox="0 0 1200 88" role="img" aria-label="Closing quote">
+  <defs>
+    <pattern id="grain" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M0 79.5H80" stroke="#fff" stroke-opacity=".025"/>
+      <circle cx="8" cy="12" r=".7" fill="#fff" opacity=".16"/>
+      <circle cx="51" cy="40" r=".6" fill="#fff" opacity=".11"/>
+      <circle cx="29" cy="66" r=".6" fill="#fff" opacity=".13"/>
+    </pattern>
+    <style>
+      .canvas{fill:#09090a} .grain{fill:url(#grain)}
+      .rule{stroke:#4b4540;stroke-width:1} .red{fill:#d12f37} .gold{fill:#d5ad52}
+      .white{fill:#f4f0e9} .soft{fill:#aba59c}
+      .micro{font:700 16px 'Segoe UI',Arial,sans-serif;letter-spacing:1px}
+      .section{font:700 18px 'Segoe UI',Arial,sans-serif;letter-spacing:1px}
+      .small{font:500 19px 'Segoe UI',Arial,sans-serif}
+      .mono{font:600 16px Consolas,'Courier New',monospace}
+      .serif{font:600 24px Georgia,'Times New Roman',serif}
+      .num{font:500 45px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
+      .inkline{stroke-dasharray:28 10;animation:ink 8s linear infinite}
+      .ambient-line{stroke-dasharray:46 1500;animation:rail 18s linear infinite}
+      .card-edge{animation:edge 6s ease-in-out infinite}
+      .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
+      .warmth{animation:warmth 5.8s ease-in-out infinite}
+      .heat-cell{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}
+      .rank-meter{animation:rankGlow 4.2s ease-in-out infinite}
+      .month{font:700 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}
+      .weekday{font:700 12px 'Segoe UI',Arial,sans-serif}
+      .yearnum{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
+      .badge-label{font:600 17px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}
+      .badge-glyph{font:700 16px Consolas,'Courier New',monospace}
+      @keyframes ink{to{stroke-dashoffset:-304}}
+      @keyframes rail{to{stroke-dashoffset:-1546}}
+      @keyframes edge{0%,100%{stroke-opacity:.48}50%{stroke-opacity:.92}}
+      @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
+      @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
+      @keyframes heat{0%,100%{filter:brightness(.9);opacity:.8}50%{filter:brightness(1.7);opacity:1}}
+      @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
+      @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
+    </style>
+  </defs>
+  <rect width="1200" height="88" rx="5" class="canvas"/>
+  <rect width="1200" height="88" rx="5" class="grain"/>
+  <path d="M0 0H1200" stroke="#d12f37" stroke-width="5"/>
+  
+  <path d="M150 65H1050" stroke="#463a30" stroke-width="1"/>
+  <path d="M150 65H1050" stroke="#d12f37" stroke-width="2" class="ambient-line"/>
+  <circle cx="150" cy="65" r="3" fill="#d5ad52" class="pulse"/>
+  <circle cx="1050" cy="65" r="3" fill="#d5ad52" class="pulse"/>
+  <text x="600" y="48" text-anchor="middle" class="serif white" font-size="24">
+    <tspan fill="#d12f37">/dev/null</tspan><tspan fill="#f4f0e9"> is my </tspan>
+    <tspan fill="#d5ad52">inspiration</tspan><tspan fill="#aba59c"> · </tspan>
+    <tspan fill="#d5ad52">Rust</tspan><tspan fill="#f4f0e9"> is my </tspan>
+    <tspan fill="#d12f37">weapon</tspan><tspan fill="#f4f0e9"> of </tspan><tspan fill="#d5ad52">choice</tspan>
+  </text>
+</svg>

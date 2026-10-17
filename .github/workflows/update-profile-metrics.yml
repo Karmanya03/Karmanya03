@@ -17,6 +17,7 @@ on:
       - assets/panels/contributions.svg
       - assets/panels/contributions-*.svg
       - assets/panels/toolkit.svg
+      - assets/panels/footer-quote.svg
       - assets/panels/profile-metadata.json
       - README.md
 
@@ -55,6 +56,6 @@ jobs:
             echo "No panel changes detected"
             exit 0
           fi
-          git add README.md assets/panels/overview.svg assets/panels/repositories.svg assets/panels/trophies.svg assets/panels/recent-activity.svg assets/panels/telemetry.svg assets/panels/whoami.svg assets/panels/contributions.svg assets/panels/contributions-*.svg assets/panels/toolkit.svg assets/panels/profile-metadata.json
+          git add README.md assets/panels/overview.svg assets/panels/repositories.svg assets/panels/trophies.svg assets/panels/recent-activity.svg assets/panels/telemetry.svg assets/panels/whoami.svg assets/panels/contributions.svg assets/panels/contributions-*.svg assets/panels/toolkit.svg assets/panels/footer-quote.svg assets/panels/profile-metadata.json
           git commit -m "chore: refresh profile command-center panels"
           git push

@@ -487,7 +487,15 @@ def svg_escape(value: Any) -> str:
     return html.escape(str(value or ""), quote=True)
 
 
-def wrap_svg(title: str, body: str, height: int, index: str) -> str:
+def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: bool = True) -> str:
+    header = f'''
+  <path d="M0 2H1200" stroke="#f4f0e9" stroke-opacity=".48" stroke-width="1" class="ambient-line"/>
+  <rect x="30" y="25" width="42" height="27" rx="2" class="red"/>
+  <text x="51" y="44" text-anchor="middle" class="micro white">{svg_escape(index)}</text>
+  <text x="87" y="43" class="micro white">{svg_escape(title.upper())}</text>
+  <path d="M30 62H1170" class="rule"/>
+''' if show_header else ""
+    header = header.strip()
     return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
   width="1200" height="{height}" viewBox="0 0 1200 {height}" role="img" aria-label="{svg_escape(title)}">
   <defs>
@@ -512,19 +520,19 @@ def wrap_svg(title: str, body: str, height: int, index: str) -> str:
       .card-edge{{animation:edge 6s ease-in-out infinite}}
       .pulse{{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}}
       .warmth{{animation:warmth 5.8s ease-in-out infinite}}
-      .heat-cell{{animation:heat 6.5s ease-in-out infinite;animation-delay:var(--delay,0s)}}
+      .heat-cell{{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}}
       .rank-meter{{animation:rankGlow 4.2s ease-in-out infinite}}
-      .month{{font:700 12px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}}
-      .weekday{{font:700 11px 'Segoe UI',Arial,sans-serif}}
+      .month{{font:700 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}}
+      .weekday{{font:700 12px 'Segoe UI',Arial,sans-serif}}
       .yearnum{{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}}
-      .badge-label{{font:600 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}}
-      .badge-glyph{{font:700 11px Consolas,'Courier New',monospace}}
+      .badge-label{{font:600 17px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}}
+      .badge-glyph{{font:700 16px Consolas,'Courier New',monospace}}
       @keyframes ink{{to{{stroke-dashoffset:-304}}}}
       @keyframes rail{{to{{stroke-dashoffset:-1546}}}}
       @keyframes edge{{0%,100%{{stroke-opacity:.48}}50%{{stroke-opacity:.92}}}}
       @keyframes pulse{{0%,100%{{opacity:.72;transform:scale(.94)}}50%{{opacity:1;transform:scale(1.06)}}}}
       @keyframes warmth{{0%,100%{{opacity:.2}}50%{{opacity:.55}}}}
-      @keyframes heat{{0%,100%{{filter:brightness(1)}}50%{{filter:brightness(1.24)}}}}
+      @keyframes heat{{0%,100%{{filter:brightness(.9);opacity:.8}}50%{{filter:brightness(1.7);opacity:1}}}}
       @keyframes rankGlow{{0%,100%{{opacity:.74}}50%{{opacity:1}}}}
       @media (prefers-reduced-motion:reduce){{*,*::before,*::after{{animation:none!important;scroll-behavior:auto!important}}}}
     </style>
@@ -532,12 +540,8 @@ def wrap_svg(title: str, body: str, height: int, index: str) -> str:
   <rect width="1200" height="{height}" rx="5" class="canvas"/>
   <rect width="1200" height="{height}" rx="5" class="grain"/>
   <path d="M0 0H1200" stroke="#d12f37" stroke-width="5"/>
-  <path d="M0 2H1200" stroke="#f4f0e9" stroke-opacity=".48" stroke-width="1" class="ambient-line"/>
-  <rect x="30" y="25" width="42" height="27" rx="2" class="red"/>
-  <text x="51" y="44" text-anchor="middle" class="micro white">{svg_escape(index)}</text>
-  <text x="87" y="43" class="micro white">{svg_escape(title.upper())}</text>
-  <path d="M30 62H1170" class="rule"/>
-  {body}
+  {header}
+  {body.strip()}
 </svg>
 """
 
@@ -745,8 +749,8 @@ def render_whoami(data: dict[str, Any]) -> str:
   <path d="M34 88V397" stroke="#d12f37" stroke-width="4"/>
   <rect x="58" y="104" width="136" height="24" rx="12" fill="#301316" stroke="#8f312f"/>
   <text x="126" y="121" text-anchor="middle" class="micro white">IDENTITY / 01</text>
-  <rect x="209" y="104" width="220" height="24" rx="12" fill="#282116" stroke="#8a6b34"/>
-  <text x="319" y="121" text-anchor="middle" class="micro gold">CRTP · PT1 · CNSP</text>
+  <rect x="209" y="104" width="292" height="24" rx="12" fill="#282116" stroke="#8a6b34"/>
+  <text x="355" y="121" text-anchor="middle" class="micro gold">CRTP · PT1 · CNSP CERTIFIED</text>
   <text x="58" y="175" class="serif white" font-size="42">{name}</text>
   <text x="60" y="202" class="mono soft">@{svg_escape(USERNAME)}  ·  PENETRATION TESTER / RED TEAMING</text>
   <path d="M58 221H782" class="rule"/>
@@ -754,12 +758,12 @@ def render_whoami(data: dict[str, Any]) -> str:
   <text x="183" y="250" class="small white">Penetration testing  ·  Red Teaming</text>
   <text x="60" y="281" class="micro red">ENGINEER</text>
   <text x="183" y="281" class="small white">Security engineering  ·  Programming</text>
-  <text x="60" y="312" class="micro red">FOUNDER</text>
-  <text x="183" y="312" class="small white">Game Developer  ·  game-development startup</text>
-  <text x="60" y="343" class="micro red">PROFESSOR</text>
-  <text x="183" y="343" class="small white">College cybersecurity department</text>
+  <text x="60" y="312" class="micro red">GAME DEV</text>
+  <text x="183" y="312" class="small white">Game Developer</text>
+  <text x="60" y="343" class="micro red">TEACHING</text>
+  <text x="183" y="343" class="small white">Cybersecurity Professor · College</text>
   <text x="60" y="374" class="micro red">CERTIFIED</text>
-  <text x="183" y="374" class="small white">CRTP  ·  PT1  ·  CNSP</text>
+  <text x="183" y="374" class="small white">CRTP  ·  PT1  ·  CNSP Certified</text>
 
   <path d="M814 98V388" stroke="#3e352b"/>
   <rect x="837" y="104" width="304" height="274" rx="4" fill="#121011" stroke="#5a3031" class="card-edge"/>
@@ -861,26 +865,26 @@ def render_contributions(
     grid_start = dates[0] - dt.timedelta(days=(dates[0].weekday() + 1) % 7)
     grid_x = 100
     step_x = 20
-    step_y = 14
-    cell_w = 13
-    cell_h = 10
-    row_start = 157
-    greens = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
+    step_y = 16
+    cell_w = 16
+    cell_h = 13
+    row_start = 174
+    levels = ["#171518", "#3a151a", "#79212b", "#c6323d", "#d5ad52"]
     body: list[str] = [
-        '<rect x="34" y="82" width="1132" height="206" rx="5" fill="#0d0d0e" stroke="#3c3732" class="card-edge"/>',
+        '<rect x="34" y="82" width="1132" height="240" rx="5" fill="#0d0d0e" stroke="#3c3732" class="card-edge"/>',
         '<path d="M34 87H1166" stroke="#d12f37" stroke-opacity=".9" stroke-width="2"/>',
     ]
     count_text = fmt_count(day_total)
     body.append(f'''
   <text x="52" y="128" class="num gold">{svg_escape(count_text)}</text>
   <text x="196" y="111" class="micro white">{svg_escape(heading.upper())}</text>
-  <text x="196" y="133" class="micro soft">{dates[0].strftime('%d %b %Y').upper()} — {end_date.strftime('%d %b %Y').upper()}  ·  {active_days} ACTIVE DAYS</text>
-  <text x="893" y="111" text-anchor="end" class="micro soft">LESS</text>
+  <text x="196" y="138" class="micro soft">{dates[0].strftime('%d %b %Y').upper()} — {end_date.strftime('%d %b %Y').upper()}  ·  {active_days} ACTIVE DAYS</text>
+  <text x="893" y="116" text-anchor="end" class="micro soft">LESS</text>
 ''')
     legend_start = 912
-    for level, color in enumerate(greens):
-        body.append(f'<rect x="{legend_start + level * 22}" y="99" width="12" height="12" rx="2" fill="{color}" stroke="#39423c" stroke-width=".5"/>')
-    body.append('<text x="1036" y="111" class="micro soft">MORE</text>')
+    for level, color in enumerate(levels):
+        body.append(f'<rect x="{legend_start + level * 22}" y="104" width="14" height="14" rx="3" fill="{color}" stroke="#615344" stroke-width=".5"/>')
+    body.append('<text x="1036" y="116" class="micro soft">MORE</text>')
 
     month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     week_names = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -890,27 +894,27 @@ def render_contributions(
             continue
         seen_months.add((date.year, date.month))
         week = (date - grid_start).days // 7
-        body.append(f'<text x="{grid_x + week * step_x}" y="151" class="month soft">{month_names[date.month - 1]}</text>')
+        body.append(f'<text x="{grid_x + week * step_x}" y="160" class="month soft">{month_names[date.month - 1]}</text>')
 
     for index, label in enumerate(week_names):
         if index in (0, 2, 4, 6):
-            body.append(f'<text x="65" y="{row_start + index * step_y + 9}" text-anchor="middle" class="weekday soft">{label}</text>')
+            body.append(f'<text x="65" y="{row_start + index * step_y + 11}" text-anchor="middle" class="weekday soft">{label}</text>')
     for index, (count, level_value) in enumerate(values):
         date = dates[index]
         week = (date - grid_start).days // 7
         weekday = (date.weekday() + 1) % 7
         level = max(0, min(4, int(level_value)))
-        color = greens[level]
-        delay = ((week * .11) + (weekday * .07)) % 6.5
+        color = levels[level]
+        delay = ((week * .17) + (weekday * .23)) % 3.4
         title = f"{date.isoformat()} · {count} {'contribution' if count == 1 else 'contributions'}"
         body.append(
             f'<rect x="{grid_x + week * step_x}" y="{row_start + weekday * step_y}" '
             f'width="{cell_w}" height="{cell_h}" rx="2" fill="{color}" '
             f'class="heat-cell" style="--delay:{delay:.2f}s"><title>{svg_escape(title)}</title></rect>'
         )
-    body.append(f'<text x="{grid_x}" y="277" class="micro soft">{year}</text>')
-    body.append(f'<path d="M{grid_x + 52} 273H{grid_x + 52 + int(950 * active_days / max(1, len(values)))}" stroke="#d12f37" stroke-width="2" class="inkline"/>')
-    return wrap_svg(f"Contribution calendar {year}", "".join(body), 304, "05")
+    body.append(f'<text x="{grid_x}" y="310" class="micro gold">{year}</text>')
+    body.append(f'<path d="M{grid_x + 52} 306H{grid_x + 52 + int(950 * active_days / max(1, len(values)))}" stroke="#d12f37" stroke-width="2" class="inkline"/>')
+    return wrap_svg(f"Contribution calendar {year}", "".join(body), 338, "05")
 
 
 def render_toolkit() -> str:
@@ -925,54 +929,74 @@ def render_toolkit() -> str:
         "Unreal Engine": "UE", "TensorFlow": "TF", "NumPy": "NP", "Adobe": "Ae",
         "Premiere Pro": "Pr", "After Effects": "Ae",
     }
-    body: list[str] = ['<rect x="34" y="82" width="1132" height="470" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>']
+    body: list[str] = ['<rect x="34" y="82" width="1132" height="508" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>']
     badge_clips: list[str] = []
+    badge_sweeps: list[str] = []
     badge_count = 0
     top = 98
     for group_index, (group, items) in enumerate(SHIELD_GROUPS.items()):
-        y_title = top + group_index * 142
+        y_title = top + group_index * 158
         body.append(f'<text x="58" y="{y_title + 16}" class="micro gold">{svg_escape(group)}</text>')
         body.append(f'<path d="M58 {y_title + 28}H1142" stroke="#3d3834"/>')
         x = 58
         y = y_title + 43
         for label, _logo in items:
             color, logo_color = colors[badge_count % len(colors)]
-            width = min(196, max(74, 48 + len(label) * 7.3))
+            width = min(210, max(86, 55 + len(label) * 8.6))
             if x + width > 1142:
                 x = 58
-                y += 31
-            badge_clips.append(f'<rect x="{x}" y="{y}" width="{width}" height="21" rx="3"/>')
+                y += 50
+            height = 42
+            clip_id = f"badge-clip-{badge_count}"
+            badge_clips.append(
+                f'<clipPath id="{clip_id}" clipPathUnits="userSpaceOnUse">'
+                f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="4"/>'
+                '</clipPath>'
+            )
             body.append(
-                f'<rect x="{x}" y="{y}" width="{width}" height="21" rx="3" fill="#151414" '
+                f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="4" fill="#151414" '
                 f'stroke="#{color}" stroke-opacity=".72" stroke-width=".8" class="card-edge"/>'
-                f'<path d="M{x + 3} {y + 3}H{x + 22}V{y + 18}H{x + 3}Z" fill="#{color}" fill-opacity=".94"/>'
-                f'<text x="{x + 12.5}" y="{y + 14.5}" text-anchor="middle" fill="#{logo_color}" class="badge-glyph">{svg_escape(marks.get(label, label[:2]))}</text>'
-                f'<text x="{x + 29}" y="{y + 15}" fill="#f4f0e9" class="badge-label">{svg_escape(label)}</text>'
+                f'<path d="M{x + 4} {y + 4}H{x + 38}V{y + 38}H{x + 4}Z" fill="#{color}" fill-opacity=".94"/>'
+                f'<text x="{x + 21}" y="{y + 26}" text-anchor="middle" fill="#{logo_color}" class="badge-glyph">{svg_escape(marks.get(label, label[:2]))}</text>'
+                f'<text x="{x + 45}" y="{y + 27}" fill="#f4f0e9" class="badge-label">{svg_escape(label)}</text>'
+            )
+            delay = (badge_count * .13) % 2.6
+            badge_sweeps.append(
+                f'<rect x="{x - 48}" y="{y}" width="48" height="{height}" fill="url(#badgeShine)" '
+                f'opacity=".9" clip-path="url(#{clip_id})">'
+                f'<animate attributeName="x" from="{x - 48}" to="{x + width}" dur="4.3s" '
+                f'begin="{delay:.2f}s" repeatCount="indefinite"/>'
+                '</rect>'
             )
             x += width + 12
             badge_count += 1
 
-    clips = ''.join(badge_clips)
-    body.append(f'<defs><clipPath id="shield-mask">{clips}</clipPath></defs>')
-    body.append('<rect x="-120" y="140" width="84" height="360" fill="url(#shieldShine)" opacity=".44" clip-path="url(#shield-mask)" class="shield-sweep"/>')
-    body.append('<text x="58" y="529" class="micro soft">LANGUAGES  ·  CLOUD  ·  SECURITY  ·  GAME DEVELOPMENT  ·  CREATIVE TOOLS</text>')
-    svg = wrap_svg("Toolkit", "".join(body), 572, "06")
-    svg = svg.replace(
-        '<defs>\n    <pattern id="grain"',
-        '<defs>\n    <linearGradient id="shieldShine" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".54"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>\n    <pattern id="grain"',
-        1,
+    defs = (
+        '<defs><linearGradient id="badgeShine" x1="0" y1="0" x2="1" y2="0">'
+        '<stop offset="0" stop-color="#fff" stop-opacity="0"/>'
+        '<stop offset=".48" stop-color="#fff" stop-opacity=".8"/>'
+        '<stop offset="1" stop-color="#fff" stop-opacity="0"/>'
+        + '</linearGradient>' + ''.join(badge_clips) + '</defs>'
     )
-    svg = svg.replace(
-        '.heat-cell{animation:heat 6.5s ease-in-out infinite;animation-delay:var(--delay,0s)}',
-        '.heat-cell{animation:heat 6.5s ease-in-out infinite;animation-delay:var(--delay,0s)}\n      .shield-sweep{animation:shieldSweep 8.5s ease-in-out infinite;}',
-        1,
-    )
-    svg = svg.replace(
-        '@keyframes heat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.24)}}',
-        '@keyframes heat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.24)}}\n      @keyframes shieldSweep{0%,8%{transform:translateX(0);opacity:0}14%{opacity:.55}28%,100%{transform:translateX(1370px);opacity:0}}',
-        1,
-    )
-    return svg
+    body.append(defs + ''.join(badge_sweeps))
+    body.append('<text x="58" y="568" class="micro soft">LANGUAGES  ·  CLOUD  ·  SECURITY  ·  GAME DEVELOPMENT  ·  CREATIVE TOOLS</text>')
+    return wrap_svg("Toolkit", "".join(body), 610, "06")
+
+
+def render_footer_quote() -> str:
+    body = '''
+  <path d="M150 65H1050" stroke="#463a30" stroke-width="1"/>
+  <path d="M150 65H1050" stroke="#d12f37" stroke-width="2" class="ambient-line"/>
+  <circle cx="150" cy="65" r="3" fill="#d5ad52" class="pulse"/>
+  <circle cx="1050" cy="65" r="3" fill="#d5ad52" class="pulse"/>
+  <text x="600" y="48" text-anchor="middle" class="serif white" font-size="24">
+    <tspan fill="#d12f37">/dev/null</tspan><tspan fill="#f4f0e9"> is my </tspan>
+    <tspan fill="#d5ad52">inspiration</tspan><tspan fill="#aba59c"> · </tspan>
+    <tspan fill="#d5ad52">Rust</tspan><tspan fill="#f4f0e9"> is my </tspan>
+    <tspan fill="#d12f37">weapon</tspan><tspan fill="#f4f0e9"> of </tspan><tspan fill="#d5ad52">choice</tspan>
+  </text>
+'''
+    return wrap_svg("Closing quote", body, 88, "07", show_header=False)
 
 
 def render_recent_activity(data: dict[str, Any]) -> str:
@@ -1143,6 +1167,7 @@ def main() -> None:
     write_file(OUT_DIR / "recent-activity.svg", render_recent_activity(data))
     write_file(OUT_DIR / "telemetry.svg", render_event_trace(data))
     write_file(OUT_DIR / "toolkit.svg", render_toolkit())
+    write_file(OUT_DIR / "footer-quote.svg", render_footer_quote())
     years = sorted(data.get("contributions", {}).get("years", []), key=lambda item: int(item.get("year", 0)), reverse=True)
     if years:
         write_file(OUT_DIR / "contributions.svg", render_contributions(data, years[0], trailing=True))

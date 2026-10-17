@@ -18,12 +18,12 @@
 ## Who I am
 
 <p align="center">
-  <img src="assets/panels/whoami.svg" alt="Karmanya Ravindra — Penetration Tester and Red Teamer, CRTP, PT1, and CNSP certified; Security Engineer, programmer, game-development founder, and cybersecurity professor" width="100%">
+  <img src="assets/panels/whoami.svg" alt="Karmanya Ravindra — Penetration Tester and Red Teamer; CRTP, PT1, and CNSP certified; Security Engineer, programmer, Game Developer, and Cybersecurity Professor" width="100%">
 </p>
 
 ## About
 
-Penetration Tester focused on Red Teaming, Security Engineer, programmer, and Game Developer. I run a game-development startup and teach in a college cybersecurity department as a Professor. Certified in CRTP, PT1, and CNSP.
+My work spans penetration testing and Red Teaming, security engineering, programming, and game development. I also teach as a Cybersecurity Professor at a college. Certified in CRTP, PT1, and CNSP.
 
 > “The quieter you become, the more you can hear.” — Kali Linux
 
@@ -119,8 +119,6 @@ Penetration Tester focused on Red Teaming, Security Engineer, programmer, and Ga
   <img src="assets/panels/toolkit.svg" alt="Animated toolkit badges across programming languages, cloud, security, game development, and creative tools" width="100%">
 </p>
 
-<div align="center">
-
-*`/dev/null` is my inspiration · Rust is my weapon of choice*
-
-</div>
+<p align="center">
+  <img src="assets/panels/footer-quote.svg" alt="/dev/null is my inspiration · Rust is my weapon of choice" width="100%">
+</p>
