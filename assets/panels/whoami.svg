@@ -66,19 +66,14 @@
   <path d="M30 62H1170" class="rule"/>
   <rect x="34" y="83" width="1132" height="320" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>
   <defs>
-  <clipPath id="whoami-calendar-glass-clip"><rect x="34" y="83" width="780" height="320" rx="5"/></clipPath>
-<linearGradient id="whoami-calendar-glass-light" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0" stop-color="#f4f0e9" stop-opacity="0"/>
-    <stop offset=".46" stop-color="#f4f0e9" stop-opacity=".08"/>
-    <stop offset=".56" stop-color="#f4f0e9" stop-opacity=".92"/>
-    <stop offset=".66" stop-color="#f4f0e9" stop-opacity=".12"/>
-    <stop offset="1" stop-color="#f4f0e9" stop-opacity="0"/>
-  </linearGradient>
+  <clipPath id="whoami-background-multishimmer-clip"><rect x="34" y="83" width="780" height="320" rx="5"/></clipPath>
+  <filter id="whoami-background-multishimmer-soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.3"/></filter>
 </defs>
-<g clip-path="url(#whoami-calendar-glass-clip)" opacity=".18">
-  <path d="M-386 503h54l1280 -1280h-54Z" fill="url(#whoami-calendar-glass-light)">
-    <animateTransform attributeName="transform" type="translate" values="-752.0,-338.0;752.0,338.0" dur="8.8s" begin="1.1s" repeatCount="indefinite"/>
-  </path>
+<g clip-path="url(#whoami-background-multishimmer-clip)" filter="url(#whoami-background-multishimmer-soft)">
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="-752.0,-338.0;752.0,338.0" dur="9.2s" begin="1.1s" repeatCount="indefinite"/>
+    <path d="M-386 503h38l1280 -1280h-38Z" fill="#000000" fill-opacity=".64"/><path d="M-358 531h38l1280 -1280h-38Z" fill="#f4f0e9" fill-opacity=".12"/><path d="M-330 559h38l1280 -1280h-38Z" fill="#000000" fill-opacity=".64"/><path d="M-302 587h38l1280 -1280h-38Z" fill="#f4f0e9" fill-opacity=".12"/><path d="M-274 615h38l1280 -1280h-38Z" fill="#000000" fill-opacity=".64"/><path d="M-246 643h38l1280 -1280h-38Z" fill="#f4f0e9" fill-opacity=".12"/>
+  </g>
 </g>
   <path d="M34 88V397" stroke="#d12f37" stroke-width="4"/>
   <rect x="58" y="104" width="136" height="24" rx="12" fill="#301316" stroke="#8f312f"/>
