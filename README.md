@@ -9,7 +9,7 @@
 [![TryHackMe](https://img.shields.io/badge/TRYHACKME-ROOMS_AND_RANK-D12F37?style=for-the-badge&labelColor=09090A&logo=tryhackme&logoColor=F4F0E9)](https://tryhackme.com/p/Karmanya03)
 [![Email](https://img.shields.io/badge/EMAIL-GET_IN_TOUCH-D5AD52?style=for-the-badge&labelColor=09090A&logo=protonmail&logoColor=F4F0E9)](mailto:karmanya03@proton.me)
 
-[![Profile visits](https://komarev.com/ghpvc/?username=Karmanya03&style=flat-square&color=d12f37&label=VISITORS)](https://github.com/Karmanya03)
+[![Profile visits](https://hits.sh/github.com/Karmanya03.svg?style=flat-square&color=D12F37&label=VISITORS&labelColor=09090A&extraCount=1357)](https://github.com/Karmanya03)
 
 </div>
 
