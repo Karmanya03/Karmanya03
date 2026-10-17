@@ -930,7 +930,7 @@ def render_toolkit() -> str:
         "Premiere Pro": "Pr", "After Effects": "Ae",
     }
     body: list[str] = ['<rect x="34" y="82" width="1132" height="508" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>']
-    badge_clips: list[str] = []
+    badge_mask: list[str] = []
     badge_sweeps: list[str] = []
     badge_count = 0
     top = 98
@@ -947,11 +947,8 @@ def render_toolkit() -> str:
                 x = 58
                 y += 50
             height = 42
-            clip_id = f"badge-clip-{badge_count}"
-            badge_clips.append(
-                f'<clipPath id="{clip_id}" clipPathUnits="userSpaceOnUse">'
-                f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="4"/>'
-                '</clipPath>'
+            badge_mask.append(
+                f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="4" fill="#fff"/>'
             )
             body.append(
                 f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="4" fill="#151414" '
@@ -960,25 +957,22 @@ def render_toolkit() -> str:
                 f'<text x="{x + 21}" y="{y + 26}" text-anchor="middle" fill="#{logo_color}" class="badge-glyph">{svg_escape(marks.get(label, label[:2]))}</text>'
                 f'<text x="{x + 45}" y="{y + 27}" fill="#f4f0e9" class="badge-label">{svg_escape(label)}</text>'
             )
-            delay = (badge_count * .13) % 2.6
-            badge_sweeps.append(
-                f'<rect x="{x - 48}" y="{y}" width="48" height="{height}" fill="url(#badgeShine)" '
-                f'opacity=".9" clip-path="url(#{clip_id})">'
-                f'<animate attributeName="x" from="{x - 48}" to="{x + width}" dur="4.3s" '
-                f'begin="{delay:.2f}s" repeatCount="indefinite"/>'
-                '</rect>'
-            )
             x += width + 12
             badge_count += 1
 
     defs = (
-        '<defs><linearGradient id="badgeShine" x1="0" y1="0" x2="1" y2="0">'
-        '<stop offset="0" stop-color="#fff" stop-opacity="0"/>'
-        '<stop offset=".48" stop-color="#fff" stop-opacity=".8"/>'
-        '<stop offset="1" stop-color="#fff" stop-opacity="0"/>'
-        + '</linearGradient>' + ''.join(badge_clips) + '</defs>'
+        '<defs><mask id="badgeMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="610">'
+        '<rect width="1200" height="610" fill="#000"/><g fill="#fff">'
+        + ''.join(badge_mask) + '</g></mask></defs>'
     )
-    body.append(defs + ''.join(badge_sweeps))
+    body.append(defs + '''
+  <g mask="url(#badgeMask)">
+    <g>
+      <path d="M-120 -140H-45L470 560H395Z" fill="#fff" opacity=".24"/>
+      <path d="M-101 -140H-64L451 560H414Z" fill="#fff" opacity=".62"/>
+      <animateTransform attributeName="transform" type="translate" values="-500,-70;1400,340" dur="6.4s" repeatCount="indefinite"/>
+    </g>
+  </g>''')
     body.append('<text x="58" y="568" class="micro soft">LANGUAGES  ·  CLOUD  ·  SECURITY  ·  GAME DEVELOPMENT  ·  CREATIVE TOOLS</text>')
     return wrap_svg("Toolkit", "".join(body), 610, "06")
 

@@ -2,7 +2,7 @@
 
 [![Animated banner](https://i.postimg.cc/zBBGQtGy/Banner-3L2.gif)](https://karmanya03-secdev.pro/)
 
-<img src="https://readme-typing-svg.demolab.com?font=Bahnschrift&weight=700&size=34&pause=900&color=D5AD52&center=true&vCenter=true&multiline=true&width=920&height=105&lines=KARMANYA+RAVINDRA;%2F+RED+TEAMING+%2F+SECURITY+%2F+GAME+DEV+%2F" alt="Karmanya Ravindra — Red Teaming, security, game development">
+<img src="https://readme-typing-svg.demolab.com?font=Bahnschrift&weight=700&size=34&pause=900&color=D5AD52&center=true&vCenter=true&multiline=true&width=920&height=105&lines=KARMANYA03;%2F+RED+TEAMING+%2F+SECURITY+%2F+GAME+DEV+%2F" alt="Karmanya03 — Red Teaming, security, game development">
 
 [![Portfolio](https://img.shields.io/badge/PORTFOLIO-OPEN-D5AD52?style=for-the-badge&labelColor=09090A)](https://karmanya03-secdev.pro/)
 [![LinkedIn](https://img.shields.io/badge/LINKEDIN-SAY_HELLO-F4F0E9?style=for-the-badge&labelColor=09090A&logo=linkedin&logoColor=F4F0E9)](https://linkedin.com/in/karmanya03)
