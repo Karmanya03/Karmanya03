@@ -33,8 +33,10 @@
       .month{font:700 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}
       .weekday{font:700 12px 'Segoe UI',Arial,sans-serif}
       .yearnum{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
-      .badge-label{font:600 17px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}
+      .badge-label{font:600 15px 'Segoe UI',Arial,sans-serif;letter-spacing:.15px}
       .badge-glyph{font:700 16px Consolas,'Courier New',monospace}
+      .trophy-orbit{transform-box:fill-box;transform-origin:center;animation:trophyOrbit 11s linear infinite}
+      .achievement-bloom{transform-box:fill-box;transform-origin:center;animation:achievementBloom 6.4s ease-in-out infinite}
       @keyframes ink{to{stroke-dashoffset:-304}}
       @keyframes rail{to{stroke-dashoffset:-1546}}
       @keyframes footerSweep{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
@@ -46,6 +48,8 @@
       @keyframes quoteWord{0%,100%{opacity:.78}45%{opacity:1}}
       @keyframes quoteBar{0%,100%{opacity:.06}50%{opacity:.28}}
       @keyframes quoteRail{from{stroke-dashoffset:678}to{stroke-dashoffset:0}}
+      @keyframes trophyOrbit{to{transform:rotate(360deg)}}
+      @keyframes achievementBloom{0%,100%{opacity:.52;transform:scale(.92)}50%{opacity:1;transform:scale(1.06)}}
       @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>
@@ -78,7 +82,7 @@
   <text x="60" y="132" class="micro" fill="#e2464d">STARS</text>
   <circle cx="175" cy="184" r="39" fill="#e2464d" fill-opacity=".07" stroke="#e2464d" stroke-opacity=".24" stroke-width="7" class="pulse"/>
   <circle cx="175" cy="184" r="31" fill="#151414" stroke="#e2464d" stroke-width="1.5"/>
-  <circle cx="175" cy="184" r="35" fill="none" stroke="#e2464d" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <circle cx="175" cy="184" r="35" fill="none" stroke="#e2464d" stroke-opacity=".58" stroke-width="1" stroke-dasharray="2 7" class="trophy-orbit" style="animation-duration:8.2s;animation-direction:normal"/>
   <text x="175" y="195" text-anchor="middle" fill="#e2464d" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">✦</text>
   <text x="175" y="249" text-anchor="middle" fill="#e2464d" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">A</text>
   <text x="175" y="272" text-anchor="middle" class="micro white">42 <tspan fill="#e2464d">· ✦</tspan></text>
@@ -107,7 +111,7 @@
   <text x="343" y="132" class="micro" fill="#e2464d">FOLLOWERS</text>
   <circle cx="458" cy="184" r="39" fill="#e2464d" fill-opacity=".07" stroke="#e2464d" stroke-opacity=".24" stroke-width="7" class="pulse"/>
   <circle cx="458" cy="184" r="31" fill="#151414" stroke="#e2464d" stroke-width="1.5"/>
-  <circle cx="458" cy="184" r="35" fill="none" stroke="#e2464d" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <circle cx="458" cy="184" r="35" fill="none" stroke="#e2464d" stroke-opacity=".58" stroke-width="1" stroke-dasharray="2 7" class="trophy-orbit" style="animation-duration:9.0s;animation-direction:reverse"/>
   <text x="458" y="195" text-anchor="middle" fill="#e2464d" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">◎</text>
   <text x="458" y="249" text-anchor="middle" fill="#e2464d" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">A</text>
   <text x="458" y="272" text-anchor="middle" class="micro white">32 <tspan fill="#e2464d">· ◎</tspan></text>
@@ -136,7 +140,7 @@
   <text x="626" y="132" class="micro" fill="#c9a3ff">REPOSITORIES</text>
   <circle cx="741" cy="184" r="39" fill="#c9a3ff" fill-opacity=".07" stroke="#c9a3ff" stroke-opacity=".24" stroke-width="7" class="pulse"/>
   <circle cx="741" cy="184" r="31" fill="#151414" stroke="#c9a3ff" stroke-width="1.5"/>
-  <circle cx="741" cy="184" r="35" fill="none" stroke="#c9a3ff" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <circle cx="741" cy="184" r="35" fill="none" stroke="#c9a3ff" stroke-opacity=".58" stroke-width="1" stroke-dasharray="2 7" class="trophy-orbit" style="animation-duration:9.8s;animation-direction:normal"/>
   <text x="741" y="195" text-anchor="middle" fill="#c9a3ff" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">▤</text>
   <text x="741" y="249" text-anchor="middle" fill="#c9a3ff" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">S</text>
   <text x="741" y="272" text-anchor="middle" class="micro white">42 <tspan fill="#c9a3ff">· ▤</tspan></text>
@@ -165,7 +169,7 @@
   <text x="909" y="132" class="micro" fill="#d5ad52">COMMITS</text>
   <circle cx="1024" cy="184" r="39" fill="#d5ad52" fill-opacity=".07" stroke="#d5ad52" stroke-opacity=".24" stroke-width="7" class="pulse"/>
   <circle cx="1024" cy="184" r="31" fill="#151414" stroke="#d5ad52" stroke-width="1.5"/>
-  <circle cx="1024" cy="184" r="35" fill="none" stroke="#d5ad52" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <circle cx="1024" cy="184" r="35" fill="none" stroke="#d5ad52" stroke-opacity=".58" stroke-width="1" stroke-dasharray="2 7" class="trophy-orbit" style="animation-duration:10.6s;animation-direction:reverse"/>
   <text x="1024" y="195" text-anchor="middle" fill="#d5ad52" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">↟</text>
   <text x="1024" y="249" text-anchor="middle" fill="#d5ad52" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">AAA</text>
   <text x="1024" y="272" text-anchor="middle" class="micro white">715 <tspan fill="#d5ad52">· ↟</tspan></text>
@@ -194,7 +198,7 @@
   <text x="60" y="380" class="micro" fill="#bd7955">PULL REQUESTS</text>
   <circle cx="175" cy="432" r="39" fill="#bd7955" fill-opacity=".07" stroke="#bd7955" stroke-opacity=".24" stroke-width="7" class="pulse"/>
   <circle cx="175" cy="432" r="31" fill="#151414" stroke="#bd7955" stroke-width="1.5"/>
-  <circle cx="175" cy="432" r="35" fill="none" stroke="#bd7955" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <circle cx="175" cy="432" r="35" fill="none" stroke="#bd7955" stroke-opacity=".58" stroke-width="1" stroke-dasharray="2 7" class="trophy-orbit" style="animation-duration:8.2s;animation-direction:normal"/>
   <text x="175" y="443" text-anchor="middle" fill="#bd7955" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">⑂</text>
   <text x="175" y="497" text-anchor="middle" fill="#bd7955" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">B</text>
   <text x="175" y="520" text-anchor="middle" class="micro white">10 <tspan fill="#bd7955">· ⑂</tspan></text>
@@ -223,7 +227,7 @@
   <text x="343" y="380" class="micro" fill="#766f67">ISSUES</text>
   <circle cx="458" cy="432" r="39" fill="#766f67" fill-opacity=".07" stroke="#766f67" stroke-opacity=".24" stroke-width="7" class="pulse"/>
   <circle cx="458" cy="432" r="31" fill="#151414" stroke="#766f67" stroke-width="1.5"/>
-  <circle cx="458" cy="432" r="35" fill="none" stroke="#766f67" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <circle cx="458" cy="432" r="35" fill="none" stroke="#766f67" stroke-opacity=".58" stroke-width="1" stroke-dasharray="2 7" class="trophy-orbit" style="animation-duration:9.0s;animation-direction:reverse"/>
   <text x="458" y="443" text-anchor="middle" fill="#766f67" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">!</text>
   <text x="458" y="497" text-anchor="middle" fill="#766f67" font-family="Georgia,'Times New Roman',serif" font-size="19" font-weight="700">LOCKED</text>
   <text x="458" y="520" text-anchor="middle" class="micro white">0 <tspan fill="#766f67">· !</tspan></text>
@@ -252,7 +256,7 @@
   <text x="626" y="380" class="micro" fill="#aaa49a">LANGUAGES</text>
   <circle cx="741" cy="432" r="39" fill="#aaa49a" fill-opacity=".07" stroke="#aaa49a" stroke-opacity=".24" stroke-width="7" class="pulse"/>
   <circle cx="741" cy="432" r="31" fill="#151414" stroke="#aaa49a" stroke-width="1.5"/>
-  <circle cx="741" cy="432" r="35" fill="none" stroke="#aaa49a" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <circle cx="741" cy="432" r="35" fill="none" stroke="#aaa49a" stroke-opacity=".58" stroke-width="1" stroke-dasharray="2 7" class="trophy-orbit" style="animation-duration:9.8s;animation-direction:normal"/>
   <text x="741" y="443" text-anchor="middle" fill="#aaa49a" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">〈/〉</text>
   <text x="741" y="497" text-anchor="middle" fill="#aaa49a" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">C</text>
   <text x="741" y="520" text-anchor="middle" class="micro white">13 <tspan fill="#aaa49a">· 〈/〉</tspan></text>

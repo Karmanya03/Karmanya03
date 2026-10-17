@@ -671,6 +671,38 @@ def diagonal_sheen(
 </g>'''
 
 
+def horizontal_sheen(
+    x: int,
+    y: int,
+    width: int,
+    height: int,
+    key: str,
+    *,
+    tint: str = "#d5ad52",
+    duration: str = "8s",
+    delay: str = "0s",
+    opacity: str = ".16",
+    radius: int = 4,
+) -> str:
+    """A short horizontal glass pass for repository cards."""
+    band_width = max(64, int(width * .18))
+    return f'''<defs>
+  <clipPath id="{key}-clip"><rect x="{x}" y="{y}" width="{width}" height="{height}" rx="{radius}"/></clipPath>
+  <linearGradient id="{key}-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="{tint}" stop-opacity="0"/>
+    <stop offset=".42" stop-color="{tint}" stop-opacity=".10"/>
+    <stop offset=".52" stop-color="#fffaf0" stop-opacity=".92"/>
+    <stop offset=".62" stop-color="{tint}" stop-opacity=".18"/>
+    <stop offset="1" stop-color="{tint}" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#{key}-clip)" opacity="{opacity}">
+  <rect x="{x - band_width}" y="{y}" width="{band_width}" height="{height}" fill="url(#{key}-light)">
+    <animateTransform attributeName="transform" type="translate" values="0,0;{width + band_width},0" dur="{duration}" begin="{delay}" repeatCount="indefinite"/>
+  </rect>
+</g>'''
+
+
 def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: bool = True) -> str:
     header = f'''
   <path d="M0 2H1200" stroke="#f4f0e9" stroke-opacity=".48" stroke-width="1" class="ambient-line"/>
@@ -715,8 +747,10 @@ def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: boo
       .month{{font:700 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}}
       .weekday{{font:700 12px 'Segoe UI',Arial,sans-serif}}
       .yearnum{{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}}
-      .badge-label{{font:600 17px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}}
+      .badge-label{{font:600 15px 'Segoe UI',Arial,sans-serif;letter-spacing:.15px}}
       .badge-glyph{{font:700 16px Consolas,'Courier New',monospace}}
+      .trophy-orbit{{transform-box:fill-box;transform-origin:center;animation:trophyOrbit 11s linear infinite}}
+      .achievement-bloom{{transform-box:fill-box;transform-origin:center;animation:achievementBloom 6.4s ease-in-out infinite}}
       @keyframes ink{{to{{stroke-dashoffset:-304}}}}
       @keyframes rail{{to{{stroke-dashoffset:-1546}}}}
       @keyframes footerSweep{{from{{stroke-dashoffset:900}}to{{stroke-dashoffset:0}}}}
@@ -728,6 +762,8 @@ def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: boo
       @keyframes quoteWord{{0%,100%{{opacity:.78}}45%{{opacity:1}}}}
       @keyframes quoteBar{{0%,100%{{opacity:.06}}50%{{opacity:.28}}}}
       @keyframes quoteRail{{from{{stroke-dashoffset:678}}to{{stroke-dashoffset:0}}}}
+      @keyframes trophyOrbit{{to{{transform:rotate(360deg)}}}}
+      @keyframes achievementBloom{{0%,100%{{opacity:.52;transform:scale(.92)}}50%{{opacity:1;transform:scale(1.06)}}}}
       @media (prefers-reduced-motion:reduce){{*,*::before,*::after{{animation:none!important;scroll-behavior:auto!important}}}}
     </style>
   </defs>
@@ -847,7 +883,7 @@ def render_repositories(data: dict[str, Any]) -> str:
             )
         body.append(f"""
   <path d="M{x} {y + 15}H{x + width}V{y + 184}H{x}Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
-  {diagonal_sheen(x, y + 15, width, 169, f'repo-sheen-{index}', tint="#d5ad52", duration=f'{8.2 + index * .47:.2f}s', delay=f'{index * .31:.2f}s', opacity=".13", radius=2)}
+  {horizontal_sheen(x, y + 15, width, 169, f'repo-sheen-{index}', tint="#d5ad52" if index % 2 == 0 else "#d12f37", duration=f'{8.6 + index * .53:.2f}s', delay=f'{index * .37:.2f}s', opacity=".18", radius=2)}
   <path d="M{x} {y + 15}V{y + 1}H{x + 74}L{x + 86} {y + 15}" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="{x + 15}" y="{y + 43}" class="micro red">{index + 1:02}</text>
   <a xlink:href="{url}" target="_blank" rel="noopener noreferrer">
@@ -944,7 +980,7 @@ def render_trophies(data: dict[str, Any]) -> str:
   <text x="{x + 18}" y="{y + 36}" class="micro" fill="{rank_color}">{svg_escape(key.upper())}</text>
   <circle cx="{center}" cy="{y + 88}" r="39" fill="{rank_color}" fill-opacity=".07" stroke="{rank_color}" stroke-opacity=".24" stroke-width="7" class="pulse"/>
   <circle cx="{center}" cy="{y + 88}" r="31" fill="#151414" stroke="{rank_color}" stroke-width="1.5"/>
-  <circle cx="{center}" cy="{y + 88}" r="35" fill="none" stroke="{rank_color}" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <circle cx="{center}" cy="{y + 88}" r="35" fill="none" stroke="{rank_color}" stroke-opacity=".58" stroke-width="1" stroke-dasharray="2 7" class="trophy-orbit" style="animation-duration:{8.2 + (index % 4) * .8:.1f}s;animation-direction:{'normal' if index % 2 == 0 else 'reverse'}"/>
   <text x="{center}" y="{y + 99}" text-anchor="middle" fill="{rank_color}" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">{svg_escape(icon)}</text>
   <text x="{center}" y="{y + 153}" text-anchor="middle" fill="{rank_color}" font-family="Georgia,'Times New Roman',serif" font-size="{rank_font_size}" font-weight="700">{svg_escape(rank)}</text>
   <text x="{center}" y="{y + 176}" text-anchor="middle" class="micro white">{score_text} <tspan fill="{rank_color}">· {svg_escape(icon)}</tspan></text>
@@ -989,7 +1025,7 @@ def render_achievements(data: dict[str, Any]) -> str:
     <rect x="{x}" y="{y}" width="{card_width}" height="{card_height}" rx="6" fill="#101011" stroke="{color}" stroke-opacity=".52" class="card-edge"/>
     {diagonal_sheen(x, y, card_width, card_height, f'achievement-sheen-{index}', tint=color, duration=f'{8.6 + index * .56:.2f}s', delay=f'{index * .27:.2f}s', opacity=".17", radius=6)}
     <path d="M{x + 1} {y + 7}H{x + card_width - 1}" stroke="{color}" stroke-width="3"/>
-    <circle cx="{x + 44}" cy="{y + 49}" r="24" fill="{color}" fill-opacity=".10" stroke="{color}" stroke-opacity=".65"/>
+    <circle cx="{x + 44}" cy="{y + 49}" r="24" fill="{color}" fill-opacity=".10" stroke="{color}" stroke-opacity=".65" class="achievement-bloom"/>
     <circle cx="{x + 44}" cy="{y + 49}" r="30" fill="none" stroke="{color}" stroke-opacity=".28" stroke-dasharray="2 7" class="inkline"/>
     <text x="{x + 44}" y="{y + 57}" text-anchor="middle" fill="{color}" font-family="Georgia,'Times New Roman',serif" font-size="23" font-weight="700">{svg_escape(glyph)}</text>
     <text x="{x + 82}" y="{y + 54}" class="serif white" font-size="{font_size}">{svg_escape(name)}</text>
@@ -1180,30 +1216,63 @@ def render_contributions(
     return wrap_svg(f"Contribution calendar {year}", "".join(body), 338, "05")
 
 
+def toolkit_icon_markup(label: str, x: int, y: int, accent: str, foreground: str) -> str:
+    """Return a local, font-free technology emblem sized for one toolkit tile."""
+    marks = {
+        "Rust": '<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.7"/><path d="M12 1.8v2.8m0 14.8v2.8M1.8 12h2.8m14.8 0h2.8M4.8 4.8l2 2m10.4 10.4 2 2m0-14.4-2 2M6.8 17.2l-2 2"/>',
+        "WebAssembly": '<path d="m12 2 9 5v10l-9 5-9-5V7z"/><path d="m7 8 5 8 5-8M8.8 11h6.4"/>',
+        "C": '<path d="m8.5 5-7 7 7 7m7-14 7 7-7 7"/>',
+        "C++": '<path d="m7 5-6 7 6 7m10-14 6 7-6 7M13 8v8m-4-4h8"/>',
+        "C Sharp": '<path d="m7 5-6 7 6 7m10-14 6 7-6 7M13 8l-2 8m6-8-2 8m-5-5h8m-9 3h8"/>',
+        "Java": '<path d="M8 15h9l-1 5H9zM6 15h13m-8-7c-2-2 3-2 1-5m2 7c3-2-1-3 1-5M7 18c-2 1-1 2 2 2m8-2c2 1 1 2-2 2"/>',
+        "JavaScript": '<path d="M4 3h16v18H4z" fill="{ink}" stroke="none"/><text x="12" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-size="7.4" font-weight="700" fill="{color}" stroke="none">JS</text>',
+        "Python": '<path d="M12 3c-5 0-6 2-6 6v3h8v2H5c-3 0-4 2-4 5 0 2 2 3 5 3 4 0 6-2 6-5v-3H8v-2h7c3 0 4-2 4-5 0-3-2-4-7-4z"/><circle cx="9" cy="6.5" r=".8" fill="{ink}" stroke="none"/><circle cx="15" cy="17.5" r=".8" fill="{ink}" stroke="none"/>',
+        "PowerShell": '<path d="m3 5 7 7-7 7m9 0h9"/>',
+        "HTML5": '<path d="m4 2 1.5 18L12 22l6.5-2L20 2z"/><path d="M8 7h8l-.5 3.5H8.5L9 15l3 1 3-1 .3-2"/>',
+        "CSS3": '<path d="m4 2 1.5 18L12 22l6.5-2L20 2z"/><path d="M8 7h8M8.5 11h7l-.5 4-3 1-3-1"/>',
+        "R": '<path d="M4 20V4h8a5 5 0 0 1 0 10H4m7 0 6 6m-5-16v10"/><circle cx="18.5" cy="5.5" r="1.5"/>',
+        "AWS": '<path d="M4 14a5 5 0 0 1 5-5 6 6 0 0 1 11 2 4 4 0 0 1-1 8H7a4 4 0 0 1-3-5zM5 21c5 2 10 2 15 0m-4-2 4 2-3 3"/>',
+        "Azure": '<path d="M13 3 4 19h6l9 2-6-10 3-5zM8 17h8"/>',
+        "Google Cloud": '<path d="M7 18h11a4 4 0 0 0 1-8 6 6 0 0 0-11-2 5 5 0 0 0-1 10z"/><path d="M7 18a5 5 0 0 1 1-10m10 2a4 4 0 0 1 1 8" stroke="{color}"/>',
+        "Cloudflare": '<path d="M5 17a4 4 0 0 1 1-8 6 6 0 0 1 11-2 4 4 0 0 1 2 7H9m1 4h9"/><path d="M15 3v3M21 6l-2 2M4 7l2 2"/>',
+        "Django": '<path d="M5 3h7a8 8 0 1 1 0 16H5z"/><path d="M9 7h3a4 4 0 1 1 0 8H9z"/>',
+        "Flask": '<path d="M9 3h6m-5 0v6l-6 10a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3L14 9V3m-8 12h12m-9-3h2"/>',
+        "FastAPI": '<path d="m14 2-9 12h7l-2 8 9-12h-7z"/>',
+        "Node.js": '<path d="m12 2 9 5v10l-9 5-9-5V7z"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="9" r="1.5"/><circle cx="15" cy="16" r="1.5"/><path d="m10.3 11.2 3.4-1.4m-3.2 3.1 3 2.2"/>',
+        "MySQL": '<path d="M3 17c3 0 4-7 8-8 3-.8 4 2 6 2 2 0 3-2 4-2m-8 0c0-2 2-3 4-2m-6 6c2 2 5 3 8 2m-2-4 2 4 3-2"/>',
+        "MongoDB": '<path d="M12 2c-3 5-7 8-6 13 1 4 4 6 6 7 2-1 5-3 6-7 1-5-3-8-6-13z"/><path d="M12 7v14m0-7 4-3"/>',
+        "PostgreSQL": '<path d="M5 19c-2-2-2-8 0-11 2-4 6-5 10-4 3 1 4 4 4 7 0 2-1 3-3 3h-2l1 3c0 2-2 3-4 2l-1-3-3 3z"/><path d="M13 8c2-2 4-2 6-1m-8 2h.1"/>',
+        "SQLite": '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v13c0 2 4 4 8 4s8-2 8-4V5M4 11c0 2 4 3 8 3s8-1 8-3M4 17c0 2 4 3 8 3s8-1 8-3"/>',
+        "Git": '<circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="7" r="2"/><path d="M6 7v10m2-7c5 0 4-3 8-3"/>',
+        "GitHub": '<path d="M8 6 6 3 5 9c-2 2-2 7 1 9l2 1v2h8v-2l2-1c3-2 3-7 1-9l-1-6-3 3a13 13 0 0 0-7 0z"/><path d="M9 16c1 2 5 2 6 0m-7-3h.1m8 0h.1"/>',
+        "GitLab": '<path d="m12 21 10-8-3-10-3 6H8L5 3 2 13z"/><path d="m6 9 6 12 6-12m-6 12L2 13m10 8 10-8"/>',
+        "Nginx": '<path d="M3 6h5l3 3h10M3 12h18M3 18h5l3-3h10"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="18" r="1"/>',
+        "Jira": '<path d="m12 2 9 9-9 11-9-11z"/><path d="m12 2 5 9-5 11-5-11z"/>',
+        "Unity": '<path d="m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5m-9 5v10m-4-12 8 5m0-5-8 5"/>',
+        "Unreal Engine": '<circle cx="12" cy="12" r="10"/><path d="M17 8v9h-2v-2c-1 2-5 3-7 1V8h2v7c1 1 3 1 4 0V8z"/>',
+        "TensorFlow": '<path d="m5 5 7 7 7-7M5 19l7-7 7 7M5 5v14m14-14v14"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/>',
+        "NumPy": '<path d="M3 4h18v16H3zM3 10h18M3 15h18M9 4v16m6-16v16"/>',
+        "Adobe": '<path d="M3 20 10 4h4l7 16h-5l-4-10-4 10z"/><path d="M7 16h10"/>',
+        "Premiere Pro": '<rect x="3" y="3" width="18" height="18" rx="3" fill="{ink}" stroke="none"/><path d="M8 17V7h4a3 3 0 0 1 0 6h-1m4 4v-7m0 3c1-2 2-3 4-3" stroke="{color}"/>',
+        "After Effects": '<path d="M4 5h9M8.5 5v14M4 19h9m3-1v-7h5v7m-5-3h5m-5 3c0 3 4 4 6 2"/>',
+    }
+    mark = marks[label].format(color=f"#{accent}", ink=f"#{foreground}")
+    return (
+        f'<g transform="translate({x + 7} {y + 8}) scale(.95)" fill="none" '
+        f'stroke="#{foreground}" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">'
+        f'{mark}</g>'
+    )
+
+
 def render_toolkit() -> str:
     colors = [("D5AD52", "09090A"), ("F4F0E9", "09090A"), ("D12F37", "F4F0E9")]
-    marks = {
-        "Rust": "R", "WebAssembly": "WASM", "C": "C", "C++": "C++", "C Sharp": "C#",
-        "Java": "J", "JavaScript": "JS", "Python": "Py", "PowerShell": "PS", "HTML5": "H5",
-        "CSS3": "C3", "R": "R", "AWS": "AWS", "Azure": "Az", "Google Cloud": "GC",
-        "Cloudflare": "CF", "Django": "Dj", "Flask": "Fl", "FastAPI": "API", "Node.js": "JS",
-        "MySQL": "SQL", "MongoDB": "Mg", "PostgreSQL": "Pg", "SQLite": "Sq", "Git": "Git",
-        "GitHub": "GH", "GitLab": "GL", "Nginx": "N", "Jira": "J", "Unity": "U",
-        "Unreal Engine": "UE", "TensorFlow": "TF", "NumPy": "NP", "Adobe": "Ae",
-        "Premiere Pro": "Pr", "After Effects": "Ae",
-    }
-    highlight_colors = {"D5AD52": "#fff2cb", "F4F0E9": "#ffffff", "D12F37": "#ffb5b8"}
-    toolkit_gradients = ''.join(
-        f'''<linearGradient id="toolkit-sheen-{color}" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0" stop-color="#{color}" stop-opacity="0"/>
-  <stop offset=".46" stop-color="#{color}" stop-opacity=".08"/>
-  <stop offset=".56" stop-color="{highlight_colors[color]}" stop-opacity=".92"/>
-  <stop offset=".66" stop-color="#{color}" stop-opacity=".12"/>
-  <stop offset="1" stop-color="#{color}" stop-opacity="0"/>
-</linearGradient>'''
-        for color, _ in colors
-    )
-    body: list[str] = [f'<defs>{toolkit_gradients}</defs>', '<rect x="34" y="82" width="1132" height="508" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>']
+    defs = [
+        '<clipPath id="toolkit-panel-clip"><rect x="34" y="82" width="1132" height="508" rx="5"/></clipPath>',
+    ]
+    body: list[str] = [
+        '<rect x="34" y="82" width="1132" height="508" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>',
+        '<path d="M35 87H1165" stroke="#d5ad52" stroke-opacity=".34" stroke-width="1"/>',
+    ]
     badge_count = 0
     top = 98
     for group_index, (group, items) in enumerate(SHIELD_GROUPS.items()):
@@ -1212,30 +1281,44 @@ def render_toolkit() -> str:
         body.append(f'<path d="M58 {y_title + 28}H1142" stroke="#3d3834"/>')
         x = 58
         y = y_title + 43
-        for label, _logo in items:
+        for label, _logo_slug in items:
             color, logo_color = colors[badge_count % len(colors)]
-            width = min(210, max(86, 55 + len(label) * 8.6))
+            width = min(218, max(92, int(76 + len(label) * 8.2)))
             if x + width > 1142:
                 x = 58
-                y += 50
-            height = 42
-            sheen = diagonal_sheen(
-                x, y, width, height, f'toolkit-badge-sheen-{badge_count}',
-                tint=f'#{color}', duration="4.6s",
-                delay=f'{badge_count * .10:.2f}s', opacity=".56", radius=4,
-                gradient_id=f'toolkit-sheen-{color}',
-            )
+                y += 48
+            height = 40
             body.append(
+                f'<g class="toolkit-badge" aria-label="{svg_escape(label)}">'
                 f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="4" fill="#151414" '
-                f'stroke="#{color}" stroke-opacity=".72" stroke-width=".8" class="card-edge"/>'
-                f'<path d="M{x + 4} {y + 4}H{x + 38}V{y + 38}H{x + 4}Z" fill="#{color}" fill-opacity=".94"/>'
-                f'{sheen}'
-                f'<text x="{x + 21}" y="{y + 26}" text-anchor="middle" fill="#{logo_color}" class="badge-glyph">{svg_escape(marks.get(label, label[:2]))}</text>'
-                f'<text x="{x + 45}" y="{y + 27}" fill="#f4f0e9" class="badge-label">{svg_escape(label)}</text>'
+                f'stroke="#{color}" stroke-opacity=".72" stroke-width=".8"/>'
+                f'<rect x="{x + 4}" y="{y + 4}" width="30" height="32" rx="3" fill="#{color}" fill-opacity=".88"/>'
+                f'{toolkit_icon_markup(label, x + 4, y + 1, color, logo_color)}'
+                f'<text x="{x + 43}" y="{y + 25}" fill="#f4f0e9" class="badge-label">{svg_escape(label)}</text>'
+                f'</g>'
             )
-            x += width + 12
+            x += width + 10
             badge_count += 1
 
+    body.insert(0, f'''<defs>{"".join(defs)}
+      <linearGradient id="toolkit-glass-color" gradientUnits="userSpaceOnUse" x1="-460" y1="660" x2="1150" y2="-950">
+        <stop offset="0" stop-color="#f4f0e9" stop-opacity="0"/>
+        <stop offset=".43" stop-color="#f4f0e9" stop-opacity=".08"/>
+        <stop offset=".49" stop-color="#fff9eb" stop-opacity=".78"/>
+        <stop offset=".53" stop-color="#d5ad52" stop-opacity=".72"/>
+        <stop offset=".57" stop-color="#f2cfc5" stop-opacity=".56"/>
+        <stop offset=".63" stop-color="#f4f0e9" stop-opacity=".08"/>
+        <stop offset="1" stop-color="#f4f0e9" stop-opacity="0"/>
+      </linearGradient>
+      <filter id="toolkit-glass-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
+    </defs>''')
+    body.append('''<g clip-path="url(#toolkit-panel-clip)" style="mix-blend-mode:screen;isolation:isolate" aria-label="One colour-responsive toolkit glass sweep">
+      <g>
+        <animateTransform attributeName="transform" type="translate" values="-1800,-1800;1450,1450" dur="14.8s" begin="-10s" repeatCount="indefinite"/>
+        <path d="M-460 660h52l1610 -1610h-52Z" fill="url(#toolkit-glass-color)" opacity=".34" filter="url(#toolkit-glass-glow)"/>
+        <path d="M-460 660h52l1610 -1610h-52Z" fill="url(#toolkit-glass-color)" opacity=".70"/>
+      </g>
+    </g>''')
     body.append('<text x="58" y="568" class="micro soft">LANGUAGES  ·  CLOUD  ·  SECURITY  ·  GAME DEVELOPMENT  ·  CREATIVE TOOLS</text>')
     return wrap_svg("Toolkit", "".join(body), 610, "06")
 

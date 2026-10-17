@@ -33,8 +33,10 @@
       .month{font:700 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}
       .weekday{font:700 12px 'Segoe UI',Arial,sans-serif}
       .yearnum{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
-      .badge-label{font:600 17px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}
+      .badge-label{font:600 15px 'Segoe UI',Arial,sans-serif;letter-spacing:.15px}
       .badge-glyph{font:700 16px Consolas,'Courier New',monospace}
+      .trophy-orbit{transform-box:fill-box;transform-origin:center;animation:trophyOrbit 11s linear infinite}
+      .achievement-bloom{transform-box:fill-box;transform-origin:center;animation:achievementBloom 6.4s ease-in-out infinite}
       @keyframes ink{to{stroke-dashoffset:-304}}
       @keyframes rail{to{stroke-dashoffset:-1546}}
       @keyframes footerSweep{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
@@ -46,6 +48,8 @@
       @keyframes quoteWord{0%,100%{opacity:.78}45%{opacity:1}}
       @keyframes quoteBar{0%,100%{opacity:.06}50%{opacity:.28}}
       @keyframes quoteRail{from{stroke-dashoffset:678}to{stroke-dashoffset:0}}
+      @keyframes trophyOrbit{to{transform:rotate(360deg)}}
+      @keyframes achievementBloom{0%,100%{opacity:.52;transform:scale(.92)}50%{opacity:1;transform:scale(1.06)}}
       @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>
@@ -76,7 +80,7 @@
   </path>
 </g>
     <path d="M45 111H399" stroke="#68b7d3" stroke-width="3"/>
-    <circle cx="88" cy="153" r="24" fill="#68b7d3" fill-opacity=".10" stroke="#68b7d3" stroke-opacity=".65"/>
+    <circle cx="88" cy="153" r="24" fill="#68b7d3" fill-opacity=".10" stroke="#68b7d3" stroke-opacity=".65" class="achievement-bloom"/>
     <circle cx="88" cy="153" r="30" fill="none" stroke="#68b7d3" stroke-opacity=".28" stroke-dasharray="2 7" class="inkline"/>
     <text x="88" y="161" text-anchor="middle" fill="#68b7d3" font-family="Georgia,'Times New Roman',serif" font-size="23" font-weight="700">↗</text>
     <text x="126" y="158" class="serif white" font-size="22">Pull Shark</text>
@@ -103,7 +107,7 @@
   </path>
 </g>
     <path d="M423 111H777" stroke="#d5ad52" stroke-width="3"/>
-    <circle cx="466" cy="153" r="24" fill="#d5ad52" fill-opacity=".10" stroke="#d5ad52" stroke-opacity=".65"/>
+    <circle cx="466" cy="153" r="24" fill="#d5ad52" fill-opacity=".10" stroke="#d5ad52" stroke-opacity=".65" class="achievement-bloom"/>
     <circle cx="466" cy="153" r="30" fill="none" stroke="#d5ad52" stroke-opacity=".28" stroke-dasharray="2 7" class="inkline"/>
     <text x="466" y="161" text-anchor="middle" fill="#d5ad52" font-family="Georgia,'Times New Roman',serif" font-size="23" font-weight="700">✦</text>
     <text x="504" y="158" class="serif white" font-size="22">Starstruck</text>
@@ -130,7 +134,7 @@
   </path>
 </g>
     <path d="M801 111H1155" stroke="#e2464d" stroke-width="3"/>
-    <circle cx="844" cy="153" r="24" fill="#e2464d" fill-opacity=".10" stroke="#e2464d" stroke-opacity=".65"/>
+    <circle cx="844" cy="153" r="24" fill="#e2464d" fill-opacity=".10" stroke="#e2464d" stroke-opacity=".65" class="achievement-bloom"/>
     <circle cx="844" cy="153" r="30" fill="none" stroke="#e2464d" stroke-opacity=".28" stroke-dasharray="2 7" class="inkline"/>
     <text x="844" y="161" text-anchor="middle" fill="#e2464d" font-family="Georgia,'Times New Roman',serif" font-size="23" font-weight="700">!</text>
     <text x="882" y="158" class="serif white" font-size="22">YOLO</text>
