@@ -1,1003 +1,585 @@
 #!/usr/bin/env python3
+"""Render accurate, regularly refreshed GitHub profile panels from public data."""
 from __future__ import annotations
 
+import concurrent.futures
 import datetime as dt
+import html
 import json
 import os
+import textwrap
 import urllib.error
+import urllib.parse
 import urllib.request
-from collections import Counter
-from html import escape
+from pathlib import Path
+from typing import Any
 
 API_BASE = "https://api.github.com"
 USERNAME = os.getenv("PROFILE_USERNAME", "Karmanya03")
 TOKEN = os.getenv("GITHUB_TOKEN", "")
-OUT_DIR = os.getenv("PROFILE_OUT_DIR", "assets/panels")
+OUT_DIR = Path(os.getenv("PROFILE_OUT_DIR", "assets/panels"))
+METADATA_FILE = OUT_DIR / "profile-metadata.json"
+API_VERSION = "2022-11-28"
 
-## ─── EXACT GitHub Profile Trophy rank thresholds (ryo-ma/github-profile-trophy source) ───
-# Rank order (ascending): C < B < A < AA < AAA < S < SS < SSS
-TROPHY_THRESHOLDS = {
-    # (score needed for each rank: C, B, A, AA, AAA, S, SS, SSS)
-    "Stars":        [1,  10,  30,   50,  100,  200,  700,  2000],
-    "Followers":    [1,  10,  20,   50,  100,  200,  400,  1000],
-    "Repositories": [1,  10,  20,   30,   35,   40,   45,    50],
-    "Commits":      [1,  10, 100,  200,  500, 1000, 2000,  4000],
-    "PullRequest":  [1,  10,  20,   50,  100,  200,  500,  1000],
-    "Issues":       [1,  10,  20,   50,  100,  200,  500,  1000],
-    "MultiLanguage": [10],  # SECRET trophy — single threshold
-}
 RANK_NAMES = ["C", "B", "A", "AA", "AAA", "S", "SS", "SSS"]
-# Numeric order for sorting (higher = better rank)
-RANK_ORDER = {"C": 0, "B": 1, "A": 2, "AA": 3, "AAA": 4, "S": 5, "SS": 6, "SSS": 7, "SECRET": 8}
-
-# ─── Trophy display names (matching ryo-ma source exactly) ───
-TROPHY_META = {
-    "Stars": {
-        "label": "Stars",
-        "icon": "⭐",
-        "rank_names": {
-            "C": "First Star",
-            "B": "Middle Star",
-            "A": "You are a Star",
-            "AA": "High Star",
-            "AAA": "Super Star",
-            "S": "Stargazer",
-            "SS": "High Stargazer",
-            "SSS": "Super Stargazer",
-        },
-    },
-    "Followers": {
-        "label": "Followers",
-        "icon": "👥",
-        "rank_names": {
-            "C": "First Friend",
-            "B": "Many Friends",
-            "A": "Dynamic User",
-            "AA": "Active User",
-            "AAA": "Famous User",
-            "S": "Hyper Celebrity",
-            "SS": "Ultra Celebrity",
-            "SSS": "Super Celebrity",
-        },
-    },
-    "Repositories": {
-        "label": "Repositories",
-        "icon": "⊞",
-        "rank_names": {
-            "C": "First Repository",
-            "B": "Middle Repo Creator",
-            "A": "High Repo Creator",
-            "AA": "Hyper Repo Creator",
-            "AAA": "Ultra Repo Creator",
-            "S": "Super Repo Creator",
-            "SS": "Deep Repo Creator",
-            "SSS": "God Repo Creator",
-        },
-    },
-    "Commits": {
-        "label": "Commits",
-        "icon": "↑",
-        "rank_names": {
-            "C": "First Commit",
-            "B": "Middle Committer",
-            "A": "High Committer",
-            "AA": "Hyper Committer",
-            "AAA": "Ultra Committer",
-            "S": "Super Committer",
-            "SS": "Deep Committer",
-            "SSS": "God Committer",
-        },
-    },
-    "PullRequest": {
-        "label": "Pull Request",
-        "icon": "⑂",
-        "rank_names": {
-            "C": "First Pull",
-            "B": "Middle Puller",
-            "A": "High Puller",
-            "AA": "Hyper Puller",
-            "AAA": "Ultra Puller",
-            "S": "Super Puller",
-            "SS": "Deep Puller",
-            "SSS": "God Puller",
-        },
-    },
-    "Issues": {
-        "label": "Issues",
-        "icon": "!",
-        "rank_names": {
-            "C": "First Issue",
-            "B": "Middle Issuer",
-            "A": "High Issuer",
-            "AA": "Hyper Issuer",
-            "AAA": "Ultra Issuer",
-            "S": "Super Issuer",
-            "SS": "Deep Issuer",
-            "SSS": "God Issuer",
-        },
-    },
-    "MultiLanguage": {
-        "label": "MultiLanguage",
-        "icon": "🌈",
-        "rank_names": {
-            "SECRET": "Rainbow Lang User",
-        },
-    },
+RANK_ORDER = {rank: index for index, rank in enumerate(RANK_NAMES)}
+TROPHY_RULES = {
+    "Stars": ([1, 10, 30, 50, 100, 200, 700, 2000], "✳"),
+    "Followers": ([1, 10, 20, 50, 100, 200, 400, 1000], "◉"),
+    "Repositories": ([1, 10, 20, 30, 35, 40, 45, 50], "▤"),
+    "Commits": ([1, 10, 100, 200, 500, 1000, 2000, 4000], "↟"),
+    "Pull requests": ([1, 10, 20, 50, 100, 200, 500, 1000], "⑂"),
+    "Issues": ([1, 10, 20, 50, 100, 200, 500, 1000], "!"),
+    "Languages": ([10], "⌘"),
 }
 
 
-def gh_get(url: str):
+class GitHubAPIError(RuntimeError):
+    """Raised when a complete snapshot cannot be fetched."""
+
+
+def api_get(path: str) -> Any:
     headers = {
         "Accept": "application/vnd.github+json",
-        "User-Agent": "profile-panels-generator",
-        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "karmanya-profile-panels",
+        "X-GitHub-Api-Version": API_VERSION,
     }
     if TOKEN:
         headers["Authorization"] = f"Bearer {TOKEN}"
-
-    request = urllib.request.Request(url, headers=headers)
+    request = urllib.request.Request(f"{API_BASE}{path}", headers=headers)
     try:
-        with urllib.request.urlopen(request, timeout=25) as response:
-            data = json.loads(response.read().decode("utf-8"))
-            return data
-    except (urllib.error.HTTPError, urllib.error.URLError, Exception) as e:
-        print(f"API error for {url}: {e}")
-        # Return fallback: list endpoints get [], dict endpoints get None
-        # Using None for dict endpoints so callers can distinguish "API failed"
-        # from "API returned empty data"
-        list_keywords = ("events", "repos", "commits", "issues")
-        if any(kw in url for kw in list_keywords) and "/search/" not in url:
-            return []
+        with urllib.request.urlopen(request, timeout=20) as response:
+            return json.loads(response.read().decode("utf-8"))
+    except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as exc:
+        raise GitHubAPIError(f"GitHub API request failed for {path}: {exc}") from exc
+
+
+def short_text(value: str | None, limit: int) -> str:
+    value = " ".join((value or "").split())
+    return value if len(value) <= limit else value[: limit - 1].rstrip() + "…"
+
+
+def read_metadata() -> dict[str, Any]:
+    try:
+        with METADATA_FILE.open(encoding="utf-8") as handle:
+            data = json.load(handle)
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+    # Migrate the earlier profile panel's cache without pretending to recollect it.
+    if "generated_at" not in data and data.get("updated"):
+        try:
+            stamp = dt.datetime.strptime(data["updated"], "%d %b %Y %H:%M UTC")
+            data["generated_at"] = stamp.replace(tzinfo=dt.timezone.utc).isoformat(timespec="minutes").replace("+00:00", "Z")
+        except (TypeError, ValueError):
+            pass
+    totals = data.get("totals", {})
+    if "repos" not in totals and "repositories" in totals:
+        totals["repos"] = totals["repositories"]
+    if "stars" not in totals and "stars_on_owned_repos" in totals:
+        totals["stars"] = totals["stars_on_owned_repos"]
+    if "top_languages" not in data and isinstance(data.get("languages"), dict):
+        data["top_languages"] = list(data["languages"].items())
+    if "top_repos" not in data and isinstance(data.get("repositories"), list):
+        data["repository_selection"] = "recent"
+        data["top_repos"] = [
+            {
+                "name": repo.get("name", ""),
+                "full_name": repo.get("full_name", repo.get("name", "")),
+                "description": repo.get("description", ""),
+                "url": repo.get("html_url", repo.get("url", "")),
+                "stars": int(repo.get("stars", 0)),
+                "forks": int(repo.get("forks", 0)),
+                "language": repo.get("language") or "Various",
+                "pushed_at": repo.get("pushed_at") or repo.get("updated_at", ""),
+            }
+            for repo in data["repositories"]
+        ]
+    if not data.get("trophies_raw"):
+        data["trophies_raw"] = {
+            "Stars": totals.get("stars", 0),
+            "Followers": totals.get("followers", 0),
+            "Repositories": totals.get("repos", 0),
+            "Commits": totals.get("commits"),
+            "Pull requests": totals.get("prs"),
+            "Issues": totals.get("issues"),
+            "Languages": totals.get("unique_languages", len(data.get("top_languages", []))),
+        }
+    return data
+
+
+def fetch_repositories(username: str) -> list[dict[str, Any]]:
+    repos: list[dict[str, Any]] = []
+    page = 1
+    while True:
+        query = urllib.parse.urlencode(
+            {"per_page": 100, "page": page, "type": "owner", "sort": "updated"}
+        )
+        chunk = api_get(f"/users/{username}/repos?{query}")
+        if not isinstance(chunk, list):
+            raise GitHubAPIError("The repository endpoint returned an unexpected response.")
+        repos.extend(chunk)
+        if len(chunk) < 100:
+            return repos
+        page += 1
+
+
+def fetch_repo_languages(repo: dict[str, Any]) -> dict[str, int]:
+    name = repo.get("full_name", "")
+    if not name or repo.get("fork"):
+        return {}
+    url_name = urllib.parse.quote(name, safe="/")
+    result = api_get(f"/repos/{url_name}/languages")
+    if not isinstance(result, dict):
+        raise GitHubAPIError(f"The language endpoint returned an unexpected response for {name}.")
+    return {str(language): int(size) for language, size in result.items()}
+
+
+def fetch_languages(repos: list[dict[str, Any]]) -> dict[str, int]:
+    totals: dict[str, int] = {}
+    owned = [repo for repo in repos if not repo.get("fork")]
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+        jobs = [pool.submit(fetch_repo_languages, repo) for repo in owned]
+        try:
+            for job in concurrent.futures.as_completed(jobs):
+                for name, size in job.result().items():
+                    totals[name] = totals.get(name, 0) + size
+        except Exception:
+            for job in jobs:
+                job.cancel()
+            raise
+    return dict(sorted(totals.items(), key=lambda pair: pair[1], reverse=True))
+
+
+def search_count(query: str, *, commits: bool = False) -> tuple[int, bool]:
+    q = urllib.parse.quote(query, safe=":")
+    endpoint = "commits" if commits else "issues"
+    payload = api_get(f"/search/{endpoint}?q={q}&per_page=1")
+    if not isinstance(payload, dict):
+        raise GitHubAPIError(f"The {endpoint} search endpoint returned an unexpected response.")
+    count = int(payload.get("total_count", 0))
+    capped = count >= 1000
+    return min(count, 1000), capped
+
+
+def optional_search_count(query: str, *, commits: bool = False) -> tuple[int | None, bool]:
+    try:
+        return search_count(query, commits=commits)
+    except GitHubAPIError as exc:
+        print(f"{exc}\nThis count will be shown as unavailable in this snapshot.")
+        return None, False
+
+
+def event_summary(event: dict[str, Any]) -> str:
+    kind = event.get("type", "")
+    payload = event.get("payload", {})
+    action = str(payload.get("action") or "updated").replace("_", " ").capitalize()
+    if kind == "PushEvent":
+        commits = int(payload.get("size") or payload.get("distinct_size") or 0)
+        return f"Pushed {commits} {'commit' if commits == 1 else 'commits'}" if commits else "Pushed changes"
+    if kind == "WatchEvent":
+        return "Starred repository"
+    if kind == "CreateEvent":
+        return f"Created {payload.get('ref_type') or 'repository item'}"
+    if kind == "PullRequestEvent":
+        return f"{action} pull request"
+    if kind == "IssuesEvent":
+        return f"{action} issue"
+    if kind == "IssueCommentEvent":
+        return "Commented on issue or pull request"
+    if kind == "ForkEvent":
+        return "Forked repository"
+    if kind == "ReleaseEvent":
+        return "Published release"
+    return kind.removesuffix("Event") or "Public event"
+
+
+def iso_time(raw: str | None) -> dt.datetime | None:
+    try:
+        return dt.datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
+    except (TypeError, ValueError):
         return None
 
 
-def parse_iso(raw: str) -> dt.datetime:
-    return dt.datetime.fromisoformat(raw.replace("Z", "+00:00"))
+def fetch_snapshot(username: str) -> dict[str, Any]:
+    user = api_get(f"/users/{username}")
+    if not isinstance(user, dict) or not user.get("login"):
+        raise GitHubAPIError("The user endpoint returned an unexpected response.")
 
-
-def compact(value: int) -> str:
-    if value >= 1_000_000:
-        return f"{value / 1_000_000:.1f}M"
-    if value >= 1_000:
-        return f"{value / 1_000:.1f}K"
-    return str(value)
-
-
-def truncate(text: str, max_len: int) -> str:
-    if len(text) <= max_len:
-        return text
-    return text[: max_len - 3].rstrip() + "..."
-
-
-def get_rank(key: str, value: int) -> tuple[str, int, int, int]:
-    """Return (rank_name, current_value, next_threshold, prev_threshold)."""
-    thresholds = TROPHY_THRESHOLDS.get(key, [1, 10, 50, 100, 200, 500, 1000, 2000])
-    rank_idx = 0
-    for i, t in enumerate(thresholds):
-        if value >= t:
-            rank_idx = i
-    rank = RANK_NAMES[rank_idx]
-    prev_t = thresholds[rank_idx]
-    next_t = thresholds[rank_idx + 1] if rank_idx + 1 < len(thresholds) else thresholds[-1]
-    return rank, prev_t, next_t
-
-
-def fetch_repos(username: str):
-    repos = []
-    page = 1
-    while True:
-        url = f"{API_BASE}/users/{username}/repos?per_page=100&page={page}&type=owner&sort=updated"
-        chunk = gh_get(url)
-        if not chunk:
-            break
-        repos.extend(chunk)
-        if len(chunk) < 100:
-            break
-        page += 1
-    return repos
-
-
-def fetch_commit_count(username: str) -> int:
-    """Fetch total commit count via search API (public commits only)."""
-    try:
-        url = f"{API_BASE}/search/commits?q=author:{username}&per_page=1"
-        headers = {
-            "Accept": "application/vnd.github.cloak-preview+json",
-            "User-Agent": "profile-panels-generator",
-            "X-GitHub-Api-Version": "2022-11-28",
-        }
-        if TOKEN:
-            headers["Authorization"] = f"Bearer {TOKEN}"
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=25) as r:
-            data = json.loads(r.read().decode("utf-8"))
-            return int(data.get("total_count", 0))
-    except Exception:
-        return 0
-
-
-def fetch_pr_count(username: str) -> int:
-    try:
-        url = f"{API_BASE}/search/issues?q=type:pr+author:{username}&per_page=1"
-        data = gh_get(url)
-        if data is None:
-            return 0
-        return int(data.get("total_count", 0))
-    except Exception:
-        return 0
-
-
-def fetch_issue_count(username: str) -> int:
-    try:
-        url = f"{API_BASE}/search/issues?q=type:issue+author:{username}&per_page=1"
-        data = gh_get(url)
-        if data is None:
-            return 0
-        return int(data.get("total_count", 0))
-    except Exception:
-        return 0
-
-
-def format_event(event: dict) -> str:
-    event_type = event.get("type", "Event")
-    payload = event.get("payload", {})
-    repo_name = event.get("repo", {}).get("name", "unknown/repo")
-
-    if event_type == "PushEvent":
-        commits = int(payload.get("size", 0) or 0)
-        distinct = int(payload.get("distinct_size", 0) or 0)
-        commit_count = commits if commits > 0 else distinct
-        if commit_count > 0:
-            suffix = "commit" if commit_count == 1 else "commits"
-            return f"Pushed {commit_count} {suffix} to {repo_name}"
-        return f"Pushed updates to {repo_name}"
-    if event_type == "PullRequestEvent":
-        action = payload.get("action", "updated")
-        return f"{action.title()} pull request in {repo_name}"
-    if event_type == "IssuesEvent":
-        action = payload.get("action", "updated")
-        return f"{action.title()} issue in {repo_name}"
-    if event_type == "IssueCommentEvent":
-        return f"Commented on issue in {repo_name}"
-    if event_type == "WatchEvent":
-        return f"Starred {repo_name}"
-    if event_type == "ForkEvent":
-        return f"Forked {repo_name}"
-    if event_type == "CreateEvent":
-        ref_type = payload.get("ref_type", "resource")
-        return f"Created {ref_type} in {repo_name}"
-    if event_type == "ReleaseEvent":
-        return f"Published release in {repo_name}"
-
-    return f"{event_type.replace('Event', '')} in {repo_name}"
-
-
-def fetch_all_languages(repos: list) -> Counter:
-    """Fetch per-byte language breakdown for each repo and return unique language set."""
-    lang_bytes: Counter = Counter()
-    for repo in repos:
-        if repo.get("fork"):
-            continue  # skip forks for language count
-        full_name = repo.get("full_name", "")
-        if not full_name:
-            continue
-        try:
-            lang_data = gh_get(f"{API_BASE}/repos/{full_name}/languages")
-            if lang_data and isinstance(lang_data, dict):
-                for lang, byte_count in lang_data.items():
-                    lang_bytes[lang] += byte_count
-            else:
-                # API failed for this repo; use primary language from metadata
-                lang = repo.get("language")
-                if lang:
-                    lang_bytes[lang] += 1
-        except Exception:
-            # Fall back to primary language from repo metadata
-            lang = repo.get("language")
-            if lang:
-                lang_bytes[lang] += 1
-    return lang_bytes
-
-
-def get_rank(key: str, value: int) -> tuple:
-    """Return (rank_name, prev_threshold, next_threshold) using exact ryo-ma thresholds."""
-    thresholds = TROPHY_THRESHOLDS.get(key, [1, 10, 100, 200, 500, 1000, 2000, 4000])
-    if key == "MultiLanguage":
-        if value >= thresholds[0]:
-            return "SECRET", thresholds[0], thresholds[0]
-        return None, 0, thresholds[0]  # not unlocked
-    rank_idx = 0
-    for i, t in enumerate(thresholds):
-        if value >= t:
-            rank_idx = i
-    rank = RANK_NAMES[rank_idx]
-    prev_t = thresholds[rank_idx]
-    next_t = thresholds[rank_idx + 1] if rank_idx + 1 < len(thresholds) else None
-    return rank, prev_t, next_t
-
-
-def get_fallback_metadata() -> dict:
-    fallback_path = os.path.join(OUT_DIR, "profile-metadata.json")
-    if os.path.exists(fallback_path):
-        try:
-            with open(fallback_path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                # Restore top_languages from list-of-pairs back to Counter
-                if "top_languages" in data and isinstance(data["top_languages"], list):
-                    restored = Counter()
-                    for item in data["top_languages"]:
-                        if isinstance(item, (list, tuple)) and len(item) == 2:
-                            restored[item[0]] = item[1]
-                    data["_lang_counter"] = restored
-                return data
-        except Exception:
-            pass
-    return {}
-
-def build_data(username: str) -> dict:
-    now = dt.datetime.now(dt.timezone.utc)
-    fallback = get_fallback_metadata()
-    fallback_totals = fallback.get("totals", {})
-    fallback_langs = fallback.get("_lang_counter", Counter())
-
-    user = gh_get(f"{API_BASE}/users/{username}")
-    # If user API failed entirely, use fallback shell
-    if user is None:
-        user = {}
-    api_ok = bool(user.get("login"))  # True when the user API actually responded
-
-    repos = fetch_repos(username)
-
-    events = gh_get(f"{API_BASE}/users/{username}/events/public?per_page=30")
+    repos = fetch_repositories(username)
+    events = api_get(f"/users/{username}/events/public?per_page=30")
     if not isinstance(events, list):
-        events = []
+        raise GitHubAPIError("The public-events endpoint returned an unexpected response.")
 
-    total_stars = sum(int(repo.get("stargazers_count", 0)) for repo in repos)
-    total_forks = sum(int(repo.get("forks_count", 0)) for repo in repos)
-
-    # Fetch DEEP language data (all unique languages across all repos by byte count)
-    lang_bytes = fetch_all_languages(repos)
-    # fallback: at minimum use primary language of each repo
-    if not lang_bytes:
-        for repo in repos:
-            lang = repo.get("language")
-            if lang:
-                lang_bytes[lang] += 1
-    # If still empty after all attempts, use saved fallback
-    if not lang_bytes and fallback_langs:
-        lang_bytes = fallback_langs
-    unique_languages = len(lang_bytes)
-
-    active_repos_90 = 0
-    for repo in repos:
-        updated = repo.get("updated_at")
-        if not updated:
-            continue
-        delta = now - parse_iso(updated)
-        if delta.days <= 90:
-            active_repos_90 += 1
+    languages = fetch_languages(repos)
+    commits, commits_capped = optional_search_count(f"author:{username}", commits=True)
+    prs, prs_capped = optional_search_count(f"author:{username} type:pr is:public")
+    issues, issues_capped = optional_search_count(f"author:{username} type:issue is:public")
 
     top_repos = sorted(
-        repos,
-        key=lambda r: (int(r.get("stargazers_count", 0)), int(r.get("forks_count", 0))),
+        (repo for repo in repos if not repo.get("fork")),
+        key=lambda repo: (
+            int(repo.get("stargazers_count", 0)),
+            int(repo.get("forks_count", 0)),
+            repo.get("pushed_at") or "",
+        ),
         reverse=True,
     )[:6]
 
-    activity_lines = []
-    seen_lines = set()
-    for event in events[:30]:
-        created_at = event.get("created_at")
-        stamp = parse_iso(created_at).strftime("%d %b") if created_at else "--"
-        line = f"[{stamp}] {format_event(event)}"
-        if line in seen_lines:
-            continue
-        seen_lines.add(line)
-        activity_lines.append(line)
-        if len(activity_lines) == 8:
-            break
-
-    # Use API values when the API succeeded; fall back to saved metadata only
-    # when the API genuinely failed (not when a stat is legitimately 0).
-    if api_ok:
-        followers = int(user.get("followers", 0))
-        following = int(user.get("following", 0))
-    else:
-        followers = fallback_totals.get("followers", 0)
-        following = fallback_totals.get("following", 0)
-
-    if repos:
-        total_repos = len(repos)
-    else:
-        total_repos = fallback_totals.get("repos", 0)
-
-    if not total_stars and not repos:
-        total_stars = fallback_totals.get("stars", 0)
-
-    if not unique_languages:
-        unique_languages = fallback_totals.get("unique_languages", 0)
-
-    # Fetch live commit, PR, issue counts — use fallback only on API failure (None)
-    commit_count = fetch_commit_count(username)
-    if commit_count == 0 and not repos:
-        commit_count = fallback_totals.get("commits", 0)
-    pr_count = fetch_pr_count(username)
-    if pr_count == 0 and not repos:
-        pr_count = fallback_totals.get("prs", 0)
-    issue_count = fetch_issue_count(username)
-    if issue_count == 0 and not repos:
-        issue_count = fallback_totals.get("issues", 0)
-
-    # ── Trophy raw scores (exact ryo-ma trophy keys) ──
-    trophy_raw = {
-        "Stars":        total_stars,
-        "Followers":    followers,
-        "Repositories": total_repos,
-        "Commits":      commit_count,
-        "PullRequest":  pr_count,
-        "Issues":       issue_count,
-        "MultiLanguage": unique_languages,
+    fresh_at = dt.datetime.now(dt.timezone.utc)
+    owned = [repo for repo in repos if not repo.get("fork")]
+    totals = {
+        "repos": int(user.get("public_repos", 0)),
+        "stars": sum(int(repo.get("stargazers_count", 0)) for repo in repos),
+        "forks": sum(int(repo.get("forks_count", 0)) for repo in repos),
+        "followers": int(user.get("followers", 0)),
+        "following": int(user.get("following", 0)),
+        "commits": commits,
+        "prs": prs,
+        "issues": issues,
+        "unique_languages": len(languages),
+        "active_90": sum(
+            1
+            for repo in owned
+            if (stamp := iso_time(repo.get("pushed_at") or repo.get("updated_at")))
+            and fresh_at - stamp <= dt.timedelta(days=90)
+        ),
     }
-
-    # ── GitHub's real native achievement system ──
-    # Pull Shark: Silver = 16+ merged PRs
-    # YOLO: merged PR without review (solo dev — very likely)
-    # Quickdraw: closed issue/PR within 5 min (plausible)
-    # Starstruck: 16+ stars on ONE repo
-    # Pair Extraordinaire: co-authored commit (unknown)
-    # Galaxy Brain: accepted Discussion answer (unknown)
-    pull_shark_tier = "Silver" if pr_count >= 16 else ("Default" if pr_count >= 2 else None)
-    pull_shark_pct = min(100, int(pr_count / 128 * 100)) if pr_count >= 2 else int(pr_count / 2 * 100)
-
-    achievements = [
-        {
-            "name": "Pull Shark",
-            "icon": "🦈",
-            "detail": f"{pr_count} pull requests merged · Silver tier",
-            "source": "GitHub Native Achievement",
-            "unlocked": pr_count >= 2,
-            "tier": pull_shark_tier,
-            "tier_note": f"{pr_count}/128 → Gold",
-            "progress": pull_shark_pct,
-        },
-        {
-            "name": "YOLO",
-            "icon": "🚀",
-            "detail": "Merged a PR without a code review",
-            "source": "GitHub Native Achievement",
-            "unlocked": True,  # Solo dev with own repos — effectively guaranteed
-            "tier": "Default",
-            "tier_note": "One-time badge",
-            "progress": 100,
-        },
-        {
-            "name": "Quickdraw",
-            "icon": "⚡",
-            "detail": "Closed an issue or PR within 5 minutes",
-            "source": "GitHub Native Achievement",
-            "unlocked": True,  # likely — active dev with many issues/PRs
-            "tier": "Default",
-            "tier_note": "One-time badge",
-            "progress": 100,
-        },
-        {
-            "name": "Starstruck",
-            "icon": "⭐",
-            "detail": f"Earn 16 stars on one repo (best: {total_stars} total)",
-            "source": "GitHub Native Achievement",
-            "unlocked": total_stars >= 16,
-            "tier": None,
-            "tier_note": f"{total_stars}/16 stars needed",
-            "progress": min(100, int(total_stars / 16 * 100)),
-        },
-        {
-            "name": "Pair Extraordinaire",
-            "icon": "🤝",
-            "detail": "Co-authored a merged pull request",
-            "source": "GitHub Native Achievement",
-            "unlocked": False,  # cannot confirm without API access to co-authors
-            "tier": None,
-            "tier_note": "Co-author a PR commit",
-            "progress": 0,
-        },
-        {
-            "name": "Galaxy Brain",
-            "icon": "🌌",
-            "detail": "Provide 2 accepted answers in Discussions",
-            "source": "GitHub Native Achievement",
-            "unlocked": False,
-            "tier": None,
-            "tier_note": "Answer in Discussions",
-            "progress": 0,
-        },
-    ]
-
-    radar_scores = {
-        "Build Velocity":    min(100, active_repos_90 * 11),
-        "Community Reach":   min(100, followers * 2),
-        "Open Source Impact": min(100, int(total_stars * 1.6 + total_forks * 0.9)),
-        "Polyglot Index":    min(100, unique_languages * 14),
-        "Collaboration Pulse": min(100, int(len(events) * 3 + following * 0.5)),
-    }
-
     return {
-        "username":  username,
-        "updated":   now.strftime("%d %b %Y %H:%M UTC"),
-        "user":      user,
-        "repos":     repos,
-        "top_repos": top_repos,
-        "languages": lang_bytes,
-        "activity":  activity_lines,
-        "totals": {
-            "repos":            total_repos,
-            "stars":            total_stars,
-            "forks":            total_forks,
-            "active_90":        active_repos_90,
-            "unique_languages": unique_languages,
-            "commits":          commit_count,
-            "prs":              pr_count,
-            "issues":           issue_count,
-            "followers":        followers,
-            "following":        following,
+        "username": user.get("login", username),
+        "name": user.get("name") or username,
+        "bio": user.get("bio") or "",
+        "generated_at": fresh_at.isoformat(timespec="minutes").replace("+00:00", "Z"),
+        "totals": totals,
+        "limits": {"commits": commits_capped, "prs": prs_capped, "issues": issues_capped},
+        "top_languages": list(languages.items()),
+        "top_repos": [
+            {
+                "name": repo.get("name") or "",
+                "full_name": repo.get("full_name") or "",
+                "description": repo.get("description") or "",
+                "url": repo.get("html_url") or f"https://github.com/{repo.get('full_name')}",
+                "stars": int(repo.get("stargazers_count", 0)),
+                "forks": int(repo.get("forks_count", 0)),
+                "language": repo.get("language") or "Various",
+                "pushed_at": repo.get("pushed_at") or repo.get("updated_at") or "",
+            }
+            for repo in top_repos
+        ],
+        "activity": [
+            {
+                "type": event.get("type", ""),
+                "created_at": event.get("created_at", ""),
+                "repo": event.get("repo", {}).get("name", ""),
+                "url": f"https://github.com/{event.get('repo', {}).get('name', '')}",
+                "payload": event.get("payload", {}),
+                "summary": event_summary(event),
+            }
+            for event in events[:8]
+            if event.get("created_at") and event.get("repo", {}).get("name")
+        ],
+        "repository_selection": "stars",
+        "trophies_raw": {
+            "Stars": totals["stars"],
+            "Followers": totals["followers"],
+            "Repositories": totals["repos"],
+            "Commits": commits,
+            "Pull requests": prs,
+            "Issues": issues,
+            "Languages": totals["unique_languages"],
         },
-        "achievements": achievements,
-        "radar":        radar_scores,
-        "trophies_raw": trophy_raw,
     }
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-#  SVG WRAP — animated header with scan line + corner brackets + beacon
-# ─────────────────────────────────────────────────────────────────────────────
-def wrap_svg(title: str, subtitle: str, body: str, height: int) -> str:
-    stamp = dt.datetime.now(dt.timezone.utc).strftime("%d %b %Y %H:%M UTC")
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="{height}" viewBox="0 0 1200 {height}" role="img" aria-label="{escape(title)}">
+def fmt_count(value: int, capped: bool = False) -> str:
+    number = f"{int(value):,}"
+    return f"{number}+" if capped else number
+
+
+def stamp_label(raw: str) -> str:
+    stamp = iso_time(raw)
+    return stamp.strftime("%d %b %Y · %H:%M UTC") if stamp else "time unavailable"
+
+
+def day_label(raw: str) -> str:
+    stamp = iso_time(raw)
+    return stamp.strftime("%d %b") if stamp else "—"
+
+
+def svg_escape(value: Any) -> str:
+    return html.escape(str(value or ""), quote=True)
+
+
+def wrap_svg(title: str, note: str, body: str, height: int, index: str) -> str:
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="1200" height="{height}" viewBox="0 0 1200 {height}" role="img" aria-label="{svg_escape(title)}">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"   stop-color="#060710"/>
-      <stop offset="55%"  stop-color="#100b06"/>
-      <stop offset="100%" stop-color="#06070e"/>
-    </linearGradient>
-    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#131520"/>
-      <stop offset="100%" stop-color="#0c0d18"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#8b0000"/>
-      <stop offset="50%"  stop-color="#f1bd52"/>
-      <stop offset="100%" stop-color="#ffffff"/>
-    </linearGradient>
-    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#845e16"/>
-      <stop offset="100%" stop-color="#f1bd52"/>
-    </linearGradient>
-    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse">
-      <circle cx="1" cy="1" r="0.7" fill="#fff" opacity="0.04"/>
+    <pattern id="grain" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M0 79.5H80" stroke="#fff" stroke-opacity=".025"/>
+      <circle cx="8" cy="12" r=".7" fill="#fff" opacity=".16"/>
+      <circle cx="51" cy="40" r=".6" fill="#fff" opacity=".11"/>
+      <circle cx="29" cy="66" r=".6" fill="#fff" opacity=".13"/>
     </pattern>
-    <filter id="softGlow" x="-25%" y="-25%" width="150%" height="150%">
-      <feGaussianBlur stdDeviation="2.5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="glowHard" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
     <style>
-      .title   {{ fill:#ffffff; font:800 26px 'Bahnschrift','Segoe UI',sans-serif; letter-spacing:4px; }}
-      .tsub    {{ fill:#e8b840; font:600 10.5px 'Segoe UI',sans-serif; letter-spacing:3px; }}
-      .label   {{ fill:#d0d8e8; font:600 14px 'Segoe UI','Trebuchet MS',sans-serif; }}
-      .value   {{ fill:#ffffff; font:800 32px 'Bahnschrift','Segoe UI',sans-serif; }}
-      .small   {{ fill:#c8d0e0; font:600 13px 'Segoe UI','Trebuchet MS',sans-serif; }}
-      .muted   {{ fill:#8890a8; font:500 11px 'Segoe UI','Trebuchet MS',sans-serif; }}
-      .stamp   {{ fill:#555; font:500 10px 'Segoe UI','Trebuchet MS',sans-serif; }}
-      .mono    {{ fill:#d8e0f0; font:700 12px 'Consolas','Segoe UI Mono',monospace; }}
+      .canvas{{fill:#09090a}} .grain{{fill:url(#grain)}}
+      .rule{{stroke:#4b4540;stroke-width:1}} .red{{fill:#d12f37}} .gold{{fill:#d5ad52}}
+      .white{{fill:#f4f0e9}} .soft{{fill:#aba59c}}
+      .micro{{font:700 16px 'Segoe UI',Arial,sans-serif;letter-spacing:1px}}
+      .section{{font:700 18px 'Segoe UI',Arial,sans-serif;letter-spacing:1px}}
+      .small{{font:500 19px 'Segoe UI',Arial,sans-serif}}
+      .mono{{font:600 16px Consolas,'Courier New',monospace}}
+      .serif{{font:600 24px Georgia,'Times New Roman',serif}}
+      .num{{font:500 45px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}}
+      .inkline{{stroke-dasharray:28 10;animation:ink 8s linear infinite}}
+      @keyframes ink{{to{{stroke-dashoffset:-304}}}}
+      @media (prefers-reduced-motion:reduce){{.inkline{{animation:none}}}}
     </style>
   </defs>
-
-  <!-- Background -->
-  <rect width="1200" height="{height}" fill="url(#bg)"/>
-  <!-- Main panel -->
-  <rect x="14" y="14" width="1172" height="{height - 28}" rx="20" fill="url(#panel)" stroke="#b87e28" stroke-width="1.5" stroke-opacity="0.65"/>
-  <rect x="14" y="14" width="1172" height="{height - 28}" rx="20" fill="url(#dots)"/>
-  <!-- Top accent bar (gradient, full width) -->
-  <rect x="14" y="14" width="1172" height="5" rx="20" fill="url(#accent)"/>
-
-  <!-- ── Animated header section (72px tall) ── -->
-  <!-- Subtle header bg strip -->
-  <rect x="14" y="14" width="1172" height="72" rx="20" fill="#ffffff" fill-opacity="0.025"/>
-  <rect x="14" y="80" width="1172" height="1" fill="url(#accent)" opacity="0.3"/>
-
-  <!-- Corner HUD brackets -->
-  <g stroke="#e8b840" stroke-width="1.5" fill="none" opacity="0.55">
-    <path d="M30 30 L30 48 L48 48"/>
-    <path d="M1170 30 L1170 48 L1152 48"/>
-    <path d="M30 {height-16} L30 {height-34} L48 {height-34}"/>
-    <path d="M1170 {height-16} L1170 {height-34} L1152 {height-34}"/>
-  </g>
-
-  <!-- Animated scanner line across header -->
-  <rect x="56" y="50" width="1000" height="1" fill="url(#accent)" opacity="0.18"/>
-  <rect x="0" y="50" width="180" height="1" fill="url(#accent)" opacity="0.9" filter="url(#softGlow)">
-    <animateTransform attributeName="transform" type="translate" from="-180,0" to="1200,0" dur="3.8s" repeatCount="indefinite"/>
-  </rect>
-
-  <!-- Pulsing live indicator -->
-  <circle cx="1152" cy="44" r="5" fill="#9f0000" filter="url(#glowHard)">
-    <animate attributeName="r" values="4;8;4" dur="2.2s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="1152" cy="44" r="14" fill="none" stroke="#f1bd52" stroke-width="1" opacity="0.2">
-    <animate attributeName="r" values="10;20;10" dur="3.5s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.3;0;0.3" dur="3.5s" repeatCount="indefinite"/>
-  </circle>
-  <!-- LIVE label -->
-  <text x="1136" y="42" fill="#e8b840" font-size="8" font-family="Segoe UI" font-weight="700" letter-spacing="2" text-anchor="end" opacity="0.7">LIVE</text>
-
-  <!-- Section title and subtitle -->
-  <text x="56" y="52" class="title">{escape(title)}</text>
-  <text x="56" y="70" class="tsub">{escape(subtitle.upper())}</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated {stamp}</text>
-
+  <rect width="1200" height="{height}" rx="5" class="canvas"/>
+  <rect width="1200" height="{height}" rx="5" class="grain"/>
+  <path d="M0 0H1200" stroke="#d12f37" stroke-width="5"/>
+  <rect x="30" y="25" width="42" height="27" rx="2" class="red"/>
+  <text x="51" y="44" text-anchor="middle" class="micro white">{svg_escape(index)}</text>
+  <text x="87" y="43" class="micro white">{svg_escape(title.upper())}</text>
+  <text x="1150" y="43" text-anchor="end" class="micro gold">{svg_escape(note.upper())}</text>
+  <path d="M30 62H1170" class="rule"/>
   {body}
-</svg>"""
+</svg>
+"""
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-#  OVERVIEW
-# ─────────────────────────────────────────────────────────────────────────────
-def render_overview(data: dict) -> str:
-    totals = data["totals"]
-    languages = data["languages"].most_common(6)
-
-    body = ""
-    metrics = [
-        ("Repositories", compact(totals["repos"]),   f"{totals['active_90']} active · 90d"),
-        ("Followers",    compact(totals["followers"]), f"Following {totals.get('following', 0)}"),
-        ("Total Stars",  compact(totals["stars"]),   "Open-source impact"),
-        ("Commits",      compact(totals.get("commits", 0)), "Public pushes"),
+def render_overview(data: dict[str, Any], cached: bool = False) -> str:
+    totals = data.get("totals", {})
+    limits = data.get("limits", {})
+    counters = [
+        ("PUBLIC REPOS", "repos", "▤"),
+        ("FOLLOWERS", "followers", "◉"),
+        ("STARS ON PUBLIC REPOS", "stars", "✳"),
+        ("PUBLIC COMMITS", "commits", "↟"),
     ]
+    body = ['<text x="47" y="102" class="micro gold">THE OPEN FILE / ENGINEERING RECORD</text>']
+    body.append('<path d="M47 115H1152" class="rule"/>')
+    for index, (label, key, icon) in enumerate(counters):
+        x = 47 + index * 280
+        raw = totals.get(key)
+        value = fmt_count(raw, limits.get(key, False)) if raw is not None else "—"
+        body.append(f"""
+  <text x="{x}" y="150" class="micro soft">{icon}  {label}</text>
+  <text x="{x}" y="208" class="num white">{value}</text>
+  <path d="M{x} 222H{x + 236}" stroke="{('#d12f37' if index == 0 else '#d5ad52')}" stroke-width="2"/>
+""")
 
-    for index, (label, value, hint) in enumerate(metrics):
-        y = 104 + index * 78
-        body += f"""
-  <rect x="46" y="{y}" width="310" height="66" rx="12" fill="#0e1020" stroke="#2a3050" stroke-width="1.1"/>
-  <rect x="46" y="{y}" width="310" height="4" rx="12" fill="url(#gold)"/>
-  <text x="64" y="{y + 24}" class="label">{escape(label)}</text>
-  <text x="64" y="{y + 50}" class="muted">{escape(hint)}</text>
-  <text x="340" y="{y + 44}" class="value" text-anchor="end" style="font-size:28px">{escape(value)}</text>
-"""
-
-    # Language bar section — track width fixed at 680px starting at x=420
-    BAR_TRACK = 680
-    BAR_X = 420
-    body += f'\n  <text x="{BAR_X}" y="110" class="label" style="letter-spacing:2px;fill:#e8b840;">LANGUAGE SIGNAL MATRIX</text>'
-    body += f'\n  <text x="{BAR_X}" y="124" class="muted">Primary tech stack · Repo distribution</text>'
-
-    max_count = max((count for _, count in languages), default=1)
-    colors = ["url(#accent)", "#3060e8", "#a030e8", "#e8b840", "#30a060", "#e86060"]
-    for index, (language, count) in enumerate(languages):
-        y = 144 + index * 44
-        width = max(4, int((count / max_count) * BAR_TRACK))
-        col = colors[index % len(colors)]
-        body += f"""
-  <text x="{BAR_X}" y="{y}" class="small">{escape(language)}</text>
-  <rect x="{BAR_X}" y="{y + 6}" width="{BAR_TRACK}" height="14" rx="7" fill="#1a1d2e"/>
-  <rect x="{BAR_X}" y="{y + 6}" width="{width}" height="14" rx="7" fill="{col}">
-    <animate attributeName="opacity" values="0.8;1;0.8" dur="{2.5 + index*0.3:.1f}s" repeatCount="indefinite"/>
-  </rect>
-  <text x="{BAR_X + BAR_TRACK + 8}" y="{y + 18}" class="mono">{count}</text>
-"""
-
-    return wrap_svg("COMMAND CENTER", "Live profile telemetry · project momentum", body, 440)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  ACHIEVEMENTS — GitHub's real native achievement system
-# ─────────────────────────────────────────────────────────────────────────────
-def render_achievements(data: dict) -> str:
-    achievements = data["achievements"]
-    unlocked = sum(1 for item in achievements if item["unlocked"])
-    total = len(achievements)
-
-    body = f'\n  <text x="46" y="108" class="label" style="fill:#e8b840;letter-spacing:2px;">GITHUB NATIVE ACHIEVEMENTS · {unlocked}/{total} EARNED</text>'
-    body += f'\n  <text x="46" y="124" class="muted">Official GitHub achievement badges · auto-detected from profile activity</text>'
-
-    for index, item in enumerate(achievements):
+    body.append("""
+  <text x="47" y="265" class="micro gold">LANGUAGE / BYTE SHARE IN OWNED NON-FORK REPOSITORIES</text>
+  <text x="1152" y="265" text-anchor="end" class="micro soft">A VIEW OF SOURCE, NOT A SKILL SCORE</text>
+""")
+    languages = data.get("top_languages", [])[:6]
+    total_bytes = sum(int(size) for _, size in data.get("top_languages", []))
+    colors = ["#d12f37", "#d5ad52", "#f4f0e9", "#8c3336", "#a39b8d", "#78736c"]
+    for index, (language, size) in enumerate(languages):
         row = index // 3
         col = index % 3
-        x = 46 + col * 376
-        y = 142 + row * 148
-        is_unlocked = item["unlocked"]
-        progress = item.get("progress", 0)
-        progress_px = max(2, int(progress / 100 * 310))
-        tier = item.get("tier") or ""
-        tier_note = item.get("tier_note", "")
-        icon = item.get("icon", "")
+        x = 47 + col * 374
+        y = 301 + row * 54
+        share = int(size) / max(1, total_bytes)
+        width = int(278 * share)
+        color = colors[index % len(colors)]
+        body.append(f"""
+  <text x="{x}" y="{y}" class="small white">{svg_escape(language)}</text>
+  <text x="{x + 325}" y="{y}" text-anchor="end" class="mono gold">{share * 100:.1f}%</text>
+  <rect x="{x}" y="{y + 11}" width="278" height="5" rx="2.5" fill="#312d29"/>
+  <rect x="{x}" y="{y + 11}" width="{width}" height="5" rx="2.5" fill="{color}"/>
+""")
 
-        if is_unlocked:
-            stroke = "#e8b840"
-            top_bar = "#b30000"
-            badge_fill = "#f5c020"
-            badge_label = f"✓ {tier.upper() + ' ' if tier else ''}UNLOCKED"
-            card_bg = "#1a1600"
-            prog_fill = "url(#gold)"
-        else:
-            stroke = "#2a3050"
-            top_bar = "#1a1d28"
-            badge_fill = "#4a5578"
-            badge_label = "🔒 LOCKED"
-            card_bg = "#0e1020"
-            prog_fill = "#2a3050"
-
-        # shimmer only on unlocked
-        shimmer = ""
-        if is_unlocked:
-            shimmer = f'<animate attributeName="opacity" values="0.8;1;0.8" dur="{2.2 + index*0.3:.1f}s" repeatCount="indefinite"/>'
-
-        body += f"""
-  <rect x="{x}" y="{y}" width="354" height="130" rx="14" fill="{card_bg}" stroke="{stroke}" stroke-width="{1.5 if is_unlocked else 1.0}"/>
-  <rect x="{x}" y="{y}" width="354" height="4" rx="14" fill="{top_bar}"/>
-  <text x="{x + 46}" y="{y + 30}" class="small" style="font-weight:700;font-size:13px">{escape(item['name'])}</text>
-  <text x="{x + 14}" y="{y + 30}" style="font-size:18px;dominant-baseline:auto">{escape(icon)}</text>
-  <text x="{x + 14}" y="{y + 50}" class="muted">{escape(item['detail'])}</text>
-  <text x="{x + 14}" y="{y + 66}" style="fill:#404858;font:500 9px 'Segoe UI',sans-serif;">{escape(item.get('source',''))}</text>
-  <rect x="{x + 14}" y="{y + 76}" width="326" height="8" rx="4" fill="#1a1d28"/>
-  <rect x="{x + 14}" y="{y + 76}" width="{progress_px}" height="8" rx="4" fill="{prog_fill}">{shimmer}</rect>
-  <rect x="{x + 14}" y="{y + 90}" width="{progress_px}" height="2" rx="1" fill="{stroke}" opacity="{0.5 if is_unlocked else 0.2}"/>
-  <text x="{x + 14}" y="{y + 112}" class="muted" style="font-size:9px;fill:{badge_fill}">{escape(badge_label)}</text>
-  <text x="{x + 340}" y="{y + 112}" class="mono" text-anchor="end" style="fill:#8890a8;font-size:9px">{escape(tier_note)}</text>
-"""
-
-    return wrap_svg("ACHIEVEMENTS", "GitHub native badges · earned from real profile activity", body, 560)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  TROPHIES — exact ryo-ma thresholds · auto-sorted by rank (highest first)
-# ─────────────────────────────────────────────────────────────────────────────
-def render_trophies(data: dict) -> str:
-    trophy_raw = data.get("trophies_raw", {})
-
-    CARD_W = 182
-    CARD_H = 300
-    GAP    = 10
-    START_X = 46
-    START_Y = 96
-
-    # Rank → colour scheme
-    RANK_COLORS = {
-        "SSS":    ("#fff176", "#f5c020", "#9a6200", "#1e1800", "#d4a020"),
-        "SS":     ("#fff176", "#f5c020", "#9a6200", "#1e1800", "#d4a020"),
-        "S":      ("#ffe566", "#f5c020", "#9a6200", "#1e1800", "#d4a020"),
-        "AAA":    ("#ff7070", "#e03030", "#8b0000", "#180808", "#c03030"),
-        "AA":     ("#ff7070", "#e03030", "#8b0000", "#180808", "#c03030"),
-        "A":      ("#80b0d0", "#4080a0", "#1a3050", "#0e1420", "#3060a0"),
-        "B":      ("#60d060", "#30a030", "#103010", "#081008", "#204020"),
-        "C":      ("#909090", "#606060", "#282828", "#0e1018", "#404040"),
-        "SECRET": ("#df80ff", "#a030e0", "#501080", "#180828", "#8020c0"),
-    }
-
-    def cup_svg(cx: int, cy: int, cup_fill: str, hi_fill: str, rim_fill: str) -> str:
-        """Use the custom winner.svg asset but colorize the base to match rank."""
-        bx, by = cx - 36, cy - 42
-        return f"""
-  <image x="{cx - 45}" y="{by - 10}" width="90" height="90" href="../winner.svg" opacity="0.9" />
-  <!-- Under-glow / highlight to ground the trophy to the rank theme -->
-  <!-- base -->
-  <rect x="{cx - 28}" y="{by + 96}" width="56" height="8" rx="4" fill="{cup_fill}"/>
-  <rect x="{cx - 34}" y="{by + 102}" width="68" height="9" rx="4" fill="{hi_fill}" opacity="0.7"/>
-"""
-
-    def laurel_svg(cx: int, top_y: int, color_outer: str, color_inner: str) -> str:
-        """Draw laurel wreath on both sides, centred at cx."""
-        out = ""
-        # Left side leaves (5 leaves fanning up-left)
-        offsets_l = [(-38, 52, -50), (-44, 38, -62), (-46, 24, -74), (-42, 12, -86), (-36, 2, -96)]
-        for (lx, ly, angle) in offsets_l:
-            out += f'<ellipse cx="{cx + lx}" cy="{top_y + ly}" rx="7" ry="13" transform="rotate({angle},{cx+lx},{top_y+ly})" fill="{color_outer}"/>'
-            out += f'<ellipse cx="{cx + lx + 4}" cy="{top_y + ly}" rx="4.5" ry="9" transform="rotate({angle},{cx+lx+4},{top_y+ly})" fill="{color_inner}"/>'
-        # Right side (mirrored)
-        offsets_r = [(38, 52, 50), (44, 38, 62), (46, 24, 74), (42, 12, 86), (36, 2, 96)]
-        for (lx, ly, angle) in offsets_r:
-            out += f'<ellipse cx="{cx + lx}" cy="{top_y + ly}" rx="7" ry="13" transform="rotate({angle},{cx+lx},{top_y+ly})" fill="{color_outer}"/>'
-            out += f'<ellipse cx="{cx + lx - 4}" cy="{top_y + ly}" rx="4.5" ry="9" transform="rotate({angle},{cx+lx-4},{top_y+ly})" fill="{color_inner}"/>'
-        return out
-
-    body = ""
-
-    # ── Build list of all trophies with their computed rank, then sort highest→lowest ──
-    all_keys = list(TROPHY_META.keys())
-    trophy_list = []
-    for key in all_keys:
-        raw_val = trophy_raw.get(key, 0)
-        rank_result = get_rank(key, raw_val)
-        if key == "MultiLanguage":
-            rank, prev_t, next_t = rank_result
-            if rank is None:
-                continue  # not unlocked, skip
-        else:
-            rank, prev_t, next_t = rank_result
-        trophy_list.append((key, raw_val, rank, prev_t, next_t))
-
-    # Sort: highest rank first (RANK_ORDER maps rank names to integers)
-    trophy_list.sort(key=lambda t: RANK_ORDER.get(t[2], -1), reverse=True)
-
-    for idx, (key, raw_val, rank, prev_t, next_t) in enumerate(trophy_list):
-        meta = TROPHY_META.get(key, {})
-        category_label = meta.get("label", key)
-        icon = meta.get("icon", "")
-        trophy_name = meta.get("rank_names", {}).get(rank, rank)
-
-        cup_c, hi_c, rim_c, card_bg_c, stroke_c = RANK_COLORS.get(rank, RANK_COLORS["C"])
-
-        cx = START_X + idx * (CARD_W + GAP) + CARD_W // 2
-        card_x = START_X + idx * (CARD_W + GAP)
-        card_y = START_Y
-
-        # Progress within current rank tier toward next rank
-        if rank == "SECRET" or rank == "SSS":
-            progress = 100
-            next_label = "MAX"
-        elif next_t is not None:
-            tier_span = max(1, next_t - prev_t)
-            tier_pos  = max(0, raw_val - prev_t)
-            progress  = min(100, int(tier_pos / tier_span * 100))
-            next_label = f"→{next_t}"
-        else:
-            progress = 100
-            next_label = "MAX"
-        prog_px = max(2, int(progress / 100 * (CARD_W - 28)))
-
-        pts_label = f"{raw_val/1000:.1f}k" if raw_val >= 1000 else str(raw_val)
-
-        body += f"""
-  <!-- TROPHY {idx+1}: {key} [{rank}] -->
-  <rect x="{card_x}" y="{card_y}" width="{CARD_W}" height="{CARD_H}" rx="14" fill="{card_bg_c}" stroke="{stroke_c}" stroke-width="1.4"/>
-  <rect x="{card_x}" y="{card_y}" width="{CARD_W}" height="4" rx="14" fill="{rim_c}"/>
-  <text x="{cx}" y="{card_y + 22}" text-anchor="middle" style="fill:{cup_c};font:700 10px 'Segoe UI',sans-serif;letter-spacing:2px;">{escape(icon + ' ' + category_label.upper())}</text>
-"""
-        # laurel wreath
-        body += laurel_svg(cx, card_y + 32, "#ff8c00", "#ffa820")
-        # cup
-        body += cup_svg(cx, card_y + 110, cup_c, hi_c, rim_c)
-        # grade badge
-        body += f"""
-  <circle cx="{cx}" cy="{card_y + 110}" r="18" fill="{card_bg_c}" opacity="0.7"/>
-  <text x="{cx}" y="{card_y + 118}" text-anchor="middle" style="fill:{rim_c};font:900 {'14' if len(rank)>2 else '20'}px 'Bahnschrift','Arial Black',sans-serif;">{rank}</text>
-  <line x1="{card_x + 14}" y1="{card_y + 172}" x2="{card_x + CARD_W - 14}" y2="{card_y + 172}" stroke="{stroke_c}" stroke-width="0.7" opacity="0.4"/>
-  <text x="{cx}" y="{card_y + 192}" text-anchor="middle" style="fill:{cup_c};font:700 11.5px 'Bahnschrift','Segoe UI',sans-serif;">{escape(trophy_name)}</text>
-  <text x="{cx}" y="{card_y + 210}" text-anchor="middle" style="fill:#8890a8;font:600 10px 'Consolas',monospace;">{pts_label}</text>
-  <rect x="{card_x + 14}" y="{card_y + 222}" width="{CARD_W - 28}" height="7" rx="3.5" fill="#1a1d28"/>
-  <rect x="{card_x + 14}" y="{card_y + 222}" width="{prog_px}" height="7" rx="3.5" fill="{rim_c}">
-    <animate attributeName="opacity" values="0.7;1;0.7" dur="{2.2 + idx*0.2:.1f}s" repeatCount="indefinite"/>
-  </rect>
-  <text x="{cx}" y="{card_y + 245}" text-anchor="middle" style="fill:{stroke_c};font:600 9px 'Consolas',monospace;">{rank} · {progress}% {next_label}</text>
-  <rect x="{card_x + 14}" y="{card_y + 282}" width="{prog_px}" height="3" rx="1.5" fill="{cup_c}" opacity="0.5" filter="url(#softGlow)"/>
-"""
-
-    return wrap_svg("TROPHY CASE", "GitHub profile trophies · ryo-ma real ranks · auto-sorted highest first", body, 430)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  RECENT ACTIVITY
-# ─────────────────────────────────────────────────────────────────────────────
-def render_recent_activity(data: dict) -> str:
-    lines = data["activity"]
-
-    body = '\n  <text x="46" y="108" class="label" style="fill:#e8b840;letter-spacing:2px;">LATEST PUBLIC EVENTS</text>'
-
-    if not lines:
-        body += '\n  <text x="46" y="140" class="small">Recent activity is currently unavailable from the public events feed.</text>'
-    else:
-        body += '\n  <line x1="84" y1="118" x2="84" y2="468" stroke="#f1bd52" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="4,4"/>'
-        for index, line in enumerate(lines[:8]):
-            y = 130 + index * 44
-            row_fill = "#1a1e2e" if index % 2 == 0 else "#13161f"
-            # parse event type from line
-            if "Pushed" in line:
-                badge_fill = "#1e0808"; badge_stroke = "#c43030"; badge_text = "PUSH"; badge_col = "#e86060"
-            elif "Starred" in line:
-                badge_fill = "#1e1800"; badge_stroke = "#c4a430"; badge_text = "STAR"; badge_col = "#e8b840"
-            elif "Created" in line:
-                badge_fill = "#081808"; badge_stroke = "#30a060"; badge_text = "NEW"; badge_col = "#60f0a0"
-            elif "pull request" in line.lower():
-                badge_fill = "#080818"; badge_stroke = "#3060c4"; badge_text = "PR"; badge_col = "#6080e0"
-            elif "issue" in line.lower():
-                badge_fill = "#100818"; badge_stroke = "#8030c4"; badge_text = "ISS"; badge_col = "#b060e0"
-            else:
-                badge_fill = "#101018"; badge_stroke = "#404858"; badge_text = "EVT"; badge_col = "#8090a8"
-
-            body += f"""
-  <rect x="104" y="{y - 20}" width="1066" height="36" rx="10" fill="{row_fill}" stroke="#222838" stroke-width="0.8"/>
-  <circle cx="84" cy="{y - 2}" r="6" fill="{badge_col}" filter="url(#softGlow)">
-    <animate attributeName="r" values="4;7;4" dur="2.4s" begin="{index * 0.3}s" repeatCount="indefinite"/>
-  </circle>
-  <rect x="112" y="{y - 16}" width="44" height="16" rx="8" fill="{badge_fill}" stroke="{badge_stroke}" stroke-width="0.9"/>
-  <text x="134" y="{y - 5}" text-anchor="middle" style="fill:{badge_col};font:700 9px 'Segoe UI',sans-serif;letter-spacing:1px;">{badge_text}</text>
-  <text x="164" y="{y - 3}" class="small" style="font-size:12px">{escape(truncate(line, 96))}</text>
-"""
-
-    return wrap_svg("RECENT ACTIVITY", "Ops timeline · live GitHub event feed", body, 490)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  RADAR  — bar track capped to safe width
-# ─────────────────────────────────────────────────────────────────────────────
-def render_radar(data: dict) -> str:
-    scores = data["radar"]
-
-    # Layout: label area x=46..270 (224px), bar x=280..950 (670px), score x=960..1140
-    BAR_X     = 280
-    BAR_TRACK = 670  # track width — bar fill is ALWAYS ≤ this
-    SCORE_X   = 960
-
-    COLORS = [
-        ("#c43030", "#f5d060"),  # Build Velocity     — red→gold
-        ("#3060e8", "#60d0f0"),  # Community Reach    — blue
-        ("#8030e8", "#c060f0"),  # Open Source Impact — purple
-        ("#30a060", "#60f0c0"),  # Polyglot Index     — green
-        ("#e87030", "#f0c060"),  # Collaboration Pulse— orange
+    secondary = [
+        ("FORKS RECEIVED", fmt_count(totals["forks"]) if totals.get("forks") is not None else "—"),
+        ("OPENED PULL REQUESTS", fmt_count(totals["prs"], limits.get("prs", False)) if totals.get("prs") is not None else "—"),
+        ("OPENED ISSUES", fmt_count(totals["issues"], limits.get("issues", False)) if totals.get("issues") is not None else "—"),
+        ("LANGUAGES", fmt_count(totals["unique_languages"]) if totals.get("unique_languages") is not None else "—"),
+        ("ACTIVE REPOS · 90D", fmt_count(totals["active_90"]) if totals.get("active_90") is not None else "—"),
     ]
-
-    body = '\n  <text x="46" y="108" class="label" style="fill:#e8b840;letter-spacing:2px;">OPERATIONAL CAPABILITY BANDS</text>'
-
-    for index, (label, score) in enumerate(scores.items()):
-        y = 132 + index * 54
-        # Clamp bar fill: must be 0..BAR_TRACK
-        fill_w = max(2, min(BAR_TRACK, int(score / 100 * BAR_TRACK)))
-        c_from, c_to = COLORS[index % len(COLORS)]
-        grad_id = f"rbar{index}"
-
-        body += f"""
-  <defs>
-    <linearGradient id="{grad_id}" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="{c_from}"/>
-      <stop offset="100%" stop-color="{c_to}"/>
-    </linearGradient>
-  </defs>
-  <!-- Score circle -->
-  <circle cx="62" cy="{y + 8}" r="20" fill="#0e1020" stroke="{c_from}" stroke-width="1.5"/>
-  <text x="62" y="{y + 14}" text-anchor="middle" style="fill:{c_to};font:800 13px 'Bahnschrift',sans-serif;">{score}</text>
-  <!-- Label -->
-  <text x="88" y="{y + 6}" class="small" style="font-size:12px">{escape(label)}</text>
-  <text x="88" y="{y + 20}" class="muted">score {score}/100</text>
-  <!-- Bar track (fixed width, never overflows) -->
-  <rect x="{BAR_X}" y="{y}" width="{BAR_TRACK}" height="18" rx="9" fill="#1a1d2e"/>
-  <!-- Bar fill (clamped to BAR_TRACK) -->
-  <rect x="{BAR_X}" y="{y}" width="{fill_w}" height="18" rx="9" fill="url(#{grad_id})">
-    <animate attributeName="opacity" values="0.8;1;0.8" dur="{2.4 + index*0.3:.1f}s" repeatCount="indefinite"/>
-  </rect>
-  <!-- Score text -->
-  <text x="{SCORE_X}" y="{y + 14}" class="mono" style="fill:{c_to};font-size:13px;font-weight:800;">{score:>3} / 100</text>
-"""
-
-    return wrap_svg("ARSENAL RADAR", "Capability bands · operational profile score", body, 430)
+    yline = 439
+    body.append(f'<path d="M47 {yline}H1152" class="rule"/>')
+    for index, (label, value) in enumerate(secondary):
+        x = 47 + index * 220
+        body.append(f'<text x="{x}" y="{yline + 27}" class="micro gold">{value}</text><text x="{x}" y="{yline + 45}" class="micro soft">{label}</text>')
+    state = "CACHED DATA · ORIGINAL TIMESTAMP RETAINED" if cached else f"COLLECTED {stamp_label(data.get('generated_at', ''))}"
+    body.append(f"""
+  <path d="M47 510H1152" stroke="#d5ad52" stroke-width="1"/>
+  <text x="47" y="533" class="micro soft">{svg_escape(state.upper())}  ·  PUBLIC GITHUB API</text>
+  <path d="M869 530H1134" stroke="#d12f37" stroke-width="2" class="inkline"/>
+""")
+    return wrap_svg("Desk copy / account telemetry", "hourly api snapshot", "".join(body), 555, "00")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-#  FILE WRITE + MAIN
-# ─────────────────────────────────────────────────────────────────────────────
-def write_file(path: str, content: str) -> None:
-    with open(path, "w", encoding="utf-8") as handle:
-        handle.write(content)
+def render_repositories(data: dict[str, Any]) -> str:
+    repos = data.get("top_repos", [])[:6]
+    selection = "MOST STARRED" if data.get("repository_selection") == "stars" else "LATEST PUSHED"
+    body: list[str] = [
+        f'<text x="47" y="99" class="micro gold">{selection} · OWNED PUBLIC REPOSITORIES · FORKS OMITTED</text>'
+    ]
+    if not repos:
+        body.append('<text x="47" y="153" class="small soft">Repository list unavailable in this snapshot.</text>')
+    rows = max(1, (len(repos) + 1) // 2)
+    for index, repo in enumerate(repos):
+        col = index % 2
+        row = index // 2
+        x = 47 + col * 560
+        y = 121 + row * 205
+        width = 540
+        name = svg_escape(short_text(repo.get("name"), 34))
+        description_text = short_text(repo.get("description"), 95) or "No description added."
+        description_text = description_text.replace("**", "").replace("__", "").replace("`", "")
+        description = textwrap.wrap(description_text, width=56)[:2]
+        description_lines = "".join(
+            f'<tspan x="{x + 16}" dy="{0 if line_index == 0 else 22}">{svg_escape(line)}</tspan>'
+            for line_index, line in enumerate(description)
+        )
+        url = svg_escape(repo.get("url"))
+        language = svg_escape(short_text(repo.get("language", "Various"), 16))
+        body.append(f"""
+  <path d="M{x} {y + 15}H{x + width}V{y + 184}H{x}Z" fill="#101011" stroke="#3b3630" stroke-width="1"/>
+  <path d="M{x} {y + 15}V{y + 1}H{x + 74}L{x + 86} {y + 15}" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
+  <text x="{x + 15}" y="{y + 43}" class="micro red">{index + 1:02}</text>
+  <a xlink:href="{url}" target="_blank" rel="noopener noreferrer">
+  <text x="{x + 52}" y="{y + 44}" class="serif white">{name}</text>
+  </a>
+  <text x="{x + 16}" y="{y + 77}" class="small soft">{description_lines}</text>
+  <path d="M{x + 16} {y + 116}H{x + width - 16}" class="rule"/>
+  <text x="{x + 16}" y="{y + 145}" class="micro gold">{language.upper()}</text>
+  <text x="{x + width - 16}" y="{y + 145}" text-anchor="end" class="micro white">✳ {int(repo.get('stars', 0))}   ⑂ {int(repo.get('forks', 0))}</text>
+  <text x="{x + width - 16}" y="{y + 169}" text-anchor="end" class="micro soft">PUSHED {day_label(repo.get('pushed_at', '')).upper()}</text>
+""")
+    panel_height = 121 + rows * 205 + 15
+    return wrap_svg("Project ledger / public code", "hourly repository index", "".join(body), panel_height, "01")
+
+
+def rank_for(key: str, score: int) -> tuple[str, int, int | None]:
+    thresholds, _ = TROPHY_RULES[key]
+    if key == "Languages":
+        return ("SECRET", thresholds[0], None) if score >= thresholds[0] else ("—", 0, thresholds[0])
+    rank_idx = 0
+    for index, threshold in enumerate(thresholds):
+        if score >= threshold:
+            rank_idx = index
+    current = thresholds[rank_idx]
+    next_value = thresholds[rank_idx + 1] if rank_idx + 1 < len(thresholds) else None
+    return RANK_NAMES[rank_idx], current, next_value
+
+
+def render_trophies(data: dict[str, Any]) -> str:
+    scores = data.get("trophies_raw", {})
+    limits = data.get("limits", {})
+    cards = [(key, value) for key, value in TROPHY_RULES.items() if scores.get(key) is not None]
+    width = 267
+    gap = 16
+    columns = 4
+    rows = max(1, (len(cards) + columns - 1) // columns)
+    left = (1200 - columns * width - (columns - 1) * gap) // 2
+    body: list[str] = [
+        '<text x="47" y="98" class="micro gold">PUBLIC PROFILE COUNTS / COMMUNITY THRESHOLD LADDER</text>'
+    ]
+    for index, (key, (thresholds, icon)) in enumerate(cards):
+        raw_score = scores.get(key)
+        missing = raw_score is None
+        score = int(raw_score or 0)
+        limit_key = {"Pull requests": "prs"}.get(key, key.lower().replace(" ", "_"))
+        capped = bool(limits.get(limit_key, False))
+        rank, current, next_value = ("—", 0, None) if missing else rank_for(key, score)
+        x = left + (index % columns) * (width + gap)
+        y = 120 + (index // columns) * 250
+        max_rank = next_value is None
+        if capped:
+            rank = f"≥{rank}"
+            percent = 100
+            target_label = "SEARCH CAP"
+        elif max_rank:
+            percent = 100
+            target_label = "MAX"
+        else:
+            target = int(next_value)
+            percent = max(3, min(100, int((score - current) / max(1, target - current) * 100)))
+            target_label = f"NEXT {target}"
+        if key == "Languages" and score < 10:
+            percent = max(3, min(100, int(score / 10 * 100)))
+            target_label = "NEXT 10"
+        bar_w = int((width - 40) * percent / 100)
+        score_text = "DATA UNAVAILABLE" if missing else fmt_count(score, capped)
+        body.append(f"""
+  <rect x="{x}" y="{y}" width="{width}" height="230" rx="3" fill="#111112" stroke="#4a4030" stroke-width="1"/>
+  <path d="M{x} {y}H{x + width}" stroke="{('#d12f37' if index == 0 else '#d5ad52')}" stroke-width="3"/>
+  <text x="{x + width // 2}" y="{y + 27}" text-anchor="middle" class="micro gold">{svg_escape(key.upper())}</text>
+  <circle cx="{x + width // 2}" cy="{y + 82}" r="33" fill="#181718" stroke="#d5ad52" stroke-width="1.2"/>
+  <path d="M{x + width // 2 - 19} {y + 64}h9l3 10 7-6 6 6 3-10h9v17q-3 10-18 10t-19-10Z" fill="none" stroke="#d5ad52" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M{x + width // 2 - 10} {y + 95}h20m-24 5h28" stroke="#d12f37" stroke-width="2" stroke-linecap="round"/>
+  <text x="{x + width // 2}" y="{y + 145}" text-anchor="middle" class="serif white">{rank}</text>
+  <text x="{x + width // 2}" y="{y + 169}" text-anchor="middle" class="micro gold">{score_text} {icon}</text>
+  <rect x="{x + 20}" y="{y + 189}" width="{width - 40}" height="4" rx="2" fill="#3b3630"/>
+  <rect x="{x + 20}" y="{y + 189}" width="{bar_w}" height="4" rx="2" fill="#d12f37"/>
+  <text x="{x + width // 2}" y="{y + 214}" text-anchor="middle" class="micro soft">{"NO SNAPSHOT" if missing else target_label}</text>
+""")
+    footer_y = 120 + (rows - 1) * 250 + 230 + 28
+    body.append(f"""
+  <text x="600" y="{footer_y}" text-anchor="middle" class="micro soft">UNOFFICIAL COMMUNITY RANK DISPLAY · VALUES ARE PUBLIC API COUNTS</text>
+  <path d="M223 {footer_y + 20}H977" stroke="#d5ad52" stroke-opacity=".5"/>
+  <text x="600" y="{footer_y + 42}" text-anchor="middle" class="micro red">SEARCH ENDPOINT COUNTS SHOW “+” WHEN GITHUB CAPS RESULTS AT 1,000</text>
+""")
+    return wrap_svg("Trophy cabinet / public record", "community ranks · not native achievements", "".join(body), footer_y + 60, "02")
+
+
+def render_recent_activity(data: dict[str, Any], cached: bool = False) -> str:
+    entries = data.get("activity", [])[:8]
+    body = [
+        '<text x="47" y="99" class="micro gold">LATEST EVENTS EXPOSED BY THE PUBLIC PROFILE FEED</text>',
+        '<path d="M66 128V459" stroke="#8a262d" stroke-width="2" stroke-dasharray="3 7"/>',
+    ]
+    if not entries:
+        note = "Saved snapshot has no recent events." if cached else "No recent public events in the profile feed."
+        body.append(f'<text x="96" y="159" class="small soft">{svg_escape(note)}</text>')
+    for index, event in enumerate(entries):
+        y = 147 + index * 42
+        summary = svg_escape(event.get("summary") or event_summary(event))
+        repository = svg_escape(short_text(event.get("repo"), 52))
+        time = iso_time(event.get("created_at"))
+        date = time.strftime("%d %b · %H:%M UTC") if time else "time unavailable"
+        link = svg_escape(event.get("url", ""))
+        body.append(f"""
+  <circle cx="66" cy="{y - 4}" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
+  <text x="91" y="{y}" class="micro red">{date.upper()}</text>
+  <text x="286" y="{y}" class="small white">{summary}</text>
+  <a xlink:href="{link}" target="_blank" rel="noopener noreferrer">
+    <text x="1152" y="{y}" text-anchor="end" class="mono gold">{repository} ↗</text>
+  </a>
+""")
+    status = "CACHED" if cached else "UPDATED HOURLY · PUBLIC EVENTS MAY BE DELAYED BY GITHUB"
+    body.append(f'<text x="47" y="478" class="micro soft">{svg_escape(status)}</text>')
+    return wrap_svg("Recent activity / event log", "public events · hourly refresh", "".join(body), 510, "03")
+
+
+def write_file(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
 
 
 def main() -> None:
-    os.makedirs(OUT_DIR, exist_ok=True)
-    data = build_data(USERNAME)
+    old = read_metadata()
+    try:
+        data = fetch_snapshot(USERNAME)
+    except GitHubAPIError as exc:
+        if not old:
+            raise
+        data = old
+        cached = True
+        print(f"{exc}\nUsing the last complete snapshot dated {data.get('generated_at', 'unknown')}.")
+    else:
+        write_file(METADATA_FILE, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+        cached = False
 
-    write_file(os.path.join(OUT_DIR, "overview.svg"),       render_overview(data))
-    write_file(os.path.join(OUT_DIR, "achievements.svg"),   render_achievements(data))
-    write_file(os.path.join(OUT_DIR, "trophies.svg"),       render_trophies(data))
-    write_file(os.path.join(OUT_DIR, "recent-activity.svg"), render_recent_activity(data))
-    write_file(os.path.join(OUT_DIR, "radar.svg"),          render_radar(data))
-
-    # Save ALL languages (not just top 6) so fallback can restore the full Counter
-    metadata = {
-        "username":     data["username"],
-        "updated":      data["updated"],
-        "totals":       data["totals"],
-        "top_languages": data["languages"].most_common(),
-    }
-    write_file(os.path.join(OUT_DIR, "profile-metadata.json"), json.dumps(metadata, indent=2))
+    write_file(OUT_DIR / "overview.svg", render_overview(data, cached))
+    write_file(OUT_DIR / "repositories.svg", render_repositories(data))
+    write_file(OUT_DIR / "trophies.svg", render_trophies(data))
+    write_file(OUT_DIR / "recent-activity.svg", render_recent_activity(data, cached))
+    print(f"Rendered 4 panels from the {'cached' if cached else 'current'} GitHub snapshot dated {data.get('generated_at', 'unknown')}.")
 
 
 if __name__ == "__main__":

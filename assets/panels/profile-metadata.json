@@ -1,40 +1,139 @@
 {
   "username": "Karmanya03",
-  "updated": "26 Apr 2026 05:20 UTC",
+  "name": "Karmanya Ravindra",
+  "bio": "Engineering | Game Development | Cybersecurity & Ethical Hacking",
+  "generated_at": "2026-10-17T15:21Z",
   "totals": {
-    "repos": 36,
-    "stars": 6,
-    "forks": 0,
-    "active_90": 9,
-    "unique_languages": 12,
-    "commits": 445,
-    "prs": 6,
-    "issues": 0
+    "repositories": 42,
+    "followers": 32,
+    "stars_on_owned_repos": 42
   },
-  "top_languages": [
-    [
-      "Rust",
-      4311632
-    ],
-    [
-      "JavaScript",
-      270020
-    ],
-    [
-      "CSS",
-      247529
-    ],
-    [
-      "HTML",
-      236798
-    ],
-    [
-      "Python",
-      219112
-    ],
-    [
-      "Shell",
-      41361
-    ]
+  "languages": {
+    "Rust": 13007184,
+    "Python": 491676,
+    "JavaScript": 431019,
+    "HTML": 399291,
+    "CSS": 280207,
+    "Shell": 72235,
+    "PowerShell": 54143,
+    "C": 10680,
+    "Solidity": 7349,
+    "Dockerfile": 5804,
+    "Batchfile": 4621,
+    "Ruby": 1166,
+    "Procfile": 39
+  },
+  "repositories": [
+    {
+      "name": "Karmanya03",
+      "description": "",
+      "html_url": "https://github.com/Karmanya03/Karmanya03",
+      "stars": 0,
+      "updated_at": "2026-10-17T13:02:19Z"
+    },
+    {
+      "name": "Overthrone",
+      "description": "**(WIP)** Overthrone - The First All-Rust Active Directory exploitation framework. A single static binary that takes you from network access to Domain Admin to finished report - zero external dependencies, pure native protocol implementations, full kill-chain. No Python. No .NET. No mercy.",
+      "html_url": "https://github.com/Karmanya03/Overthrone",
+      "stars": 30,
+      "updated_at": "2026-09-22T03:04:14Z"
+    },
+    {
+      "name": "Grym",
+      "description": "Scope-enforced security assessment platform for explicitly authorized engagements.",
+      "html_url": "https://github.com/Karmanya03/Grym",
+      "stars": 0,
+      "updated_at": "2026-09-08T16:49:12Z"
+    }
+  ],
+  "activity": [
+    {
+      "type": "WatchEvent",
+      "created_at": "2026-09-30T15:58:37Z",
+      "repo": "togg53192-cmd/jailbreaks",
+      "payload": {
+        "action": "started"
+      }
+    },
+    {
+      "type": "WatchEvent",
+      "created_at": "2026-09-22T10:06:46Z",
+      "repo": "anmolkapil/plexo",
+      "payload": {
+        "action": "started"
+      }
+    },
+    {
+      "type": "PushEvent",
+      "created_at": "2026-09-22T03:04:15Z",
+      "repo": "Karmanya03/Overthrone",
+      "payload": {
+        "repository_id": 1159769890,
+        "push_id": 44220405036,
+        "ref": "refs/heads/main",
+        "head": "6171542bd905da116b781710f9f9be8662526d27",
+        "before": "55a3663a3c44c58d58a8172001f8a68379a473e7"
+      }
+    },
+    {
+      "type": "PushEvent",
+      "created_at": "2026-09-21T18:32:52Z",
+      "repo": "Karmanya03/Overthrone",
+      "payload": {
+        "repository_id": 1159769890,
+        "push_id": 44190403377,
+        "ref": "refs/heads/main",
+        "head": "55a3663a3c44c58d58a8172001f8a68379a473e7",
+        "before": "a27bf1b9420e2b6a34e40413a3cf8b18bfd1032f"
+      }
+    },
+    {
+      "type": "PushEvent",
+      "created_at": "2026-09-21T08:08:48Z",
+      "repo": "Karmanya03/Overthrone",
+      "payload": {
+        "repository_id": 1159769890,
+        "push_id": 44138665066,
+        "ref": "refs/heads/main",
+        "head": "48ecec3287d4baba5d7f9ea6e085a7ef5961f111",
+        "before": "bd33e426d6e58ac31109d83438733bc1e73c02bb"
+      }
+    },
+    {
+      "type": "PushEvent",
+      "created_at": "2026-09-21T10:16:57Z",
+      "repo": "Karmanya03/Overthrone",
+      "payload": {
+        "repository_id": 1159769890,
+        "push_id": 44148466279,
+        "ref": "refs/heads/main",
+        "head": "c422dac575de9b72060ff9b9d9be0d167ecef6e8",
+        "before": "bd4577bb9a92d1de5d7058d51d7b5414b13c595f"
+      }
+    },
+    {
+      "type": "PushEvent",
+      "created_at": "2026-09-21T04:58:17Z",
+      "repo": "Karmanya03/Overthrone",
+      "payload": {
+        "repository_id": 1159769890,
+        "push_id": 44126633186,
+        "ref": "refs/heads/main",
+        "head": "30994d65e0efa961c7bec061d9c3448ea9f6a59f",
+        "before": "fd24d0f0d017c8cb2e8acaccba32fa0e8fd4a37f"
+      }
+    },
+    {
+      "type": "PushEvent",
+      "created_at": "2026-09-21T10:23:58Z",
+      "repo": "Karmanya03/Overthrone",
+      "payload": {
+        "repository_id": 1159769890,
+        "push_id": 44148996461,
+        "ref": "refs/heads/main",
+        "head": "a27bf1b9420e2b6a34e40413a3cf8b18bfd1032f",
+        "before": "c422dac575de9b72060ff9b9d9be0d167ecef6e8"
+      }
+    }
   ]
 }
