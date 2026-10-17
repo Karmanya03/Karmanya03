@@ -22,6 +22,10 @@
       .footer-sweep-glow{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite;filter:url(#footer-glow)}
       .footer-sweep{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite}
       .card-edge{animation:edge 6s ease-in-out infinite}
+      .quote-word{animation:quoteWord 5.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+      .quote-word-late{animation:quoteWord 5.2s ease-in-out infinite 1.8s;transform-box:fill-box;transform-origin:center}
+      .quote-bar-glow{animation:quoteBar 7.2s ease-in-out infinite}
+      .quote-rail{stroke-dasharray:112 566;animation:quoteRail 7.8s cubic-bezier(.35,0,.22,1) infinite}
       .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
       .warmth{animation:warmth 5.8s ease-in-out infinite}
       .heat-cell{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}
@@ -39,6 +43,9 @@
       @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
       @keyframes heat{0%,100%{filter:brightness(.9);opacity:.8}50%{filter:brightness(1.7);opacity:1}}
       @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
+      @keyframes quoteWord{0%,100%{opacity:.78}45%{opacity:1}}
+      @keyframes quoteBar{0%,100%{opacity:.06}50%{opacity:.28}}
+      @keyframes quoteRail{from{stroke-dashoffset:678}to{stroke-dashoffset:0}}
       @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>

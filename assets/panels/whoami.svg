@@ -19,7 +19,13 @@
       .num{font:500 45px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
       .inkline{stroke-dasharray:28 10;animation:ink 8s linear infinite}
       .ambient-line{stroke-dasharray:46 1500;animation:rail 18s linear infinite}
+      .footer-sweep-glow{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite;filter:url(#footer-glow)}
+      .footer-sweep{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite}
       .card-edge{animation:edge 6s ease-in-out infinite}
+      .quote-word{animation:quoteWord 5.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+      .quote-word-late{animation:quoteWord 5.2s ease-in-out infinite 1.8s;transform-box:fill-box;transform-origin:center}
+      .quote-bar-glow{animation:quoteBar 7.2s ease-in-out infinite}
+      .quote-rail{stroke-dasharray:112 566;animation:quoteRail 7.8s cubic-bezier(.35,0,.22,1) infinite}
       .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
       .warmth{animation:warmth 5.8s ease-in-out infinite}
       .heat-cell{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}
@@ -31,11 +37,15 @@
       .badge-glyph{font:700 16px Consolas,'Courier New',monospace}
       @keyframes ink{to{stroke-dashoffset:-304}}
       @keyframes rail{to{stroke-dashoffset:-1546}}
+      @keyframes footerSweep{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
       @keyframes edge{0%,100%{stroke-opacity:.48}50%{stroke-opacity:.92}}
       @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
       @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
       @keyframes heat{0%,100%{filter:brightness(.9);opacity:.8}50%{filter:brightness(1.7);opacity:1}}
       @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
+      @keyframes quoteWord{0%,100%{opacity:.78}45%{opacity:1}}
+      @keyframes quoteBar{0%,100%{opacity:.06}50%{opacity:.28}}
+      @keyframes quoteRail{from{stroke-dashoffset:678}to{stroke-dashoffset:0}}
       @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>
@@ -48,6 +58,21 @@
   <text x="87" y="43" class="micro white">WHO I AM</text>
   <path d="M30 62H1170" class="rule"/>
   <rect x="34" y="83" width="1132" height="320" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>
+  <defs>
+  <clipPath id="whoami-main-sheen-clip"><rect x="34" y="83" width="1132" height="320" rx="5"/></clipPath>
+  <linearGradient id="whoami-main-sheen-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d12f37" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d12f37" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d12f37" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d12f37" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d12f37" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#whoami-main-sheen-clip)" opacity=".07">
+  <path d="M-396 -327h54l500 500h-54Z" fill="url(#whoami-main-sheen-light)">
+    <animateTransform attributeName="transform" type="translate" values="-1312,-440;1312,440" dur="11.8s" begin="1.1s" repeatCount="indefinite"/>
+  </path>
+</g>
   <path d="M34 88V397" stroke="#d12f37" stroke-width="4"/>
   <rect x="58" y="104" width="136" height="24" rx="12" fill="#301316" stroke="#8f312f"/>
   <text x="126" y="121" text-anchor="middle" class="micro white">IDENTITY / 01</text>
@@ -61,14 +86,29 @@
   <text x="60" y="281" class="micro red">ENGINEER</text>
   <text x="183" y="281" class="small white">Security engineering  ·  Programming</text>
   <text x="60" y="312" class="micro red">GAME DEV</text>
-  <text x="183" y="312" class="small white">Game Developer</text>
+  <text x="183" y="312" class="small white">Game Developer · Game Programmer</text>
   <text x="60" y="343" class="micro red">TEACHING</text>
   <text x="183" y="343" class="small white">Cybersecurity Professor · College</text>
   <text x="60" y="374" class="micro red">CERTIFIED</text>
-  <text x="183" y="374" class="small white">CRTP  ·  PT1  ·  CNSP Certified</text>
+  <text x="183" y="374" class="small white">CRTP Certified  ·  PT1 Certified  ·  CNSP Certified</text>
 
   <path d="M814 98V388" stroke="#3e352b"/>
   <rect x="837" y="104" width="304" height="274" rx="4" fill="#121011" stroke="#5a3031" class="card-edge"/>
+  <defs>
+  <clipPath id="whoami-status-sheen-clip"><rect x="837" y="104" width="304" height="274" rx="4"/></clipPath>
+  <linearGradient id="whoami-status-sheen-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#whoami-status-sheen-clip)" opacity=".12">
+  <path d="M453 -260h54l454 454h-54Z" fill="url(#whoami-status-sheen-light)">
+    <animateTransform attributeName="transform" type="translate" values="-484,-394;484,394" dur="9.4s" begin="2.4s" repeatCount="indefinite"/>
+  </path>
+</g>
   <path d="M837 104H1141" stroke="#d12f37" stroke-width="3"/>
   <text x="861" y="135" class="micro gold">BUILD STATUS</text>
   <circle cx="1109" cy="129" r="5" fill="#e2464d" class="pulse"/>

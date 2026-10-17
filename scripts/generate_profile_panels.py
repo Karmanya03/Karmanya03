@@ -634,6 +634,39 @@ def svg_escape(value: Any) -> str:
     return html.escape(str(value or ""), quote=True)
 
 
+def diagonal_sheen(
+    x: int,
+    y: int,
+    width: int,
+    height: int,
+    key: str,
+    *,
+    tint: str = "#f4f0e9",
+    duration: str = "9s",
+    delay: str = "0s",
+    opacity: str = ".16",
+    radius: int = 6,
+) -> str:
+    """A clipped down-right light pass for a single card, paced per section."""
+    start_x, start_y = x - height - 110, y - height - 90
+    band = height + 180
+    return f'''<defs>
+  <clipPath id="{key}-clip"><rect x="{x}" y="{y}" width="{width}" height="{height}" rx="{radius}"/></clipPath>
+  <linearGradient id="{key}-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="{tint}" stop-opacity="0"/>
+    <stop offset=".46" stop-color="{tint}" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="{tint}" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="{tint}" stop-opacity=".12"/>
+    <stop offset="1" stop-color="{tint}" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#{key}-clip)" opacity="{opacity}">
+  <path d="M{start_x} {start_y}h54l{band} {band}h-54Z" fill="url(#{key}-light)">
+    <animateTransform attributeName="transform" type="translate" values="{-width - 180},{-height - 120};{width + 180},{height + 120}" dur="{duration}" begin="{delay}" repeatCount="indefinite"/>
+  </path>
+</g>'''
+
+
 def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: bool = True) -> str:
     header = f'''
   <path d="M0 2H1200" stroke="#f4f0e9" stroke-opacity=".48" stroke-width="1" class="ambient-line"/>
@@ -667,6 +700,10 @@ def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: boo
       .footer-sweep-glow{{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite;filter:url(#footer-glow)}}
       .footer-sweep{{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite}}
       .card-edge{{animation:edge 6s ease-in-out infinite}}
+      .quote-word{{animation:quoteWord 5.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}}
+      .quote-word-late{{animation:quoteWord 5.2s ease-in-out infinite 1.8s;transform-box:fill-box;transform-origin:center}}
+      .quote-bar-glow{{animation:quoteBar 7.2s ease-in-out infinite}}
+      .quote-rail{{stroke-dasharray:112 566;animation:quoteRail 7.8s cubic-bezier(.35,0,.22,1) infinite}}
       .pulse{{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}}
       .warmth{{animation:warmth 5.8s ease-in-out infinite}}
       .heat-cell{{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}}
@@ -684,6 +721,9 @@ def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: boo
       @keyframes warmth{{0%,100%{{opacity:.2}}50%{{opacity:.55}}}}
       @keyframes heat{{0%,100%{{filter:brightness(.9);opacity:.8}}50%{{filter:brightness(1.7);opacity:1}}}}
       @keyframes rankGlow{{0%,100%{{opacity:.74}}50%{{opacity:1}}}}
+      @keyframes quoteWord{{0%,100%{{opacity:.78}}45%{{opacity:1}}}}
+      @keyframes quoteBar{{0%,100%{{opacity:.06}}50%{{opacity:.28}}}}
+      @keyframes quoteRail{{from{{stroke-dashoffset:678}}to{{stroke-dashoffset:0}}}}
       @media (prefers-reduced-motion:reduce){{*,*::before,*::after{{animation:none!important;scroll-behavior:auto!important}}}}
     </style>
   </defs>
@@ -710,6 +750,12 @@ def render_overview(data: dict[str, Any]) -> str:
         x = 47 + index * 280
         raw = totals.get(key)
         value = fmt_count(raw, limits.get(key, False)) if raw is not None else "—"
+        body.append(diagonal_sheen(
+            x - 8, 91, 252, 103, f'overview-sheen-{index}',
+            tint="#d12f37" if index == 0 else "#d5ad52",
+            duration=f'{10.4 + index * 1.1:.2f}s', delay=f'{index * .8:.2f}s',
+            opacity=".11", radius=3,
+        ))
         body.append(f"""
   <text x="{x}" y="112" class="micro soft">{icon}  {label}</text>
   <text x="{x}" y="170" class="num white">{value}</text>
@@ -797,6 +843,7 @@ def render_repositories(data: dict[str, Any]) -> str:
             )
         body.append(f"""
   <path d="M{x} {y + 15}H{x + width}V{y + 184}H{x}Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
+  {diagonal_sheen(x, y + 15, width, 169, f'repo-sheen-{index}', tint="#d5ad52", duration=f'{8.2 + index * .47:.2f}s', delay=f'{index * .31:.2f}s', opacity=".13", radius=2)}
   <path d="M{x} {y + 15}V{y + 1}H{x + 74}L{x + 86} {y + 15}" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="{x + 15}" y="{y + 43}" class="micro red">{index + 1:02}</text>
   <a xlink:href="{url}" target="_blank" rel="noopener noreferrer">
@@ -834,7 +881,7 @@ def rank_for(key: str, score: int) -> tuple[str, int, int | None]:
 def render_trophies(data: dict[str, Any]) -> str:
     rank_colors = {
         "C": "#aaa49a", "B": "#bd7955", "A": "#e2464d", "AA": "#ef8a4c",
-        "AAA": "#d5ad52", "S": "#f4f0e9", "SS": "#e39cc2", "SSS": "#ffe99a",
+        "AAA": "#d5ad52", "S": "#c9a3ff", "SS": "#dc8dff", "SSS": "#f0bdff",
         "SECRET": "#94d6aa", "LOCKED": "#766f67", "—": "#766f67",
     }
     scores = data.get("trophies_raw", {})
@@ -876,10 +923,18 @@ def render_trophies(data: dict[str, Any]) -> str:
         bar_w = int((width - 40) * percent / 100)
         score_text = "DATA UNAVAILABLE" if missing else fmt_count(score, capped)
         rank_color = rank_colors.get(rank.lstrip("≥").split("+")[0], rank_colors["SSS"])
+        is_s_rank = rank.lstrip("≥").split("+")[0].startswith("S")
+        rank_sheen = diagonal_sheen(
+            x, y, width, 226, f'trophy-sheen-{index}',
+            tint="#d7a6ff" if is_s_rank else "#d5ad52",
+            duration=f'{7.1 + index * .63:.2f}s', delay=f'{index * .42:.2f}s',
+            opacity=".22" if is_s_rank else ".10", radius=7,
+        )
         center = x + width // 2
         rank_font_size = 19 if len(rank) > 4 else 28
         body.append(f"""
   <rect x="{x}" y="{y}" width="{width}" height="226" rx="7" fill="#101011" stroke="{rank_color}" stroke-opacity=".58" class="card-edge"/>
+  {rank_sheen}
   <path d="M{x + 1} {y + 7}H{x + width - 1}" stroke="{rank_color}" stroke-width="3"/>
   <path d="M{x + 14} {y + 20}h16m-16 0v16M{x + width - 14} {y + 20}h-16m16 0v16" fill="none" stroke="{rank_color}" stroke-opacity=".46" stroke-width="1.3"/>
   <text x="{x + 18}" y="{y + 36}" class="micro" fill="{rank_color}">{svg_escape(key.upper())}</text>
@@ -928,6 +983,7 @@ def render_achievements(data: dict[str, Any]) -> str:
         body.append(f"""
   <a xlink:href="{svg_escape(url)}" target="_blank" rel="noopener noreferrer">
     <rect x="{x}" y="{y}" width="{card_width}" height="{card_height}" rx="6" fill="#101011" stroke="{color}" stroke-opacity=".52" class="card-edge"/>
+    {diagonal_sheen(x, y, card_width, card_height, f'achievement-sheen-{index}', tint=color, duration=f'{8.6 + index * .56:.2f}s', delay=f'{index * .27:.2f}s', opacity=".17", radius=6)}
     <path d="M{x + 1} {y + 7}H{x + card_width - 1}" stroke="{color}" stroke-width="3"/>
     <circle cx="{x + 44}" cy="{y + 49}" r="24" fill="{color}" fill-opacity=".10" stroke="{color}" stroke-opacity=".65"/>
     <circle cx="{x + 44}" cy="{y + 49}" r="30" fill="none" stroke="{color}" stroke-opacity=".28" stroke-dasharray="2 7" class="inkline"/>
@@ -947,6 +1003,7 @@ def render_whoami(data: dict[str, Any]) -> str:
     name = svg_escape(data.get("name") or "Karmanya Ravindra")
     body = f"""
   <rect x="34" y="83" width="1132" height="320" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>
+  {diagonal_sheen(34, 83, 1132, 320, "whoami-main-sheen", tint="#d12f37", duration="11.8s", delay="1.1s", opacity=".07", radius=5)}
   <path d="M34 88V397" stroke="#d12f37" stroke-width="4"/>
   <rect x="58" y="104" width="136" height="24" rx="12" fill="#301316" stroke="#8f312f"/>
   <text x="126" y="121" text-anchor="middle" class="micro white">IDENTITY / 01</text>
@@ -960,14 +1017,15 @@ def render_whoami(data: dict[str, Any]) -> str:
   <text x="60" y="281" class="micro red">ENGINEER</text>
   <text x="183" y="281" class="small white">Security engineering  ·  Programming</text>
   <text x="60" y="312" class="micro red">GAME DEV</text>
-  <text x="183" y="312" class="small white">Game Developer</text>
+  <text x="183" y="312" class="small white">Game Developer · Game Programmer</text>
   <text x="60" y="343" class="micro red">TEACHING</text>
   <text x="183" y="343" class="small white">Cybersecurity Professor · College</text>
   <text x="60" y="374" class="micro red">CERTIFIED</text>
-  <text x="183" y="374" class="small white">CRTP  ·  PT1  ·  CNSP Certified</text>
+  <text x="183" y="374" class="small white">CRTP Certified  ·  PT1 Certified  ·  CNSP Certified</text>
 
   <path d="M814 98V388" stroke="#3e352b"/>
   <rect x="837" y="104" width="304" height="274" rx="4" fill="#121011" stroke="#5a3031" class="card-edge"/>
+  {diagonal_sheen(837, 104, 304, 274, "whoami-status-sheen", tint="#d5ad52", duration="9.4s", delay="2.4s", opacity=".12", radius=4)}
   <path d="M837 104H1141" stroke="#d12f37" stroke-width="3"/>
   <text x="861" y="135" class="micro gold">BUILD STATUS</text>
   <circle cx="1109" cy="129" r="5" fill="#e2464d" class="pulse"/>
@@ -1132,7 +1190,6 @@ def render_toolkit() -> str:
     }
     body: list[str] = ['<rect x="34" y="82" width="1132" height="508" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>']
     badge_mask: list[str] = []
-    badge_sweeps: list[str] = []
     badge_count = 0
     top = 98
     for group_index, (group, items) in enumerate(SHIELD_GROUPS.items()):
@@ -1167,12 +1224,30 @@ def render_toolkit() -> str:
         + ''.join(badge_mask) + '</g></mask></defs>'
     )
     body.append(defs + '''
+  <defs>
+    <linearGradient id="badge-rake-gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
+      <stop offset=".46" stop-color="#d5ad52" stop-opacity=".18"/>
+      <stop offset=".55" stop-color="#fff2cb" stop-opacity=".82"/>
+      <stop offset=".64" stop-color="#d5ad52" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="badge-rake-white" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity=".68"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
   <g mask="url(#badgeMask)">
-    <g>
-      <path d="M-120 -140H-45L470 560H395Z" fill="#fff" opacity=".24"/>
-      <path d="M-101 -140H-64L451 560H414Z" fill="#fff" opacity=".62"/>
-      <animateTransform attributeName="transform" type="translate" values="-500,-70;1400,340" dur="6.4s" repeatCount="indefinite"/>
-    </g>
+    <path d="M-340 -260h58l740 820h-58Z" fill="url(#badge-rake-gold)" opacity=".72">
+      <animateTransform attributeName="transform" type="translate" values="-760,-520;760,520" dur="10.8s" repeatCount="indefinite"/>
+    </path>
+    <path d="M-370 -260h26l740 820h-26Z" fill="url(#badge-rake-white)" opacity=".74">
+      <animateTransform attributeName="transform" type="translate" values="-760,-520;760,520" dur="10.8s" begin="1.9s" repeatCount="indefinite"/>
+    </path>
+    <path d="M-330 -260h30l740 820h-30Z" fill="url(#badge-rake-white)" opacity=".34">
+      <animateTransform attributeName="transform" type="translate" values="-760,-520;760,520" dur="14.2s" begin="4.1s" repeatCount="indefinite"/>
+    </path>
   </g>''')
     body.append('<text x="58" y="568" class="micro soft">LANGUAGES  ·  CLOUD  ·  SECURITY  ·  GAME DEVELOPMENT  ·  CREATIVE TOOLS</text>')
     return wrap_svg("Toolkit", "".join(body), 610, "06")
@@ -1204,6 +1279,32 @@ def render_footer_quote() -> str:
   </text>
 '''
     return wrap_svg("Closing quote", body, 88, "07", show_header=False)
+
+
+def render_kali_quote() -> str:
+    body = '''
+  <defs>
+    <linearGradient id="quote-glint" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#d12f37" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#f4f0e9" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#d12f37" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="quote-line-clip"><rect x="93" y="77" width="675" height="3" rx="1.5"/></clipPath>
+  </defs>
+  <rect x="44" y="12" width="1112" height="76" rx="5" fill="#0d0d0e" stroke="#332a28"/>
+  <path d="M45 18V82" stroke="#d12f37" stroke-width="4"/>
+  <path d="M45 18V82" stroke="#ff7378" stroke-opacity=".22" stroke-width="8" class="quote-bar-glow"/>
+  <text x="75" y="39" class="micro red">FIELD NOTE  /  ATTENTION</text>
+  <text x="75" y="67" class="serif white" font-size="23">
+    “The <tspan fill="#d5ad52" class="quote-word">quieter</tspan> you become, the more you can <tspan fill="#e2464d" class="quote-word-late">hear.</tspan>”
+  </text>
+  <text x="1125" y="66" text-anchor="end" class="micro gold">— KALI LINUX</text>
+  <g clip-path="url(#quote-line-clip)">
+    <path d="M92 78H770" stroke="#552126" stroke-width="2"/>
+    <path d="M92 78H770" stroke="url(#quote-glint)" stroke-width="2.5" stroke-linecap="round" class="quote-rail"/>
+  </g>
+'''
+    return wrap_svg("Kali Linux field note", body, 100, "", show_header=False)
 
 
 def render_recent_activity(data: dict[str, Any]) -> str:
@@ -1404,6 +1505,7 @@ def main() -> None:
     write_file(OUT_DIR / "recent-activity.svg", render_recent_activity(data))
     write_file(OUT_DIR / "telemetry.svg", render_event_trace(data))
     write_file(OUT_DIR / "toolkit.svg", render_toolkit())
+    write_file(OUT_DIR / "kali-quote.svg", render_kali_quote())
     write_file(OUT_DIR / "footer-quote.svg", render_footer_quote())
     years = sorted(data.get("contributions", {}).get("years", []), key=lambda item: int(item.get("year", 0)), reverse=True)
     if years:

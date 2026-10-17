@@ -22,6 +22,10 @@
       .footer-sweep-glow{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite;filter:url(#footer-glow)}
       .footer-sweep{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite}
       .card-edge{animation:edge 6s ease-in-out infinite}
+      .quote-word{animation:quoteWord 5.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+      .quote-word-late{animation:quoteWord 5.2s ease-in-out infinite 1.8s;transform-box:fill-box;transform-origin:center}
+      .quote-bar-glow{animation:quoteBar 7.2s ease-in-out infinite}
+      .quote-rail{stroke-dasharray:112 566;animation:quoteRail 7.8s cubic-bezier(.35,0,.22,1) infinite}
       .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
       .warmth{animation:warmth 5.8s ease-in-out infinite}
       .heat-cell{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}
@@ -39,6 +43,9 @@
       @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
       @keyframes heat{0%,100%{filter:brightness(.9);opacity:.8}50%{filter:brightness(1.7);opacity:1}}
       @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
+      @keyframes quoteWord{0%,100%{opacity:.78}45%{opacity:1}}
+      @keyframes quoteBar{0%,100%{opacity:.06}50%{opacity:.28}}
+      @keyframes quoteRail{from{stroke-dashoffset:678}to{stroke-dashoffset:0}}
       @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>
@@ -51,6 +58,21 @@
   <text x="87" y="43" class="micro white">TROPHY CASE</text>
   <path d="M30 62H1170" class="rule"/>
   <rect x="42" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#e2464d" stroke-opacity=".58" class="card-edge"/>
+  <defs>
+  <clipPath id="trophy-sheen-0-clip"><rect x="42" y="96" width="267" height="226" rx="7"/></clipPath>
+  <linearGradient id="trophy-sheen-0-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#trophy-sheen-0-clip)" opacity=".10">
+  <path d="M-294 -220h54l406 406h-54Z" fill="url(#trophy-sheen-0-light)">
+    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="7.10s" begin="0.00s" repeatCount="indefinite"/>
+  </path>
+</g>
   <path d="M43 103H308" stroke="#e2464d" stroke-width="3"/>
   <path d="M56 116h16m-16 0v16M295 116h-16m16 0v16" fill="none" stroke="#e2464d" stroke-opacity=".46" stroke-width="1.3"/>
   <text x="60" y="132" class="micro" fill="#e2464d">STARS</text>
@@ -65,6 +87,21 @@
   <text x="175" y="312" text-anchor="middle" class="micro soft">NEXT 50</text>
 
   <rect x="325" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#e2464d" stroke-opacity=".58" class="card-edge"/>
+  <defs>
+  <clipPath id="trophy-sheen-1-clip"><rect x="325" y="96" width="267" height="226" rx="7"/></clipPath>
+  <linearGradient id="trophy-sheen-1-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#trophy-sheen-1-clip)" opacity=".10">
+  <path d="M-11 -220h54l406 406h-54Z" fill="url(#trophy-sheen-1-light)">
+    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="7.73s" begin="0.42s" repeatCount="indefinite"/>
+  </path>
+</g>
   <path d="M326 103H591" stroke="#e2464d" stroke-width="3"/>
   <path d="M339 116h16m-16 0v16M578 116h-16m16 0v16" fill="none" stroke="#e2464d" stroke-opacity=".46" stroke-width="1.3"/>
   <text x="343" y="132" class="micro" fill="#e2464d">FOLLOWERS</text>
@@ -78,21 +115,51 @@
   <rect x="345" y="288" width="90" height="5" rx="2.5" fill="#e2464d" class="rank-meter"/>
   <text x="458" y="312" text-anchor="middle" class="micro soft">NEXT 50</text>
 
-  <rect x="608" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#f4f0e9" stroke-opacity=".58" class="card-edge"/>
-  <path d="M609 103H874" stroke="#f4f0e9" stroke-width="3"/>
-  <path d="M622 116h16m-16 0v16M861 116h-16m16 0v16" fill="none" stroke="#f4f0e9" stroke-opacity=".46" stroke-width="1.3"/>
-  <text x="626" y="132" class="micro" fill="#f4f0e9">REPOSITORIES</text>
-  <circle cx="741" cy="184" r="39" fill="#f4f0e9" fill-opacity=".07" stroke="#f4f0e9" stroke-opacity=".24" stroke-width="7" class="pulse"/>
-  <circle cx="741" cy="184" r="31" fill="#151414" stroke="#f4f0e9" stroke-width="1.5"/>
-  <circle cx="741" cy="184" r="35" fill="none" stroke="#f4f0e9" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
-  <text x="741" y="195" text-anchor="middle" fill="#f4f0e9" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">▤</text>
-  <text x="741" y="249" text-anchor="middle" fill="#f4f0e9" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">S</text>
-  <text x="741" y="272" text-anchor="middle" class="micro white">42 <tspan fill="#f4f0e9">· ▤</tspan></text>
+  <rect x="608" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#c9a3ff" stroke-opacity=".58" class="card-edge"/>
+  <defs>
+  <clipPath id="trophy-sheen-2-clip"><rect x="608" y="96" width="267" height="226" rx="7"/></clipPath>
+  <linearGradient id="trophy-sheen-2-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d7a6ff" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d7a6ff" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d7a6ff" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d7a6ff" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d7a6ff" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#trophy-sheen-2-clip)" opacity=".22">
+  <path d="M272 -220h54l406 406h-54Z" fill="url(#trophy-sheen-2-light)">
+    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="8.36s" begin="0.84s" repeatCount="indefinite"/>
+  </path>
+</g>
+  <path d="M609 103H874" stroke="#c9a3ff" stroke-width="3"/>
+  <path d="M622 116h16m-16 0v16M861 116h-16m16 0v16" fill="none" stroke="#c9a3ff" stroke-opacity=".46" stroke-width="1.3"/>
+  <text x="626" y="132" class="micro" fill="#c9a3ff">REPOSITORIES</text>
+  <circle cx="741" cy="184" r="39" fill="#c9a3ff" fill-opacity=".07" stroke="#c9a3ff" stroke-opacity=".24" stroke-width="7" class="pulse"/>
+  <circle cx="741" cy="184" r="31" fill="#151414" stroke="#c9a3ff" stroke-width="1.5"/>
+  <circle cx="741" cy="184" r="35" fill="none" stroke="#c9a3ff" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <text x="741" y="195" text-anchor="middle" fill="#c9a3ff" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">▤</text>
+  <text x="741" y="249" text-anchor="middle" fill="#c9a3ff" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">S</text>
+  <text x="741" y="272" text-anchor="middle" class="micro white">42 <tspan fill="#c9a3ff">· ▤</tspan></text>
   <rect x="628" y="288" width="227" height="5" rx="2.5" fill="#3b3630"/>
-  <rect x="628" y="288" width="90" height="5" rx="2.5" fill="#f4f0e9" class="rank-meter"/>
+  <rect x="628" y="288" width="90" height="5" rx="2.5" fill="#c9a3ff" class="rank-meter"/>
   <text x="741" y="312" text-anchor="middle" class="micro soft">NEXT 45</text>
 
   <rect x="891" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#d5ad52" stroke-opacity=".58" class="card-edge"/>
+  <defs>
+  <clipPath id="trophy-sheen-3-clip"><rect x="891" y="96" width="267" height="226" rx="7"/></clipPath>
+  <linearGradient id="trophy-sheen-3-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#trophy-sheen-3-clip)" opacity=".10">
+  <path d="M555 -220h54l406 406h-54Z" fill="url(#trophy-sheen-3-light)">
+    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="8.99s" begin="1.26s" repeatCount="indefinite"/>
+  </path>
+</g>
   <path d="M892 103H1157" stroke="#d5ad52" stroke-width="3"/>
   <path d="M905 116h16m-16 0v16M1144 116h-16m16 0v16" fill="none" stroke="#d5ad52" stroke-opacity=".46" stroke-width="1.3"/>
   <text x="909" y="132" class="micro" fill="#d5ad52">COMMITS</text>
@@ -107,6 +174,21 @@
   <text x="1024" y="312" text-anchor="middle" class="micro soft">NEXT 1000</text>
 
   <rect x="42" y="344" width="267" height="226" rx="7" fill="#101011" stroke="#bd7955" stroke-opacity=".58" class="card-edge"/>
+  <defs>
+  <clipPath id="trophy-sheen-4-clip"><rect x="42" y="344" width="267" height="226" rx="7"/></clipPath>
+  <linearGradient id="trophy-sheen-4-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#trophy-sheen-4-clip)" opacity=".10">
+  <path d="M-294 28h54l406 406h-54Z" fill="url(#trophy-sheen-4-light)">
+    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="9.62s" begin="1.68s" repeatCount="indefinite"/>
+  </path>
+</g>
   <path d="M43 351H308" stroke="#bd7955" stroke-width="3"/>
   <path d="M56 364h16m-16 0v16M295 364h-16m16 0v16" fill="none" stroke="#bd7955" stroke-opacity=".46" stroke-width="1.3"/>
   <text x="60" y="380" class="micro" fill="#bd7955">PULL REQUESTS</text>
@@ -121,6 +203,21 @@
   <text x="175" y="560" text-anchor="middle" class="micro soft">NEXT 20</text>
 
   <rect x="325" y="344" width="267" height="226" rx="7" fill="#101011" stroke="#766f67" stroke-opacity=".58" class="card-edge"/>
+  <defs>
+  <clipPath id="trophy-sheen-5-clip"><rect x="325" y="344" width="267" height="226" rx="7"/></clipPath>
+  <linearGradient id="trophy-sheen-5-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#trophy-sheen-5-clip)" opacity=".10">
+  <path d="M-11 28h54l406 406h-54Z" fill="url(#trophy-sheen-5-light)">
+    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="10.25s" begin="2.10s" repeatCount="indefinite"/>
+  </path>
+</g>
   <path d="M326 351H591" stroke="#766f67" stroke-width="3"/>
   <path d="M339 364h16m-16 0v16M578 364h-16m16 0v16" fill="none" stroke="#766f67" stroke-opacity=".46" stroke-width="1.3"/>
   <text x="343" y="380" class="micro" fill="#766f67">ISSUES</text>
@@ -135,6 +232,21 @@
   <text x="458" y="560" text-anchor="middle" class="micro soft">FIRST · 1</text>
 
   <rect x="608" y="344" width="267" height="226" rx="7" fill="#101011" stroke="#aaa49a" stroke-opacity=".58" class="card-edge"/>
+  <defs>
+  <clipPath id="trophy-sheen-6-clip"><rect x="608" y="344" width="267" height="226" rx="7"/></clipPath>
+  <linearGradient id="trophy-sheen-6-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#trophy-sheen-6-clip)" opacity=".10">
+  <path d="M272 28h54l406 406h-54Z" fill="url(#trophy-sheen-6-light)">
+    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="10.88s" begin="2.52s" repeatCount="indefinite"/>
+  </path>
+</g>
   <path d="M609 351H874" stroke="#aaa49a" stroke-width="3"/>
   <path d="M622 364h16m-16 0v16M861 364h-16m16 0v16" fill="none" stroke="#aaa49a" stroke-opacity=".46" stroke-width="1.3"/>
   <text x="626" y="380" class="micro" fill="#aaa49a">LANGUAGES</text>

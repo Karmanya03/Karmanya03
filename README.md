@@ -23,9 +23,11 @@
 
 ## About
 
-I value work that makes complex systems easier to reason about: trace an attack path, demonstrate its impact, and leave behind a practical way to reduce the risk. I bring that same build–test–refine mindset to teaching and game development.
+I’m drawn to systems that reward careful exploration: tracing an Active Directory attack path, building close-to-the-metal tools in Rust, and shaping game mechanics until every interaction feels deliberate. I bring that same habit of questioning assumptions into the classroom—making complex ideas easier to test, explain, and remember.
 
-> “The quieter you become, the more you can hear.” — Kali Linux
+<p align="center">
+  <img src="assets/panels/kali-quote.svg" alt="The quieter you become, the more you can hear. — Kali Linux" width="100%">
+</p>
 
 ## Live profile
 

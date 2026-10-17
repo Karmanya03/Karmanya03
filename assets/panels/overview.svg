@@ -19,23 +19,33 @@
       .num{font:500 45px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
       .inkline{stroke-dasharray:28 10;animation:ink 8s linear infinite}
       .ambient-line{stroke-dasharray:46 1500;animation:rail 18s linear infinite}
+      .footer-sweep-glow{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite;filter:url(#footer-glow)}
+      .footer-sweep{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite}
       .card-edge{animation:edge 6s ease-in-out infinite}
+      .quote-word{animation:quoteWord 5.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+      .quote-word-late{animation:quoteWord 5.2s ease-in-out infinite 1.8s;transform-box:fill-box;transform-origin:center}
+      .quote-bar-glow{animation:quoteBar 7.2s ease-in-out infinite}
+      .quote-rail{stroke-dasharray:112 566;animation:quoteRail 7.8s cubic-bezier(.35,0,.22,1) infinite}
       .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
       .warmth{animation:warmth 5.8s ease-in-out infinite}
-      .heat-cell{animation:heat 6.5s ease-in-out infinite;animation-delay:var(--delay,0s)}
+      .heat-cell{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}
       .rank-meter{animation:rankGlow 4.2s ease-in-out infinite}
-      .month{font:700 12px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}
-      .weekday{font:700 11px 'Segoe UI',Arial,sans-serif}
+      .month{font:700 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}
+      .weekday{font:700 12px 'Segoe UI',Arial,sans-serif}
       .yearnum{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
-      .badge-label{font:600 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}
-      .badge-glyph{font:700 11px Consolas,'Courier New',monospace}
+      .badge-label{font:600 17px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}
+      .badge-glyph{font:700 16px Consolas,'Courier New',monospace}
       @keyframes ink{to{stroke-dashoffset:-304}}
       @keyframes rail{to{stroke-dashoffset:-1546}}
+      @keyframes footerSweep{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
       @keyframes edge{0%,100%{stroke-opacity:.48}50%{stroke-opacity:.92}}
       @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
       @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
-      @keyframes heat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.24)}}
+      @keyframes heat{0%,100%{filter:brightness(.9);opacity:.8}50%{filter:brightness(1.7);opacity:1}}
       @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
+      @keyframes quoteWord{0%,100%{opacity:.78}45%{opacity:1}}
+      @keyframes quoteBar{0%,100%{opacity:.06}50%{opacity:.28}}
+      @keyframes quoteRail{from{stroke-dashoffset:678}to{stroke-dashoffset:0}}
       @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>
@@ -47,19 +57,75 @@
   <text x="51" y="44" text-anchor="middle" class="micro white">00</text>
   <text x="87" y="43" class="micro white">PROFILE / LIVE RECORD</text>
   <path d="M30 62H1170" class="rule"/>
-  
+  <defs>
+  <clipPath id="overview-sheen-0-clip"><rect x="39" y="91" width="252" height="103" rx="3"/></clipPath>
+  <linearGradient id="overview-sheen-0-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d12f37" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d12f37" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d12f37" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d12f37" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d12f37" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#overview-sheen-0-clip)" opacity=".11">
+  <path d="M-174 -102h54l283 283h-54Z" fill="url(#overview-sheen-0-light)">
+    <animateTransform attributeName="transform" type="translate" values="-432,-223;432,223" dur="10.40s" begin="0.00s" repeatCount="indefinite"/>
+  </path>
+</g>
   <text x="47" y="112" class="micro soft">▤  PUBLIC REPOS</text>
   <text x="47" y="170" class="num white">42</text>
   <path d="M47 184H283" stroke="#d12f37" stroke-width="2"/>
-
+<defs>
+  <clipPath id="overview-sheen-1-clip"><rect x="319" y="91" width="252" height="103" rx="3"/></clipPath>
+  <linearGradient id="overview-sheen-1-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#overview-sheen-1-clip)" opacity=".11">
+  <path d="M106 -102h54l283 283h-54Z" fill="url(#overview-sheen-1-light)">
+    <animateTransform attributeName="transform" type="translate" values="-432,-223;432,223" dur="11.50s" begin="0.80s" repeatCount="indefinite"/>
+  </path>
+</g>
   <text x="327" y="112" class="micro soft">◉  FOLLOWERS</text>
   <text x="327" y="170" class="num white">32</text>
   <path d="M327 184H563" stroke="#d5ad52" stroke-width="2"/>
-
+<defs>
+  <clipPath id="overview-sheen-2-clip"><rect x="599" y="91" width="252" height="103" rx="3"/></clipPath>
+  <linearGradient id="overview-sheen-2-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#overview-sheen-2-clip)" opacity=".11">
+  <path d="M386 -102h54l283 283h-54Z" fill="url(#overview-sheen-2-light)">
+    <animateTransform attributeName="transform" type="translate" values="-432,-223;432,223" dur="12.60s" begin="1.60s" repeatCount="indefinite"/>
+  </path>
+</g>
   <text x="607" y="112" class="micro soft">✳  STARS ON PUBLIC REPOS</text>
   <text x="607" y="170" class="num white">42</text>
   <path d="M607 184H843" stroke="#d5ad52" stroke-width="2"/>
-
+<defs>
+  <clipPath id="overview-sheen-3-clip"><rect x="879" y="91" width="252" height="103" rx="3"/></clipPath>
+  <linearGradient id="overview-sheen-3-light" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
+    <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
+    <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
+    <stop offset=".66" stop-color="#d5ad52" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#overview-sheen-3-clip)" opacity=".11">
+  <path d="M666 -102h54l283 283h-54Z" fill="url(#overview-sheen-3-light)">
+    <animateTransform attributeName="transform" type="translate" values="-432,-223;432,223" dur="13.70s" begin="2.40s" repeatCount="indefinite"/>
+  </path>
+</g>
   <text x="887" y="112" class="micro soft">↟  PUBLIC COMMITS</text>
   <text x="887" y="170" class="num white">715</text>
   <path d="M887 184H1123" stroke="#d5ad52" stroke-width="2"/>
@@ -99,5 +165,4 @@
   <path d="M47 456H1152" stroke="#d5ad52" stroke-width="1"/>
   <text x="47" y="482" class="micro soft">AS OF 17 OCT 2026 · 16:20 UTC</text>
   <path d="M869 479H1134" stroke="#d12f37" stroke-width="2" class="inkline"/>
-
 </svg>
