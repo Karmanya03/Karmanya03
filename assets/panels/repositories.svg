@@ -90,7 +90,7 @@
   <path d="M63 237H571" class="rule"/>
   <text x="63" y="266" class="micro gold">RUST</text>
   <text x="571" y="266" text-anchor="end" class="micro white">✳ 30   ⑂ 2</text>
-  
+  <text x="571" y="290" text-anchor="end" class="micro soft">PUSHED 22 SEP</text>
 
   <path d="M607 136H1147V305H607Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
   <defs>
@@ -117,7 +117,7 @@
   <path d="M623 237H1131" class="rule"/>
   <text x="623" y="266" class="micro gold">RUST</text>
   <text x="1131" y="266" text-anchor="end" class="micro white">✳ 7   ⑂ 0</text>
-  
+  <text x="1131" y="290" text-anchor="end" class="micro soft">PUSHED 07 JUL</text>
 
   <path d="M47 341H587V510H47Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
   <defs>
@@ -144,7 +144,7 @@
   <path d="M63 442H571" class="rule"/>
   <text x="63" y="471" class="micro gold">RUST</text>
   <text x="571" y="471" text-anchor="end" class="micro white">✳ 4   ⑂ 0</text>
-  
+  <text x="571" y="495" text-anchor="end" class="micro soft">PUSHED 31 JAN</text>
 
   <path d="M607 341H1147V510H607Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
   <defs>
@@ -171,7 +171,7 @@
   <path d="M623 442H1131" class="rule"/>
   <text x="623" y="471" class="micro gold">RUST</text>
   <text x="1131" y="471" text-anchor="end" class="micro white">✳ 1   ⑂ 1</text>
-  
+  <text x="1131" y="495" text-anchor="end" class="micro soft">PUSHED 06 JUL</text>
 
   <path d="M47 546H587V715H47Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
   <defs>
@@ -198,7 +198,7 @@
   <path d="M63 647H571" class="rule"/>
   <text x="63" y="676" class="micro gold">RUST</text>
   <text x="571" y="676" text-anchor="end" class="micro white">✳ 0   ⑂ 0</text>
-  
+  <text x="571" y="700" text-anchor="end" class="micro soft">PUSHED 08 SEP</text>
 
   <path d="M607 546H1147V715H607Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
   <defs>
@@ -225,4 +225,5 @@
   <path d="M623 647H1131" class="rule"/>
   <text x="623" y="676" class="micro gold">RUST</text>
   <text x="1131" y="676" text-anchor="end" class="micro white">✳ 0   ⑂ 0</text>
+  <text x="1131" y="700" text-anchor="end" class="micro soft">PUSHED 28 JUL</text>
 </svg>
