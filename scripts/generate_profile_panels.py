@@ -759,7 +759,7 @@ def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: boo
       @keyframes edge{{0%,100%{{stroke-opacity:.48}}50%{{stroke-opacity:.92}}}}
       @keyframes pulse{{0%,100%{{opacity:.72;transform:scale(.94)}}50%{{opacity:1;transform:scale(1.06)}}}}
       @keyframes warmth{{0%,100%{{opacity:.2}}50%{{opacity:.55}}}}
-      @keyframes heat{{0%,100%{{filter:brightness(.9);opacity:.8}}50%{{filter:brightness(1.7);opacity:1}}}}
+      @keyframes heat{{0%,100%{{filter:brightness(.78);opacity:.74}}50%{{filter:brightness(1.9) drop-shadow(0 0 2px #f4f0e9);opacity:1}}}}
       @keyframes toolkitSweep{{from{{transform:translate(-1800px,-1800px)}}to{{transform:translate(1450px,1450px)}}}}
       @keyframes rankGlow{{0%,100%{{opacity:.74}}50%{{opacity:1}}}}
       @keyframes quoteWord{{0%,100%{{opacity:.78}}45%{{opacity:1}}}}
@@ -892,7 +892,7 @@ def render_repositories(data: dict[str, Any]) -> str:
             )
         body.append(f"""
   <path d="M{x} {y + 15}H{x + width}V{y + 184}H{x}Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
-  {diagonal_sheen(x, y + 15, width, 169, f'repo-sheen-{index}', tint="#d5ad52" if index % 2 == 0 else "#d12f37", duration=f'{12.4 + index * .62:.2f}s', delay=f'{index * .41:.2f}s', opacity=".10", radius=2)}
+  {diagonal_sheen(x, y + 15, width, 169, f'repo-sheen-{index}', tint="#d5ad52" if index % 2 == 0 else "#d12f37", duration=f'{12.4 + index * .62:.2f}s', delay=f'{index * .41:.2f}s', opacity=".16", radius=2)}
   <path d="M{x} {y + 15}V{y + 1}H{x + 74}L{x + 86} {y + 15}" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="{x + 15}" y="{y + 43}" class="micro red">{index + 1:02}</text>
   <a xlink:href="{url}" target="_blank" rel="noopener noreferrer">
@@ -1032,7 +1032,7 @@ def render_achievements(data: dict[str, Any]) -> str:
         body.append(f"""
   <a xlink:href="{svg_escape(url)}" target="_blank" rel="noopener noreferrer">
     <rect x="{x}" y="{y}" width="{card_width}" height="{card_height}" rx="6" fill="#101011" stroke="{color}" stroke-opacity=".52" class="card-edge"/>
-    {diagonal_sheen(x, y, card_width, card_height, f'achievement-sheen-{index}', tint=color, duration=f'{8.6 + index * .56:.2f}s', delay=f'{index * .27:.2f}s', opacity=".17", radius=6)}
+    {diagonal_sheen(x, y, card_width, card_height, f'achievement-sheen-{index}', tint=color, duration=f'{8.6 + index * .56:.2f}s', delay=f'{index * .27:.2f}s', opacity=".22", radius=6)}
     <path d="M{x + 1} {y + 7}H{x + card_width - 1}" stroke="{color}" stroke-width="3"/>
     <circle cx="{x + 44}" cy="{y + 49}" r="24" fill="{color}" fill-opacity=".10" stroke="{color}" stroke-opacity=".65" class="achievement-bloom"/>
     <circle cx="{x + 44}" cy="{y + 49}" r="30" fill="none" stroke="{color}" stroke-opacity=".28" stroke-dasharray="2 7" class="inkline"/>
@@ -1051,14 +1051,14 @@ def render_achievements(data: dict[str, Any]) -> str:
 def render_whoami(data: dict[str, Any]) -> str:
     name = svg_escape(data.get("name") or "Karmanya Ravindra")
     identity_cells = "".join(
-        f'<rect x="{162 + cell * 7}" y="{row_y - 7}" width="5" height="5" rx="1.5" '
+        f'<rect x="{156 + cell * 9}" y="{row_y - 8}" width="7" height="7" rx="2" '
         f'fill="{["#d12f37", "#d5ad52", "#f4f0e9"][(row + cell) % 3]}" '
         f'class="heat-cell" style="--delay:{(row * .31 + cell * .12):.2f}s"/>'
         for row, row_y in enumerate((250, 281, 312, 343, 374)) for cell in range(3)
     )
     body = f"""
   <rect x="34" y="83" width="1132" height="320" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>
-  {diagonal_sheen(34, 83, 1132, 320, "whoami-main-sheen", tint="#d12f37", duration="11.8s", delay="1.1s", opacity=".07", radius=5)}
+  {diagonal_sheen(34, 83, 1132, 320, "whoami-main-sheen", tint="#d12f37", duration="11.8s", delay="1.1s", opacity=".14", radius=5)}
   <path d="M34 88V397" stroke="#d12f37" stroke-width="4"/>
   <rect x="58" y="104" width="136" height="24" rx="12" fill="#301316" stroke="#8f312f"/>
   <text x="126" y="121" text-anchor="middle" class="micro white">IDENTITY / 01</text>
@@ -1362,7 +1362,7 @@ def render_toolkit() -> str:
 def render_footer_quote() -> str:
     body = '''
   <defs>
-    <linearGradient id="footer-sweep-color" x1="150" y1="65" x2="1050" y2="65" gradientUnits="userSpaceOnUse">
+    <linearGradient id="footer-sweep-color" x1="150" y1="108" x2="1050" y2="108" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#8f252c" stop-opacity=".12"/>
       <stop offset=".48" stop-color="#d12f37"/>
       <stop offset=".68" stop-color="#ffd2c6"/>
@@ -1372,24 +1372,24 @@ def render_footer_quote() -> str:
       <feGaussianBlur stdDeviation="3"/>
     </filter>
   </defs>
-  <path d="M150 65H1050" stroke="#463a30" stroke-width="1"/>
-  <path d="M150 65H1050" stroke="#d12f37" stroke-opacity=".28" stroke-width="7" stroke-linecap="round" class="footer-sweep-glow"/>
-  <path d="M150 65H1050" stroke="url(#footer-sweep-color)" stroke-width="2.5" stroke-linecap="round" class="footer-sweep"/>
-  <circle cx="150" cy="65" r="3" fill="#d5ad52" class="pulse"/>
-  <circle cx="1050" cy="65" r="3" fill="#d5ad52" class="pulse"/>
-  <text x="600" y="44" text-anchor="middle" class="serif white" font-size="21">
+  <text x="600" y="43" text-anchor="middle" class="serif white" font-size="21">
     <tspan fill="#d12f37">/dev/null</tspan><tspan fill="#f4f0e9"> is my </tspan>
     <tspan fill="#d5ad52">inspiration</tspan><tspan fill="#aba59c"> · </tspan>
     <tspan fill="#d5ad52">Rust</tspan><tspan fill="#f4f0e9"> is my </tspan>
     <tspan fill="#d12f37">weapon</tspan><tspan fill="#f4f0e9"> of </tspan><tspan fill="#d5ad52">choice</tspan>
   </text>
-  <text x="600" y="99" text-anchor="middle" class="serif white" font-size="19">
+  <text x="600" y="82" text-anchor="middle" class="serif white" font-size="19">
     <tspan fill="#f4f0e9">The network is the </tspan><tspan fill="#d12f37">battlefield</tspan>
     <tspan fill="#aba59c"> · </tspan><tspan fill="#d5ad52">Stay curious</tspan>
     <tspan fill="#f4f0e9">, </tspan><tspan fill="#d5ad52">stay paranoid</tspan>
   </text>
+  <path d="M150 108H1050" stroke="#463a30" stroke-width="1"/>
+  <path d="M150 108H1050" stroke="#d12f37" stroke-opacity=".28" stroke-width="7" stroke-linecap="round" class="footer-sweep-glow"/>
+  <path d="M150 108H1050" stroke="url(#footer-sweep-color)" stroke-width="2.5" stroke-linecap="round" class="footer-sweep"/>
+  <circle cx="150" cy="108" r="3" fill="#d5ad52" class="pulse"/>
+  <circle cx="1050" cy="108" r="3" fill="#d5ad52" class="pulse"/>
 '''
-    return wrap_svg("Closing quote", body, 122, "07", show_header=False)
+    return wrap_svg("Closing quote", body, 132, "07", show_header=False)
 
 
 def render_kali_quote() -> str:
@@ -1431,8 +1431,14 @@ def render_recent_activity(data: dict[str, Any]) -> str:
         time = iso_time(event.get("created_at"))
         date = time.strftime("%d %b · %H:%M UTC") if time else "time unavailable"
         link = svg_escape(event.get("url", ""))
+        activity_cells = "".join(
+            f'<rect x="{56 + cell * 10}" y="{y - 9}" width="7" height="7" rx="2" '
+            f'fill="{["#d12f37", "#d5ad52", "#f4f0e9"][cell]}" stroke="#09090a" stroke-width=".8" '
+            f'class="heat-cell" style="--delay:{(index * .31 + cell * .16) % 3.4:.2f}s"/>'
+            for cell in range(3)
+        )
         body.append(f"""
-  <rect x="62" y="{y - 8}" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:{(index * .31) % 3.4:.2f}s"/>
+  {activity_cells}
   <text x="91" y="{y}" class="micro red">{date.upper()}</text>
   <text x="286" y="{y}" class="small white">{summary}</text>
   <a xlink:href="{link}" target="_blank" rel="noopener noreferrer">
@@ -1490,7 +1496,13 @@ def render_event_trace(data: dict[str, Any]) -> str:
         body.append(f'<path d="{trace}" fill="none" stroke="#d5ad52" stroke-opacity=".42" stroke-width="2" class="inkline"/>')
         for index, (x, y, color, description) in enumerate(points):
             delay = (index * .17) % 3.4
-            body.append(f'<rect x="{x - 4:.1f}" y="{y - 4}" width="8" height="8" rx="2" fill="{color}" stroke="#09090a" stroke-width="1.5" class="heat-cell" style="--delay:{delay:.2f}s"><title>{svg_escape(description)}</title></rect>')
+            for cell, (offset, cell_color) in enumerate(((-8, "#d12f37"), (-1, color), (6, "#d5ad52"))):
+                title = f'<title>{svg_escape(description)}</title>' if cell == 1 else ""
+                body.append(
+                    f'<rect x="{x + offset:.1f}" y="{y - 3}" width="6" height="6" rx="1.8" '
+                    f'fill="{cell_color}" stroke="#09090a" stroke-width=".8" class="heat-cell" '
+                    f'style="--delay:{(delay + cell * .14) % 3.4:.2f}s">{title}</rect>'
+                )
         oldest = iso_time(events[0].get("created_at"))
         newest = iso_time(events[-1].get("created_at"))
         left_date = oldest.strftime("%d %b %Y").upper() if oldest else ""

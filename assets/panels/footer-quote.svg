@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="1200" height="122" viewBox="0 0 1200 122" role="img" aria-label="Closing quote">
+  width="1200" height="132" viewBox="0 0 1200 132" role="img" aria-label="Closing quote">
   <defs>
     <pattern id="grain" width="80" height="80" patternUnits="userSpaceOnUse">
       <path d="M0 79.5H80" stroke="#fff" stroke-opacity=".025"/>
@@ -45,7 +45,7 @@
       @keyframes edge{0%,100%{stroke-opacity:.48}50%{stroke-opacity:.92}}
       @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
       @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
-      @keyframes heat{0%,100%{filter:brightness(.9);opacity:.8}50%{filter:brightness(1.7);opacity:1}}
+      @keyframes heat{0%,100%{filter:brightness(.78);opacity:.74}50%{filter:brightness(1.9) drop-shadow(0 0 2px #f4f0e9);opacity:1}}
       @keyframes toolkitSweep{from{transform:translate(-1800px,-1800px)}to{transform:translate(1450px,1450px)}}
       @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
       @keyframes quoteWord{0%,100%{opacity:.78}45%{opacity:1}}
@@ -56,12 +56,12 @@
       @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>
-  <rect width="1200" height="122" rx="5" class="canvas"/>
-  <rect width="1200" height="122" rx="5" class="grain"/>
+  <rect width="1200" height="132" rx="5" class="canvas"/>
+  <rect width="1200" height="132" rx="5" class="grain"/>
   <path d="M0 0H1200" stroke="#d12f37" stroke-width="5"/>
   
   <defs>
-    <linearGradient id="footer-sweep-color" x1="150" y1="65" x2="1050" y2="65" gradientUnits="userSpaceOnUse">
+    <linearGradient id="footer-sweep-color" x1="150" y1="108" x2="1050" y2="108" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#8f252c" stop-opacity=".12"/>
       <stop offset=".48" stop-color="#d12f37"/>
       <stop offset=".68" stop-color="#ffd2c6"/>
@@ -71,20 +71,20 @@
       <feGaussianBlur stdDeviation="3"/>
     </filter>
   </defs>
-  <path d="M150 65H1050" stroke="#463a30" stroke-width="1"/>
-  <path d="M150 65H1050" stroke="#d12f37" stroke-opacity=".28" stroke-width="7" stroke-linecap="round" class="footer-sweep-glow"/>
-  <path d="M150 65H1050" stroke="url(#footer-sweep-color)" stroke-width="2.5" stroke-linecap="round" class="footer-sweep"/>
-  <circle cx="150" cy="65" r="3" fill="#d5ad52" class="pulse"/>
-  <circle cx="1050" cy="65" r="3" fill="#d5ad52" class="pulse"/>
-  <text x="600" y="44" text-anchor="middle" class="serif white" font-size="21">
+  <text x="600" y="43" text-anchor="middle" class="serif white" font-size="21">
     <tspan fill="#d12f37">/dev/null</tspan><tspan fill="#f4f0e9"> is my </tspan>
     <tspan fill="#d5ad52">inspiration</tspan><tspan fill="#aba59c"> · </tspan>
     <tspan fill="#d5ad52">Rust</tspan><tspan fill="#f4f0e9"> is my </tspan>
     <tspan fill="#d12f37">weapon</tspan><tspan fill="#f4f0e9"> of </tspan><tspan fill="#d5ad52">choice</tspan>
   </text>
-  <text x="600" y="99" text-anchor="middle" class="serif white" font-size="19">
+  <text x="600" y="82" text-anchor="middle" class="serif white" font-size="19">
     <tspan fill="#f4f0e9">The network is the </tspan><tspan fill="#d12f37">battlefield</tspan>
     <tspan fill="#aba59c"> · </tspan><tspan fill="#d5ad52">Stay curious</tspan>
     <tspan fill="#f4f0e9">, </tspan><tspan fill="#d5ad52">stay paranoid</tspan>
   </text>
+  <path d="M150 108H1050" stroke="#463a30" stroke-width="1"/>
+  <path d="M150 108H1050" stroke="#d12f37" stroke-opacity=".28" stroke-width="7" stroke-linecap="round" class="footer-sweep-glow"/>
+  <path d="M150 108H1050" stroke="url(#footer-sweep-color)" stroke-width="2.5" stroke-linecap="round" class="footer-sweep"/>
+  <circle cx="150" cy="108" r="3" fill="#d5ad52" class="pulse"/>
+  <circle cx="1050" cy="108" r="3" fill="#d5ad52" class="pulse"/>
 </svg>

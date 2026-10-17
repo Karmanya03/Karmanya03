@@ -45,7 +45,7 @@
       @keyframes edge{0%,100%{stroke-opacity:.48}50%{stroke-opacity:.92}}
       @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
       @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
-      @keyframes heat{0%,100%{filter:brightness(.9);opacity:.8}50%{filter:brightness(1.7);opacity:1}}
+      @keyframes heat{0%,100%{filter:brightness(.78);opacity:.74}50%{filter:brightness(1.9) drop-shadow(0 0 2px #f4f0e9);opacity:1}}
       @keyframes toolkitSweep{from{transform:translate(-1800px,-1800px)}to{transform:translate(1450px,1450px)}}
       @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
       @keyframes quoteWord{0%,100%{opacity:.78}45%{opacity:1}}
@@ -65,56 +65,56 @@
   <text x="87" y="43" class="micro white">RECENT ACTIVITY</text>
   <path d="M30 62H1170" class="rule"/>
   <path d="M66 105V459" stroke="#8a262d" stroke-width="2" stroke-dasharray="3 7" class="inkline"/>
-  <rect x="62" y="116" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:0.00s"/>
+  <rect x="56" y="115" width="7" height="7" rx="2" fill="#d12f37" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:0.00s"/><rect x="66" y="115" width="7" height="7" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:0.16s"/><rect x="76" y="115" width="7" height="7" rx="2" fill="#f4f0e9" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:0.32s"/>
   <text x="91" y="124" class="micro red">30 SEP · 15:58 UTC</text>
   <text x="286" y="124" class="small white">Starred repository</text>
   <a xlink:href="https://github.com/togg53192-cmd/jailbreaks" target="_blank" rel="noopener noreferrer">
     <text x="1152" y="124" text-anchor="end" class="mono gold">togg53192-cmd/jailbreaks ↗</text>
   </a>
 
-  <rect x="62" y="158" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:0.31s"/>
+  <rect x="56" y="157" width="7" height="7" rx="2" fill="#d12f37" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:0.31s"/><rect x="66" y="157" width="7" height="7" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:0.47s"/><rect x="76" y="157" width="7" height="7" rx="2" fill="#f4f0e9" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:0.63s"/>
   <text x="91" y="166" class="micro red">22 SEP · 10:06 UTC</text>
   <text x="286" y="166" class="small white">Starred repository</text>
   <a xlink:href="https://github.com/anmolkapil/plexo" target="_blank" rel="noopener noreferrer">
     <text x="1152" y="166" text-anchor="end" class="mono gold">anmolkapil/plexo ↗</text>
   </a>
 
-  <rect x="62" y="200" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:0.62s"/>
+  <rect x="56" y="199" width="7" height="7" rx="2" fill="#d12f37" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:0.62s"/><rect x="66" y="199" width="7" height="7" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:0.78s"/><rect x="76" y="199" width="7" height="7" rx="2" fill="#f4f0e9" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:0.94s"/>
   <text x="91" y="208" class="micro red">22 SEP · 03:04 UTC</text>
   <text x="286" y="208" class="small white">Pushed changes</text>
   <a xlink:href="https://github.com/Karmanya03/Overthrone" target="_blank" rel="noopener noreferrer">
     <text x="1152" y="208" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
 
-  <rect x="62" y="242" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:0.93s"/>
+  <rect x="56" y="241" width="7" height="7" rx="2" fill="#d12f37" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:0.93s"/><rect x="66" y="241" width="7" height="7" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:1.09s"/><rect x="76" y="241" width="7" height="7" rx="2" fill="#f4f0e9" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:1.25s"/>
   <text x="91" y="250" class="micro red">21 SEP · 18:32 UTC</text>
   <text x="286" y="250" class="small white">Pushed changes</text>
   <a xlink:href="https://github.com/Karmanya03/Overthrone" target="_blank" rel="noopener noreferrer">
     <text x="1152" y="250" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
 
-  <rect x="62" y="284" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:1.24s"/>
+  <rect x="56" y="283" width="7" height="7" rx="2" fill="#d12f37" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:1.24s"/><rect x="66" y="283" width="7" height="7" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:1.40s"/><rect x="76" y="283" width="7" height="7" rx="2" fill="#f4f0e9" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:1.56s"/>
   <text x="91" y="292" class="micro red">21 SEP · 08:08 UTC</text>
   <text x="286" y="292" class="small white">Pushed changes</text>
   <a xlink:href="https://github.com/Karmanya03/Overthrone" target="_blank" rel="noopener noreferrer">
     <text x="1152" y="292" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
 
-  <rect x="62" y="326" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:1.55s"/>
+  <rect x="56" y="325" width="7" height="7" rx="2" fill="#d12f37" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:1.55s"/><rect x="66" y="325" width="7" height="7" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:1.71s"/><rect x="76" y="325" width="7" height="7" rx="2" fill="#f4f0e9" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:1.87s"/>
   <text x="91" y="334" class="micro red">21 SEP · 10:16 UTC</text>
   <text x="286" y="334" class="small white">Pushed changes</text>
   <a xlink:href="https://github.com/Karmanya03/Overthrone" target="_blank" rel="noopener noreferrer">
     <text x="1152" y="334" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
 
-  <rect x="62" y="368" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:1.86s"/>
+  <rect x="56" y="367" width="7" height="7" rx="2" fill="#d12f37" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:1.86s"/><rect x="66" y="367" width="7" height="7" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:2.02s"/><rect x="76" y="367" width="7" height="7" rx="2" fill="#f4f0e9" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:2.18s"/>
   <text x="91" y="376" class="micro red">21 SEP · 04:58 UTC</text>
   <text x="286" y="376" class="small white">Pushed changes</text>
   <a xlink:href="https://github.com/Karmanya03/Overthrone" target="_blank" rel="noopener noreferrer">
     <text x="1152" y="376" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
 
-  <rect x="62" y="410" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:2.17s"/>
+  <rect x="56" y="409" width="7" height="7" rx="2" fill="#d12f37" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:2.17s"/><rect x="66" y="409" width="7" height="7" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:2.33s"/><rect x="76" y="409" width="7" height="7" rx="2" fill="#f4f0e9" stroke="#09090a" stroke-width=".8" class="heat-cell" style="--delay:2.49s"/>
   <text x="91" y="418" class="micro red">21 SEP · 10:23 UTC</text>
   <text x="286" y="418" class="small white">Pushed changes</text>
   <a xlink:href="https://github.com/Karmanya03/Overthrone" target="_blank" rel="noopener noreferrer">
