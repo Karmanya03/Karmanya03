@@ -59,7 +59,7 @@
   <path d="M30 62H1170" class="rule"/>
   <defs>
   <clipPath id="overview-sheen-0-clip"><rect x="39" y="91" width="252" height="103" rx="3"/></clipPath>
-  <linearGradient id="overview-sheen-0-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="overview-sheen-0-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d12f37" stop-opacity="0"/>
     <stop offset=".46" stop-color="#d12f37" stop-opacity=".08"/>
     <stop offset=".56" stop-color="#d12f37" stop-opacity=".92"/>
@@ -68,8 +68,8 @@
   </linearGradient>
 </defs>
 <g clip-path="url(#overview-sheen-0-clip)" opacity=".11">
-  <path d="M-174 -102h54l283 283h-54Z" fill="url(#overview-sheen-0-light)">
-    <animateTransform attributeName="transform" type="translate" values="-432,-223;432,223" dur="10.40s" begin="0.00s" repeatCount="indefinite"/>
+  <path d="M-164 294h54l535 -535h-54Z" fill="url(#overview-sheen-0-light)">
+    <animateTransform attributeName="transform" type="translate" values="-276.8,-142.7;276.8,142.7" dur="10.40s" begin="0.00s" repeatCount="indefinite"/>
   </path>
 </g>
   <text x="47" y="112" class="micro soft">▤  PUBLIC REPOS</text>
@@ -77,7 +77,7 @@
   <path d="M47 184H283" stroke="#d12f37" stroke-width="2"/>
 <defs>
   <clipPath id="overview-sheen-1-clip"><rect x="319" y="91" width="252" height="103" rx="3"/></clipPath>
-  <linearGradient id="overview-sheen-1-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="overview-sheen-1-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
     <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
     <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
@@ -86,8 +86,8 @@
   </linearGradient>
 </defs>
 <g clip-path="url(#overview-sheen-1-clip)" opacity=".11">
-  <path d="M106 -102h54l283 283h-54Z" fill="url(#overview-sheen-1-light)">
-    <animateTransform attributeName="transform" type="translate" values="-432,-223;432,223" dur="11.50s" begin="0.80s" repeatCount="indefinite"/>
+  <path d="M116 294h54l535 -535h-54Z" fill="url(#overview-sheen-1-light)">
+    <animateTransform attributeName="transform" type="translate" values="-276.8,-142.7;276.8,142.7" dur="11.50s" begin="0.80s" repeatCount="indefinite"/>
   </path>
 </g>
   <text x="327" y="112" class="micro soft">◉  FOLLOWERS</text>
@@ -95,7 +95,7 @@
   <path d="M327 184H563" stroke="#d5ad52" stroke-width="2"/>
 <defs>
   <clipPath id="overview-sheen-2-clip"><rect x="599" y="91" width="252" height="103" rx="3"/></clipPath>
-  <linearGradient id="overview-sheen-2-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="overview-sheen-2-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
     <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
     <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
@@ -104,8 +104,8 @@
   </linearGradient>
 </defs>
 <g clip-path="url(#overview-sheen-2-clip)" opacity=".11">
-  <path d="M386 -102h54l283 283h-54Z" fill="url(#overview-sheen-2-light)">
-    <animateTransform attributeName="transform" type="translate" values="-432,-223;432,223" dur="12.60s" begin="1.60s" repeatCount="indefinite"/>
+  <path d="M396 294h54l535 -535h-54Z" fill="url(#overview-sheen-2-light)">
+    <animateTransform attributeName="transform" type="translate" values="-276.8,-142.7;276.8,142.7" dur="12.60s" begin="1.60s" repeatCount="indefinite"/>
   </path>
 </g>
   <text x="607" y="112" class="micro soft">✳  STARS ON PUBLIC REPOS</text>
@@ -113,7 +113,7 @@
   <path d="M607 184H843" stroke="#d5ad52" stroke-width="2"/>
 <defs>
   <clipPath id="overview-sheen-3-clip"><rect x="879" y="91" width="252" height="103" rx="3"/></clipPath>
-  <linearGradient id="overview-sheen-3-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="overview-sheen-3-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
     <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
     <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
@@ -122,8 +122,8 @@
   </linearGradient>
 </defs>
 <g clip-path="url(#overview-sheen-3-clip)" opacity=".11">
-  <path d="M666 -102h54l283 283h-54Z" fill="url(#overview-sheen-3-light)">
-    <animateTransform attributeName="transform" type="translate" values="-432,-223;432,223" dur="13.70s" begin="2.40s" repeatCount="indefinite"/>
+  <path d="M676 294h54l535 -535h-54Z" fill="url(#overview-sheen-3-light)">
+    <animateTransform attributeName="transform" type="translate" values="-276.8,-142.7;276.8,142.7" dur="13.70s" begin="2.40s" repeatCount="indefinite"/>
   </path>
 </g>
   <text x="887" y="112" class="micro soft">↟  PUBLIC COMMITS</text>

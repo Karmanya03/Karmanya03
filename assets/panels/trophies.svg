@@ -60,7 +60,7 @@
   <rect x="42" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#e2464d" stroke-opacity=".58" class="card-edge"/>
   <defs>
   <clipPath id="trophy-sheen-0-clip"><rect x="42" y="96" width="267" height="226" rx="7"/></clipPath>
-  <linearGradient id="trophy-sheen-0-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="trophy-sheen-0-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
     <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
     <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
@@ -69,8 +69,8 @@
   </linearGradient>
 </defs>
 <g clip-path="url(#trophy-sheen-0-clip)" opacity=".10">
-  <path d="M-294 -220h54l406 406h-54Z" fill="url(#trophy-sheen-0-light)">
-    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="7.10s" begin="0.00s" repeatCount="indefinite"/>
+  <path d="M-284 422h54l673 -673h-54Z" fill="url(#trophy-sheen-0-light)">
+    <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="7.10s" begin="0.00s" repeatCount="indefinite"/>
   </path>
 </g>
   <path d="M43 103H308" stroke="#e2464d" stroke-width="3"/>
@@ -89,7 +89,7 @@
   <rect x="325" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#e2464d" stroke-opacity=".58" class="card-edge"/>
   <defs>
   <clipPath id="trophy-sheen-1-clip"><rect x="325" y="96" width="267" height="226" rx="7"/></clipPath>
-  <linearGradient id="trophy-sheen-1-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="trophy-sheen-1-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
     <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
     <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
@@ -98,8 +98,8 @@
   </linearGradient>
 </defs>
 <g clip-path="url(#trophy-sheen-1-clip)" opacity=".10">
-  <path d="M-11 -220h54l406 406h-54Z" fill="url(#trophy-sheen-1-light)">
-    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="7.73s" begin="0.42s" repeatCount="indefinite"/>
+  <path d="M-1 422h54l673 -673h-54Z" fill="url(#trophy-sheen-1-light)">
+    <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="7.73s" begin="0.42s" repeatCount="indefinite"/>
   </path>
 </g>
   <path d="M326 103H591" stroke="#e2464d" stroke-width="3"/>
@@ -118,7 +118,7 @@
   <rect x="608" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#c9a3ff" stroke-opacity=".58" class="card-edge"/>
   <defs>
   <clipPath id="trophy-sheen-2-clip"><rect x="608" y="96" width="267" height="226" rx="7"/></clipPath>
-  <linearGradient id="trophy-sheen-2-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="trophy-sheen-2-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d7a6ff" stop-opacity="0"/>
     <stop offset=".46" stop-color="#d7a6ff" stop-opacity=".08"/>
     <stop offset=".56" stop-color="#d7a6ff" stop-opacity=".92"/>
@@ -127,8 +127,8 @@
   </linearGradient>
 </defs>
 <g clip-path="url(#trophy-sheen-2-clip)" opacity=".22">
-  <path d="M272 -220h54l406 406h-54Z" fill="url(#trophy-sheen-2-light)">
-    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="8.36s" begin="0.84s" repeatCount="indefinite"/>
+  <path d="M282 422h54l673 -673h-54Z" fill="url(#trophy-sheen-2-light)">
+    <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="8.36s" begin="0.84s" repeatCount="indefinite"/>
   </path>
 </g>
   <path d="M609 103H874" stroke="#c9a3ff" stroke-width="3"/>
@@ -147,7 +147,7 @@
   <rect x="891" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#d5ad52" stroke-opacity=".58" class="card-edge"/>
   <defs>
   <clipPath id="trophy-sheen-3-clip"><rect x="891" y="96" width="267" height="226" rx="7"/></clipPath>
-  <linearGradient id="trophy-sheen-3-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="trophy-sheen-3-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
     <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
     <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
@@ -156,8 +156,8 @@
   </linearGradient>
 </defs>
 <g clip-path="url(#trophy-sheen-3-clip)" opacity=".10">
-  <path d="M555 -220h54l406 406h-54Z" fill="url(#trophy-sheen-3-light)">
-    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="8.99s" begin="1.26s" repeatCount="indefinite"/>
+  <path d="M565 422h54l673 -673h-54Z" fill="url(#trophy-sheen-3-light)">
+    <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="8.99s" begin="1.26s" repeatCount="indefinite"/>
   </path>
 </g>
   <path d="M892 103H1157" stroke="#d5ad52" stroke-width="3"/>
@@ -176,7 +176,7 @@
   <rect x="42" y="344" width="267" height="226" rx="7" fill="#101011" stroke="#bd7955" stroke-opacity=".58" class="card-edge"/>
   <defs>
   <clipPath id="trophy-sheen-4-clip"><rect x="42" y="344" width="267" height="226" rx="7"/></clipPath>
-  <linearGradient id="trophy-sheen-4-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="trophy-sheen-4-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
     <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
     <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
@@ -185,8 +185,8 @@
   </linearGradient>
 </defs>
 <g clip-path="url(#trophy-sheen-4-clip)" opacity=".10">
-  <path d="M-294 28h54l406 406h-54Z" fill="url(#trophy-sheen-4-light)">
-    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="9.62s" begin="1.68s" repeatCount="indefinite"/>
+  <path d="M-284 670h54l673 -673h-54Z" fill="url(#trophy-sheen-4-light)">
+    <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="9.62s" begin="1.68s" repeatCount="indefinite"/>
   </path>
 </g>
   <path d="M43 351H308" stroke="#bd7955" stroke-width="3"/>
@@ -205,7 +205,7 @@
   <rect x="325" y="344" width="267" height="226" rx="7" fill="#101011" stroke="#766f67" stroke-opacity=".58" class="card-edge"/>
   <defs>
   <clipPath id="trophy-sheen-5-clip"><rect x="325" y="344" width="267" height="226" rx="7"/></clipPath>
-  <linearGradient id="trophy-sheen-5-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="trophy-sheen-5-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
     <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
     <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
@@ -214,8 +214,8 @@
   </linearGradient>
 </defs>
 <g clip-path="url(#trophy-sheen-5-clip)" opacity=".10">
-  <path d="M-11 28h54l406 406h-54Z" fill="url(#trophy-sheen-5-light)">
-    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="10.25s" begin="2.10s" repeatCount="indefinite"/>
+  <path d="M-1 670h54l673 -673h-54Z" fill="url(#trophy-sheen-5-light)">
+    <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="10.25s" begin="2.10s" repeatCount="indefinite"/>
   </path>
 </g>
   <path d="M326 351H591" stroke="#766f67" stroke-width="3"/>
@@ -234,7 +234,7 @@
   <rect x="608" y="344" width="267" height="226" rx="7" fill="#101011" stroke="#aaa49a" stroke-opacity=".58" class="card-edge"/>
   <defs>
   <clipPath id="trophy-sheen-6-clip"><rect x="608" y="344" width="267" height="226" rx="7"/></clipPath>
-  <linearGradient id="trophy-sheen-6-light" x1="0" y1="0" x2="1" y2="0">
+<linearGradient id="trophy-sheen-6-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
     <stop offset=".46" stop-color="#d5ad52" stop-opacity=".08"/>
     <stop offset=".56" stop-color="#d5ad52" stop-opacity=".92"/>
@@ -243,8 +243,8 @@
   </linearGradient>
 </defs>
 <g clip-path="url(#trophy-sheen-6-clip)" opacity=".10">
-  <path d="M272 28h54l406 406h-54Z" fill="url(#trophy-sheen-6-light)">
-    <animateTransform attributeName="transform" type="translate" values="-447,-346;447,346" dur="10.88s" begin="2.52s" repeatCount="indefinite"/>
+  <path d="M282 670h54l673 -673h-54Z" fill="url(#trophy-sheen-6-light)">
+    <animateTransform attributeName="transform" type="translate" values="-290.3,-253.4;290.3,253.4" dur="10.88s" begin="2.52s" repeatCount="indefinite"/>
   </path>
 </g>
   <path d="M609 351H874" stroke="#aaa49a" stroke-width="3"/>

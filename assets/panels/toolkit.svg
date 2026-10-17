@@ -57,30 +57,311 @@
   <text x="51" y="44" text-anchor="middle" class="micro white">06</text>
   <text x="87" y="43" class="micro white">TOOLKIT</text>
   <path d="M30 62H1170" class="rule"/>
-  <rect x="34" y="82" width="1132" height="508" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/><text x="58" y="114" class="micro gold">LANGUAGES &amp; SYSTEMS</text><path d="M58 126H1142" stroke="#3d3834"/><rect x="58" y="141" width="89.4" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M62 145H96V179H62Z" fill="#D5AD52" fill-opacity=".94"/><text x="79" y="167" text-anchor="middle" fill="#09090A" class="badge-glyph">R</text><text x="103" y="168" fill="#f4f0e9" class="badge-label">Rust</text><rect x="159.4" y="141" width="149.6" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M163.4 145H197.4V179H163.4Z" fill="#F4F0E9" fill-opacity=".94"/><text x="180.4" y="167" text-anchor="middle" fill="#09090A" class="badge-glyph">WASM</text><text x="204.4" y="168" fill="#f4f0e9" class="badge-label">WebAssembly</text><rect x="321.0" y="141" width="86" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M325.0 145H359.0V179H325.0Z" fill="#D12F37" fill-opacity=".94"/><text x="342.0" y="167" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">C</text><text x="366.0" y="168" fill="#f4f0e9" class="badge-label">C</text><rect x="419.0" y="141" width="86" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M423.0 145H457.0V179H423.0Z" fill="#D5AD52" fill-opacity=".94"/><text x="440.0" y="167" text-anchor="middle" fill="#09090A" class="badge-glyph">C++</text><text x="464.0" y="168" fill="#f4f0e9" class="badge-label">C++</text><rect x="517.0" y="141" width="115.19999999999999" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M521.0 145H555.0V179H521.0Z" fill="#F4F0E9" fill-opacity=".94"/><text x="538.0" y="167" text-anchor="middle" fill="#09090A" class="badge-glyph">C#</text><text x="562.0" y="168" fill="#f4f0e9" class="badge-label">C Sharp</text><rect x="644.2" y="141" width="89.4" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M648.2 145H682.2V179H648.2Z" fill="#D12F37" fill-opacity=".94"/><text x="665.2" y="167" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">J</text><text x="689.2" y="168" fill="#f4f0e9" class="badge-label">Java</text><rect x="745.6" y="141" width="141.0" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M749.6 145H783.6V179H749.6Z" fill="#D5AD52" fill-opacity=".94"/><text x="766.6" y="167" text-anchor="middle" fill="#09090A" class="badge-glyph">JS</text><text x="790.6" y="168" fill="#f4f0e9" class="badge-label">JavaScript</text><rect x="898.6" y="141" width="106.6" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M902.6 145H936.6V179H902.6Z" fill="#F4F0E9" fill-opacity=".94"/><text x="919.6" y="167" text-anchor="middle" fill="#09090A" class="badge-glyph">Py</text><text x="943.6" y="168" fill="#f4f0e9" class="badge-label">Python</text><rect x="58" y="191" width="141.0" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M62 195H96V229H62Z" fill="#D12F37" fill-opacity=".94"/><text x="79" y="217" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">PS</text><text x="103" y="218" fill="#f4f0e9" class="badge-label">PowerShell</text><rect x="211.0" y="191" width="98.0" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M215.0 195H249.0V229H215.0Z" fill="#D5AD52" fill-opacity=".94"/><text x="232.0" y="217" text-anchor="middle" fill="#09090A" class="badge-glyph">H5</text><text x="256.0" y="218" fill="#f4f0e9" class="badge-label">HTML5</text><rect x="321.0" y="191" width="89.4" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M325.0 195H359.0V229H325.0Z" fill="#F4F0E9" fill-opacity=".94"/><text x="342.0" y="217" text-anchor="middle" fill="#09090A" class="badge-glyph">C3</text><text x="366.0" y="218" fill="#f4f0e9" class="badge-label">CSS3</text><rect x="422.4" y="191" width="86" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M426.4 195H460.4V229H426.4Z" fill="#D12F37" fill-opacity=".94"/><text x="443.4" y="217" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">R</text><text x="467.4" y="218" fill="#f4f0e9" class="badge-label">R</text><text x="58" y="272" class="micro gold">CLOUD, SERVICES &amp; DATA</text><path d="M58 284H1142" stroke="#3d3834"/><rect x="58" y="299" width="86" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M62 303H96V337H62Z" fill="#D5AD52" fill-opacity=".94"/><text x="79" y="325" text-anchor="middle" fill="#09090A" class="badge-glyph">AWS</text><text x="103" y="326" fill="#f4f0e9" class="badge-label">AWS</text><rect x="156" y="299" width="98.0" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M160 303H194V337H160Z" fill="#F4F0E9" fill-opacity=".94"/><text x="177" y="325" text-anchor="middle" fill="#09090A" class="badge-glyph">Az</text><text x="201" y="326" fill="#f4f0e9" class="badge-label">Azure</text><rect x="266.0" y="299" width="158.2" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M270.0 303H304.0V337H270.0Z" fill="#D12F37" fill-opacity=".94"/><text x="287.0" y="325" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">GC</text><text x="311.0" y="326" fill="#f4f0e9" class="badge-label">Google Cloud</text><rect x="436.2" y="299" width="141.0" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M440.2 303H474.2V337H440.2Z" fill="#D5AD52" fill-opacity=".94"/><text x="457.2" y="325" text-anchor="middle" fill="#09090A" class="badge-glyph">CF</text><text x="481.2" y="326" fill="#f4f0e9" class="badge-label">Cloudflare</text><rect x="589.2" y="299" width="106.6" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M593.2 303H627.2V337H593.2Z" fill="#F4F0E9" fill-opacity=".94"/><text x="610.2" y="325" text-anchor="middle" fill="#09090A" class="badge-glyph">Dj</text><text x="634.2" y="326" fill="#f4f0e9" class="badge-label">Django</text><rect x="707.8000000000001" y="299" width="98.0" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M711.8000000000001 303H745.8000000000001V337H711.8000000000001Z" fill="#D12F37" fill-opacity=".94"/><text x="728.8000000000001" y="325" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">Fl</text><text x="752.8000000000001" y="326" fill="#f4f0e9" class="badge-label">Flask</text><rect x="817.8000000000001" y="299" width="115.19999999999999" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M821.8000000000001 303H855.8000000000001V337H821.8000000000001Z" fill="#D5AD52" fill-opacity=".94"/><text x="838.8000000000001" y="325" text-anchor="middle" fill="#09090A" class="badge-glyph">API</text><text x="862.8000000000001" y="326" fill="#f4f0e9" class="badge-label">FastAPI</text><rect x="945.0" y="299" width="115.19999999999999" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M949.0 303H983.0V337H949.0Z" fill="#F4F0E9" fill-opacity=".94"/><text x="966.0" y="325" text-anchor="middle" fill="#09090A" class="badge-glyph">JS</text><text x="990.0" y="326" fill="#f4f0e9" class="badge-label">Node.js</text><rect x="58" y="349" width="98.0" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M62 353H96V387H62Z" fill="#D12F37" fill-opacity=".94"/><text x="79" y="375" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">SQL</text><text x="103" y="376" fill="#f4f0e9" class="badge-label">MySQL</text><rect x="168.0" y="349" width="115.19999999999999" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M172.0 353H206.0V387H172.0Z" fill="#D5AD52" fill-opacity=".94"/><text x="189.0" y="375" text-anchor="middle" fill="#09090A" class="badge-glyph">Mg</text><text x="213.0" y="376" fill="#f4f0e9" class="badge-label">MongoDB</text><rect x="295.2" y="349" width="141.0" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M299.2 353H333.2V387H299.2Z" fill="#F4F0E9" fill-opacity=".94"/><text x="316.2" y="375" text-anchor="middle" fill="#09090A" class="badge-glyph">Pg</text><text x="340.2" y="376" fill="#f4f0e9" class="badge-label">PostgreSQL</text><rect x="448.2" y="349" width="106.6" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M452.2 353H486.2V387H452.2Z" fill="#D12F37" fill-opacity=".94"/><text x="469.2" y="375" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">Sq</text><text x="493.2" y="376" fill="#f4f0e9" class="badge-label">SQLite</text><text x="58" y="430" class="micro gold">SECURITY, BUILD &amp; CREATIVE</text><path d="M58 442H1142" stroke="#3d3834"/><rect x="58" y="457" width="86" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M62 461H96V495H62Z" fill="#D5AD52" fill-opacity=".94"/><text x="79" y="483" text-anchor="middle" fill="#09090A" class="badge-glyph">Git</text><text x="103" y="484" fill="#f4f0e9" class="badge-label">Git</text><rect x="156" y="457" width="106.6" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M160 461H194V495H160Z" fill="#F4F0E9" fill-opacity=".94"/><text x="177" y="483" text-anchor="middle" fill="#09090A" class="badge-glyph">GH</text><text x="201" y="484" fill="#f4f0e9" class="badge-label">GitHub</text><rect x="274.6" y="457" width="106.6" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M278.6 461H312.6V495H278.6Z" fill="#D12F37" fill-opacity=".94"/><text x="295.6" y="483" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">GL</text><text x="319.6" y="484" fill="#f4f0e9" class="badge-label">GitLab</text><rect x="393.20000000000005" y="457" width="98.0" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M397.20000000000005 461H431.20000000000005V495H397.20000000000005Z" fill="#D5AD52" fill-opacity=".94"/><text x="414.20000000000005" y="483" text-anchor="middle" fill="#09090A" class="badge-glyph">N</text><text x="438.20000000000005" y="484" fill="#f4f0e9" class="badge-label">Nginx</text><rect x="503.20000000000005" y="457" width="89.4" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M507.20000000000005 461H541.2V495H507.20000000000005Z" fill="#F4F0E9" fill-opacity=".94"/><text x="524.2" y="483" text-anchor="middle" fill="#09090A" class="badge-glyph">J</text><text x="548.2" y="484" fill="#f4f0e9" class="badge-label">Jira</text><rect x="604.6" y="457" width="98.0" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M608.6 461H642.6V495H608.6Z" fill="#D12F37" fill-opacity=".94"/><text x="625.6" y="483" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">U</text><text x="649.6" y="484" fill="#f4f0e9" class="badge-label">Unity</text><rect x="714.6" y="457" width="166.8" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M718.6 461H752.6V495H718.6Z" fill="#D5AD52" fill-opacity=".94"/><text x="735.6" y="483" text-anchor="middle" fill="#09090A" class="badge-glyph">UE</text><text x="759.6" y="484" fill="#f4f0e9" class="badge-label">Unreal Engine</text><rect x="893.4000000000001" y="457" width="141.0" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M897.4000000000001 461H931.4000000000001V495H897.4000000000001Z" fill="#F4F0E9" fill-opacity=".94"/><text x="914.4000000000001" y="483" text-anchor="middle" fill="#09090A" class="badge-glyph">TF</text><text x="938.4000000000001" y="484" fill="#f4f0e9" class="badge-label">TensorFlow</text><rect x="58" y="507" width="98.0" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M62 511H96V545H62Z" fill="#D12F37" fill-opacity=".94"/><text x="79" y="533" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">NP</text><text x="103" y="534" fill="#f4f0e9" class="badge-label">NumPy</text><rect x="168.0" y="507" width="98.0" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M172.0 511H206.0V545H172.0Z" fill="#D5AD52" fill-opacity=".94"/><text x="189.0" y="533" text-anchor="middle" fill="#09090A" class="badge-glyph">Ae</text><text x="213.0" y="534" fill="#f4f0e9" class="badge-label">Adobe</text><rect x="278.0" y="507" width="158.2" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M282.0 511H316.0V545H282.0Z" fill="#F4F0E9" fill-opacity=".94"/><text x="299.0" y="533" text-anchor="middle" fill="#09090A" class="badge-glyph">Pr</text><text x="323.0" y="534" fill="#f4f0e9" class="badge-label">Premiere Pro</text><rect x="448.2" y="507" width="166.8" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M452.2 511H486.2V545H452.2Z" fill="#D12F37" fill-opacity=".94"/><text x="469.2" y="533" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">Ae</text><text x="493.2" y="534" fill="#f4f0e9" class="badge-label">After Effects</text><defs><mask id="badgeMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="610"><rect width="1200" height="610" fill="#000"/><g fill="#fff"><rect x="58" y="141" width="89.4" height="42" rx="4" fill="#fff"/><rect x="159.4" y="141" width="149.6" height="42" rx="4" fill="#fff"/><rect x="321.0" y="141" width="86" height="42" rx="4" fill="#fff"/><rect x="419.0" y="141" width="86" height="42" rx="4" fill="#fff"/><rect x="517.0" y="141" width="115.19999999999999" height="42" rx="4" fill="#fff"/><rect x="644.2" y="141" width="89.4" height="42" rx="4" fill="#fff"/><rect x="745.6" y="141" width="141.0" height="42" rx="4" fill="#fff"/><rect x="898.6" y="141" width="106.6" height="42" rx="4" fill="#fff"/><rect x="58" y="191" width="141.0" height="42" rx="4" fill="#fff"/><rect x="211.0" y="191" width="98.0" height="42" rx="4" fill="#fff"/><rect x="321.0" y="191" width="89.4" height="42" rx="4" fill="#fff"/><rect x="422.4" y="191" width="86" height="42" rx="4" fill="#fff"/><rect x="58" y="299" width="86" height="42" rx="4" fill="#fff"/><rect x="156" y="299" width="98.0" height="42" rx="4" fill="#fff"/><rect x="266.0" y="299" width="158.2" height="42" rx="4" fill="#fff"/><rect x="436.2" y="299" width="141.0" height="42" rx="4" fill="#fff"/><rect x="589.2" y="299" width="106.6" height="42" rx="4" fill="#fff"/><rect x="707.8000000000001" y="299" width="98.0" height="42" rx="4" fill="#fff"/><rect x="817.8000000000001" y="299" width="115.19999999999999" height="42" rx="4" fill="#fff"/><rect x="945.0" y="299" width="115.19999999999999" height="42" rx="4" fill="#fff"/><rect x="58" y="349" width="98.0" height="42" rx="4" fill="#fff"/><rect x="168.0" y="349" width="115.19999999999999" height="42" rx="4" fill="#fff"/><rect x="295.2" y="349" width="141.0" height="42" rx="4" fill="#fff"/><rect x="448.2" y="349" width="106.6" height="42" rx="4" fill="#fff"/><rect x="58" y="457" width="86" height="42" rx="4" fill="#fff"/><rect x="156" y="457" width="106.6" height="42" rx="4" fill="#fff"/><rect x="274.6" y="457" width="106.6" height="42" rx="4" fill="#fff"/><rect x="393.20000000000005" y="457" width="98.0" height="42" rx="4" fill="#fff"/><rect x="503.20000000000005" y="457" width="89.4" height="42" rx="4" fill="#fff"/><rect x="604.6" y="457" width="98.0" height="42" rx="4" fill="#fff"/><rect x="714.6" y="457" width="166.8" height="42" rx="4" fill="#fff"/><rect x="893.4000000000001" y="457" width="141.0" height="42" rx="4" fill="#fff"/><rect x="58" y="507" width="98.0" height="42" rx="4" fill="#fff"/><rect x="168.0" y="507" width="98.0" height="42" rx="4" fill="#fff"/><rect x="278.0" y="507" width="158.2" height="42" rx="4" fill="#fff"/><rect x="448.2" y="507" width="166.8" height="42" rx="4" fill="#fff"/></g></mask></defs>
-  <defs>
-    <linearGradient id="badge-rake-gold" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
-      <stop offset=".46" stop-color="#d5ad52" stop-opacity=".18"/>
-      <stop offset=".55" stop-color="#fff2cb" stop-opacity=".82"/>
-      <stop offset=".64" stop-color="#d5ad52" stop-opacity=".2"/>
-      <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="badge-rake-white" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
-      <stop offset=".5" stop-color="#fff" stop-opacity=".68"/>
-      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
-  <g mask="url(#badgeMask)">
-    <path d="M-340 -260h58l740 820h-58Z" fill="url(#badge-rake-gold)" opacity=".72">
-      <animateTransform attributeName="transform" type="translate" values="-760,-520;760,520" dur="10.8s" repeatCount="indefinite"/>
-    </path>
-    <path d="M-370 -260h26l740 820h-26Z" fill="url(#badge-rake-white)" opacity=".74">
-      <animateTransform attributeName="transform" type="translate" values="-760,-520;760,520" dur="10.8s" begin="1.9s" repeatCount="indefinite"/>
-    </path>
-    <path d="M-330 -260h30l740 820h-30Z" fill="url(#badge-rake-white)" opacity=".34">
-      <animateTransform attributeName="transform" type="translate" values="-760,-520;760,520" dur="14.2s" begin="4.1s" repeatCount="indefinite"/>
-    </path>
-  </g><text x="58" y="568" class="micro soft">LANGUAGES  ·  CLOUD  ·  SECURITY  ·  GAME DEVELOPMENT  ·  CREATIVE TOOLS</text>
+  <defs><linearGradient id="toolkit-sheen-D5AD52" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#D5AD52" stop-opacity="0"/>
+  <stop offset=".46" stop-color="#D5AD52" stop-opacity=".08"/>
+  <stop offset=".56" stop-color="#fff2cb" stop-opacity=".92"/>
+  <stop offset=".66" stop-color="#D5AD52" stop-opacity=".12"/>
+  <stop offset="1" stop-color="#D5AD52" stop-opacity="0"/>
+</linearGradient><linearGradient id="toolkit-sheen-F4F0E9" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#F4F0E9" stop-opacity="0"/>
+  <stop offset=".46" stop-color="#F4F0E9" stop-opacity=".08"/>
+  <stop offset=".56" stop-color="#ffffff" stop-opacity=".92"/>
+  <stop offset=".66" stop-color="#F4F0E9" stop-opacity=".12"/>
+  <stop offset="1" stop-color="#F4F0E9" stop-opacity="0"/>
+</linearGradient><linearGradient id="toolkit-sheen-D12F37" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#D12F37" stop-opacity="0"/>
+  <stop offset=".46" stop-color="#D12F37" stop-opacity=".08"/>
+  <stop offset=".56" stop-color="#ffb5b8" stop-opacity=".92"/>
+  <stop offset=".66" stop-color="#D12F37" stop-opacity=".12"/>
+  <stop offset="1" stop-color="#D12F37" stop-opacity="0"/>
+</linearGradient></defs><rect x="34" y="82" width="1132" height="508" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/><text x="58" y="114" class="micro gold">LANGUAGES &amp; SYSTEMS</text><path d="M58 126H1142" stroke="#3d3834"/><rect x="58" y="141" width="89.4" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M62 145H96V179H62Z" fill="#D5AD52" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-0-clip"><rect x="58" y="141" width="89.4" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-0-clip)" opacity=".56">
+  <path d="M-84 283h54l311.4 -311.4h-54Z" fill="url(#toolkit-sheen-D5AD52)">
+    <animateTransform attributeName="transform" type="translate" values="-130.46,-87.80000000000001;130.46,87.80000000000001" dur="4.6s" begin="0.00s" repeatCount="indefinite"/>
+  </path>
+</g><text x="79" y="167" text-anchor="middle" fill="#09090A" class="badge-glyph">R</text><text x="103" y="168" fill="#f4f0e9" class="badge-label">Rust</text><rect x="159.4" y="141" width="149.6" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M163.4 145H197.4V179H163.4Z" fill="#F4F0E9" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-1-clip"><rect x="159.4" y="141" width="149.6" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-1-clip)" opacity=".56">
+  <path d="M17.400000000000006 283h54l371.6 -371.6h-54Z" fill="url(#toolkit-sheen-F4F0E9)">
+    <animateTransform attributeName="transform" type="translate" values="-184.64,-87.80000000000001;184.64,87.80000000000001" dur="4.6s" begin="0.10s" repeatCount="indefinite"/>
+  </path>
+</g><text x="180.4" y="167" text-anchor="middle" fill="#09090A" class="badge-glyph">WASM</text><text x="204.4" y="168" fill="#f4f0e9" class="badge-label">WebAssembly</text><rect x="321.0" y="141" width="86" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M325.0 145H359.0V179H325.0Z" fill="#D12F37" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-2-clip"><rect x="321.0" y="141" width="86" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-2-clip)" opacity=".56">
+  <path d="M179.0 283h54l308 -308h-54Z" fill="url(#toolkit-sheen-D12F37)">
+    <animateTransform attributeName="transform" type="translate" values="-127.4,-87.80000000000001;127.4,87.80000000000001" dur="4.6s" begin="0.20s" repeatCount="indefinite"/>
+  </path>
+</g><text x="342.0" y="167" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">C</text><text x="366.0" y="168" fill="#f4f0e9" class="badge-label">C</text><rect x="419.0" y="141" width="86" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M423.0 145H457.0V179H423.0Z" fill="#D5AD52" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-3-clip"><rect x="419.0" y="141" width="86" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-3-clip)" opacity=".56">
+  <path d="M277.0 283h54l308 -308h-54Z" fill="url(#toolkit-sheen-D5AD52)">
+    <animateTransform attributeName="transform" type="translate" values="-127.4,-87.80000000000001;127.4,87.80000000000001" dur="4.6s" begin="0.30s" repeatCount="indefinite"/>
+  </path>
+</g><text x="440.0" y="167" text-anchor="middle" fill="#09090A" class="badge-glyph">C++</text><text x="464.0" y="168" fill="#f4f0e9" class="badge-label">C++</text><rect x="517.0" y="141" width="115.19999999999999" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M521.0 145H555.0V179H521.0Z" fill="#F4F0E9" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-4-clip"><rect x="517.0" y="141" width="115.19999999999999" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-4-clip)" opacity=".56">
+  <path d="M375.0 283h54l337.2 -337.2h-54Z" fill="url(#toolkit-sheen-F4F0E9)">
+    <animateTransform attributeName="transform" type="translate" values="-153.68,-87.80000000000001;153.68,87.80000000000001" dur="4.6s" begin="0.40s" repeatCount="indefinite"/>
+  </path>
+</g><text x="538.0" y="167" text-anchor="middle" fill="#09090A" class="badge-glyph">C#</text><text x="562.0" y="168" fill="#f4f0e9" class="badge-label">C Sharp</text><rect x="644.2" y="141" width="89.4" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M648.2 145H682.2V179H648.2Z" fill="#D12F37" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-5-clip"><rect x="644.2" y="141" width="89.4" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-5-clip)" opacity=".56">
+  <path d="M502.20000000000005 283h54l311.4 -311.4h-54Z" fill="url(#toolkit-sheen-D12F37)">
+    <animateTransform attributeName="transform" type="translate" values="-130.46,-87.80000000000001;130.46,87.80000000000001" dur="4.6s" begin="0.50s" repeatCount="indefinite"/>
+  </path>
+</g><text x="665.2" y="167" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">J</text><text x="689.2" y="168" fill="#f4f0e9" class="badge-label">Java</text><rect x="745.6" y="141" width="141.0" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M749.6 145H783.6V179H749.6Z" fill="#D5AD52" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-6-clip"><rect x="745.6" y="141" width="141.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-6-clip)" opacity=".56">
+  <path d="M603.6 283h54l363.0 -363.0h-54Z" fill="url(#toolkit-sheen-D5AD52)">
+    <animateTransform attributeName="transform" type="translate" values="-176.9,-87.80000000000001;176.9,87.80000000000001" dur="4.6s" begin="0.60s" repeatCount="indefinite"/>
+  </path>
+</g><text x="766.6" y="167" text-anchor="middle" fill="#09090A" class="badge-glyph">JS</text><text x="790.6" y="168" fill="#f4f0e9" class="badge-label">JavaScript</text><rect x="898.6" y="141" width="106.6" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M902.6 145H936.6V179H902.6Z" fill="#F4F0E9" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-7-clip"><rect x="898.6" y="141" width="106.6" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-7-clip)" opacity=".56">
+  <path d="M756.6 283h54l328.6 -328.6h-54Z" fill="url(#toolkit-sheen-F4F0E9)">
+    <animateTransform attributeName="transform" type="translate" values="-145.94,-87.80000000000001;145.94,87.80000000000001" dur="4.6s" begin="0.70s" repeatCount="indefinite"/>
+  </path>
+</g><text x="919.6" y="167" text-anchor="middle" fill="#09090A" class="badge-glyph">Py</text><text x="943.6" y="168" fill="#f4f0e9" class="badge-label">Python</text><rect x="58" y="191" width="141.0" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M62 195H96V229H62Z" fill="#D12F37" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-8-clip"><rect x="58" y="191" width="141.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-8-clip)" opacity=".56">
+  <path d="M-84 333h54l363.0 -363.0h-54Z" fill="url(#toolkit-sheen-D12F37)">
+    <animateTransform attributeName="transform" type="translate" values="-176.9,-87.80000000000001;176.9,87.80000000000001" dur="4.6s" begin="0.80s" repeatCount="indefinite"/>
+  </path>
+</g><text x="79" y="217" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">PS</text><text x="103" y="218" fill="#f4f0e9" class="badge-label">PowerShell</text><rect x="211.0" y="191" width="98.0" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M215.0 195H249.0V229H215.0Z" fill="#D5AD52" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-9-clip"><rect x="211.0" y="191" width="98.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-9-clip)" opacity=".56">
+  <path d="M69.0 333h54l320.0 -320.0h-54Z" fill="url(#toolkit-sheen-D5AD52)">
+    <animateTransform attributeName="transform" type="translate" values="-138.2,-87.80000000000001;138.2,87.80000000000001" dur="4.6s" begin="0.90s" repeatCount="indefinite"/>
+  </path>
+</g><text x="232.0" y="217" text-anchor="middle" fill="#09090A" class="badge-glyph">H5</text><text x="256.0" y="218" fill="#f4f0e9" class="badge-label">HTML5</text><rect x="321.0" y="191" width="89.4" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M325.0 195H359.0V229H325.0Z" fill="#F4F0E9" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-10-clip"><rect x="321.0" y="191" width="89.4" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-10-clip)" opacity=".56">
+  <path d="M179.0 333h54l311.4 -311.4h-54Z" fill="url(#toolkit-sheen-F4F0E9)">
+    <animateTransform attributeName="transform" type="translate" values="-130.46,-87.80000000000001;130.46,87.80000000000001" dur="4.6s" begin="1.00s" repeatCount="indefinite"/>
+  </path>
+</g><text x="342.0" y="217" text-anchor="middle" fill="#09090A" class="badge-glyph">C3</text><text x="366.0" y="218" fill="#f4f0e9" class="badge-label">CSS3</text><rect x="422.4" y="191" width="86" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M426.4 195H460.4V229H426.4Z" fill="#D12F37" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-11-clip"><rect x="422.4" y="191" width="86" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-11-clip)" opacity=".56">
+  <path d="M280.4 333h54l308 -308h-54Z" fill="url(#toolkit-sheen-D12F37)">
+    <animateTransform attributeName="transform" type="translate" values="-127.4,-87.80000000000001;127.4,87.80000000000001" dur="4.6s" begin="1.10s" repeatCount="indefinite"/>
+  </path>
+</g><text x="443.4" y="217" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">R</text><text x="467.4" y="218" fill="#f4f0e9" class="badge-label">R</text><text x="58" y="272" class="micro gold">CLOUD, SERVICES &amp; DATA</text><path d="M58 284H1142" stroke="#3d3834"/><rect x="58" y="299" width="86" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M62 303H96V337H62Z" fill="#D5AD52" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-12-clip"><rect x="58" y="299" width="86" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-12-clip)" opacity=".56">
+  <path d="M-84 441h54l308 -308h-54Z" fill="url(#toolkit-sheen-D5AD52)">
+    <animateTransform attributeName="transform" type="translate" values="-127.4,-87.80000000000001;127.4,87.80000000000001" dur="4.6s" begin="1.20s" repeatCount="indefinite"/>
+  </path>
+</g><text x="79" y="325" text-anchor="middle" fill="#09090A" class="badge-glyph">AWS</text><text x="103" y="326" fill="#f4f0e9" class="badge-label">AWS</text><rect x="156" y="299" width="98.0" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M160 303H194V337H160Z" fill="#F4F0E9" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-13-clip"><rect x="156" y="299" width="98.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-13-clip)" opacity=".56">
+  <path d="M14 441h54l320.0 -320.0h-54Z" fill="url(#toolkit-sheen-F4F0E9)">
+    <animateTransform attributeName="transform" type="translate" values="-138.2,-87.80000000000001;138.2,87.80000000000001" dur="4.6s" begin="1.30s" repeatCount="indefinite"/>
+  </path>
+</g><text x="177" y="325" text-anchor="middle" fill="#09090A" class="badge-glyph">Az</text><text x="201" y="326" fill="#f4f0e9" class="badge-label">Azure</text><rect x="266.0" y="299" width="158.2" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M270.0 303H304.0V337H270.0Z" fill="#D12F37" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-14-clip"><rect x="266.0" y="299" width="158.2" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-14-clip)" opacity=".56">
+  <path d="M124.0 441h54l380.2 -380.2h-54Z" fill="url(#toolkit-sheen-D12F37)">
+    <animateTransform attributeName="transform" type="translate" values="-192.38,-87.80000000000001;192.38,87.80000000000001" dur="4.6s" begin="1.40s" repeatCount="indefinite"/>
+  </path>
+</g><text x="287.0" y="325" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">GC</text><text x="311.0" y="326" fill="#f4f0e9" class="badge-label">Google Cloud</text><rect x="436.2" y="299" width="141.0" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M440.2 303H474.2V337H440.2Z" fill="#D5AD52" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-15-clip"><rect x="436.2" y="299" width="141.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-15-clip)" opacity=".56">
+  <path d="M294.2 441h54l363.0 -363.0h-54Z" fill="url(#toolkit-sheen-D5AD52)">
+    <animateTransform attributeName="transform" type="translate" values="-176.9,-87.80000000000001;176.9,87.80000000000001" dur="4.6s" begin="1.50s" repeatCount="indefinite"/>
+  </path>
+</g><text x="457.2" y="325" text-anchor="middle" fill="#09090A" class="badge-glyph">CF</text><text x="481.2" y="326" fill="#f4f0e9" class="badge-label">Cloudflare</text><rect x="589.2" y="299" width="106.6" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M593.2 303H627.2V337H593.2Z" fill="#F4F0E9" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-16-clip"><rect x="589.2" y="299" width="106.6" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-16-clip)" opacity=".56">
+  <path d="M447.20000000000005 441h54l328.6 -328.6h-54Z" fill="url(#toolkit-sheen-F4F0E9)">
+    <animateTransform attributeName="transform" type="translate" values="-145.94,-87.80000000000001;145.94,87.80000000000001" dur="4.6s" begin="1.60s" repeatCount="indefinite"/>
+  </path>
+</g><text x="610.2" y="325" text-anchor="middle" fill="#09090A" class="badge-glyph">Dj</text><text x="634.2" y="326" fill="#f4f0e9" class="badge-label">Django</text><rect x="707.8000000000001" y="299" width="98.0" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M711.8000000000001 303H745.8000000000001V337H711.8000000000001Z" fill="#D12F37" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-17-clip"><rect x="707.8000000000001" y="299" width="98.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-17-clip)" opacity=".56">
+  <path d="M565.8000000000001 441h54l320.0 -320.0h-54Z" fill="url(#toolkit-sheen-D12F37)">
+    <animateTransform attributeName="transform" type="translate" values="-138.2,-87.80000000000001;138.2,87.80000000000001" dur="4.6s" begin="1.70s" repeatCount="indefinite"/>
+  </path>
+</g><text x="728.8000000000001" y="325" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">Fl</text><text x="752.8000000000001" y="326" fill="#f4f0e9" class="badge-label">Flask</text><rect x="817.8000000000001" y="299" width="115.19999999999999" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M821.8000000000001 303H855.8000000000001V337H821.8000000000001Z" fill="#D5AD52" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-18-clip"><rect x="817.8000000000001" y="299" width="115.19999999999999" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-18-clip)" opacity=".56">
+  <path d="M675.8000000000001 441h54l337.2 -337.2h-54Z" fill="url(#toolkit-sheen-D5AD52)">
+    <animateTransform attributeName="transform" type="translate" values="-153.68,-87.80000000000001;153.68,87.80000000000001" dur="4.6s" begin="1.80s" repeatCount="indefinite"/>
+  </path>
+</g><text x="838.8000000000001" y="325" text-anchor="middle" fill="#09090A" class="badge-glyph">API</text><text x="862.8000000000001" y="326" fill="#f4f0e9" class="badge-label">FastAPI</text><rect x="945.0" y="299" width="115.19999999999999" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M949.0 303H983.0V337H949.0Z" fill="#F4F0E9" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-19-clip"><rect x="945.0" y="299" width="115.19999999999999" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-19-clip)" opacity=".56">
+  <path d="M803.0 441h54l337.2 -337.2h-54Z" fill="url(#toolkit-sheen-F4F0E9)">
+    <animateTransform attributeName="transform" type="translate" values="-153.68,-87.80000000000001;153.68,87.80000000000001" dur="4.6s" begin="1.90s" repeatCount="indefinite"/>
+  </path>
+</g><text x="966.0" y="325" text-anchor="middle" fill="#09090A" class="badge-glyph">JS</text><text x="990.0" y="326" fill="#f4f0e9" class="badge-label">Node.js</text><rect x="58" y="349" width="98.0" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M62 353H96V387H62Z" fill="#D12F37" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-20-clip"><rect x="58" y="349" width="98.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-20-clip)" opacity=".56">
+  <path d="M-84 491h54l320.0 -320.0h-54Z" fill="url(#toolkit-sheen-D12F37)">
+    <animateTransform attributeName="transform" type="translate" values="-138.2,-87.80000000000001;138.2,87.80000000000001" dur="4.6s" begin="2.00s" repeatCount="indefinite"/>
+  </path>
+</g><text x="79" y="375" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">SQL</text><text x="103" y="376" fill="#f4f0e9" class="badge-label">MySQL</text><rect x="168.0" y="349" width="115.19999999999999" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M172.0 353H206.0V387H172.0Z" fill="#D5AD52" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-21-clip"><rect x="168.0" y="349" width="115.19999999999999" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-21-clip)" opacity=".56">
+  <path d="M26.0 491h54l337.2 -337.2h-54Z" fill="url(#toolkit-sheen-D5AD52)">
+    <animateTransform attributeName="transform" type="translate" values="-153.68,-87.80000000000001;153.68,87.80000000000001" dur="4.6s" begin="2.10s" repeatCount="indefinite"/>
+  </path>
+</g><text x="189.0" y="375" text-anchor="middle" fill="#09090A" class="badge-glyph">Mg</text><text x="213.0" y="376" fill="#f4f0e9" class="badge-label">MongoDB</text><rect x="295.2" y="349" width="141.0" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M299.2 353H333.2V387H299.2Z" fill="#F4F0E9" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-22-clip"><rect x="295.2" y="349" width="141.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-22-clip)" opacity=".56">
+  <path d="M153.2 491h54l363.0 -363.0h-54Z" fill="url(#toolkit-sheen-F4F0E9)">
+    <animateTransform attributeName="transform" type="translate" values="-176.9,-87.80000000000001;176.9,87.80000000000001" dur="4.6s" begin="2.20s" repeatCount="indefinite"/>
+  </path>
+</g><text x="316.2" y="375" text-anchor="middle" fill="#09090A" class="badge-glyph">Pg</text><text x="340.2" y="376" fill="#f4f0e9" class="badge-label">PostgreSQL</text><rect x="448.2" y="349" width="106.6" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M452.2 353H486.2V387H452.2Z" fill="#D12F37" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-23-clip"><rect x="448.2" y="349" width="106.6" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-23-clip)" opacity=".56">
+  <path d="M306.2 491h54l328.6 -328.6h-54Z" fill="url(#toolkit-sheen-D12F37)">
+    <animateTransform attributeName="transform" type="translate" values="-145.94,-87.80000000000001;145.94,87.80000000000001" dur="4.6s" begin="2.30s" repeatCount="indefinite"/>
+  </path>
+</g><text x="469.2" y="375" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">Sq</text><text x="493.2" y="376" fill="#f4f0e9" class="badge-label">SQLite</text><text x="58" y="430" class="micro gold">SECURITY, BUILD &amp; CREATIVE</text><path d="M58 442H1142" stroke="#3d3834"/><rect x="58" y="457" width="86" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M62 461H96V495H62Z" fill="#D5AD52" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-24-clip"><rect x="58" y="457" width="86" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-24-clip)" opacity=".56">
+  <path d="M-84 599h54l308 -308h-54Z" fill="url(#toolkit-sheen-D5AD52)">
+    <animateTransform attributeName="transform" type="translate" values="-127.4,-87.80000000000001;127.4,87.80000000000001" dur="4.6s" begin="2.40s" repeatCount="indefinite"/>
+  </path>
+</g><text x="79" y="483" text-anchor="middle" fill="#09090A" class="badge-glyph">Git</text><text x="103" y="484" fill="#f4f0e9" class="badge-label">Git</text><rect x="156" y="457" width="106.6" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M160 461H194V495H160Z" fill="#F4F0E9" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-25-clip"><rect x="156" y="457" width="106.6" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-25-clip)" opacity=".56">
+  <path d="M14 599h54l328.6 -328.6h-54Z" fill="url(#toolkit-sheen-F4F0E9)">
+    <animateTransform attributeName="transform" type="translate" values="-145.94,-87.80000000000001;145.94,87.80000000000001" dur="4.6s" begin="2.50s" repeatCount="indefinite"/>
+  </path>
+</g><text x="177" y="483" text-anchor="middle" fill="#09090A" class="badge-glyph">GH</text><text x="201" y="484" fill="#f4f0e9" class="badge-label">GitHub</text><rect x="274.6" y="457" width="106.6" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M278.6 461H312.6V495H278.6Z" fill="#D12F37" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-26-clip"><rect x="274.6" y="457" width="106.6" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-26-clip)" opacity=".56">
+  <path d="M132.60000000000002 599h54l328.6 -328.6h-54Z" fill="url(#toolkit-sheen-D12F37)">
+    <animateTransform attributeName="transform" type="translate" values="-145.94,-87.80000000000001;145.94,87.80000000000001" dur="4.6s" begin="2.60s" repeatCount="indefinite"/>
+  </path>
+</g><text x="295.6" y="483" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">GL</text><text x="319.6" y="484" fill="#f4f0e9" class="badge-label">GitLab</text><rect x="393.20000000000005" y="457" width="98.0" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M397.20000000000005 461H431.20000000000005V495H397.20000000000005Z" fill="#D5AD52" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-27-clip"><rect x="393.20000000000005" y="457" width="98.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-27-clip)" opacity=".56">
+  <path d="M251.20000000000005 599h54l320.0 -320.0h-54Z" fill="url(#toolkit-sheen-D5AD52)">
+    <animateTransform attributeName="transform" type="translate" values="-138.2,-87.80000000000001;138.2,87.80000000000001" dur="4.6s" begin="2.70s" repeatCount="indefinite"/>
+  </path>
+</g><text x="414.20000000000005" y="483" text-anchor="middle" fill="#09090A" class="badge-glyph">N</text><text x="438.20000000000005" y="484" fill="#f4f0e9" class="badge-label">Nginx</text><rect x="503.20000000000005" y="457" width="89.4" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M507.20000000000005 461H541.2V495H507.20000000000005Z" fill="#F4F0E9" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-28-clip"><rect x="503.20000000000005" y="457" width="89.4" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-28-clip)" opacity=".56">
+  <path d="M361.20000000000005 599h54l311.4 -311.4h-54Z" fill="url(#toolkit-sheen-F4F0E9)">
+    <animateTransform attributeName="transform" type="translate" values="-130.46,-87.80000000000001;130.46,87.80000000000001" dur="4.6s" begin="2.80s" repeatCount="indefinite"/>
+  </path>
+</g><text x="524.2" y="483" text-anchor="middle" fill="#09090A" class="badge-glyph">J</text><text x="548.2" y="484" fill="#f4f0e9" class="badge-label">Jira</text><rect x="604.6" y="457" width="98.0" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M608.6 461H642.6V495H608.6Z" fill="#D12F37" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-29-clip"><rect x="604.6" y="457" width="98.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-29-clip)" opacity=".56">
+  <path d="M462.6 599h54l320.0 -320.0h-54Z" fill="url(#toolkit-sheen-D12F37)">
+    <animateTransform attributeName="transform" type="translate" values="-138.2,-87.80000000000001;138.2,87.80000000000001" dur="4.6s" begin="2.90s" repeatCount="indefinite"/>
+  </path>
+</g><text x="625.6" y="483" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">U</text><text x="649.6" y="484" fill="#f4f0e9" class="badge-label">Unity</text><rect x="714.6" y="457" width="166.8" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M718.6 461H752.6V495H718.6Z" fill="#D5AD52" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-30-clip"><rect x="714.6" y="457" width="166.8" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-30-clip)" opacity=".56">
+  <path d="M572.6 599h54l388.8 -388.8h-54Z" fill="url(#toolkit-sheen-D5AD52)">
+    <animateTransform attributeName="transform" type="translate" values="-200.12,-87.80000000000001;200.12,87.80000000000001" dur="4.6s" begin="3.00s" repeatCount="indefinite"/>
+  </path>
+</g><text x="735.6" y="483" text-anchor="middle" fill="#09090A" class="badge-glyph">UE</text><text x="759.6" y="484" fill="#f4f0e9" class="badge-label">Unreal Engine</text><rect x="893.4000000000001" y="457" width="141.0" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M897.4000000000001 461H931.4000000000001V495H897.4000000000001Z" fill="#F4F0E9" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-31-clip"><rect x="893.4000000000001" y="457" width="141.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-31-clip)" opacity=".56">
+  <path d="M751.4000000000001 599h54l363.0 -363.0h-54Z" fill="url(#toolkit-sheen-F4F0E9)">
+    <animateTransform attributeName="transform" type="translate" values="-176.9,-87.80000000000001;176.9,87.80000000000001" dur="4.6s" begin="3.10s" repeatCount="indefinite"/>
+  </path>
+</g><text x="914.4000000000001" y="483" text-anchor="middle" fill="#09090A" class="badge-glyph">TF</text><text x="938.4000000000001" y="484" fill="#f4f0e9" class="badge-label">TensorFlow</text><rect x="58" y="507" width="98.0" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M62 511H96V545H62Z" fill="#D12F37" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-32-clip"><rect x="58" y="507" width="98.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-32-clip)" opacity=".56">
+  <path d="M-84 649h54l320.0 -320.0h-54Z" fill="url(#toolkit-sheen-D12F37)">
+    <animateTransform attributeName="transform" type="translate" values="-138.2,-87.80000000000001;138.2,87.80000000000001" dur="4.6s" begin="3.20s" repeatCount="indefinite"/>
+  </path>
+</g><text x="79" y="533" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">NP</text><text x="103" y="534" fill="#f4f0e9" class="badge-label">NumPy</text><rect x="168.0" y="507" width="98.0" height="42" rx="4" fill="#151414" stroke="#D5AD52" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M172.0 511H206.0V545H172.0Z" fill="#D5AD52" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-33-clip"><rect x="168.0" y="507" width="98.0" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-33-clip)" opacity=".56">
+  <path d="M26.0 649h54l320.0 -320.0h-54Z" fill="url(#toolkit-sheen-D5AD52)">
+    <animateTransform attributeName="transform" type="translate" values="-138.2,-87.80000000000001;138.2,87.80000000000001" dur="4.6s" begin="3.30s" repeatCount="indefinite"/>
+  </path>
+</g><text x="189.0" y="533" text-anchor="middle" fill="#09090A" class="badge-glyph">Ae</text><text x="213.0" y="534" fill="#f4f0e9" class="badge-label">Adobe</text><rect x="278.0" y="507" width="158.2" height="42" rx="4" fill="#151414" stroke="#F4F0E9" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M282.0 511H316.0V545H282.0Z" fill="#F4F0E9" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-34-clip"><rect x="278.0" y="507" width="158.2" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-34-clip)" opacity=".56">
+  <path d="M136.0 649h54l380.2 -380.2h-54Z" fill="url(#toolkit-sheen-F4F0E9)">
+    <animateTransform attributeName="transform" type="translate" values="-192.38,-87.80000000000001;192.38,87.80000000000001" dur="4.6s" begin="3.40s" repeatCount="indefinite"/>
+  </path>
+</g><text x="299.0" y="533" text-anchor="middle" fill="#09090A" class="badge-glyph">Pr</text><text x="323.0" y="534" fill="#f4f0e9" class="badge-label">Premiere Pro</text><rect x="448.2" y="507" width="166.8" height="42" rx="4" fill="#151414" stroke="#D12F37" stroke-opacity=".72" stroke-width=".8" class="card-edge"/><path d="M452.2 511H486.2V545H452.2Z" fill="#D12F37" fill-opacity=".94"/><defs>
+  <clipPath id="toolkit-badge-sheen-35-clip"><rect x="448.2" y="507" width="166.8" height="42" rx="4"/></clipPath>
+
+</defs>
+<g clip-path="url(#toolkit-badge-sheen-35-clip)" opacity=".56">
+  <path d="M306.2 649h54l388.8 -388.8h-54Z" fill="url(#toolkit-sheen-D12F37)">
+    <animateTransform attributeName="transform" type="translate" values="-200.12,-87.80000000000001;200.12,87.80000000000001" dur="4.6s" begin="3.50s" repeatCount="indefinite"/>
+  </path>
+</g><text x="469.2" y="533" text-anchor="middle" fill="#F4F0E9" class="badge-glyph">Ae</text><text x="493.2" y="534" fill="#f4f0e9" class="badge-label">After Effects</text><text x="58" y="568" class="micro soft">LANGUAGES  ·  CLOUD  ·  SECURITY  ·  GAME DEVELOPMENT  ·  CREATIVE TOOLS</text>
 </svg>

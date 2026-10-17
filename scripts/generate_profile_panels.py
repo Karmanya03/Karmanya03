@@ -646,23 +646,27 @@ def diagonal_sheen(
     delay: str = "0s",
     opacity: str = ".16",
     radius: int = 6,
+    gradient_id: str | None = None,
 ) -> str:
     """A clipped down-right light pass for a single card, paced per section."""
-    start_x, start_y = x - height - 110, y - height - 90
-    band = height + 180
-    return f'''<defs>
-  <clipPath id="{key}-clip"><rect x="{x}" y="{y}" width="{width}" height="{height}" rx="{radius}"/></clipPath>
-  <linearGradient id="{key}-light" x1="0" y1="0" x2="1" y2="0">
+    start_x, start_y = x - height - 100, y + height + 100
+    band = width + height + 180
+    travel_x, travel_y = width * .9 + 50, height * .9 + 50
+    light_id = gradient_id or f"{key}-light"
+    gradient_definition = "" if gradient_id else f'''<linearGradient id="{light_id}" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="{tint}" stop-opacity="0"/>
     <stop offset=".46" stop-color="{tint}" stop-opacity=".08"/>
     <stop offset=".56" stop-color="{tint}" stop-opacity=".92"/>
     <stop offset=".66" stop-color="{tint}" stop-opacity=".12"/>
     <stop offset="1" stop-color="{tint}" stop-opacity="0"/>
-  </linearGradient>
+  </linearGradient>'''
+    return f'''<defs>
+  <clipPath id="{key}-clip"><rect x="{x}" y="{y}" width="{width}" height="{height}" rx="{radius}"/></clipPath>
+{gradient_definition}
 </defs>
 <g clip-path="url(#{key}-clip)" opacity="{opacity}">
-  <path d="M{start_x} {start_y}h54l{band} {band}h-54Z" fill="url(#{key}-light)">
-    <animateTransform attributeName="transform" type="translate" values="{-width - 180},{-height - 120};{width + 180},{height + 120}" dur="{duration}" begin="{delay}" repeatCount="indefinite"/>
+  <path d="M{start_x} {start_y}h54l{band} -{band}h-54Z" fill="url(#{light_id})">
+    <animateTransform attributeName="transform" type="translate" values="{-travel_x},{-travel_y};{travel_x},{travel_y}" dur="{duration}" begin="{delay}" repeatCount="indefinite"/>
   </path>
 </g>'''
 
@@ -1188,8 +1192,18 @@ def render_toolkit() -> str:
         "Unreal Engine": "UE", "TensorFlow": "TF", "NumPy": "NP", "Adobe": "Ae",
         "Premiere Pro": "Pr", "After Effects": "Ae",
     }
-    body: list[str] = ['<rect x="34" y="82" width="1132" height="508" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>']
-    badge_mask: list[str] = []
+    highlight_colors = {"D5AD52": "#fff2cb", "F4F0E9": "#ffffff", "D12F37": "#ffb5b8"}
+    toolkit_gradients = ''.join(
+        f'''<linearGradient id="toolkit-sheen-{color}" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#{color}" stop-opacity="0"/>
+  <stop offset=".46" stop-color="#{color}" stop-opacity=".08"/>
+  <stop offset=".56" stop-color="{highlight_colors[color]}" stop-opacity=".92"/>
+  <stop offset=".66" stop-color="#{color}" stop-opacity=".12"/>
+  <stop offset="1" stop-color="#{color}" stop-opacity="0"/>
+</linearGradient>'''
+        for color, _ in colors
+    )
+    body: list[str] = [f'<defs>{toolkit_gradients}</defs>', '<rect x="34" y="82" width="1132" height="508" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>']
     badge_count = 0
     top = 98
     for group_index, (group, items) in enumerate(SHIELD_GROUPS.items()):
@@ -1205,50 +1219,23 @@ def render_toolkit() -> str:
                 x = 58
                 y += 50
             height = 42
-            badge_mask.append(
-                f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="4" fill="#fff"/>'
+            sheen = diagonal_sheen(
+                x, y, width, height, f'toolkit-badge-sheen-{badge_count}',
+                tint=f'#{color}', duration="4.6s",
+                delay=f'{badge_count * .10:.2f}s', opacity=".56", radius=4,
+                gradient_id=f'toolkit-sheen-{color}',
             )
             body.append(
                 f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="4" fill="#151414" '
                 f'stroke="#{color}" stroke-opacity=".72" stroke-width=".8" class="card-edge"/>'
                 f'<path d="M{x + 4} {y + 4}H{x + 38}V{y + 38}H{x + 4}Z" fill="#{color}" fill-opacity=".94"/>'
+                f'{sheen}'
                 f'<text x="{x + 21}" y="{y + 26}" text-anchor="middle" fill="#{logo_color}" class="badge-glyph">{svg_escape(marks.get(label, label[:2]))}</text>'
                 f'<text x="{x + 45}" y="{y + 27}" fill="#f4f0e9" class="badge-label">{svg_escape(label)}</text>'
             )
             x += width + 12
             badge_count += 1
 
-    defs = (
-        '<defs><mask id="badgeMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="610">'
-        '<rect width="1200" height="610" fill="#000"/><g fill="#fff">'
-        + ''.join(badge_mask) + '</g></mask></defs>'
-    )
-    body.append(defs + '''
-  <defs>
-    <linearGradient id="badge-rake-gold" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#d5ad52" stop-opacity="0"/>
-      <stop offset=".46" stop-color="#d5ad52" stop-opacity=".18"/>
-      <stop offset=".55" stop-color="#fff2cb" stop-opacity=".82"/>
-      <stop offset=".64" stop-color="#d5ad52" stop-opacity=".2"/>
-      <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="badge-rake-white" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
-      <stop offset=".5" stop-color="#fff" stop-opacity=".68"/>
-      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
-  <g mask="url(#badgeMask)">
-    <path d="M-340 -260h58l740 820h-58Z" fill="url(#badge-rake-gold)" opacity=".72">
-      <animateTransform attributeName="transform" type="translate" values="-760,-520;760,520" dur="10.8s" repeatCount="indefinite"/>
-    </path>
-    <path d="M-370 -260h26l740 820h-26Z" fill="url(#badge-rake-white)" opacity=".74">
-      <animateTransform attributeName="transform" type="translate" values="-760,-520;760,520" dur="10.8s" begin="1.9s" repeatCount="indefinite"/>
-    </path>
-    <path d="M-330 -260h30l740 820h-30Z" fill="url(#badge-rake-white)" opacity=".34">
-      <animateTransform attributeName="transform" type="translate" values="-760,-520;760,520" dur="14.2s" begin="4.1s" repeatCount="indefinite"/>
-    </path>
-  </g>''')
     body.append('<text x="58" y="568" class="micro soft">LANGUAGES  ·  CLOUD  ·  SECURITY  ·  GAME DEVELOPMENT  ·  CREATIVE TOOLS</text>')
     return wrap_svg("Toolkit", "".join(body), 610, "06")
 
