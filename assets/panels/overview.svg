@@ -18,13 +18,27 @@
       .serif{font:600 24px Georgia,'Times New Roman',serif}
       .num{font:500 45px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
       .inkline{stroke-dasharray:28 10;animation:ink 8s linear infinite}
+      .ambient-line{stroke-dasharray:46 1500;animation:rail 18s linear infinite}
+      .card-edge{animation:edge 6s ease-in-out infinite}
+      .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
+      .warmth{animation:warmth 5.8s ease-in-out infinite}
+      .heat-cell{animation:heat 6.5s ease-in-out infinite;animation-delay:var(--delay,0s)}
+      .month{font:700 12px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}
+      .weekday{font:700 11px 'Segoe UI',Arial,sans-serif}
+      .yearnum{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
       @keyframes ink{to{stroke-dashoffset:-304}}
-      @media (prefers-reduced-motion:reduce){.inkline{animation:none}}
+      @keyframes rail{to{stroke-dashoffset:-1546}}
+      @keyframes edge{0%,100%{stroke-opacity:.48}50%{stroke-opacity:.92}}
+      @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
+      @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
+      @keyframes heat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.24)}}
+      @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>
   <rect width="1200" height="505" rx="5" class="canvas"/>
   <rect width="1200" height="505" rx="5" class="grain"/>
   <path d="M0 0H1200" stroke="#d12f37" stroke-width="5"/>
+  <path d="M0 2H1200" stroke="#f4f0e9" stroke-opacity=".48" stroke-width="1" class="ambient-line"/>
   <rect x="30" y="25" width="42" height="27" rx="2" class="red"/>
   <text x="51" y="44" text-anchor="middle" class="micro white">00</text>
   <text x="87" y="43" class="micro white">PROFILE / LIVE RECORD</text>
@@ -43,7 +57,7 @@
   <path d="M607 184H843" stroke="#d5ad52" stroke-width="2"/>
 
   <text x="887" y="112" class="micro soft">↟  PUBLIC COMMITS</text>
-  <text x="887" y="170" class="num white">—</text>
+  <text x="887" y="170" class="num white">715</text>
   <path d="M887 184H1123" stroke="#d5ad52" stroke-width="2"/>
 
   <text x="47" y="224" class="micro gold">LANGUAGE MIX</text>
@@ -51,35 +65,35 @@
   <text x="47" y="258" class="small white">Rust</text>
   <text x="372" y="258" text-anchor="end" class="mono gold">88.1%</text>
   <rect x="47" y="269" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="47" y="269" width="244" height="5" rx="2.5" fill="#d12f37"/>
+  <rect x="47" y="269" width="244" height="5" rx="2.5" fill="#d12f37" class="warmth"/>
 
   <text x="421" y="258" class="small white">Python</text>
   <text x="746" y="258" text-anchor="end" class="mono gold">3.3%</text>
   <rect x="421" y="269" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="421" y="269" width="9" height="5" rx="2.5" fill="#d5ad52"/>
+  <rect x="421" y="269" width="9" height="5" rx="2.5" fill="#d5ad52" class="warmth"/>
 
   <text x="795" y="258" class="small white">JavaScript</text>
   <text x="1120" y="258" text-anchor="end" class="mono gold">2.9%</text>
   <rect x="795" y="269" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="795" y="269" width="8" height="5" rx="2.5" fill="#f4f0e9"/>
+  <rect x="795" y="269" width="8" height="5" rx="2.5" fill="#f4f0e9" class="warmth"/>
 
   <text x="47" y="312" class="small white">HTML</text>
   <text x="372" y="312" text-anchor="end" class="mono gold">2.7%</text>
   <rect x="47" y="323" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="47" y="323" width="7" height="5" rx="2.5" fill="#8c3336"/>
+  <rect x="47" y="323" width="7" height="5" rx="2.5" fill="#8c3336" class="warmth"/>
 
   <text x="421" y="312" class="small white">CSS</text>
   <text x="746" y="312" text-anchor="end" class="mono gold">1.9%</text>
   <rect x="421" y="323" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="421" y="323" width="5" height="5" rx="2.5" fill="#a39b8d"/>
+  <rect x="421" y="323" width="5" height="5" rx="2.5" fill="#a39b8d" class="warmth"/>
 
   <text x="795" y="312" class="small white">Shell</text>
   <text x="1120" y="312" text-anchor="end" class="mono gold">0.5%</text>
   <rect x="795" y="323" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="795" y="323" width="1" height="5" rx="2.5" fill="#78736c"/>
-<path d="M47 376H1152" class="rule"/><text x="47" y="403" class="micro gold">—</text><text x="47" y="421" class="micro soft">FORKS RECEIVED</text><text x="232" y="403" class="micro gold">30</text><text x="232" y="421" class="micro soft">FOLLOWING</text><text x="417" y="403" class="micro gold">—</text><text x="417" y="421" class="micro soft">PULL REQUESTS</text><text x="602" y="403" class="micro gold">—</text><text x="602" y="421" class="micro soft">ISSUES</text><text x="787" y="403" class="micro gold">—</text><text x="787" y="421" class="micro soft">LANGUAGES</text><text x="972" y="403" class="micro gold">—</text><text x="972" y="421" class="micro soft">ACTIVE REPOS · 90D</text>
+  <rect x="795" y="323" width="1" height="5" rx="2.5" fill="#78736c" class="warmth"/>
+<path d="M47 376H1152" class="rule"/><text x="47" y="403" class="micro gold">3</text><text x="47" y="421" class="micro soft">FORKS RECEIVED</text><text x="232" y="403" class="micro gold">30</text><text x="232" y="421" class="micro soft">FOLLOWING</text><text x="417" y="403" class="micro gold">10</text><text x="417" y="421" class="micro soft">PULL REQUESTS</text><text x="602" y="403" class="micro gold">0</text><text x="602" y="421" class="micro soft">ISSUES</text><text x="787" y="403" class="micro gold">13</text><text x="787" y="421" class="micro soft">LANGUAGES</text><text x="972" y="403" class="micro gold">5</text><text x="972" y="421" class="micro soft">ACTIVE REPOS · 90D</text>
   <path d="M47 456H1152" stroke="#d5ad52" stroke-width="1"/>
-  <text x="47" y="482" class="micro soft">AS OF 17 OCT 2026 · 15:21 UTC</text>
+  <text x="47" y="482" class="micro soft">AS OF 17 OCT 2026 · 16:20 UTC</text>
   <path d="M869 479H1134" stroke="#d12f37" stroke-width="2" class="inkline"/>
 
 </svg>

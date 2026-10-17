@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="1200" height="348" viewBox="0 0 1200 348" role="img" aria-label="Trophy case">
+  width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-label="Trophy case">
   <defs>
     <pattern id="grain" width="80" height="80" patternUnits="userSpaceOnUse">
       <path d="M0 79.5H80" stroke="#fff" stroke-opacity=".025"/>
@@ -18,64 +18,128 @@
       .serif{font:600 24px Georgia,'Times New Roman',serif}
       .num{font:500 45px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
       .inkline{stroke-dasharray:28 10;animation:ink 8s linear infinite}
+      .ambient-line{stroke-dasharray:46 1500;animation:rail 18s linear infinite}
+      .card-edge{animation:edge 6s ease-in-out infinite}
+      .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
+      .warmth{animation:warmth 5.8s ease-in-out infinite}
+      .heat-cell{animation:heat 6.5s ease-in-out infinite;animation-delay:var(--delay,0s)}
+      .month{font:700 12px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}
+      .weekday{font:700 11px 'Segoe UI',Arial,sans-serif}
+      .yearnum{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
       @keyframes ink{to{stroke-dashoffset:-304}}
-      @media (prefers-reduced-motion:reduce){.inkline{animation:none}}
+      @keyframes rail{to{stroke-dashoffset:-1546}}
+      @keyframes edge{0%,100%{stroke-opacity:.48}50%{stroke-opacity:.92}}
+      @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
+      @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
+      @keyframes heat{0%,100%{filter:brightness(1)}50%{filter:brightness(1.24)}}
+      @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>
-  <rect width="1200" height="348" rx="5" class="canvas"/>
-  <rect width="1200" height="348" rx="5" class="grain"/>
+  <rect width="1200" height="600" rx="5" class="canvas"/>
+  <rect width="1200" height="600" rx="5" class="grain"/>
   <path d="M0 0H1200" stroke="#d12f37" stroke-width="5"/>
+  <path d="M0 2H1200" stroke="#f4f0e9" stroke-opacity=".48" stroke-width="1" class="ambient-line"/>
   <rect x="30" y="25" width="42" height="27" rx="2" class="red"/>
   <text x="51" y="44" text-anchor="middle" class="micro white">02</text>
   <text x="87" y="43" class="micro white">TROPHY CASE</text>
   <path d="M30 62H1170" class="rule"/>
   
-  <rect x="42" y="94" width="267" height="230" rx="3" fill="#111112" stroke="#4a4030" stroke-width="1"/>
-  <path d="M42 94H309" stroke="#d12f37" stroke-width="3"/>
-  <text x="175" y="121" text-anchor="middle" class="micro gold">STARS</text>
-  <circle cx="175" cy="176" r="33" fill="#181718" stroke="#d5ad52" stroke-width="1.2"/>
-  <path d="M156 158h9l3 10 7-6 6 6 3-10h9v17q-3 10-18 10t-19-10Z" fill="none" stroke="#d5ad52" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M165 189h20m-24 5h28" stroke="#d12f37" stroke-width="2" stroke-linecap="round"/>
-  <text x="175" y="239" text-anchor="middle" class="serif white">A</text>
-  <text x="175" y="263" text-anchor="middle" class="micro gold">42 ✳</text>
-  <rect x="62" y="283" width="227" height="4" rx="2" fill="#3b3630"/>
-  <rect x="62" y="283" width="136" height="4" rx="2" fill="#d12f37"/>
-  <text x="175" y="308" text-anchor="middle" class="micro soft">NEXT 50</text>
+  <rect x="42" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#e2464d" stroke-opacity=".58" class="card-edge"/>
+  <path d="M43 103H308" stroke="#e2464d" stroke-width="3"/>
+  <path d="M56 116h16m-16 0v16M295 116h-16m16 0v16" fill="none" stroke="#e2464d" stroke-opacity=".46" stroke-width="1.3"/>
+  <text x="60" y="132" class="micro" fill="#e2464d">STARS</text>
+  <circle cx="175" cy="184" r="39" fill="#e2464d" fill-opacity=".07" stroke="#e2464d" stroke-opacity=".24" stroke-width="7" class="pulse"/>
+  <circle cx="175" cy="184" r="31" fill="#151414" stroke="#e2464d" stroke-width="1.5"/>
+  <circle cx="175" cy="184" r="35" fill="none" stroke="#e2464d" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <text x="175" y="195" text-anchor="middle" fill="#e2464d" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">✦</text>
+  <text x="175" y="249" text-anchor="middle" fill="#e2464d" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">A</text>
+  <text x="175" y="272" text-anchor="middle" class="micro white">42 <tspan fill="#e2464d">· ✦</tspan></text>
+  <rect x="62" y="288" width="227" height="5" rx="2.5" fill="#3b3630"/>
+  <rect x="62" y="288" width="136" height="5" rx="2.5" fill="#e2464d"/>
+  <text x="175" y="312" text-anchor="middle" class="micro soft">NEXT 50</text>
 
-  <rect x="325" y="94" width="267" height="230" rx="3" fill="#111112" stroke="#4a4030" stroke-width="1"/>
-  <path d="M325 94H592" stroke="#d5ad52" stroke-width="3"/>
-  <text x="458" y="121" text-anchor="middle" class="micro gold">FOLLOWERS</text>
-  <circle cx="458" cy="176" r="33" fill="#181718" stroke="#d5ad52" stroke-width="1.2"/>
-  <path d="M439 158h9l3 10 7-6 6 6 3-10h9v17q-3 10-18 10t-19-10Z" fill="none" stroke="#d5ad52" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M448 189h20m-24 5h28" stroke="#d12f37" stroke-width="2" stroke-linecap="round"/>
-  <text x="458" y="239" text-anchor="middle" class="serif white">A</text>
-  <text x="458" y="263" text-anchor="middle" class="micro gold">32 ◉</text>
-  <rect x="345" y="283" width="227" height="4" rx="2" fill="#3b3630"/>
-  <rect x="345" y="283" width="90" height="4" rx="2" fill="#d12f37"/>
-  <text x="458" y="308" text-anchor="middle" class="micro soft">NEXT 50</text>
+  <rect x="325" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#e2464d" stroke-opacity=".58" class="card-edge"/>
+  <path d="M326 103H591" stroke="#e2464d" stroke-width="3"/>
+  <path d="M339 116h16m-16 0v16M578 116h-16m16 0v16" fill="none" stroke="#e2464d" stroke-opacity=".46" stroke-width="1.3"/>
+  <text x="343" y="132" class="micro" fill="#e2464d">FOLLOWERS</text>
+  <circle cx="458" cy="184" r="39" fill="#e2464d" fill-opacity=".07" stroke="#e2464d" stroke-opacity=".24" stroke-width="7" class="pulse"/>
+  <circle cx="458" cy="184" r="31" fill="#151414" stroke="#e2464d" stroke-width="1.5"/>
+  <circle cx="458" cy="184" r="35" fill="none" stroke="#e2464d" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <text x="458" y="195" text-anchor="middle" fill="#e2464d" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">◎</text>
+  <text x="458" y="249" text-anchor="middle" fill="#e2464d" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">A</text>
+  <text x="458" y="272" text-anchor="middle" class="micro white">32 <tspan fill="#e2464d">· ◎</tspan></text>
+  <rect x="345" y="288" width="227" height="5" rx="2.5" fill="#3b3630"/>
+  <rect x="345" y="288" width="90" height="5" rx="2.5" fill="#e2464d"/>
+  <text x="458" y="312" text-anchor="middle" class="micro soft">NEXT 50</text>
 
-  <rect x="608" y="94" width="267" height="230" rx="3" fill="#111112" stroke="#4a4030" stroke-width="1"/>
-  <path d="M608 94H875" stroke="#d5ad52" stroke-width="3"/>
-  <text x="741" y="121" text-anchor="middle" class="micro gold">REPOSITORIES</text>
-  <circle cx="741" cy="176" r="33" fill="#181718" stroke="#d5ad52" stroke-width="1.2"/>
-  <path d="M722 158h9l3 10 7-6 6 6 3-10h9v17q-3 10-18 10t-19-10Z" fill="none" stroke="#d5ad52" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M731 189h20m-24 5h28" stroke="#d12f37" stroke-width="2" stroke-linecap="round"/>
-  <text x="741" y="239" text-anchor="middle" class="serif white">S</text>
-  <text x="741" y="263" text-anchor="middle" class="micro gold">42 ▤</text>
-  <rect x="628" y="283" width="227" height="4" rx="2" fill="#3b3630"/>
-  <rect x="628" y="283" width="90" height="4" rx="2" fill="#d12f37"/>
-  <text x="741" y="308" text-anchor="middle" class="micro soft">NEXT 45</text>
+  <rect x="608" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#f4f0e9" stroke-opacity=".58" class="card-edge"/>
+  <path d="M609 103H874" stroke="#f4f0e9" stroke-width="3"/>
+  <path d="M622 116h16m-16 0v16M861 116h-16m16 0v16" fill="none" stroke="#f4f0e9" stroke-opacity=".46" stroke-width="1.3"/>
+  <text x="626" y="132" class="micro" fill="#f4f0e9">REPOSITORIES</text>
+  <circle cx="741" cy="184" r="39" fill="#f4f0e9" fill-opacity=".07" stroke="#f4f0e9" stroke-opacity=".24" stroke-width="7" class="pulse"/>
+  <circle cx="741" cy="184" r="31" fill="#151414" stroke="#f4f0e9" stroke-width="1.5"/>
+  <circle cx="741" cy="184" r="35" fill="none" stroke="#f4f0e9" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <text x="741" y="195" text-anchor="middle" fill="#f4f0e9" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">▤</text>
+  <text x="741" y="249" text-anchor="middle" fill="#f4f0e9" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">S</text>
+  <text x="741" y="272" text-anchor="middle" class="micro white">42 <tspan fill="#f4f0e9">· ▤</tspan></text>
+  <rect x="628" y="288" width="227" height="5" rx="2.5" fill="#3b3630"/>
+  <rect x="628" y="288" width="90" height="5" rx="2.5" fill="#f4f0e9"/>
+  <text x="741" y="312" text-anchor="middle" class="micro soft">NEXT 45</text>
 
-  <rect x="891" y="94" width="267" height="230" rx="3" fill="#111112" stroke="#4a4030" stroke-width="1"/>
-  <path d="M891 94H1158" stroke="#d5ad52" stroke-width="3"/>
-  <text x="1024" y="121" text-anchor="middle" class="micro gold">LANGUAGES</text>
-  <circle cx="1024" cy="176" r="33" fill="#181718" stroke="#d5ad52" stroke-width="1.2"/>
-  <path d="M1005 158h9l3 10 7-6 6 6 3-10h9v17q-3 10-18 10t-19-10Z" fill="none" stroke="#d5ad52" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M1014 189h20m-24 5h28" stroke="#d12f37" stroke-width="2" stroke-linecap="round"/>
-  <text x="1024" y="239" text-anchor="middle" class="serif white">SECRET</text>
-  <text x="1024" y="263" text-anchor="middle" class="micro gold">13 ⌘</text>
-  <rect x="911" y="283" width="227" height="4" rx="2" fill="#3b3630"/>
-  <rect x="911" y="283" width="227" height="4" rx="2" fill="#d12f37"/>
-  <text x="1024" y="308" text-anchor="middle" class="micro soft">MAX</text>
+  <rect x="891" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#d5ad52" stroke-opacity=".58" class="card-edge"/>
+  <path d="M892 103H1157" stroke="#d5ad52" stroke-width="3"/>
+  <path d="M905 116h16m-16 0v16M1144 116h-16m16 0v16" fill="none" stroke="#d5ad52" stroke-opacity=".46" stroke-width="1.3"/>
+  <text x="909" y="132" class="micro" fill="#d5ad52">COMMITS</text>
+  <circle cx="1024" cy="184" r="39" fill="#d5ad52" fill-opacity=".07" stroke="#d5ad52" stroke-opacity=".24" stroke-width="7" class="pulse"/>
+  <circle cx="1024" cy="184" r="31" fill="#151414" stroke="#d5ad52" stroke-width="1.5"/>
+  <circle cx="1024" cy="184" r="35" fill="none" stroke="#d5ad52" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <text x="1024" y="195" text-anchor="middle" fill="#d5ad52" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">↟</text>
+  <text x="1024" y="249" text-anchor="middle" fill="#d5ad52" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">AAA</text>
+  <text x="1024" y="272" text-anchor="middle" class="micro white">715 <tspan fill="#d5ad52">· ↟</tspan></text>
+  <rect x="911" y="288" width="227" height="5" rx="2.5" fill="#3b3630"/>
+  <rect x="911" y="288" width="97" height="5" rx="2.5" fill="#d5ad52"/>
+  <text x="1024" y="312" text-anchor="middle" class="micro soft">NEXT 1000</text>
+
+  <rect x="42" y="344" width="267" height="226" rx="7" fill="#101011" stroke="#bd7955" stroke-opacity=".58" class="card-edge"/>
+  <path d="M43 351H308" stroke="#bd7955" stroke-width="3"/>
+  <path d="M56 364h16m-16 0v16M295 364h-16m16 0v16" fill="none" stroke="#bd7955" stroke-opacity=".46" stroke-width="1.3"/>
+  <text x="60" y="380" class="micro" fill="#bd7955">PULL REQUESTS</text>
+  <circle cx="175" cy="432" r="39" fill="#bd7955" fill-opacity=".07" stroke="#bd7955" stroke-opacity=".24" stroke-width="7" class="pulse"/>
+  <circle cx="175" cy="432" r="31" fill="#151414" stroke="#bd7955" stroke-width="1.5"/>
+  <circle cx="175" cy="432" r="35" fill="none" stroke="#bd7955" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <text x="175" y="443" text-anchor="middle" fill="#bd7955" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">⑂</text>
+  <text x="175" y="497" text-anchor="middle" fill="#bd7955" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">B</text>
+  <text x="175" y="520" text-anchor="middle" class="micro white">10 <tspan fill="#bd7955">· ⑂</tspan></text>
+  <rect x="62" y="536" width="227" height="5" rx="2.5" fill="#3b3630"/>
+  <rect x="62" y="536" width="6" height="5" rx="2.5" fill="#bd7955"/>
+  <text x="175" y="560" text-anchor="middle" class="micro soft">NEXT 20</text>
+
+  <rect x="325" y="344" width="267" height="226" rx="7" fill="#101011" stroke="#766f67" stroke-opacity=".58" class="card-edge"/>
+  <path d="M326 351H591" stroke="#766f67" stroke-width="3"/>
+  <path d="M339 364h16m-16 0v16M578 364h-16m16 0v16" fill="none" stroke="#766f67" stroke-opacity=".46" stroke-width="1.3"/>
+  <text x="343" y="380" class="micro" fill="#766f67">ISSUES</text>
+  <circle cx="458" cy="432" r="39" fill="#766f67" fill-opacity=".07" stroke="#766f67" stroke-opacity=".24" stroke-width="7" class="pulse"/>
+  <circle cx="458" cy="432" r="31" fill="#151414" stroke="#766f67" stroke-width="1.5"/>
+  <circle cx="458" cy="432" r="35" fill="none" stroke="#766f67" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <text x="458" y="443" text-anchor="middle" fill="#766f67" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">!</text>
+  <text x="458" y="497" text-anchor="middle" fill="#766f67" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">LOCKED</text>
+  <text x="458" y="520" text-anchor="middle" class="micro white">0 <tspan fill="#766f67">· !</tspan></text>
+  <rect x="345" y="536" width="227" height="5" rx="2.5" fill="#3b3630"/>
+  <rect x="345" y="536" width="6" height="5" rx="2.5" fill="#766f67"/>
+  <text x="458" y="560" text-anchor="middle" class="micro soft">FIRST · 1</text>
+
+  <rect x="608" y="344" width="267" height="226" rx="7" fill="#101011" stroke="#94d6aa" stroke-opacity=".58" class="card-edge"/>
+  <path d="M609 351H874" stroke="#94d6aa" stroke-width="3"/>
+  <path d="M622 364h16m-16 0v16M861 364h-16m16 0v16" fill="none" stroke="#94d6aa" stroke-opacity=".46" stroke-width="1.3"/>
+  <text x="626" y="380" class="micro" fill="#94d6aa">LANGUAGES</text>
+  <circle cx="741" cy="432" r="39" fill="#94d6aa" fill-opacity=".07" stroke="#94d6aa" stroke-opacity=".24" stroke-width="7" class="pulse"/>
+  <circle cx="741" cy="432" r="31" fill="#151414" stroke="#94d6aa" stroke-width="1.5"/>
+  <circle cx="741" cy="432" r="35" fill="none" stroke="#94d6aa" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
+  <text x="741" y="443" text-anchor="middle" fill="#94d6aa" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">〈/〉</text>
+  <text x="741" y="497" text-anchor="middle" fill="#94d6aa" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">SECRET</text>
+  <text x="741" y="520" text-anchor="middle" class="micro white">13 <tspan fill="#94d6aa">· 〈/〉</tspan></text>
+  <rect x="628" y="536" width="227" height="5" rx="2.5" fill="#3b3630"/>
+  <rect x="628" y="536" width="227" height="5" rx="2.5" fill="#94d6aa"/>
+  <text x="741" y="560" text-anchor="middle" class="micro soft">MAX</text>
 
 </svg>

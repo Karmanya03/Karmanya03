@@ -13,6 +13,8 @@ on:
       - assets/panels/trophies.svg
       - assets/panels/recent-activity.svg
       - assets/panels/telemetry.svg
+      - assets/panels/whoami.svg
+      - assets/panels/contributions.svg
       - assets/panels/profile-metadata.json
 
 permissions:
@@ -50,6 +52,6 @@ jobs:
             echo "No panel changes detected"
             exit 0
           fi
-          git add assets/panels/overview.svg assets/panels/repositories.svg assets/panels/trophies.svg assets/panels/recent-activity.svg assets/panels/telemetry.svg assets/panels/profile-metadata.json
+          git add assets/panels/overview.svg assets/panels/repositories.svg assets/panels/trophies.svg assets/panels/recent-activity.svg assets/panels/telemetry.svg assets/panels/whoami.svg assets/panels/contributions.svg assets/panels/profile-metadata.json
           git commit -m "chore: refresh profile command-center panels"
           git push

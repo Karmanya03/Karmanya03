@@ -15,6 +15,12 @@
 
 ---
 
+## Who I am
+
+<p align="center">
+  <img src="assets/panels/whoami.svg" alt="Karmanya Ravindra — red team professional, CRTP certified, building in security, game development, and XR" width="100%">
+</p>
+
 ## About
 
 B.E. Computer Science & Design graduate, CRTP-certified, and working as a Software Engineer. I build around offensive security and secure engineering; outside that, I gravitate toward Rust, game development, and XR.
@@ -52,6 +58,10 @@ B.E. Computer Science & Design graduate, CRTP-certified, and working as a Softwa
 </p>
 
 ## Contributions
+
+<p align="center">
+  <img src="assets/panels/contributions.svg" alt="Accurate daily GitHub contribution history from account creation through the current year, with yearly totals" width="100%">
+</p>
 
 [![Contribution calendar](https://img.shields.io/badge/CONTRIBUTION_CALENDAR-OPEN_ON_GITHUB-D12F37?style=for-the-badge&labelColor=09090A&logo=github&logoColor=F4F0E9)](https://github.com/Karmanya03#contribution-activity)
 
