@@ -682,28 +682,29 @@ def background_multishimmer(
     delay: str,
     radius: int = 5,
 ) -> str:
-    """A clipped stack of soft alternating monochrome sweeps, behind card content."""
+    """A seamless, low-opacity monochrome shimmer field behind card content."""
     start_x, start_y = x - height - 100, y + height + 100
     band = width + height + 180
-    travel_x, travel_y = width * .9 + 50, height * .9 + 50
+    # Broad rails leave an unmistakable quiet gap between each dark and light pass.
+    stripe_width = 126
+    spacing = 82
+    repeat_step = spacing * 2
+    stripe_count = (width + height + repeat_step - 1) // repeat_step + 4
     stripes = []
-    for index, (color, opacity) in enumerate((
-        ("#000000", ".64"), ("#f4f0e9", ".12"),
-        ("#000000", ".64"), ("#f4f0e9", ".12"),
-        ("#000000", ".64"), ("#f4f0e9", ".12"),
-    )):
-        offset = index * 28
+    for index in range(-4, stripe_count):
+        color, opacity = ("#000000", ".17") if index % 2 == 0 else ("#f4f0e9", ".12")
+        offset = index * spacing
         stripes.append(
-            f'<path d="M{start_x + offset} {start_y + offset}h38l{band} -{band}h-38Z" '
+            f'<path d="M{start_x + offset} {start_y + offset}h{stripe_width}l{band} -{band}h-{stripe_width}Z" '
             f'fill="{color}" fill-opacity="{opacity}"/>'
         )
     return f'''<defs>
   <clipPath id="{key}-clip"><rect x="{x}" y="{y}" width="{width}" height="{height}" rx="{radius}"/></clipPath>
-  <filter id="{key}-soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.3"/></filter>
+  <filter id="{key}-soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="0.65"/></filter>
 </defs>
 <g clip-path="url(#{key}-clip)" filter="url(#{key}-soft)">
   <g>
-    <animateTransform attributeName="transform" type="translate" values="{-travel_x},{-travel_y};{travel_x},{travel_y}" dur="{duration}" begin="{delay}" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;{repeat_step},{repeat_step}" dur="{duration}" begin="{delay}" repeatCount="indefinite" calcMode="linear"/>
     {''.join(stripes)}
   </g>
 </g>'''
@@ -828,7 +829,7 @@ def render_overview(data: dict[str, Any]) -> str:
     ]
     body: list[str] = [background_multishimmer(
         34, 82, 1132, 404, "overview-background-multishimmer",
-        duration="11.8s", delay="1.6s", radius=5,
+        duration="38s", delay="1.6s", radius=5,
     )]
     for index, (label, key, icon) in enumerate(counters):
         x = 47 + index * 280
@@ -1093,7 +1094,7 @@ def render_whoami(data: dict[str, Any]) -> str:
     name = svg_escape(data.get("name") or "Karmanya Ravindra")
     body = f"""
   <rect x="34" y="83" width="1132" height="320" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>
-  {background_multishimmer(34, 83, 780, 320, "whoami-background-multishimmer", duration="9.2s", delay="1.1s", radius=5)}
+  {background_multishimmer(34, 83, 780, 320, "whoami-background-multishimmer", duration="42s", delay="1.1s", radius=5)}
   <path d="M34 88V397" stroke="#d12f37" stroke-width="4"/>
   <rect x="58" y="104" width="136" height="24" rx="12" fill="#301316" stroke="#8f312f"/>
   <text x="126" y="121" text-anchor="middle" class="micro white">IDENTITY / 01</text>
@@ -1455,7 +1456,7 @@ def render_kali_quote() -> str:
 def render_recent_activity(data: dict[str, Any]) -> str:
     entries = data.get("activity", [])[:8]
     body = [
-        background_multishimmer(34, 82, 1132, 378, "activity-background-multishimmer", duration="12.6s", delay="2.2s", radius=5),
+        background_multishimmer(34, 82, 1132, 378, "activity-background-multishimmer", duration="40s", delay="2.2s", radius=5),
         '<path d="M66 105V459" stroke="#8a262d" stroke-width="2" stroke-dasharray="3 7" class="inkline"/>',
     ]
     if not entries:
@@ -1494,7 +1495,7 @@ def render_event_trace(data: dict[str, Any]) -> str:
         "OTHER": (335, "#78736c"),
     }
     body: list[str] = []
-    body.append(background_multishimmer(34, 82, 1132, 320, "telemetry-background-multishimmer", duration="10.8s", delay=".8s", radius=5))
+    body.append(background_multishimmer(34, 82, 1132, 320, "telemetry-background-multishimmer", duration="36s", delay=".8s", radius=5))
     for label, (y, color) in lanes.items():
         body.append(f'<text x="47" y="{y + 5}" class="micro soft">{label}</text>')
         body.append(f'<path d="M{x_start} {y}H{x_end}" stroke="#312d29" stroke-width="1"/>')
