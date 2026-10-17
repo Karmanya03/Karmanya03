@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import concurrent.futures
+import copy
 import datetime as dt
 import html
 from html.parser import HTMLParser
@@ -22,6 +23,7 @@ TOKEN = os.getenv("GITHUB_TOKEN", "")
 OUT_DIR = Path(os.getenv("PROFILE_OUT_DIR", "assets/panels"))
 METADATA_FILE = OUT_DIR / "profile-metadata.json"
 API_VERSION = "2022-11-28"
+REFRESH_HISTORICAL_CONTRIBUTIONS = os.getenv("REFRESH_CONTRIBUTION_HISTORY", "false").lower() in {"1", "true", "yes"}
 
 RANK_NAMES = ["C", "B", "A", "AA", "AAA", "S", "SS", "SSS"]
 RANK_ORDER = {rank: index for index, rank in enumerate(RANK_NAMES)}
@@ -32,7 +34,28 @@ TROPHY_RULES = {
     "Commits": ([1, 10, 100, 200, 500, 1000, 2000, 4000], "↟"),
     "Pull requests": ([1, 10, 20, 50, 100, 200, 500, 1000], "⑂"),
     "Issues": ([1, 10, 20, 50, 100, 200, 500, 1000], "!"),
-    "Languages": ([10], "〈/〉"),
+    "Languages": ([10, 15, 20, 25, 30, 40, 50, 75], "〈/〉"),
+}
+
+ACHIEVEMENT_COLORS = {
+    "starstruck": "#d5ad52",
+    "pull-shark": "#68b7d3",
+    "yolo": "#e2464d",
+    "quickdraw": "#d5ad52",
+    "galaxy-brain": "#a996e8",
+    "pair-extraordinaire": "#91c99b",
+    "arctic-code-vault-contributor": "#92cbd1",
+    "mars-2020-contributor": "#e78a68",
+}
+ACHIEVEMENT_GLYPHS = {
+    "starstruck": "✦",
+    "pull-shark": "↗",
+    "yolo": "!",
+    "quickdraw": "⌁",
+    "galaxy-brain": "✧",
+    "pair-extraordinaire": "Ⅱ",
+    "arctic-code-vault-contributor": "❄",
+    "mars-2020-contributor": "◉",
 }
 
 SHIELD_GROUPS = {
@@ -110,6 +133,60 @@ class ContributionCalendarParser(HTMLParser):
             self.tooltip_parts.append(data)
 
 
+class GitHubAchievementParser(HTMLParser):
+    """Read only earned achievement links visible on a public GitHub profile."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.badges: list[dict[str, str]] = []
+        self.current: dict[str, Any] | None = None
+        self.seen_achievement_page = False
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attributes = dict(attrs)
+        if "achievement" in " ".join(str(value or "") for value in attributes.values()).lower():
+            self.seen_achievement_page = True
+        if tag != "a":
+            if self.current and tag == "img":
+                alt = (attributes.get("alt") or "").strip()
+                if alt:
+                    self.current["name"] = alt
+            return
+
+        href = attributes.get("href") or ""
+        params = urllib.parse.parse_qs(urllib.parse.urlparse(href).query)
+        slug = next(iter(params.get("achievement", [])), "").strip()
+        if not slug:
+            return
+        self.seen_achievement_page = True
+        label = attributes.get("aria-label") or attributes.get("title") or ""
+        self.current = {"slug": slug, "name": label, "url": href, "text": []}
+
+    def handle_data(self, data: str) -> None:
+        if self.current is not None:
+            self.current["text"].append(data)
+        if "achievement" in data.lower():
+            self.seen_achievement_page = True
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag != "a" or self.current is None:
+            return
+        item = self.current
+        name = str(item.get("name") or "").strip()
+        name = re.sub(r"^achievement\s*:\s*", "", name, flags=re.IGNORECASE).strip()
+        if not name:
+            text = " ".join(" ".join(item["text"]).split())
+            name = re.sub(r"^achievement\s*:\s*", "", text, flags=re.IGNORECASE).strip()
+        if not name:
+            name = str(item["slug"]).replace("-", " ").title()
+        self.badges.append({
+            "slug": str(item["slug"]),
+            "name": name,
+            "url": str(item["url"]),
+        })
+        self.current = None
+
+
 def parse_contribution_calendar(page: str, *, expected_year: int | None = None) -> dict[str, Any]:
     parser = ContributionCalendarParser()
     parser.feed(page)
@@ -164,15 +241,63 @@ def github_page(path: str) -> str:
         with urllib.request.urlopen(request, timeout=30) as response:
             return response.read().decode("utf-8", errors="replace")
     except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as exc:
-        raise GitHubAPIError(f"GitHub contribution page request failed for {path}: {exc}") from exc
+        raise GitHubAPIError(f"GitHub page request failed for {path}: {exc}") from exc
 
 
-def fetch_contribution_history(username: str, created_at: str, today: dt.date) -> dict[str, Any]:
+def parse_github_achievements(page: str) -> list[dict[str, str]]:
+    parser = GitHubAchievementParser()
+    parser.feed(page)
+    if not parser.seen_achievement_page:
+        raise GitHubAPIError("GitHub's public profile did not expose an achievement section.")
+    unique: dict[str, dict[str, str]] = {}
+    for badge in parser.badges:
+        unique[badge["slug"]] = badge
+    return sorted(unique.values(), key=lambda badge: badge["name"].casefold())
+
+
+def fetch_github_achievements(username: str) -> list[dict[str, str]]:
+    page = github_page(f"/{urllib.parse.quote(username)}?tab=achievements")
+    return parse_github_achievements(page)
+
+
+def valid_cached_year(item: dict[str, Any], year: int) -> bool:
+    days = (dt.date(year + 1, 1, 1) - dt.date(year, 1, 1)).days
+    try:
+        counts = [int(value) for value in str(item.get("counts", "")).split(",")]
+        levels = str(item.get("levels", ""))
+        return (
+            int(item.get("year", 0)) == year
+            and len(counts) == days
+            and len(levels) == days
+            and all(0 <= level <= 4 for level in map(int, levels))
+            and sum(counts) == int(item.get("total", -1))
+        )
+    except (TypeError, ValueError):
+        return False
+
+
+def fetch_contribution_history(
+    username: str,
+    created_at: str,
+    today: dt.date,
+    cached: dict[str, Any] | None = None,
+    *,
+    refresh_historical: bool = False,
+) -> dict[str, Any]:
     created = iso_time(created_at)
     if not created:
         raise GitHubAPIError("The public profile did not include its account creation date.")
-    years = []
+    cached_years = {
+        int(item.get("year", 0)): item
+        for item in (cached or {}).get("years", [])
+        if isinstance(item, dict)
+    }
+    years: list[dict[str, Any]] = []
     for year in range(created.year, today.year + 1):
+        saved = cached_years.get(year)
+        if year < today.year and not refresh_historical and saved and valid_cached_year(saved, year):
+            years.append(saved)
+            continue
         query = urllib.parse.urlencode({"from": f"{year}-01-01", "to": f"{year}-12-31"})
         calendar = parse_contribution_calendar(
             github_page(f"/users/{urllib.parse.quote(username)}/contributions?{query}"),
@@ -310,20 +435,41 @@ def fetch_repo_languages(repo: dict[str, Any]) -> dict[str, int]:
     return {str(language): int(size) for language, size in result.items()}
 
 
-def fetch_languages(repos: list[dict[str, Any]]) -> dict[str, int]:
+def fetch_languages(
+    repos: list[dict[str, Any]], cached: dict[str, Any] | None = None,
+) -> tuple[dict[str, int], dict[str, dict[str, Any]]]:
     totals: dict[str, int] = {}
     owned = [repo for repo in repos if not repo.get("fork")]
+    previous = cached or {}
+    refreshed: dict[str, dict[str, Any]] = {}
+    fetch: list[tuple[dict[str, Any], str]] = []
+    for repo in owned:
+        name = str(repo.get("full_name") or "")
+        pushed_at = str(repo.get("pushed_at") or repo.get("updated_at") or "")
+        saved = previous.get(name, {})
+        saved_languages = saved.get("languages") if isinstance(saved, dict) else None
+        if isinstance(saved, dict) and saved.get("pushed_at") == pushed_at and isinstance(saved_languages, dict):
+            refreshed[name] = {"pushed_at": pushed_at, "languages": saved_languages}
+        else:
+            fetch.append((repo, pushed_at))
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
-        jobs = [pool.submit(fetch_repo_languages, repo) for repo in owned]
+        jobs = {
+            pool.submit(fetch_repo_languages, repo): (repo, pushed_at)
+            for repo, pushed_at in fetch
+        }
         try:
             for job in concurrent.futures.as_completed(jobs):
-                for name, size in job.result().items():
-                    totals[name] = totals.get(name, 0) + size
+                repo, pushed_at = jobs[job]
+                name = str(repo.get("full_name") or "")
+                refreshed[name] = {"pushed_at": pushed_at, "languages": job.result()}
         except Exception:
             for job in jobs:
                 job.cancel()
             raise
-    return dict(sorted(totals.items(), key=lambda pair: pair[1], reverse=True))
+    for saved in refreshed.values():
+        for language, size in saved["languages"].items():
+            totals[language] = totals.get(language, 0) + int(size)
+    return dict(sorted(totals.items(), key=lambda pair: pair[1], reverse=True)), refreshed
 
 
 def search_count(query: str, *, commits: bool = False) -> tuple[int, bool]:
@@ -376,7 +522,7 @@ def iso_time(raw: str | None) -> dt.datetime | None:
         return None
 
 
-def fetch_snapshot(username: str) -> dict[str, Any]:
+def fetch_snapshot(username: str, previous: dict[str, Any] | None = None) -> dict[str, Any]:
     user = api_get(f"/users/{username}")
     if not isinstance(user, dict) or not user.get("login"):
         raise GitHubAPIError("The user endpoint returned an unexpected response.")
@@ -386,7 +532,7 @@ def fetch_snapshot(username: str) -> dict[str, Any]:
     if not isinstance(events, list):
         raise GitHubAPIError("The public-events endpoint returned an unexpected response.")
 
-    languages = fetch_languages(repos)
+    languages, language_cache = fetch_languages(repos, (previous or {}).get("language_cache", {}))
     commits, commits_capped = optional_search_count(f"author:{username}", commits=True)
     prs, prs_capped = optional_search_count(f"author:{username} type:pr is:public")
     issues, issues_capped = optional_search_count(f"author:{username} type:issue is:public")
@@ -429,6 +575,7 @@ def fetch_snapshot(username: str) -> dict[str, Any]:
         "totals": totals,
         "limits": {"commits": commits_capped, "prs": prs_capped, "issues": issues_capped},
         "top_languages": list(languages.items()),
+        "language_cache": language_cache,
         "top_repos": [
             {
                 "name": repo.get("name") or "",
@@ -517,6 +664,8 @@ def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: boo
       .num{{font:500 45px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}}
       .inkline{{stroke-dasharray:28 10;animation:ink 8s linear infinite}}
       .ambient-line{{stroke-dasharray:46 1500;animation:rail 18s linear infinite}}
+      .footer-sweep-glow{{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite;filter:url(#footer-glow)}}
+      .footer-sweep{{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite}}
       .card-edge{{animation:edge 6s ease-in-out infinite}}
       .pulse{{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}}
       .warmth{{animation:warmth 5.8s ease-in-out infinite}}
@@ -529,6 +678,7 @@ def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: boo
       .badge-glyph{{font:700 16px Consolas,'Courier New',monospace}}
       @keyframes ink{{to{{stroke-dashoffset:-304}}}}
       @keyframes rail{{to{{stroke-dashoffset:-1546}}}}
+      @keyframes footerSweep{{from{{stroke-dashoffset:900}}to{{stroke-dashoffset:0}}}}
       @keyframes edge{{0%,100%{{stroke-opacity:.48}}50%{{stroke-opacity:.92}}}}
       @keyframes pulse{{0%,100%{{opacity:.72;transform:scale(.94)}}50%{{opacity:1;transform:scale(1.06)}}}}
       @keyframes warmth{{0%,100%{{opacity:.2}}50%{{opacity:.55}}}}
@@ -664,8 +814,6 @@ def render_repositories(data: dict[str, Any]) -> str:
 
 def rank_for(key: str, score: int) -> tuple[str, int, int | None]:
     thresholds, _ = TROPHY_RULES[key]
-    if key == "Languages":
-        return ("SECRET", thresholds[0], None) if score >= thresholds[0] else ("LOCKED", 0, thresholds[0])
     if score < thresholds[0]:
         return "LOCKED", 0, thresholds[0]
     rank_idx = 0
@@ -674,6 +822,12 @@ def rank_for(key: str, score: int) -> tuple[str, int, int | None]:
             rank_idx = index
     current = thresholds[rank_idx]
     next_value = thresholds[rank_idx + 1] if rank_idx + 1 < len(thresholds) else None
+    if next_value is None:
+        step = max(1, thresholds[-1] - thresholds[-2])
+        extra_levels = (score - thresholds[-1]) // step
+        next_value = thresholds[-1] + (extra_levels + 1) * step
+        if extra_levels:
+            return f"{RANK_NAMES[-1]}+{extra_levels}", thresholds[-1] + extra_levels * step, next_value
     return RANK_NAMES[rank_idx], current, next_value
 
 
@@ -721,8 +875,9 @@ def render_trophies(data: dict[str, Any]) -> str:
             target_label = f"FIRST · {int(next_value or 1)}"
         bar_w = int((width - 40) * percent / 100)
         score_text = "DATA UNAVAILABLE" if missing else fmt_count(score, capped)
-        rank_color = rank_colors[rank.lstrip("≥")]
+        rank_color = rank_colors.get(rank.lstrip("≥").split("+")[0], rank_colors["SSS"])
         center = x + width // 2
+        rank_font_size = 19 if len(rank) > 4 else 28
         body.append(f"""
   <rect x="{x}" y="{y}" width="{width}" height="226" rx="7" fill="#101011" stroke="{rank_color}" stroke-opacity=".58" class="card-edge"/>
   <path d="M{x + 1} {y + 7}H{x + width - 1}" stroke="{rank_color}" stroke-width="3"/>
@@ -732,7 +887,7 @@ def render_trophies(data: dict[str, Any]) -> str:
   <circle cx="{center}" cy="{y + 88}" r="31" fill="#151414" stroke="{rank_color}" stroke-width="1.5"/>
   <circle cx="{center}" cy="{y + 88}" r="35" fill="none" stroke="{rank_color}" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 7" class="inkline"/>
   <text x="{center}" y="{y + 99}" text-anchor="middle" fill="{rank_color}" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">{svg_escape(icon)}</text>
-  <text x="{center}" y="{y + 153}" text-anchor="middle" fill="{rank_color}" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">{svg_escape(rank)}</text>
+  <text x="{center}" y="{y + 153}" text-anchor="middle" fill="{rank_color}" font-family="Georgia,'Times New Roman',serif" font-size="{rank_font_size}" font-weight="700">{svg_escape(rank)}</text>
   <text x="{center}" y="{y + 176}" text-anchor="middle" class="micro white">{score_text} <tspan fill="{rank_color}">· {svg_escape(icon)}</tspan></text>
   <rect x="{x + 20}" y="{y + 192}" width="{width - 40}" height="5" rx="2.5" fill="#3b3630"/>
   <rect x="{x + 20}" y="{y + 192}" width="{bar_w}" height="5" rx="2.5" fill="{rank_color}" class="rank-meter"/>
@@ -740,6 +895,52 @@ def render_trophies(data: dict[str, Any]) -> str:
 """)
     panel_height = 96 + rows * 248 + 8
     return wrap_svg("Trophy case", "".join(body), panel_height, "02")
+
+
+def render_achievements(data: dict[str, Any]) -> str:
+    badges = data.get("achievements", [])
+    columns = 3
+    card_width = 356
+    gap = 22
+    rows = max(1, (len(badges) + columns - 1) // columns)
+    left = (1200 - columns * card_width - (columns - 1) * gap) // 2
+    grid_y = 104
+    card_height = 122
+    body: list[str] = [
+        f'<text x="56" y="91" class="micro gold">{len(badges)} PUBLIC UNLOCKS</text>',
+        f'<text x="1144" y="91" text-anchor="end" class="micro soft">LAST CHANGE · {stamp_label(data.get("generated_at"))}</text>',
+    ]
+    if not badges:
+        body.append('<text x="60" y="155" class="small soft">No GitHub achievement badges are visible on the public profile in this snapshot.</text>')
+    for index, badge in enumerate(badges):
+        slug = str(badge.get("slug", "")).lower()
+        name = short_text(str(badge.get("name") or slug.replace("-", " ").title()), 34)
+        color = ACHIEVEMENT_COLORS.get(slug, "#d5ad52")
+        glyph = ACHIEVEMENT_GLYPHS.get(slug, "✦")
+        x = left + (index % columns) * (card_width + gap)
+        y = grid_y + (index // columns) * 140
+        url = str(badge.get("url") or "")
+        if url.startswith("/"):
+            url = "https://github.com" + url
+        if not url.startswith("https://github.com/"):
+            url = f"https://github.com/{urllib.parse.quote(USERNAME)}?achievement={urllib.parse.quote(slug)}&tab=achievements"
+        font_size = 18 if len(name) > 23 else 22
+        body.append(f"""
+  <a xlink:href="{svg_escape(url)}" target="_blank" rel="noopener noreferrer">
+    <rect x="{x}" y="{y}" width="{card_width}" height="{card_height}" rx="6" fill="#101011" stroke="{color}" stroke-opacity=".52" class="card-edge"/>
+    <path d="M{x + 1} {y + 7}H{x + card_width - 1}" stroke="{color}" stroke-width="3"/>
+    <circle cx="{x + 44}" cy="{y + 49}" r="24" fill="{color}" fill-opacity=".10" stroke="{color}" stroke-opacity=".65"/>
+    <circle cx="{x + 44}" cy="{y + 49}" r="30" fill="none" stroke="{color}" stroke-opacity=".28" stroke-dasharray="2 7" class="inkline"/>
+    <text x="{x + 44}" y="{y + 57}" text-anchor="middle" fill="{color}" font-family="Georgia,'Times New Roman',serif" font-size="23" font-weight="700">{svg_escape(glyph)}</text>
+    <text x="{x + 82}" y="{y + 54}" class="serif white" font-size="{font_size}">{svg_escape(name)}</text>
+    <path d="M{x + 20} {y + 84}H{x + card_width - 20}" class="rule"/>
+    <text x="{x + 20}" y="{y + 108}" class="micro" fill="{color}">EARNED · PUBLIC GITHUB PROFILE</text>
+    <text x="{x + card_width - 20}" y="{y + 108}" text-anchor="end" class="micro soft">↗</text>
+  </a>
+""")
+    body.append(f'<text x="56" y="{grid_y + rows * 140 + 8}" class="micro soft">BADGES LINK TO THEIR GITHUB ACHIEVEMENT PAGE</text>')
+    panel_height = grid_y + rows * 140 + 28
+    return wrap_svg("Verified achievements", "".join(body), panel_height, "02A")
 
 
 def render_whoami(data: dict[str, Any]) -> str:
@@ -979,8 +1180,20 @@ def render_toolkit() -> str:
 
 def render_footer_quote() -> str:
     body = '''
+  <defs>
+    <linearGradient id="footer-sweep-color" x1="150" y1="65" x2="1050" y2="65" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8f252c" stop-opacity=".12"/>
+      <stop offset=".48" stop-color="#d12f37"/>
+      <stop offset=".68" stop-color="#ffd2c6"/>
+      <stop offset="1" stop-color="#d12f37" stop-opacity=".12"/>
+    </linearGradient>
+    <filter id="footer-glow" x="-30%" y="-300%" width="160%" height="700%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
   <path d="M150 65H1050" stroke="#463a30" stroke-width="1"/>
-  <path d="M150 65H1050" stroke="#d12f37" stroke-width="2" class="ambient-line"/>
+  <path d="M150 65H1050" stroke="#d12f37" stroke-opacity=".28" stroke-width="7" stroke-linecap="round" class="footer-sweep-glow"/>
+  <path d="M150 65H1050" stroke="url(#footer-sweep-color)" stroke-width="2.5" stroke-linecap="round" class="footer-sweep"/>
   <circle cx="150" cy="65" r="3" fill="#d5ad52" class="pulse"/>
   <circle cx="1050" cy="65" r="3" fill="#d5ad52" class="pulse"/>
   <text x="600" y="48" text-anchor="middle" class="serif white" font-size="24">
@@ -1123,7 +1336,7 @@ def update_readme_contribution_years(data: dict[str, Any]) -> None:
 def main() -> None:
     old = read_metadata()
     try:
-        data = fetch_snapshot(USERNAME)
+        data = fetch_snapshot(USERNAME, old)
     except GitHubAPIError as exc:
         if not old:
             raise
@@ -1134,6 +1347,13 @@ def main() -> None:
         cached = False
 
     created_at = data.get("created_at") or old.get("created_at")
+    try:
+        data["achievements"] = fetch_github_achievements(USERNAME)
+        print(f"Found {len(data['achievements'])} public GitHub achievement badges.")
+    except GitHubAPIError as exc:
+        data["achievements"] = old.get("achievements", [])
+        print(f"{exc}\nUsing the last saved public achievement list.")
+
     if created_at:
         try:
             data["created_at"] = created_at
@@ -1141,6 +1361,8 @@ def main() -> None:
                 USERNAME,
                 created_at,
                 dt.datetime.now(dt.timezone.utc).date(),
+                old.get("contributions"),
+                refresh_historical=REFRESH_HISTORICAL_CONTRIBUTIONS,
             )
             print(
                 f"Fetched {len(data['contributions']['years'])} contribution years; "
@@ -1153,11 +1375,32 @@ def main() -> None:
     elif not data.get("contributions"):
         raise GitHubAPIError("The saved snapshot needs the public account creation date before history can be rendered.")
 
+    # Keep no-change runs quiet: the scheduled job still checks the live endpoints,
+    # but it does not rewrite timestamps and create a repository commit every five minutes.
+    comparable = copy.deepcopy(data)
+    old_comparable = copy.deepcopy(old)
+    comparable.pop("generated_at", None)
+    old_comparable.pop("generated_at", None)
+    for snapshot in (comparable, old_comparable):
+        if isinstance(snapshot.get("contributions"), dict):
+            snapshot["contributions"].pop("updated_at", None)
+    if comparable == old_comparable:
+        data["generated_at"] = old.get("generated_at", data.get("generated_at"))
+        if isinstance(data.get("contributions"), dict):
+            old_contributions = old.get("contributions", {})
+            data["contributions"]["updated_at"] = old_contributions.get("updated_at", data.get("generated_at"))
+    else:
+        checked_at = dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes").replace("+00:00", "Z")
+        data["generated_at"] = checked_at
+        if isinstance(data.get("contributions"), dict):
+            data["contributions"]["updated_at"] = checked_at
+
     write_file(METADATA_FILE, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
     write_file(OUT_DIR / "whoami.svg", render_whoami(data))
     write_file(OUT_DIR / "overview.svg", render_overview(data))
     write_file(OUT_DIR / "repositories.svg", render_repositories(data))
     write_file(OUT_DIR / "trophies.svg", render_trophies(data))
+    write_file(OUT_DIR / "achievements.svg", render_achievements(data))
     write_file(OUT_DIR / "recent-activity.svg", render_recent_activity(data))
     write_file(OUT_DIR / "telemetry.svg", render_event_trace(data))
     write_file(OUT_DIR / "toolkit.svg", render_toolkit())

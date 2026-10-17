@@ -1,163 +1,90 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="ACHIEVEMENTS">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="1200" height="272" viewBox="0 0 1200 272" role="img" aria-label="Verified achievements">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"   stop-color="#060710"/>
-      <stop offset="55%"  stop-color="#100b06"/>
-      <stop offset="100%" stop-color="#06070e"/>
-    </linearGradient>
-    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#131520"/>
-      <stop offset="100%" stop-color="#0c0d18"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#8b0000"/>
-      <stop offset="50%"  stop-color="#f1bd52"/>
-      <stop offset="100%" stop-color="#ffffff"/>
-    </linearGradient>
-    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#845e16"/>
-      <stop offset="100%" stop-color="#f1bd52"/>
-    </linearGradient>
-    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse">
-      <circle cx="1" cy="1" r="0.7" fill="#fff" opacity="0.04"/>
+    <pattern id="grain" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M0 79.5H80" stroke="#fff" stroke-opacity=".025"/>
+      <circle cx="8" cy="12" r=".7" fill="#fff" opacity=".16"/>
+      <circle cx="51" cy="40" r=".6" fill="#fff" opacity=".11"/>
+      <circle cx="29" cy="66" r=".6" fill="#fff" opacity=".13"/>
     </pattern>
-    <filter id="softGlow" x="-25%" y="-25%" width="150%" height="150%">
-      <feGaussianBlur stdDeviation="2.5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="glowHard" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
     <style>
-      .title   { fill:#ffffff; font:800 26px 'Bahnschrift','Segoe UI',sans-serif; letter-spacing:4px; }
-      .tsub    { fill:#e8b840; font:600 10.5px 'Segoe UI',sans-serif; letter-spacing:3px; }
-      .label   { fill:#d0d8e8; font:600 14px 'Segoe UI','Trebuchet MS',sans-serif; }
-      .value   { fill:#ffffff; font:800 32px 'Bahnschrift','Segoe UI',sans-serif; }
-      .small   { fill:#c8d0e0; font:600 13px 'Segoe UI','Trebuchet MS',sans-serif; }
-      .muted   { fill:#8890a8; font:500 11px 'Segoe UI','Trebuchet MS',sans-serif; }
-      .stamp   { fill:#555; font:500 10px 'Segoe UI','Trebuchet MS',sans-serif; }
-      .mono    { fill:#d8e0f0; font:700 12px 'Consolas','Segoe UI Mono',monospace; }
+      .canvas{fill:#09090a} .grain{fill:url(#grain)}
+      .rule{stroke:#4b4540;stroke-width:1} .red{fill:#d12f37} .gold{fill:#d5ad52}
+      .white{fill:#f4f0e9} .soft{fill:#aba59c}
+      .micro{font:700 16px 'Segoe UI',Arial,sans-serif;letter-spacing:1px}
+      .section{font:700 18px 'Segoe UI',Arial,sans-serif;letter-spacing:1px}
+      .small{font:500 19px 'Segoe UI',Arial,sans-serif}
+      .mono{font:600 16px Consolas,'Courier New',monospace}
+      .serif{font:600 24px Georgia,'Times New Roman',serif}
+      .num{font:500 45px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
+      .inkline{stroke-dasharray:28 10;animation:ink 8s linear infinite}
+      .ambient-line{stroke-dasharray:46 1500;animation:rail 18s linear infinite}
+      .footer-sweep-glow{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite;filter:url(#footer-glow)}
+      .footer-sweep{stroke-dasharray:188 712;animation:footerSweep 8.5s linear infinite}
+      .card-edge{animation:edge 6s ease-in-out infinite}
+      .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 4.8s ease-in-out infinite}
+      .warmth{animation:warmth 5.8s ease-in-out infinite}
+      .heat-cell{transform-box:fill-box;transform-origin:center;animation:heat 3.4s ease-in-out infinite;animation-delay:var(--delay,0s)}
+      .rank-meter{animation:rankGlow 4.2s ease-in-out infinite}
+      .month{font:700 13px 'Segoe UI',Arial,sans-serif;letter-spacing:.5px}
+      .weekday{font:700 12px 'Segoe UI',Arial,sans-serif}
+      .yearnum{font:600 30px Georgia,'Times New Roman',serif;font-variant-numeric:tabular-nums}
+      .badge-label{font:600 17px 'Segoe UI',Arial,sans-serif;letter-spacing:.2px}
+      .badge-glyph{font:700 16px Consolas,'Courier New',monospace}
+      @keyframes ink{to{stroke-dashoffset:-304}}
+      @keyframes rail{to{stroke-dashoffset:-1546}}
+      @keyframes footerSweep{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
+      @keyframes edge{0%,100%{stroke-opacity:.48}50%{stroke-opacity:.92}}
+      @keyframes pulse{0%,100%{opacity:.72;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
+      @keyframes warmth{0%,100%{opacity:.2}50%{opacity:.55}}
+      @keyframes heat{0%,100%{filter:brightness(.9);opacity:.8}50%{filter:brightness(1.7);opacity:1}}
+      @keyframes rankGlow{0%,100%{opacity:.74}50%{opacity:1}}
+      @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
     </style>
   </defs>
+  <rect width="1200" height="272" rx="5" class="canvas"/>
+  <rect width="1200" height="272" rx="5" class="grain"/>
+  <path d="M0 0H1200" stroke="#d12f37" stroke-width="5"/>
+  <path d="M0 2H1200" stroke="#f4f0e9" stroke-opacity=".48" stroke-width="1" class="ambient-line"/>
+  <rect x="30" y="25" width="42" height="27" rx="2" class="red"/>
+  <text x="51" y="44" text-anchor="middle" class="micro white">02A</text>
+  <text x="87" y="43" class="micro white">VERIFIED ACHIEVEMENTS</text>
+  <path d="M30 62H1170" class="rule"/>
+  <text x="56" y="91" class="micro gold">3 PUBLIC UNLOCKS</text><text x="1144" y="91" text-anchor="end" class="micro soft">LAST CHANGE · 17 Oct 2026 · 16:20 UTC</text>
+  <a xlink:href="https://github.com/Karmanya03?achievement=pull-shark&amp;tab=achievements" target="_blank" rel="noopener noreferrer">
+    <rect x="44" y="104" width="356" height="122" rx="6" fill="#101011" stroke="#68b7d3" stroke-opacity=".52" class="card-edge"/>
+    <path d="M45 111H399" stroke="#68b7d3" stroke-width="3"/>
+    <circle cx="88" cy="153" r="24" fill="#68b7d3" fill-opacity=".10" stroke="#68b7d3" stroke-opacity=".65"/>
+    <circle cx="88" cy="153" r="30" fill="none" stroke="#68b7d3" stroke-opacity=".28" stroke-dasharray="2 7" class="inkline"/>
+    <text x="88" y="161" text-anchor="middle" fill="#68b7d3" font-family="Georgia,'Times New Roman',serif" font-size="23" font-weight="700">↗</text>
+    <text x="126" y="158" class="serif white" font-size="22">Pull Shark</text>
+    <path d="M64 188H380" class="rule"/>
+    <text x="64" y="212" class="micro" fill="#68b7d3">EARNED · PUBLIC GITHUB PROFILE</text>
+    <text x="380" y="212" text-anchor="end" class="micro soft">↗</text>
+  </a>
 
-  <!-- Background -->
-  <rect width="1200" height="560" fill="url(#bg)"/>
-  <!-- Main panel -->
-  <rect x="14" y="14" width="1172" height="532" rx="20" fill="url(#panel)" stroke="#b87e28" stroke-width="1.5" stroke-opacity="0.65"/>
-  <rect x="14" y="14" width="1172" height="532" rx="20" fill="url(#dots)"/>
-  <!-- Top accent bar (gradient, full width) -->
-  <rect x="14" y="14" width="1172" height="5" rx="20" fill="url(#accent)"/>
+  <a xlink:href="https://github.com/Karmanya03?achievement=starstruck&amp;tab=achievements" target="_blank" rel="noopener noreferrer">
+    <rect x="422" y="104" width="356" height="122" rx="6" fill="#101011" stroke="#d5ad52" stroke-opacity=".52" class="card-edge"/>
+    <path d="M423 111H777" stroke="#d5ad52" stroke-width="3"/>
+    <circle cx="466" cy="153" r="24" fill="#d5ad52" fill-opacity=".10" stroke="#d5ad52" stroke-opacity=".65"/>
+    <circle cx="466" cy="153" r="30" fill="none" stroke="#d5ad52" stroke-opacity=".28" stroke-dasharray="2 7" class="inkline"/>
+    <text x="466" y="161" text-anchor="middle" fill="#d5ad52" font-family="Georgia,'Times New Roman',serif" font-size="23" font-weight="700">✦</text>
+    <text x="504" y="158" class="serif white" font-size="22">Starstruck</text>
+    <path d="M442 188H758" class="rule"/>
+    <text x="442" y="212" class="micro" fill="#d5ad52">EARNED · PUBLIC GITHUB PROFILE</text>
+    <text x="758" y="212" text-anchor="end" class="micro soft">↗</text>
+  </a>
 
-  <!-- ── Animated header section (72px tall) ── -->
-  <!-- Subtle header bg strip -->
-  <rect x="14" y="14" width="1172" height="72" rx="20" fill="#ffffff" fill-opacity="0.025"/>
-  <rect x="14" y="80" width="1172" height="1" fill="url(#accent)" opacity="0.3"/>
-
-  <!-- Corner HUD brackets -->
-  <g stroke="#e8b840" stroke-width="1.5" fill="none" opacity="0.55">
-    <path d="M30 30 L30 48 L48 48"/>
-    <path d="M1170 30 L1170 48 L1152 48"/>
-    <path d="M30 544 L30 526 L48 526"/>
-    <path d="M1170 544 L1170 526 L1152 526"/>
-  </g>
-
-  <!-- Animated scanner line across header -->
-  <rect x="56" y="50" width="1000" height="1" fill="url(#accent)" opacity="0.18"/>
-  <rect x="0" y="50" width="180" height="1" fill="url(#accent)" opacity="0.9" filter="url(#softGlow)">
-    <animateTransform attributeName="transform" type="translate" from="-180,0" to="1200,0" dur="3.8s" repeatCount="indefinite"/>
-  </rect>
-
-  <!-- Pulsing live indicator -->
-  <circle cx="1152" cy="44" r="5" fill="#9f0000" filter="url(#glowHard)">
-    <animate attributeName="r" values="4;8;4" dur="2.2s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="1152" cy="44" r="14" fill="none" stroke="#f1bd52" stroke-width="1" opacity="0.2">
-    <animate attributeName="r" values="10;20;10" dur="3.5s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.3;0;0.3" dur="3.5s" repeatCount="indefinite"/>
-  </circle>
-  <!-- LIVE label -->
-  <text x="1136" y="42" fill="#e8b840" font-size="8" font-family="Segoe UI" font-weight="700" letter-spacing="2" text-anchor="end" opacity="0.7">LIVE</text>
-
-  <!-- Section title and subtitle -->
-  <text x="56" y="52" class="title">ACHIEVEMENTS</text>
-  <text x="56" y="70" class="tsub">GITHUB NATIVE BADGES · EARNED FROM REAL PROFILE ACTIVITY</text>
-  <text x="1140" y="70" class="stamp" text-anchor="end">Updated 26 Apr 2026 05:20 UTC</text>
-
-  
-  <text x="46" y="108" class="label" style="fill:#e8b840;letter-spacing:2px;">GITHUB NATIVE ACHIEVEMENTS · 3/6 EARNED</text>
-  <text x="46" y="124" class="muted">Official GitHub achievement badges · auto-detected from profile activity</text>
-  <rect x="46" y="142" width="354" height="130" rx="14" fill="#1a1600" stroke="#e8b840" stroke-width="1.5"/>
-  <rect x="46" y="142" width="354" height="4" rx="14" fill="#b30000"/>
-  <text x="92" y="172" class="small" style="font-weight:700;font-size:13px">Pull Shark</text>
-  <text x="60" y="172" style="font-size:18px;dominant-baseline:auto">🦈</text>
-  <text x="60" y="192" class="muted">6 pull requests merged · Silver tier</text>
-  <text x="60" y="208" style="fill:#404858;font:500 9px 'Segoe UI',sans-serif;">GitHub Native Achievement</text>
-  <rect x="60" y="218" width="326" height="8" rx="4" fill="#1a1d28"/>
-  <rect x="60" y="218" width="12" height="8" rx="4" fill="url(#gold)"><animate attributeName="opacity" values="0.8;1;0.8" dur="2.2s" repeatCount="indefinite"/></rect>
-  <rect x="60" y="232" width="12" height="2" rx="1" fill="#e8b840" opacity="0.5"/>
-  <text x="60" y="254" class="muted" style="font-size:9px;fill:#f5c020">✓ DEFAULT UNLOCKED</text>
-  <text x="386" y="254" class="mono" text-anchor="end" style="fill:#8890a8;font-size:9px">6/128 → Gold</text>
-
-  <rect x="422" y="142" width="354" height="130" rx="14" fill="#1a1600" stroke="#e8b840" stroke-width="1.5"/>
-  <rect x="422" y="142" width="354" height="4" rx="14" fill="#b30000"/>
-  <text x="468" y="172" class="small" style="font-weight:700;font-size:13px">YOLO</text>
-  <text x="436" y="172" style="font-size:18px;dominant-baseline:auto">🚀</text>
-  <text x="436" y="192" class="muted">Merged a PR without a code review</text>
-  <text x="436" y="208" style="fill:#404858;font:500 9px 'Segoe UI',sans-serif;">GitHub Native Achievement</text>
-  <rect x="436" y="218" width="326" height="8" rx="4" fill="#1a1d28"/>
-  <rect x="436" y="218" width="310" height="8" rx="4" fill="url(#gold)"><animate attributeName="opacity" values="0.8;1;0.8" dur="2.5s" repeatCount="indefinite"/></rect>
-  <rect x="436" y="232" width="310" height="2" rx="1" fill="#e8b840" opacity="0.5"/>
-  <text x="436" y="254" class="muted" style="font-size:9px;fill:#f5c020">✓ DEFAULT UNLOCKED</text>
-  <text x="762" y="254" class="mono" text-anchor="end" style="fill:#8890a8;font-size:9px">One-time badge</text>
-
-  <rect x="798" y="142" width="354" height="130" rx="14" fill="#1a1600" stroke="#e8b840" stroke-width="1.5"/>
-  <rect x="798" y="142" width="354" height="4" rx="14" fill="#b30000"/>
-  <text x="844" y="172" class="small" style="font-weight:700;font-size:13px">Quickdraw</text>
-  <text x="812" y="172" style="font-size:18px;dominant-baseline:auto">⚡</text>
-  <text x="812" y="192" class="muted">Closed an issue or PR within 5 minutes</text>
-  <text x="812" y="208" style="fill:#404858;font:500 9px 'Segoe UI',sans-serif;">GitHub Native Achievement</text>
-  <rect x="812" y="218" width="326" height="8" rx="4" fill="#1a1d28"/>
-  <rect x="812" y="218" width="310" height="8" rx="4" fill="url(#gold)"><animate attributeName="opacity" values="0.8;1;0.8" dur="2.8s" repeatCount="indefinite"/></rect>
-  <rect x="812" y="232" width="310" height="2" rx="1" fill="#e8b840" opacity="0.5"/>
-  <text x="812" y="254" class="muted" style="font-size:9px;fill:#f5c020">✓ DEFAULT UNLOCKED</text>
-  <text x="1138" y="254" class="mono" text-anchor="end" style="fill:#8890a8;font-size:9px">One-time badge</text>
-
-  <rect x="46" y="290" width="354" height="130" rx="14" fill="#0e1020" stroke="#2a3050" stroke-width="1.0"/>
-  <rect x="46" y="290" width="354" height="4" rx="14" fill="#1a1d28"/>
-  <text x="92" y="320" class="small" style="font-weight:700;font-size:13px">Starstruck</text>
-  <text x="60" y="320" style="font-size:18px;dominant-baseline:auto">⭐</text>
-  <text x="60" y="340" class="muted">Earn 16 stars on one repo (best: 6 total)</text>
-  <text x="60" y="356" style="fill:#404858;font:500 9px 'Segoe UI',sans-serif;">GitHub Native Achievement</text>
-  <rect x="60" y="366" width="326" height="8" rx="4" fill="#1a1d28"/>
-  <rect x="60" y="366" width="114" height="8" rx="4" fill="#2a3050"></rect>
-  <rect x="60" y="380" width="114" height="2" rx="1" fill="#2a3050" opacity="0.2"/>
-  <text x="60" y="402" class="muted" style="font-size:9px;fill:#4a5578">🔒 LOCKED</text>
-  <text x="386" y="402" class="mono" text-anchor="end" style="fill:#8890a8;font-size:9px">6/16 stars needed</text>
-
-  <rect x="422" y="290" width="354" height="130" rx="14" fill="#0e1020" stroke="#2a3050" stroke-width="1.0"/>
-  <rect x="422" y="290" width="354" height="4" rx="14" fill="#1a1d28"/>
-  <text x="468" y="320" class="small" style="font-weight:700;font-size:13px">Pair Extraordinaire</text>
-  <text x="436" y="320" style="font-size:18px;dominant-baseline:auto">🤝</text>
-  <text x="436" y="340" class="muted">Co-authored a merged pull request</text>
-  <text x="436" y="356" style="fill:#404858;font:500 9px 'Segoe UI',sans-serif;">GitHub Native Achievement</text>
-  <rect x="436" y="366" width="326" height="8" rx="4" fill="#1a1d28"/>
-  <rect x="436" y="366" width="2" height="8" rx="4" fill="#2a3050"></rect>
-  <rect x="436" y="380" width="2" height="2" rx="1" fill="#2a3050" opacity="0.2"/>
-  <text x="436" y="402" class="muted" style="font-size:9px;fill:#4a5578">🔒 LOCKED</text>
-  <text x="762" y="402" class="mono" text-anchor="end" style="fill:#8890a8;font-size:9px">Co-author a PR commit</text>
-
-  <rect x="798" y="290" width="354" height="130" rx="14" fill="#0e1020" stroke="#2a3050" stroke-width="1.0"/>
-  <rect x="798" y="290" width="354" height="4" rx="14" fill="#1a1d28"/>
-  <text x="844" y="320" class="small" style="font-weight:700;font-size:13px">Galaxy Brain</text>
-  <text x="812" y="320" style="font-size:18px;dominant-baseline:auto">🌌</text>
-  <text x="812" y="340" class="muted">Provide 2 accepted answers in Discussions</text>
-  <text x="812" y="356" style="fill:#404858;font:500 9px 'Segoe UI',sans-serif;">GitHub Native Achievement</text>
-  <rect x="812" y="366" width="326" height="8" rx="4" fill="#1a1d28"/>
-  <rect x="812" y="366" width="2" height="8" rx="4" fill="#2a3050"></rect>
-  <rect x="812" y="380" width="2" height="2" rx="1" fill="#2a3050" opacity="0.2"/>
-  <text x="812" y="402" class="muted" style="font-size:9px;fill:#4a5578">🔒 LOCKED</text>
-  <text x="1138" y="402" class="mono" text-anchor="end" style="fill:#8890a8;font-size:9px">Answer in Discussions</text>
-
+  <a xlink:href="https://github.com/Karmanya03?achievement=yolo&amp;tab=achievements" target="_blank" rel="noopener noreferrer">
+    <rect x="800" y="104" width="356" height="122" rx="6" fill="#101011" stroke="#e2464d" stroke-opacity=".52" class="card-edge"/>
+    <path d="M801 111H1155" stroke="#e2464d" stroke-width="3"/>
+    <circle cx="844" cy="153" r="24" fill="#e2464d" fill-opacity=".10" stroke="#e2464d" stroke-opacity=".65"/>
+    <circle cx="844" cy="153" r="30" fill="none" stroke="#e2464d" stroke-opacity=".28" stroke-dasharray="2 7" class="inkline"/>
+    <text x="844" y="161" text-anchor="middle" fill="#e2464d" font-family="Georgia,'Times New Roman',serif" font-size="23" font-weight="700">!</text>
+    <text x="882" y="158" class="serif white" font-size="22">YOLO</text>
+    <path d="M820 188H1136" class="rule"/>
+    <text x="820" y="212" class="micro" fill="#e2464d">EARNED · PUBLIC GITHUB PROFILE</text>
+    <text x="1136" y="212" text-anchor="end" class="micro soft">↗</text>
+  </a>
+<text x="56" y="252" class="micro soft">BADGES LINK TO THEIR GITHUB ACHIEVEMENT PAGE</text>
 </svg>

@@ -441,6 +441,23 @@
     "Issues": 0,
     "Languages": 13
   },
+  "achievements": [
+    {
+      "slug": "pull-shark",
+      "name": "Pull Shark",
+      "url": "/Karmanya03?achievement=pull-shark&tab=achievements"
+    },
+    {
+      "slug": "starstruck",
+      "name": "Starstruck",
+      "url": "/Karmanya03?achievement=starstruck&tab=achievements"
+    },
+    {
+      "slug": "yolo",
+      "name": "YOLO",
+      "url": "/Karmanya03?achievement=yolo&tab=achievements"
+    }
+  ],
   "contributions": {
     "created_at": "2019-09-01T15:22:11Z",
     "last_year": 636,

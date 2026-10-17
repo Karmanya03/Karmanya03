@@ -23,7 +23,7 @@
 
 ## About
 
-My work spans penetration testing and Red Teaming, security engineering, programming, and game development. I also teach as a Cybersecurity Professor at a college. Certified in CRTP, PT1, and CNSP.
+I value work that makes complex systems easier to reason about: trace an attack path, demonstrate its impact, and leave behind a practical way to reduce the risk. I bring that same build–test–refine mindset to teaching and game development.
 
 > “The quieter you become, the more you can hear.” — Kali Linux
 
@@ -42,7 +42,11 @@ My work spans penetration testing and Red Teaming, security engineering, program
 ## Trophy case
 
 <p align="center">
-  <img src="assets/panels/trophies.svg" alt="Ranks calculated from public GitHub profile counts" width="100%">
+  <img src="assets/panels/achievements.svg" alt="GitHub achievements visible on Karmanya03's public profile" width="100%">
+</p>
+
+<p align="center">
+  <img src="assets/panels/trophies.svg" alt="Live trophy ranks with automatic next milestone progression from public GitHub profile counts" width="100%">
 </p>
 
 ## Recent activity

@@ -2,7 +2,10 @@ name: Render Profile Panels
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    # Five minutes is GitHub Actions' shortest supported interval; offset from :00 to reduce queue delays.
+    - cron: "3-59/5 * * * *"
+    # Refresh the complete historical contribution archive once a day.
+    - cron: "17 3 * * *"
   workflow_dispatch:
   push:
     branches:
@@ -11,6 +14,7 @@ on:
       - assets/panels/overview.svg
       - assets/panels/repositories.svg
       - assets/panels/trophies.svg
+      - assets/panels/achievements.svg
       - assets/panels/recent-activity.svg
       - assets/panels/telemetry.svg
       - assets/panels/whoami.svg
@@ -45,6 +49,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROFILE_USERNAME: Karmanya03
           PROFILE_OUT_DIR: assets/panels
+          REFRESH_CONTRIBUTION_HISTORY: ${{ github.event_name != 'schedule' || github.event.schedule == '17 3 * * *' }}
         run: |
           python scripts/generate_profile_panels.py
 
@@ -56,6 +61,6 @@ jobs:
             echo "No panel changes detected"
             exit 0
           fi
-          git add README.md assets/panels/overview.svg assets/panels/repositories.svg assets/panels/trophies.svg assets/panels/recent-activity.svg assets/panels/telemetry.svg assets/panels/whoami.svg assets/panels/contributions.svg assets/panels/contributions-*.svg assets/panels/toolkit.svg assets/panels/footer-quote.svg assets/panels/profile-metadata.json
+          git add README.md assets/panels/overview.svg assets/panels/repositories.svg assets/panels/trophies.svg assets/panels/achievements.svg assets/panels/recent-activity.svg assets/panels/telemetry.svg assets/panels/whoami.svg assets/panels/contributions.svg assets/panels/contributions-*.svg assets/panels/toolkit.svg assets/panels/footer-quote.svg assets/panels/profile-metadata.json
           git commit -m "chore: refresh profile command-center panels"
           git push
