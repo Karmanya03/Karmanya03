@@ -3,14 +3,14 @@
   "name": "Karmanya Ravindra",
   "bio": "Engineering | Game Development | Cybersecurity & Ethical Hacking",
   "created_at": "2019-09-01T15:22:11Z",
-  "generated_at": "2026-10-17T18:26Z",
+  "generated_at": "2026-10-17T18:33Z",
   "totals": {
     "repos": 42,
     "stars": 42,
     "forks": 3,
     "followers": 32,
     "following": 30,
-    "commits": 715,
+    "commits": 716,
     "prs": 10,
     "issues": 0,
     "unique_languages": 13,
@@ -28,7 +28,7 @@
     ],
     [
       "Python",
-      527485
+      528005
     ],
     [
       "JavaScript",
@@ -76,36 +76,6 @@
     ]
   ],
   "language_cache": {
-    "Karmanya03/Ferret-rs": {
-      "pushed_at": "2026-01-31T17:02:05Z",
-      "languages": {
-        "Rust": 97249,
-        "Shell": 10026,
-        "Ruby": 567
-      }
-    },
-    "Karmanya03/Eclipse": {
-      "pushed_at": "2026-07-06T09:27:59Z",
-      "languages": {
-        "Rust": 39085
-      }
-    },
-    "Karmanya03/Karmanya03": {
-      "pushed_at": "2026-10-17T18:26:12Z",
-      "languages": {
-        "Python": 83247
-      }
-    },
-    "Karmanya03/Deadrop": {
-      "pushed_at": "2026-07-07T07:14:43Z",
-      "languages": {
-        "Rust": 119564,
-        "HTML": 41362,
-        "JavaScript": 40535,
-        "PowerShell": 8522,
-        "Shell": 7689
-      }
-    },
     "Karmanya03/Overthrone": {
       "pushed_at": "2026-09-22T03:04:14Z",
       "languages": {
@@ -129,10 +99,26 @@
         "PowerShell": 4614
       }
     },
+    "Karmanya03/Deadrop": {
+      "pushed_at": "2026-07-07T07:14:43Z",
+      "languages": {
+        "Rust": 119564,
+        "HTML": 41362,
+        "JavaScript": 40535,
+        "PowerShell": 8522,
+        "Shell": 7689
+      }
+    },
     "Karmanya03/Fortrust": {
       "pushed_at": "2026-07-28T07:10:46Z",
       "languages": {
         "Rust": 1391057
+      }
+    },
+    "Karmanya03/Eclipse": {
+      "pushed_at": "2026-07-06T09:27:59Z",
+      "languages": {
+        "Rust": 39085
       }
     },
     "Karmanya03/OVT-Sentinel": {
@@ -144,12 +130,20 @@
         "Dockerfile": 562
       }
     },
-    "Karmanya03/AbstractStudio": {
-      "pushed_at": "2025-10-09T20:46:52Z",
+    "Karmanya03/Ferret-rs": {
+      "pushed_at": "2026-01-31T17:02:05Z",
       "languages": {
-        "CSS": 88120,
-        "JavaScript": 31233,
-        "HTML": 31097
+        "Rust": 97249,
+        "Shell": 10026,
+        "Ruby": 567
+      }
+    },
+    "Karmanya03/Karmanya03.github.io": {
+      "pushed_at": "2026-05-14T19:45:22Z",
+      "languages": {
+        "Shell": 3145,
+        "Ruby": 599,
+        "HTML": 34
       }
     },
     "Karmanya03/PwnJournal": {
@@ -158,6 +152,29 @@
         "Rust": 110820,
         "PowerShell": 1706,
         "Shell": 568
+      }
+    },
+    "Karmanya03/Rustify": {
+      "pushed_at": "2026-04-26T19:51:10Z",
+      "languages": {
+        "Rust": 286277,
+        "Python": 54824,
+        "PowerShell": 8343,
+        "Shell": 5669,
+        "Dockerfile": 5242
+      }
+    },
+    "Karmanya03/Kaizen-JAM": {
+      "pushed_at": "2026-03-23T02:38:18Z",
+      "languages": {
+        "JavaScript": 43746,
+        "Shell": 16077
+      }
+    },
+    "Karmanya03/Sigil": {
+      "pushed_at": "2026-03-15T13:02:02Z",
+      "languages": {
+        "Rust": 272097
       }
     },
     "Karmanya03/PassMann": {
@@ -172,46 +189,17 @@
         "Python": 1688
       }
     },
-    "Karmanya03/Sigil": {
-      "pushed_at": "2026-03-15T13:02:02Z",
+    "Karmanya03/AbstractStudio": {
+      "pushed_at": "2025-10-09T20:46:52Z",
       "languages": {
-        "Rust": 272097
-      }
-    },
-    "Karmanya03/Karmanya03.github.io": {
-      "pushed_at": "2026-05-14T19:45:22Z",
-      "languages": {
-        "Shell": 3145,
-        "Ruby": 599,
-        "HTML": 34
-      }
-    },
-    "Karmanya03/Rustify": {
-      "pushed_at": "2026-04-26T19:51:10Z",
-      "languages": {
-        "Rust": 286277,
-        "Python": 54824,
-        "PowerShell": 8343,
-        "Shell": 5669,
-        "Dockerfile": 5242
+        "CSS": 88120,
+        "JavaScript": 31233,
+        "HTML": 31097
       }
     },
     "Karmanya03/NPB_CHainzCommerce": {
       "pushed_at": "2024-12-11T03:00:15Z",
       "languages": {}
-    },
-    "Karmanya03/Kaizen-JAM": {
-      "pushed_at": "2026-03-23T02:38:18Z",
-      "languages": {
-        "JavaScript": 43746,
-        "Shell": 16077
-      }
-    },
-    "Karmanya03/PacketSniffer": {
-      "pushed_at": "2024-10-01T19:16:43Z",
-      "languages": {
-        "Python": 178
-      }
     },
     "Karmanya03/DjangoEcommerceSite": {
       "pushed_at": "2024-10-12T14:02:48Z",
@@ -230,6 +218,12 @@
         "CSS": 525
       }
     },
+    "Karmanya03/PacketSniffer": {
+      "pushed_at": "2024-10-01T19:16:43Z",
+      "languages": {
+        "Python": 178
+      }
+    },
     "Karmanya03/StealthCrawler": {
       "pushed_at": "2024-10-01T18:58:16Z",
       "languages": {
@@ -242,16 +236,16 @@
         "Python": 22468
       }
     },
-    "Karmanya03/AutoSQLInjector": {
-      "pushed_at": "2024-09-01T18:55:50Z",
-      "languages": {
-        "Python": 2838
-      }
-    },
     "Karmanya03/RFID-Blocker": {
       "pushed_at": "2024-09-01T18:57:12Z",
       "languages": {
         "Python": 1385
+      }
+    },
+    "Karmanya03/AutoSQLInjector": {
+      "pushed_at": "2024-09-01T18:55:50Z",
+      "languages": {
+        "Python": 2838
       }
     },
     "Karmanya03/Ceaser-Decoder-EncoderGUI": {
@@ -259,6 +253,10 @@
       "languages": {
         "Python": 7361
       }
+    },
+    "Karmanya03/KeyLogger": {
+      "pushed_at": "2024-07-10T11:51:51Z",
+      "languages": {}
     },
     "Karmanya03/Face-Emotion-Detection-Project": {
       "pushed_at": "2024-07-10T06:58:37Z",
@@ -268,9 +266,17 @@
       "pushed_at": "2024-06-28T13:52:08Z",
       "languages": {}
     },
-    "Karmanya03/KeyLogger": {
-      "pushed_at": "2024-07-10T11:51:51Z",
-      "languages": {}
+    "Karmanya03/VSoC-FlaskServer2024": {
+      "pushed_at": "2024-06-17T11:21:12Z",
+      "languages": {
+        "Python": 1838
+      }
+    },
+    "Karmanya03/VSoC-Flask": {
+      "pushed_at": "2024-05-23T15:23:08Z",
+      "languages": {
+        "Python": 685
+      }
     },
     "Karmanya03/Wiki3Pedia1": {
       "pushed_at": "2024-05-18T23:26:01Z",
@@ -289,18 +295,6 @@
     "Karmanya03/Karmanya031": {
       "pushed_at": "2024-04-10T06:34:30Z",
       "languages": {}
-    },
-    "Karmanya03/VSoC-FlaskServer2024": {
-      "pushed_at": "2024-06-17T11:21:12Z",
-      "languages": {
-        "Python": 1838
-      }
-    },
-    "Karmanya03/VSoC-Flask": {
-      "pushed_at": "2024-05-23T15:23:08Z",
-      "languages": {
-        "Python": 685
-      }
     },
     "Karmanya03/CIDE": {
       "pushed_at": "2024-03-03T02:57:28Z",
@@ -333,6 +327,12 @@
       "languages": {
         "HTML": 462,
         "CSS": 256
+      }
+    },
+    "Karmanya03/Karmanya03": {
+      "pushed_at": "2026-10-17T18:33:10Z",
+      "languages": {
+        "Python": 83767
       }
     }
   },
@@ -389,7 +389,7 @@
       "stars": 0,
       "forks": 0,
       "language": "Python",
-      "pushed_at": "2026-10-17T18:26:12Z",
+      "pushed_at": "2026-10-17T18:33:10Z",
       "date_label": "PUSHED"
     },
     {
@@ -697,7 +697,7 @@
     "Stars": 42,
     "Followers": 32,
     "Repositories": 42,
-    "Commits": 715,
+    "Commits": 716,
     "Pull requests": 10,
     "Issues": 0,
     "Languages": 13
@@ -778,6 +778,6 @@
         "levels": "00000000000000001421000000000010000000000000131141300111100110113314333212000100110000000000000000000000001100201002102212201110010112111001201011340101011003100010010000110100001000101001000000000001011001100111000000000000000000000000002010001000001111000001111110000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
       }
     ],
-    "updated_at": "2026-10-17T18:26Z"
+    "updated_at": "2026-10-17T18:33Z"
   }
 }
