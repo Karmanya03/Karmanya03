@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="1200" height="510" viewBox="0 0 1200 510" role="img" aria-label="Recent activity / event log">
+  width="1200" height="490" viewBox="0 0 1200 490" role="img" aria-label="Recent activity">
   <defs>
     <pattern id="grain" width="80" height="80" patternUnits="userSpaceOnUse">
       <path d="M0 79.5H80" stroke="#fff" stroke-opacity=".025"/>
@@ -22,69 +22,68 @@
       @media (prefers-reduced-motion:reduce){.inkline{animation:none}}
     </style>
   </defs>
-  <rect width="1200" height="510" rx="5" class="canvas"/>
-  <rect width="1200" height="510" rx="5" class="grain"/>
+  <rect width="1200" height="490" rx="5" class="canvas"/>
+  <rect width="1200" height="490" rx="5" class="grain"/>
   <path d="M0 0H1200" stroke="#d12f37" stroke-width="5"/>
   <rect x="30" y="25" width="42" height="27" rx="2" class="red"/>
   <text x="51" y="44" text-anchor="middle" class="micro white">03</text>
-  <text x="87" y="43" class="micro white">RECENT ACTIVITY / EVENT LOG</text>
-  <text x="1150" y="43" text-anchor="end" class="micro gold">PUBLIC EVENTS · HOURLY REFRESH</text>
+  <text x="87" y="43" class="micro white">RECENT ACTIVITY</text>
   <path d="M30 62H1170" class="rule"/>
-  <text x="47" y="99" class="micro gold">LATEST EVENTS EXPOSED BY THE PUBLIC PROFILE FEED</text><path d="M66 128V459" stroke="#8a262d" stroke-width="2" stroke-dasharray="3 7"/>
-  <circle cx="66" cy="143" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
-  <text x="91" y="147" class="micro red">30 SEP · 15:58 UTC</text>
-  <text x="286" y="147" class="small white">Starred repository</text>
+  <path d="M66 105V459" stroke="#8a262d" stroke-width="2" stroke-dasharray="3 7"/>
+  <circle cx="66" cy="120" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
+  <text x="91" y="124" class="micro red">30 SEP · 15:58 UTC</text>
+  <text x="286" y="124" class="small white">Starred repository</text>
   <a xlink:href="" target="_blank" rel="noopener noreferrer">
-    <text x="1152" y="147" text-anchor="end" class="mono gold">togg53192-cmd/jailbreaks ↗</text>
+    <text x="1152" y="124" text-anchor="end" class="mono gold">togg53192-cmd/jailbreaks ↗</text>
   </a>
 
-  <circle cx="66" cy="185" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
-  <text x="91" y="189" class="micro red">22 SEP · 10:06 UTC</text>
-  <text x="286" y="189" class="small white">Starred repository</text>
+  <circle cx="66" cy="162" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
+  <text x="91" y="166" class="micro red">22 SEP · 10:06 UTC</text>
+  <text x="286" y="166" class="small white">Starred repository</text>
   <a xlink:href="" target="_blank" rel="noopener noreferrer">
-    <text x="1152" y="189" text-anchor="end" class="mono gold">anmolkapil/plexo ↗</text>
+    <text x="1152" y="166" text-anchor="end" class="mono gold">anmolkapil/plexo ↗</text>
   </a>
 
-  <circle cx="66" cy="227" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
-  <text x="91" y="231" class="micro red">22 SEP · 03:04 UTC</text>
-  <text x="286" y="231" class="small white">Pushed changes</text>
+  <circle cx="66" cy="204" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
+  <text x="91" y="208" class="micro red">22 SEP · 03:04 UTC</text>
+  <text x="286" y="208" class="small white">Pushed changes</text>
   <a xlink:href="" target="_blank" rel="noopener noreferrer">
-    <text x="1152" y="231" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
+    <text x="1152" y="208" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
 
-  <circle cx="66" cy="269" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
-  <text x="91" y="273" class="micro red">21 SEP · 18:32 UTC</text>
-  <text x="286" y="273" class="small white">Pushed changes</text>
+  <circle cx="66" cy="246" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
+  <text x="91" y="250" class="micro red">21 SEP · 18:32 UTC</text>
+  <text x="286" y="250" class="small white">Pushed changes</text>
   <a xlink:href="" target="_blank" rel="noopener noreferrer">
-    <text x="1152" y="273" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
+    <text x="1152" y="250" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
 
-  <circle cx="66" cy="311" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
-  <text x="91" y="315" class="micro red">21 SEP · 08:08 UTC</text>
-  <text x="286" y="315" class="small white">Pushed changes</text>
+  <circle cx="66" cy="288" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
+  <text x="91" y="292" class="micro red">21 SEP · 08:08 UTC</text>
+  <text x="286" y="292" class="small white">Pushed changes</text>
   <a xlink:href="" target="_blank" rel="noopener noreferrer">
-    <text x="1152" y="315" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
+    <text x="1152" y="292" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
 
-  <circle cx="66" cy="353" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
-  <text x="91" y="357" class="micro red">21 SEP · 10:16 UTC</text>
-  <text x="286" y="357" class="small white">Pushed changes</text>
+  <circle cx="66" cy="330" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
+  <text x="91" y="334" class="micro red">21 SEP · 10:16 UTC</text>
+  <text x="286" y="334" class="small white">Pushed changes</text>
   <a xlink:href="" target="_blank" rel="noopener noreferrer">
-    <text x="1152" y="357" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
+    <text x="1152" y="334" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
 
-  <circle cx="66" cy="395" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
-  <text x="91" y="399" class="micro red">21 SEP · 04:58 UTC</text>
-  <text x="286" y="399" class="small white">Pushed changes</text>
+  <circle cx="66" cy="372" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
+  <text x="91" y="376" class="micro red">21 SEP · 04:58 UTC</text>
+  <text x="286" y="376" class="small white">Pushed changes</text>
   <a xlink:href="" target="_blank" rel="noopener noreferrer">
-    <text x="1152" y="399" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
+    <text x="1152" y="376" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
 
-  <circle cx="66" cy="437" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
-  <text x="91" y="441" class="micro red">21 SEP · 10:23 UTC</text>
-  <text x="286" y="441" class="small white">Pushed changes</text>
+  <circle cx="66" cy="414" r="5" fill="#d5ad52" stroke="#09090a" stroke-width="2"/>
+  <text x="91" y="418" class="micro red">21 SEP · 10:23 UTC</text>
+  <text x="286" y="418" class="small white">Pushed changes</text>
   <a xlink:href="" target="_blank" rel="noopener noreferrer">
-    <text x="1152" y="441" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
+    <text x="1152" y="418" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
-<text x="47" y="478" class="micro soft">CACHED</text>
+
 </svg>

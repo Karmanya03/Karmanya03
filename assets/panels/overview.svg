@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="1200" height="555" viewBox="0 0 1200 555" role="img" aria-label="Desk copy / account telemetry">
+  width="1200" height="505" viewBox="0 0 1200 505" role="img" aria-label="Profile / live record">
   <defs>
     <pattern id="grain" width="80" height="80" patternUnits="userSpaceOnUse">
       <path d="M0 79.5H80" stroke="#fff" stroke-opacity=".025"/>
@@ -22,66 +22,64 @@
       @media (prefers-reduced-motion:reduce){.inkline{animation:none}}
     </style>
   </defs>
-  <rect width="1200" height="555" rx="5" class="canvas"/>
-  <rect width="1200" height="555" rx="5" class="grain"/>
+  <rect width="1200" height="505" rx="5" class="canvas"/>
+  <rect width="1200" height="505" rx="5" class="grain"/>
   <path d="M0 0H1200" stroke="#d12f37" stroke-width="5"/>
   <rect x="30" y="25" width="42" height="27" rx="2" class="red"/>
   <text x="51" y="44" text-anchor="middle" class="micro white">00</text>
-  <text x="87" y="43" class="micro white">DESK COPY / ACCOUNT TELEMETRY</text>
-  <text x="1150" y="43" text-anchor="end" class="micro gold">HOURLY API SNAPSHOT</text>
+  <text x="87" y="43" class="micro white">PROFILE / LIVE RECORD</text>
   <path d="M30 62H1170" class="rule"/>
-  <text x="47" y="102" class="micro gold">THE OPEN FILE / ENGINEERING RECORD</text><path d="M47 115H1152" class="rule"/>
-  <text x="47" y="150" class="micro soft">▤  PUBLIC REPOS</text>
-  <text x="47" y="208" class="num white">42</text>
-  <path d="M47 222H283" stroke="#d12f37" stroke-width="2"/>
+  
+  <text x="47" y="112" class="micro soft">▤  PUBLIC REPOS</text>
+  <text x="47" y="170" class="num white">42</text>
+  <path d="M47 184H283" stroke="#d12f37" stroke-width="2"/>
 
-  <text x="327" y="150" class="micro soft">◉  FOLLOWERS</text>
-  <text x="327" y="208" class="num white">32</text>
-  <path d="M327 222H563" stroke="#d5ad52" stroke-width="2"/>
+  <text x="327" y="112" class="micro soft">◉  FOLLOWERS</text>
+  <text x="327" y="170" class="num white">32</text>
+  <path d="M327 184H563" stroke="#d5ad52" stroke-width="2"/>
 
-  <text x="607" y="150" class="micro soft">✳  STARS ON PUBLIC REPOS</text>
-  <text x="607" y="208" class="num white">42</text>
-  <path d="M607 222H843" stroke="#d5ad52" stroke-width="2"/>
+  <text x="607" y="112" class="micro soft">✳  STARS ON PUBLIC REPOS</text>
+  <text x="607" y="170" class="num white">42</text>
+  <path d="M607 184H843" stroke="#d5ad52" stroke-width="2"/>
 
-  <text x="887" y="150" class="micro soft">↟  PUBLIC COMMITS</text>
-  <text x="887" y="208" class="num white">—</text>
-  <path d="M887 222H1123" stroke="#d5ad52" stroke-width="2"/>
+  <text x="887" y="112" class="micro soft">↟  PUBLIC COMMITS</text>
+  <text x="887" y="170" class="num white">—</text>
+  <path d="M887 184H1123" stroke="#d5ad52" stroke-width="2"/>
 
-  <text x="47" y="265" class="micro gold">LANGUAGE / BYTE SHARE IN OWNED NON-FORK REPOSITORIES</text>
-  <text x="1152" y="265" text-anchor="end" class="micro soft">A VIEW OF SOURCE, NOT A SKILL SCORE</text>
+  <text x="47" y="224" class="micro gold">LANGUAGE MIX</text>
 
-  <text x="47" y="301" class="small white">Rust</text>
-  <text x="372" y="301" text-anchor="end" class="mono gold">88.1%</text>
-  <rect x="47" y="312" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="47" y="312" width="244" height="5" rx="2.5" fill="#d12f37"/>
+  <text x="47" y="258" class="small white">Rust</text>
+  <text x="372" y="258" text-anchor="end" class="mono gold">88.1%</text>
+  <rect x="47" y="269" width="278" height="5" rx="2.5" fill="#312d29"/>
+  <rect x="47" y="269" width="244" height="5" rx="2.5" fill="#d12f37"/>
 
-  <text x="421" y="301" class="small white">Python</text>
-  <text x="746" y="301" text-anchor="end" class="mono gold">3.3%</text>
-  <rect x="421" y="312" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="421" y="312" width="9" height="5" rx="2.5" fill="#d5ad52"/>
+  <text x="421" y="258" class="small white">Python</text>
+  <text x="746" y="258" text-anchor="end" class="mono gold">3.3%</text>
+  <rect x="421" y="269" width="278" height="5" rx="2.5" fill="#312d29"/>
+  <rect x="421" y="269" width="9" height="5" rx="2.5" fill="#d5ad52"/>
 
-  <text x="795" y="301" class="small white">JavaScript</text>
-  <text x="1120" y="301" text-anchor="end" class="mono gold">2.9%</text>
-  <rect x="795" y="312" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="795" y="312" width="8" height="5" rx="2.5" fill="#f4f0e9"/>
+  <text x="795" y="258" class="small white">JavaScript</text>
+  <text x="1120" y="258" text-anchor="end" class="mono gold">2.9%</text>
+  <rect x="795" y="269" width="278" height="5" rx="2.5" fill="#312d29"/>
+  <rect x="795" y="269" width="8" height="5" rx="2.5" fill="#f4f0e9"/>
 
-  <text x="47" y="355" class="small white">HTML</text>
-  <text x="372" y="355" text-anchor="end" class="mono gold">2.7%</text>
-  <rect x="47" y="366" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="47" y="366" width="7" height="5" rx="2.5" fill="#8c3336"/>
+  <text x="47" y="312" class="small white">HTML</text>
+  <text x="372" y="312" text-anchor="end" class="mono gold">2.7%</text>
+  <rect x="47" y="323" width="278" height="5" rx="2.5" fill="#312d29"/>
+  <rect x="47" y="323" width="7" height="5" rx="2.5" fill="#8c3336"/>
 
-  <text x="421" y="355" class="small white">CSS</text>
-  <text x="746" y="355" text-anchor="end" class="mono gold">1.9%</text>
-  <rect x="421" y="366" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="421" y="366" width="5" height="5" rx="2.5" fill="#a39b8d"/>
+  <text x="421" y="312" class="small white">CSS</text>
+  <text x="746" y="312" text-anchor="end" class="mono gold">1.9%</text>
+  <rect x="421" y="323" width="278" height="5" rx="2.5" fill="#312d29"/>
+  <rect x="421" y="323" width="5" height="5" rx="2.5" fill="#a39b8d"/>
 
-  <text x="795" y="355" class="small white">Shell</text>
-  <text x="1120" y="355" text-anchor="end" class="mono gold">0.5%</text>
-  <rect x="795" y="366" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="795" y="366" width="1" height="5" rx="2.5" fill="#78736c"/>
-<path d="M47 439H1152" class="rule"/><text x="47" y="466" class="micro gold">—</text><text x="47" y="484" class="micro soft">FORKS RECEIVED</text><text x="267" y="466" class="micro gold">—</text><text x="267" y="484" class="micro soft">OPENED PULL REQUESTS</text><text x="487" y="466" class="micro gold">—</text><text x="487" y="484" class="micro soft">OPENED ISSUES</text><text x="707" y="466" class="micro gold">—</text><text x="707" y="484" class="micro soft">LANGUAGES</text><text x="927" y="466" class="micro gold">—</text><text x="927" y="484" class="micro soft">ACTIVE REPOS · 90D</text>
-  <path d="M47 510H1152" stroke="#d5ad52" stroke-width="1"/>
-  <text x="47" y="533" class="micro soft">CACHED DATA · ORIGINAL TIMESTAMP RETAINED  ·  PUBLIC GITHUB API</text>
-  <path d="M869 530H1134" stroke="#d12f37" stroke-width="2" class="inkline"/>
+  <text x="795" y="312" class="small white">Shell</text>
+  <text x="1120" y="312" text-anchor="end" class="mono gold">0.5%</text>
+  <rect x="795" y="323" width="278" height="5" rx="2.5" fill="#312d29"/>
+  <rect x="795" y="323" width="1" height="5" rx="2.5" fill="#78736c"/>
+<path d="M47 376H1152" class="rule"/><text x="47" y="403" class="micro gold">—</text><text x="47" y="421" class="micro soft">FORKS RECEIVED</text><text x="267" y="403" class="micro gold">—</text><text x="267" y="421" class="micro soft">OPENED PULL REQUESTS</text><text x="487" y="403" class="micro gold">—</text><text x="487" y="421" class="micro soft">OPENED ISSUES</text><text x="707" y="403" class="micro gold">—</text><text x="707" y="421" class="micro soft">LANGUAGES</text><text x="927" y="403" class="micro gold">—</text><text x="927" y="421" class="micro soft">ACTIVE REPOS · 90D</text>
+  <path d="M47 456H1152" stroke="#d5ad52" stroke-width="1"/>
+  <text x="47" y="482" class="micro soft">AS OF 17 OCT 2026 · 15:21 UTC</text>
+  <path d="M869 479H1134" stroke="#d12f37" stroke-width="2" class="inkline"/>
 
 </svg>

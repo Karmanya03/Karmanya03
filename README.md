@@ -15,61 +15,41 @@
 
 ---
 
-### 00 / Operator notes
+## About
 
-B.E. Computer Science & Design graduate, CRTP-certified, and working as a Software Engineer. I work on offensive security and secure engineering; my side projects tend to wander into Rust, game development, and XR.
+B.E. Computer Science & Design graduate, CRTP-certified, and working as a Software Engineer. I build around offensive security and secure engineering; outside that, I gravitate toward Rust, game development, and XR.
 
 > “The quieter you become, the more you can hear.” — Kali Linux
 
-<div align="center">
+## Live profile
 
-![Profile telemetry — public GitHub counts and language share](assets/panels/overview.svg)
+<p align="center">
+  <img src="assets/panels/overview.svg" alt="GitHub profile statistics and language mix" width="100%">
+</p>
 
-</div>
+## Selected work
 
-### 01 / The workbench
+<p align="center">
+  <img src="assets/panels/repositories.svg" alt="Selected public repositories" width="100%">
+</p>
 
-Repository cards link straight to the source and show each project's language, stars, forks, and last push. Forks are left out of this index.
+## Trophy case
 
-<div align="center">
+<p align="center">
+  <img src="assets/panels/trophies.svg" alt="Ranks calculated from public GitHub profile counts" width="100%">
+</p>
 
-![Featured repositories](assets/panels/repositories.svg)
+## Recent activity
 
-</div>
+<p align="center">
+  <img src="assets/panels/recent-activity.svg" alt="Recent public GitHub events" width="100%">
+</p>
 
-### 02 / Trophy cabinet
+## Contributions
 
-Public profile counts on a community-style rank ladder. The ranks are calculated from GitHub's API data; they are not GitHub-native achievements.
+[![Contribution calendar](https://img.shields.io/badge/CONTRIBUTION_CALENDAR-OPEN_ON_GITHUB-D12F37?style=for-the-badge&labelColor=09090A&logo=github&logoColor=F4F0E9)](https://github.com/Karmanya03#contribution-activity)
 
-<div align="center">
-
-![Trophy cabinet — public profile activity ranks](assets/panels/trophies.svg)
-
-</div>
-
-### 03 / The event log
-
-Recent events from the public GitHub activity feed, with links back to the repositories.
-
-<div align="center">
-
-![Recent GitHub activity](assets/panels/recent-activity.svg)
-
-</div>
-
-### 04 / Commit telemetry
-
-The contribution graph is a rolling view of public commits. GitHub Actions refreshes the API panels hourly; the public event feed may lag behind GitHub activity.
-
-<div align="center">
-
-[![Public contribution calendar — GitHub native](https://img.shields.io/badge/PUBLIC_CONTRIBUTION_CALENDAR-GITHUB_NATIVE-D12F37?style=for-the-badge&labelColor=09090A&logo=github&logoColor=F4F0E9)](https://github.com/Karmanya03#contribution-activity)
-
-GitHub's own profile calendar is the source of truth for contribution counts and eligibility; it appears below this README on the profile.
-
-</div>
-
-### 05 / Tools on the bench
+## Toolkit
 
 **Languages & systems**
 
@@ -118,6 +98,6 @@ GitHub's own profile calendar is the source of truth for contribution counts and
 
 <div align="center">
 
-/dev/null is my inspiration · Rust is my weapon of choice
+*`/dev/null` is my inspiration · Rust is my weapon of choice*
 
 </div>

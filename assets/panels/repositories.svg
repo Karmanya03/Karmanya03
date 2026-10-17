@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="1200" height="546" viewBox="0 0 1200 546" role="img" aria-label="Project ledger / public code">
+  width="1200" height="546" viewBox="0 0 1200 546" role="img" aria-label="Selected work">
   <defs>
     <pattern id="grain" width="80" height="80" patternUnits="userSpaceOnUse">
       <path d="M0 79.5H80" stroke="#fff" stroke-opacity=".025"/>
@@ -27,21 +27,20 @@
   <path d="M0 0H1200" stroke="#d12f37" stroke-width="5"/>
   <rect x="30" y="25" width="42" height="27" rx="2" class="red"/>
   <text x="51" y="44" text-anchor="middle" class="micro white">01</text>
-  <text x="87" y="43" class="micro white">PROJECT LEDGER / PUBLIC CODE</text>
-  <text x="1150" y="43" text-anchor="end" class="micro gold">HOURLY REPOSITORY INDEX</text>
+  <text x="87" y="43" class="micro white">SELECTED WORK</text>
   <path d="M30 62H1170" class="rule"/>
-  <text x="47" y="99" class="micro gold">LATEST PUSHED · OWNED PUBLIC REPOSITORIES · FORKS OMITTED</text>
+  <text x="47" y="99" class="micro gold">RECENT WORK</text>
   <path d="M47 136H587V305H47Z" fill="#101011" stroke="#3b3630" stroke-width="1"/>
   <path d="M47 136V122H121L133 136" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="62" y="164" class="micro red">01</text>
   <a xlink:href="https://github.com/Karmanya03/Karmanya03" target="_blank" rel="noopener noreferrer">
   <text x="99" y="165" class="serif white">Karmanya03</text>
   </a>
-  <text x="63" y="198" class="small soft"><tspan x="63" dy="0">No description added.</tspan></text>
+  <text x="63" y="198" class="small soft"></text>
   <path d="M63 237H571" class="rule"/>
   <text x="63" y="266" class="micro gold">VARIOUS</text>
   <text x="571" y="266" text-anchor="end" class="micro white">✳ 0   ⑂ 0</text>
-  <text x="571" y="290" text-anchor="end" class="micro soft">PUSHED 17 OCT</text>
+  <text x="571" y="290" text-anchor="end" class="micro soft">UPDATED 17 OCT</text>
 
   <path d="M607 136H1147V305H607Z" fill="#101011" stroke="#3b3630" stroke-width="1"/>
   <path d="M607 136V122H681L693 136" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
@@ -53,7 +52,7 @@
   <path d="M623 237H1131" class="rule"/>
   <text x="623" y="266" class="micro gold">VARIOUS</text>
   <text x="1131" y="266" text-anchor="end" class="micro white">✳ 30   ⑂ 0</text>
-  <text x="1131" y="290" text-anchor="end" class="micro soft">PUSHED 22 SEP</text>
+  <text x="1131" y="290" text-anchor="end" class="micro soft">UPDATED 22 SEP</text>
 
   <path d="M47 341H587V510H47Z" fill="#101011" stroke="#3b3630" stroke-width="1"/>
   <path d="M47 341V327H121L133 341" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
@@ -65,6 +64,6 @@
   <path d="M63 442H571" class="rule"/>
   <text x="63" y="471" class="micro gold">VARIOUS</text>
   <text x="571" y="471" text-anchor="end" class="micro white">✳ 0   ⑂ 0</text>
-  <text x="571" y="495" text-anchor="end" class="micro soft">PUSHED 08 SEP</text>
+  <text x="571" y="495" text-anchor="end" class="micro soft">UPDATED 08 SEP</text>
 
 </svg>

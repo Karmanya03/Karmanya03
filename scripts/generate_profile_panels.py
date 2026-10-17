@@ -92,6 +92,7 @@ def read_metadata() -> dict[str, Any]:
                 "forks": int(repo.get("forks", 0)),
                 "language": repo.get("language") or "Various",
                 "pushed_at": repo.get("pushed_at") or repo.get("updated_at", ""),
+                "date_label": "PUSHED" if repo.get("pushed_at") else "UPDATED",
             }
             for repo in data["repositories"]
         ]
@@ -263,6 +264,7 @@ def fetch_snapshot(username: str) -> dict[str, Any]:
                 "forks": int(repo.get("forks_count", 0)),
                 "language": repo.get("language") or "Various",
                 "pushed_at": repo.get("pushed_at") or repo.get("updated_at") or "",
+                "date_label": "PUSHED",
             }
             for repo in top_repos
         ],
@@ -310,7 +312,7 @@ def svg_escape(value: Any) -> str:
     return html.escape(str(value or ""), quote=True)
 
 
-def wrap_svg(title: str, note: str, body: str, height: int, index: str) -> str:
+def wrap_svg(title: str, body: str, height: int, index: str) -> str:
     return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
   width="1200" height="{height}" viewBox="0 0 1200 {height}" role="img" aria-label="{svg_escape(title)}">
   <defs>
@@ -341,14 +343,13 @@ def wrap_svg(title: str, note: str, body: str, height: int, index: str) -> str:
   <rect x="30" y="25" width="42" height="27" rx="2" class="red"/>
   <text x="51" y="44" text-anchor="middle" class="micro white">{svg_escape(index)}</text>
   <text x="87" y="43" class="micro white">{svg_escape(title.upper())}</text>
-  <text x="1150" y="43" text-anchor="end" class="micro gold">{svg_escape(note.upper())}</text>
   <path d="M30 62H1170" class="rule"/>
   {body}
 </svg>
 """
 
 
-def render_overview(data: dict[str, Any], cached: bool = False) -> str:
+def render_overview(data: dict[str, Any]) -> str:
     totals = data.get("totals", {})
     limits = data.get("limits", {})
     counters = [
@@ -357,21 +358,19 @@ def render_overview(data: dict[str, Any], cached: bool = False) -> str:
         ("STARS ON PUBLIC REPOS", "stars", "✳"),
         ("PUBLIC COMMITS", "commits", "↟"),
     ]
-    body = ['<text x="47" y="102" class="micro gold">THE OPEN FILE / ENGINEERING RECORD</text>']
-    body.append('<path d="M47 115H1152" class="rule"/>')
+    body: list[str] = []
     for index, (label, key, icon) in enumerate(counters):
         x = 47 + index * 280
         raw = totals.get(key)
         value = fmt_count(raw, limits.get(key, False)) if raw is not None else "—"
         body.append(f"""
-  <text x="{x}" y="150" class="micro soft">{icon}  {label}</text>
-  <text x="{x}" y="208" class="num white">{value}</text>
-  <path d="M{x} 222H{x + 236}" stroke="{('#d12f37' if index == 0 else '#d5ad52')}" stroke-width="2"/>
+  <text x="{x}" y="112" class="micro soft">{icon}  {label}</text>
+  <text x="{x}" y="170" class="num white">{value}</text>
+  <path d="M{x} 184H{x + 236}" stroke="{('#d12f37' if index == 0 else '#d5ad52')}" stroke-width="2"/>
 """)
 
     body.append("""
-  <text x="47" y="265" class="micro gold">LANGUAGE / BYTE SHARE IN OWNED NON-FORK REPOSITORIES</text>
-  <text x="1152" y="265" text-anchor="end" class="micro soft">A VIEW OF SOURCE, NOT A SKILL SCORE</text>
+  <text x="47" y="224" class="micro gold">LANGUAGE MIX</text>
 """)
     languages = data.get("top_languages", [])[:6]
     total_bytes = sum(int(size) for _, size in data.get("top_languages", []))
@@ -380,7 +379,7 @@ def render_overview(data: dict[str, Any], cached: bool = False) -> str:
         row = index // 3
         col = index % 3
         x = 47 + col * 374
-        y = 301 + row * 54
+        y = 258 + row * 54
         share = int(size) / max(1, total_bytes)
         width = int(278 * share)
         color = colors[index % len(colors)]
@@ -398,25 +397,25 @@ def render_overview(data: dict[str, Any], cached: bool = False) -> str:
         ("LANGUAGES", fmt_count(totals["unique_languages"]) if totals.get("unique_languages") is not None else "—"),
         ("ACTIVE REPOS · 90D", fmt_count(totals["active_90"]) if totals.get("active_90") is not None else "—"),
     ]
-    yline = 439
+    yline = 376
     body.append(f'<path d="M47 {yline}H1152" class="rule"/>')
     for index, (label, value) in enumerate(secondary):
         x = 47 + index * 220
         body.append(f'<text x="{x}" y="{yline + 27}" class="micro gold">{value}</text><text x="{x}" y="{yline + 45}" class="micro soft">{label}</text>')
-    state = "CACHED DATA · ORIGINAL TIMESTAMP RETAINED" if cached else f"COLLECTED {stamp_label(data.get('generated_at', ''))}"
+    state = f"AS OF {stamp_label(data.get('generated_at', ''))}"
     body.append(f"""
-  <path d="M47 510H1152" stroke="#d5ad52" stroke-width="1"/>
-  <text x="47" y="533" class="micro soft">{svg_escape(state.upper())}  ·  PUBLIC GITHUB API</text>
-  <path d="M869 530H1134" stroke="#d12f37" stroke-width="2" class="inkline"/>
+  <path d="M47 456H1152" stroke="#d5ad52" stroke-width="1"/>
+  <text x="47" y="482" class="micro soft">{svg_escape(state.upper())}</text>
+  <path d="M869 479H1134" stroke="#d12f37" stroke-width="2" class="inkline"/>
 """)
-    return wrap_svg("Desk copy / account telemetry", "hourly api snapshot", "".join(body), 555, "00")
+    return wrap_svg("Profile / live record", "".join(body), 505, "00")
 
 
 def render_repositories(data: dict[str, Any]) -> str:
     repos = data.get("top_repos", [])[:6]
-    selection = "MOST STARRED" if data.get("repository_selection") == "stars" else "LATEST PUSHED"
+    selection = "MOST STARRED" if data.get("repository_selection") == "stars" else "RECENT WORK"
     body: list[str] = [
-        f'<text x="47" y="99" class="micro gold">{selection} · OWNED PUBLIC REPOSITORIES · FORKS OMITTED</text>'
+        f'<text x="47" y="99" class="micro gold">{selection}</text>'
     ]
     if not repos:
         body.append('<text x="47" y="153" class="small soft">Repository list unavailable in this snapshot.</text>')
@@ -428,7 +427,7 @@ def render_repositories(data: dict[str, Any]) -> str:
         y = 121 + row * 205
         width = 540
         name = svg_escape(short_text(repo.get("name"), 34))
-        description_text = short_text(repo.get("description"), 95) or "No description added."
+        description_text = short_text(repo.get("description"), 95)
         description_text = description_text.replace("**", "").replace("__", "").replace("`", "")
         description = textwrap.wrap(description_text, width=56)[:2]
         description_lines = "".join(
@@ -448,10 +447,10 @@ def render_repositories(data: dict[str, Any]) -> str:
   <path d="M{x + 16} {y + 116}H{x + width - 16}" class="rule"/>
   <text x="{x + 16}" y="{y + 145}" class="micro gold">{language.upper()}</text>
   <text x="{x + width - 16}" y="{y + 145}" text-anchor="end" class="micro white">✳ {int(repo.get('stars', 0))}   ⑂ {int(repo.get('forks', 0))}</text>
-  <text x="{x + width - 16}" y="{y + 169}" text-anchor="end" class="micro soft">PUSHED {day_label(repo.get('pushed_at', '')).upper()}</text>
+  <text x="{x + width - 16}" y="{y + 169}" text-anchor="end" class="micro soft">{svg_escape(repo.get('date_label', 'UPDATED'))} {day_label(repo.get('pushed_at', '')).upper()}</text>
 """)
     panel_height = 121 + rows * 205 + 15
-    return wrap_svg("Project ledger / public code", "hourly repository index", "".join(body), panel_height, "01")
+    return wrap_svg("Selected work", "".join(body), panel_height, "01")
 
 
 def rank_for(key: str, score: int) -> tuple[str, int, int | None]:
@@ -476,9 +475,7 @@ def render_trophies(data: dict[str, Any]) -> str:
     columns = 4
     rows = max(1, (len(cards) + columns - 1) // columns)
     left = (1200 - columns * width - (columns - 1) * gap) // 2
-    body: list[str] = [
-        '<text x="47" y="98" class="micro gold">PUBLIC PROFILE COUNTS / COMMUNITY THRESHOLD LADDER</text>'
-    ]
+    body: list[str] = []
     for index, (key, (thresholds, icon)) in enumerate(cards):
         raw_score = scores.get(key)
         missing = raw_score is None
@@ -487,12 +484,12 @@ def render_trophies(data: dict[str, Any]) -> str:
         capped = bool(limits.get(limit_key, False))
         rank, current, next_value = ("—", 0, None) if missing else rank_for(key, score)
         x = left + (index % columns) * (width + gap)
-        y = 120 + (index // columns) * 250
+        y = 94 + (index // columns) * 250
         max_rank = next_value is None
         if capped:
             rank = f"≥{rank}"
             percent = 100
-            target_label = "SEARCH CAP"
+            target_label = "MAX+"
         elif max_rank:
             percent = 100
             target_label = "MAX"
@@ -518,27 +515,18 @@ def render_trophies(data: dict[str, Any]) -> str:
   <rect x="{x + 20}" y="{y + 189}" width="{bar_w}" height="4" rx="2" fill="#d12f37"/>
   <text x="{x + width // 2}" y="{y + 214}" text-anchor="middle" class="micro soft">{"NO SNAPSHOT" if missing else target_label}</text>
 """)
-    footer_y = 120 + (rows - 1) * 250 + 230 + 28
-    body.append(f"""
-  <text x="600" y="{footer_y}" text-anchor="middle" class="micro soft">UNOFFICIAL COMMUNITY RANK DISPLAY · VALUES ARE PUBLIC API COUNTS</text>
-  <path d="M223 {footer_y + 20}H977" stroke="#d5ad52" stroke-opacity=".5"/>
-  <text x="600" y="{footer_y + 42}" text-anchor="middle" class="micro red">SEARCH ENDPOINT COUNTS SHOW “+” WHEN GITHUB CAPS RESULTS AT 1,000</text>
-""")
-    return wrap_svg("Trophy cabinet / public record", "community ranks · not native achievements", "".join(body), footer_y + 60, "02")
+    panel_height = 94 + rows * 250 + 4
+    return wrap_svg("Trophy case", "".join(body), panel_height, "02")
 
 
-def render_recent_activity(data: dict[str, Any], cached: bool = False) -> str:
+def render_recent_activity(data: dict[str, Any]) -> str:
     entries = data.get("activity", [])[:8]
-    body = [
-        '<text x="47" y="99" class="micro gold">LATEST EVENTS EXPOSED BY THE PUBLIC PROFILE FEED</text>',
-        '<path d="M66 128V459" stroke="#8a262d" stroke-width="2" stroke-dasharray="3 7"/>',
-    ]
+    body = ['<path d="M66 105V459" stroke="#8a262d" stroke-width="2" stroke-dasharray="3 7"/>']
     if not entries:
-        note = "Saved snapshot has no recent events." if cached else "No recent public events in the profile feed."
-        body.append(f'<text x="96" y="159" class="small soft">{svg_escape(note)}</text>')
+        body.append('<text x="96" y="159" class="small soft">No recent events</text>')
     for index, event in enumerate(entries):
-        y = 147 + index * 42
-        summary = svg_escape(event.get("summary") or event_summary(event))
+        y = 124 + index * 42
+        summary = svg_escape(short_text(event.get("summary") or event_summary(event), 26))
         repository = svg_escape(short_text(event.get("repo"), 52))
         time = iso_time(event.get("created_at"))
         date = time.strftime("%d %b · %H:%M UTC") if time else "time unavailable"
@@ -551,9 +539,7 @@ def render_recent_activity(data: dict[str, Any], cached: bool = False) -> str:
     <text x="1152" y="{y}" text-anchor="end" class="mono gold">{repository} ↗</text>
   </a>
 """)
-    status = "CACHED" if cached else "UPDATED HOURLY · PUBLIC EVENTS MAY BE DELAYED BY GITHUB"
-    body.append(f'<text x="47" y="478" class="micro soft">{svg_escape(status)}</text>')
-    return wrap_svg("Recent activity / event log", "public events · hourly refresh", "".join(body), 510, "03")
+    return wrap_svg("Recent activity", "".join(body), 490, "03")
 
 
 def write_file(path: Path, content: str) -> None:
@@ -575,10 +561,10 @@ def main() -> None:
         write_file(METADATA_FILE, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
         cached = False
 
-    write_file(OUT_DIR / "overview.svg", render_overview(data, cached))
+    write_file(OUT_DIR / "overview.svg", render_overview(data))
     write_file(OUT_DIR / "repositories.svg", render_repositories(data))
     write_file(OUT_DIR / "trophies.svg", render_trophies(data))
-    write_file(OUT_DIR / "recent-activity.svg", render_recent_activity(data, cached))
+    write_file(OUT_DIR / "recent-activity.svg", render_recent_activity(data))
     print(f"Rendered 4 panels from the {'cached' if cached else 'current'} GitHub snapshot dated {data.get('generated_at', 'unknown')}.")
 
 
