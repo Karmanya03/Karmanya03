@@ -77,7 +77,7 @@
     <stop offset="1" stop-color="#68b7d3" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#achievement-sheen-0-clip)" opacity=".22">
+<g clip-path="url(#achievement-sheen-0-clip)" opacity=".20">
   <path d="M-178 326h54l658 -658h-54Z" fill="url(#achievement-sheen-0-light)">
     <animateTransform attributeName="transform" type="translate" values="-370.40000000000003,-159.8;370.40000000000003,159.8" dur="8.60s" begin="0.00s" repeatCount="indefinite"/>
   </path>
@@ -104,7 +104,7 @@
     <stop offset="1" stop-color="#d5ad52" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#achievement-sheen-1-clip)" opacity=".22">
+<g clip-path="url(#achievement-sheen-1-clip)" opacity=".20">
   <path d="M200 326h54l658 -658h-54Z" fill="url(#achievement-sheen-1-light)">
     <animateTransform attributeName="transform" type="translate" values="-370.40000000000003,-159.8;370.40000000000003,159.8" dur="9.16s" begin="0.27s" repeatCount="indefinite"/>
   </path>
@@ -131,7 +131,7 @@
     <stop offset="1" stop-color="#e2464d" stop-opacity="0"/>
   </linearGradient>
 </defs>
-<g clip-path="url(#achievement-sheen-2-clip)" opacity=".22">
+<g clip-path="url(#achievement-sheen-2-clip)" opacity=".20">
   <path d="M578 326h54l658 -658h-54Z" fill="url(#achievement-sheen-2-light)">
     <animateTransform attributeName="transform" type="translate" values="-370.40000000000003,-159.8;370.40000000000003,159.8" dur="9.72s" begin="0.54s" repeatCount="indefinite"/>
   </path>
