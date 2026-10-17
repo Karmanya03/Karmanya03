@@ -687,12 +687,14 @@ def background_multishimmer(
     # Broad rails leave an unmistakable quiet gap between each dark and light pass.
     stripe_width = 126
     spacing = 82
-    stripe_count = (width + height + spacing * 2 - 1) // (spacing * 2) + 4
+    repeat_step = spacing * 2
+    stripe_count = (width + height + repeat_step - 1) // repeat_step + 4
     stripes = []
     for index in range(-4, stripe_count):
         color, opacity = ("#000000", ".17") if index % 2 == 0 else ("#f4f0e9", ".12")
         offset = index * spacing
-        phase_delay = (float(delay.removesuffix("s")) + index * .17) % 3.4
+        # Advancing two bands preserves color and pulse phase at each motion loop.
+        phase_delay = -(float(delay.removesuffix("s")) + (index % 2) * .17)
         stripes.append(
             f'<path d="M{start_x + offset} {start_y + offset}h{stripe_width}l{band} -{band}h-{stripe_width}Z" '
             f'fill="{color}" fill-opacity="{opacity}" class="heat-cell" style="--delay:{phase_delay:.2f}s"/>'
@@ -702,7 +704,10 @@ def background_multishimmer(
   <filter id="{key}-soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="0.65"/></filter>
 </defs>
 <g clip-path="url(#{key}-clip)" filter="url(#{key}-soft)">
-  {''.join(stripes)}
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0,0;{repeat_step},{repeat_step}" dur="3.4s" begin="0s" repeatCount="indefinite" calcMode="linear"/>
+    {''.join(stripes)}
+  </g>
 </g>'''
 
 
