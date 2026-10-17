@@ -671,45 +671,6 @@ def diagonal_sheen(
 </g>'''
 
 
-def heatmap_backdrop(
-    x: int,
-    y: int,
-    width: int,
-    height: int,
-    key: str,
-    *,
-    columns: int,
-    rows: int,
-    phase: int = 0,
-) -> str:
-    """A low-profile contribution-grid field, animated behind panel content."""
-    step_x = width / columns
-    step_y = height / rows
-    cell_width = min(12, step_x * .43)
-    cell_height = min(10, step_y * .42)
-    palette = ("#681b24", "#a32630", "#d12f37", "#d5ad52", "#f4f0e9")
-    cells: list[str] = []
-    for row in range(rows):
-        for column in range(columns):
-            level = (row * 7 + column * 11 + phase) % len(palette)
-            if (row * 3 + column + phase) % 5 == 0:
-                continue
-            cell_x = x + column * step_x + (step_x - cell_width) / 2
-            cell_y = y + row * step_y + (step_y - cell_height) / 2
-            opacity = .12 + level * .04
-            delay = (column * .11 + row * .27 + phase * .43) % 3.4
-            cells.append(
-                f'<rect x="{cell_x:.1f}" y="{cell_y:.1f}" width="{cell_width:.1f}" '
-                f'height="{cell_height:.1f}" rx="2.5" fill="{palette[level]}" '
-                f'fill-opacity="{opacity:.2f}" class="heat-cell" style="--delay:{delay:.2f}s"/>'
-            )
-    return (
-        f'<defs><clipPath id="{key}-clip"><rect x="{x}" y="{y}" width="{width}" '
-        f'height="{height}" rx="5"/></clipPath></defs>'
-        f'<g clip-path="url(#{key}-clip)">{"".join(cells)}</g>'
-    )
-
-
 def horizontal_sheen(
     x: int,
     y: int,
@@ -798,7 +759,7 @@ def wrap_svg(title: str, body: str, height: int, index: str, *, show_header: boo
       @keyframes edge{{0%,100%{{stroke-opacity:.48}}50%{{stroke-opacity:.92}}}}
       @keyframes pulse{{0%,100%{{opacity:.72;transform:scale(.94)}}50%{{opacity:1;transform:scale(1.06)}}}}
       @keyframes warmth{{0%,100%{{opacity:.2}}50%{{opacity:.55}}}}
-      @keyframes heat{{0%,100%{{filter:brightness(.78);opacity:.74}}50%{{filter:brightness(1.9) drop-shadow(0 0 2px #f4f0e9);opacity:1}}}}
+      @keyframes heat{{0%,100%{{filter:brightness(.9);opacity:.8}}50%{{filter:brightness(1.7);opacity:1}}}}
       @keyframes toolkitSweep{{from{{transform:translate(-1800px,-1800px)}}to{{transform:translate(1450px,1450px)}}}}
       @keyframes rankGlow{{0%,100%{{opacity:.74}}50%{{opacity:1}}}}
       @keyframes quoteWord{{0%,100%{{opacity:.78}}45%{{opacity:1}}}}
@@ -1091,8 +1052,7 @@ def render_whoami(data: dict[str, Any]) -> str:
     name = svg_escape(data.get("name") or "Karmanya Ravindra")
     body = f"""
   <rect x="34" y="83" width="1132" height="320" rx="5" fill="#0d0d0e" stroke="#463a30" class="card-edge"/>
-  {heatmap_backdrop(48, 94, 750, 298, "whoami-heat-field", columns=20, rows=8, phase=1)}
-  {diagonal_sheen(34, 83, 1132, 320, "whoami-main-sheen", tint="#d12f37", duration="11.8s", delay="1.1s", opacity=".07", radius=5)}
+  {diagonal_sheen(34, 83, 780, 320, "whoami-calendar-glass", tint="#f4f0e9", duration="8.8s", delay="1.1s", opacity=".18", radius=5)}
   <path d="M34 88V397" stroke="#d12f37" stroke-width="4"/>
   <rect x="58" y="104" width="136" height="24" rx="12" fill="#301316" stroke="#8f312f"/>
   <text x="126" y="121" text-anchor="middle" class="micro white">IDENTITY / 01</text>
@@ -1454,8 +1414,7 @@ def render_kali_quote() -> str:
 def render_recent_activity(data: dict[str, Any]) -> str:
     entries = data.get("activity", [])[:8]
     body = [
-        '<rect x="34" y="82" width="1132" height="378" rx="5" fill="#0d0d0e" stroke="#3c3732" class="card-edge"/>',
-        heatmap_backdrop(48, 94, 1104, 350, "activity-heat-field", columns=30, rows=9, phase=2),
+        diagonal_sheen(34, 82, 1132, 378, "activity-calendar-glass", tint="#f4f0e9", duration="11.4s", delay="2.2s", opacity=".17", radius=5),
         '<path d="M66 105V459" stroke="#8a262d" stroke-width="2" stroke-dasharray="3 7" class="inkline"/>',
     ]
     if not entries:
@@ -1494,8 +1453,7 @@ def render_event_trace(data: dict[str, Any]) -> str:
         "OTHER": (335, "#78736c"),
     }
     body: list[str] = []
-    body.append('<rect x="34" y="82" width="1132" height="320" rx="5" fill="#0d0d0e" stroke="#3c3732" class="card-edge"/>')
-    body.append(heatmap_backdrop(48, 94, 1104, 292, "telemetry-heat-field", columns=30, rows=8, phase=3))
+    body.append(diagonal_sheen(34, 82, 1132, 320, "telemetry-calendar-glass", tint="#f4f0e9", duration="10.2s", delay=".8s", opacity=".18", radius=5))
     for label, (y, color) in lanes.items():
         body.append(f'<text x="47" y="{y + 5}" class="micro soft">{label}</text>')
         body.append(f'<path d="M{x_start} {y}H{x_end}" stroke="#312d29" stroke-width="1"/>')
