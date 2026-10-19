@@ -95,7 +95,7 @@
   </path>
 </g>
   <text x="47" y="112" class="micro soft">▤  PUBLIC REPOS</text>
-  <text x="47" y="170" class="num white">42</text>
+  <text x="47" y="170" class="num white">43</text>
   <path d="M47 184H283" stroke="#d12f37" stroke-width="2"/>
 <defs>
   <clipPath id="overview-sheen-1-clip"><rect x="319" y="91" width="252" height="103" rx="3"/></clipPath>
@@ -113,7 +113,7 @@
   </path>
 </g>
   <text x="327" y="112" class="micro soft">◉  FOLLOWERS</text>
-  <text x="327" y="170" class="num white">33</text>
+  <text x="327" y="170" class="num white">34</text>
   <path d="M327 184H563" stroke="#d5ad52" stroke-width="2"/>
 <defs>
   <clipPath id="overview-sheen-2-clip"><rect x="599" y="91" width="252" height="103" rx="3"/></clipPath>
@@ -131,7 +131,7 @@
   </path>
 </g>
   <text x="607" y="112" class="micro soft">✳  STARS ON PUBLIC REPOS</text>
-  <text x="607" y="170" class="num white">42</text>
+  <text x="607" y="170" class="num white">43</text>
   <path d="M607 184H843" stroke="#d5ad52" stroke-width="2"/>
 <defs>
   <clipPath id="overview-sheen-3-clip"><rect x="879" y="91" width="252" height="103" rx="3"/></clipPath>
@@ -149,17 +149,17 @@
   </path>
 </g>
   <text x="887" y="112" class="micro soft">↟  PUBLIC COMMITS</text>
-  <text x="887" y="170" class="num white">716</text>
+  <text x="887" y="170" class="num white">717</text>
   <path d="M887 184H1123" stroke="#d5ad52" stroke-width="2"/>
 
   <text x="47" y="224" class="micro gold">LANGUAGE MIX</text>
 
   <text x="47" y="258" class="small white">Rust</text>
-  <text x="372" y="258" text-anchor="end" class="mono gold">87.9%</text>
+  <text x="372" y="258" text-anchor="end" class="mono gold">88.2%</text>
   <rect x="47" y="269" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="47" y="269" width="244" height="5" rx="2.5" fill="#d12f37" class="warmth"/>
+  <rect x="47" y="269" width="245" height="5" rx="2.5" fill="#d12f37" class="warmth"/>
 <defs>
-  <clipPath id="overview-bar-glint-0-clip"><rect x="47" y="269" width="244" height="5" rx="2"/></clipPath>
+  <clipPath id="overview-bar-glint-0-clip"><rect x="47" y="269" width="245" height="5" rx="2"/></clipPath>
   <linearGradient id="overview-bar-glint-0-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#d12f37" stop-opacity="0"/>
     <stop offset=".42" stop-color="#d12f37" stop-opacity=".10"/>
@@ -170,11 +170,11 @@
 </defs>
 <g clip-path="url(#overview-bar-glint-0-clip)" opacity=".34">
   <rect x="-17" y="269" width="64" height="5" fill="url(#overview-bar-glint-0-light)">
-    <animateTransform attributeName="transform" type="translate" values="0,0;308,0" dur="12.80s" begin="0.00s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;309,0" dur="12.80s" begin="0.00s" repeatCount="indefinite"/>
   </rect>
 </g>
   <text x="421" y="258" class="small white">Python</text>
-  <text x="746" y="258" text-anchor="end" class="mono gold">3.6%</text>
+  <text x="746" y="258" text-anchor="end" class="mono gold">3.5%</text>
   <rect x="421" y="269" width="278" height="5" rx="2.5" fill="#312d29"/>
   <rect x="421" y="269" width="9" height="5" rx="2.5" fill="#d5ad52" class="warmth"/>
 <defs>
@@ -193,11 +193,11 @@
   </rect>
 </g>
   <text x="795" y="258" class="small white">JavaScript</text>
-  <text x="1120" y="258" text-anchor="end" class="mono gold">2.9%</text>
+  <text x="1120" y="258" text-anchor="end" class="mono gold">2.8%</text>
   <rect x="795" y="269" width="278" height="5" rx="2.5" fill="#312d29"/>
-  <rect x="795" y="269" width="8" height="5" rx="2.5" fill="#f4f0e9" class="warmth"/>
+  <rect x="795" y="269" width="7" height="5" rx="2.5" fill="#f4f0e9" class="warmth"/>
 <defs>
-  <clipPath id="overview-bar-glint-2-clip"><rect x="795" y="269" width="8" height="5" rx="2"/></clipPath>
+  <clipPath id="overview-bar-glint-2-clip"><rect x="795" y="269" width="7" height="5" rx="2"/></clipPath>
   <linearGradient id="overview-bar-glint-2-light" x1="0" y1="0" x2="1" y2="0">
     <stop offset="0" stop-color="#f4f0e9" stop-opacity="0"/>
     <stop offset=".42" stop-color="#f4f0e9" stop-opacity=".10"/>
@@ -208,11 +208,11 @@
 </defs>
 <g clip-path="url(#overview-bar-glint-2-clip)" opacity=".34">
   <rect x="731" y="269" width="64" height="5" fill="url(#overview-bar-glint-2-light)">
-    <animateTransform attributeName="transform" type="translate" values="0,0;72,0" dur="14.30s" begin="1.26s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;71,0" dur="14.30s" begin="1.26s" repeatCount="indefinite"/>
   </rect>
 </g>
   <text x="47" y="312" class="small white">HTML</text>
-  <text x="372" y="312" text-anchor="end" class="mono gold">2.7%</text>
+  <text x="372" y="312" text-anchor="end" class="mono gold">2.6%</text>
   <rect x="47" y="323" width="278" height="5" rx="2.5" fill="#312d29"/>
   <rect x="47" y="323" width="7" height="5" rx="2.5" fill="#8c3336" class="warmth"/>
 <defs>
@@ -231,7 +231,7 @@
   </rect>
 </g>
   <text x="421" y="312" class="small white">CSS</text>
-  <text x="746" y="312" text-anchor="end" class="mono gold">1.9%</text>
+  <text x="746" y="312" text-anchor="end" class="mono gold">1.8%</text>
   <rect x="421" y="323" width="278" height="5" rx="2.5" fill="#312d29"/>
   <rect x="421" y="323" width="5" height="5" rx="2.5" fill="#a39b8d" class="warmth"/>
 <defs>
@@ -267,8 +267,8 @@
   <rect x="731" y="323" width="64" height="5" fill="url(#overview-bar-glint-5-light)">
     <animateTransform attributeName="transform" type="translate" values="0,0;65,0" dur="16.55s" begin="3.15s" repeatCount="indefinite"/>
   </rect>
-</g><path d="M47 376H1152" class="rule"/><text x="47" y="403" class="micro gold">3</text><text x="47" y="421" class="micro soft">FORKS RECEIVED</text><text x="232" y="403" class="micro gold">31</text><text x="232" y="421" class="micro soft">FOLLOWING</text><text x="417" y="403" class="micro gold">10</text><text x="417" y="421" class="micro soft">PULL REQUESTS</text><text x="602" y="403" class="micro gold">0</text><text x="602" y="421" class="micro soft">ISSUES</text><text x="787" y="403" class="micro gold">13</text><text x="787" y="421" class="micro soft">LANGUAGES</text><text x="972" y="403" class="micro gold">5</text><text x="972" y="421" class="micro soft">ACTIVE REPOS · 90D</text>
+</g><path d="M47 376H1152" class="rule"/><text x="47" y="403" class="micro gold">3</text><text x="47" y="421" class="micro soft">FORKS RECEIVED</text><text x="232" y="403" class="micro gold">31</text><text x="232" y="421" class="micro soft">FOLLOWING</text><text x="417" y="403" class="micro gold">10</text><text x="417" y="421" class="micro soft">PULL REQUESTS</text><text x="602" y="403" class="micro gold">0</text><text x="602" y="421" class="micro soft">ISSUES</text><text x="787" y="403" class="micro gold">15</text><text x="787" y="421" class="micro soft">LANGUAGES</text><text x="972" y="403" class="micro gold">6</text><text x="972" y="421" class="micro soft">ACTIVE REPOS · 90D</text>
   <path d="M47 456H1152" stroke="#d5ad52" stroke-width="1"/>
-  <text x="47" y="482" class="micro soft">AS OF 19 OCT 2026 · 06:18 UTC</text>
+  <text x="47" y="482" class="micro soft">AS OF 19 OCT 2026 · 08:50 UTC</text>
   <path d="M869 479H1134" stroke="#d12f37" stroke-width="2" class="inkline"/>
 </svg>

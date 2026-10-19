@@ -68,7 +68,7 @@ I’m drawn to systems that reward careful exploration: tracing an Active Direct
 <!-- CONTRIBUTION_YEARS_START -->
 
 <details name="contribution-calendar" id="contribution-2026" open>
-<summary><strong>2026</strong> · 637 contributions in the last year</summary>
+<summary><strong>2026</strong> · 639 contributions in the last year</summary>
 
 <p align="center"><img src="assets/panels/contributions-2026.svg" alt="Daily GitHub contributions for 2026" width="100%"></p>
 </details>

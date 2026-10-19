@@ -89,7 +89,7 @@
   <text x="63" y="198" class="small soft"><tspan x="63" dy="0">(WIP) Overthrone - The First All-Rust Active Directory</tspan><tspan x="63" dy="22">exploitation framework. A single st…</tspan></text>
   <path d="M63 237H571" class="rule"/>
   <text x="63" y="266" class="micro gold">RUST</text>
-  <text x="571" y="266" text-anchor="end" class="micro white">✳ 30   ⑂ 2</text>
+  <text x="571" y="266" text-anchor="end" class="micro white">✳ 31   ⑂ 2</text>
   <text x="571" y="290" text-anchor="end" class="micro soft">PUSHED 22 SEP</text>
 
   <path d="M607 136H1147V305H607Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
@@ -191,14 +191,14 @@
 </g>
   <path d="M47 546V532H121L133 546" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="62" y="574" class="micro red">05</text>
-  <a xlink:href="https://github.com/Karmanya03/Grym" target="_blank" rel="noopener noreferrer">
-  <text x="99" y="575" class="serif white">Grym</text>
+  <a xlink:href="https://github.com/Karmanya03/Cinder" target="_blank" rel="noopener noreferrer">
+  <text x="99" y="575" class="serif white">Cinder</text>
   </a>
-  <text x="63" y="608" class="small soft"><tspan x="63" dy="0">Scope-enforced security assessment platform for</tspan><tspan x="63" dy="22">explicitly authorized engagements.</tspan></text>
+  <text x="63" y="608" class="small soft"></text>
   <path d="M63 647H571" class="rule"/>
   <text x="63" y="676" class="micro gold">RUST</text>
   <text x="571" y="676" text-anchor="end" class="micro white">✳ 0   ⑂ 0</text>
-  <text x="571" y="700" text-anchor="end" class="micro soft">PUSHED 08 SEP</text>
+  <text x="571" y="700" text-anchor="end" class="micro soft">PUSHED 19 OCT</text>
 
   <path d="M607 546H1147V715H607Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
   <defs>
@@ -218,12 +218,12 @@
 </g>
   <path d="M607 546V532H681L693 546" fill="#151313" stroke="#8f312f" stroke-width="1.2"/>
   <text x="622" y="574" class="micro red">06</text>
-  <a xlink:href="https://github.com/Karmanya03/Fortrust" target="_blank" rel="noopener noreferrer">
-  <text x="659" y="575" class="serif white">Fortrust</text>
+  <a xlink:href="https://github.com/Karmanya03/Grym" target="_blank" rel="noopener noreferrer">
+  <text x="659" y="575" class="serif white">Grym</text>
   </a>
-  <text x="623" y="608" class="small soft"><tspan x="623" dy="0">WIP Fortrust is a compact Rust workspace for a privacy-</tspan><tspan x="623" dy="22">first browser stack. It already inc…</tspan></text>
+  <text x="623" y="608" class="small soft"><tspan x="623" dy="0">Scope-enforced security assessment platform for</tspan><tspan x="623" dy="22">explicitly authorized engagements.</tspan></text>
   <path d="M623 647H1131" class="rule"/>
   <text x="623" y="676" class="micro gold">RUST</text>
   <text x="1131" y="676" text-anchor="end" class="micro white">✳ 0   ⑂ 0</text>
-  <text x="1131" y="700" text-anchor="end" class="micro soft">PUSHED 28 JUL</text>
+  <text x="1131" y="700" text-anchor="end" class="micro soft">PUSHED 08 SEP</text>
 </svg>
