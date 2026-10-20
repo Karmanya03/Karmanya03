@@ -116,7 +116,7 @@
   <text x="623" y="198" class="small soft"><tspan x="623" dy="0">Zero‑knowledge file drops that self‑destruct. One</tspan><tspan x="623" dy="22">command. One link. Gone. Like it never happe…</tspan></text>
   <path d="M623 237H1131" class="rule"/>
   <text x="623" y="266" class="micro gold">RUST</text>
-  <text x="1131" y="266" text-anchor="end" class="micro white">✳ 7   ⑂ 0</text>
+  <text x="1131" y="266" text-anchor="end" class="micro white">✳ 6   ⑂ 0</text>
   <text x="1131" y="290" text-anchor="end" class="micro soft">PUSHED 07 JUL</text>
 
   <path d="M47 341H587V510H47Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>

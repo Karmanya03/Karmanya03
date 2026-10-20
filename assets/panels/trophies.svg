@@ -88,9 +88,9 @@
   <circle cx="175" cy="184" r="35" fill="none" stroke="#e2464d" stroke-opacity=".58" stroke-width="1" stroke-dasharray="2 7" class="trophy-orbit" style="animation-duration:8.2s;animation-direction:normal"/>
   <text x="175" y="195" text-anchor="middle" fill="#e2464d" font-family="Georgia,'Times New Roman',serif" font-size="32" font-weight="700">✦</text>
   <text x="175" y="249" text-anchor="middle" fill="#e2464d" font-family="Georgia,'Times New Roman',serif" font-size="28" font-weight="700">A</text>
-  <text x="175" y="272" text-anchor="middle" class="micro white">43 <tspan fill="#e2464d">· ✦</tspan></text>
+  <text x="175" y="272" text-anchor="middle" class="micro white">42 <tspan fill="#e2464d">· ✦</tspan></text>
   <rect x="62" y="288" width="227" height="5" rx="2.5" fill="#3b3630"/>
-  <rect x="62" y="288" width="147" height="5" rx="2.5" fill="#e2464d" class="rank-meter"/>
+  <rect x="62" y="288" width="136" height="5" rx="2.5" fill="#e2464d" class="rank-meter"/>
   <text x="175" y="312" text-anchor="middle" class="micro soft">NEXT 50</text>
 
   <rect x="325" y="96" width="267" height="226" rx="7" fill="#101011" stroke="#e2464d" stroke-opacity=".58" class="card-edge"/>
