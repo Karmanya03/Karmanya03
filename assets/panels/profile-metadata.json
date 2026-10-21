@@ -3,7 +3,7 @@
   "name": "Karmanya Ravindra",
   "bio": "|| Offensive Security • Red Teaming • Security Engineering • Game Developement ||",
   "created_at": "2019-09-01T15:22:11Z",
-  "generated_at": "2026-10-21T20:46Z",
+  "generated_at": "2026-10-21T23:43Z",
   "totals": {
     "repos": 43,
     "stars": 42,
@@ -348,7 +348,7 @@
       }
     },
     "Karmanya03/Karmanya03": {
-      "pushed_at": "2026-10-21T17:24:06Z",
+      "pushed_at": "2026-10-21T20:46:20Z",
       "languages": {
         "Python": 84783
       }
@@ -765,34 +765,6 @@
         "before": "a27bf1b9420e2b6a34e40413a3cf8b18bfd1032f"
       },
       "summary": "Pushed changes"
-    },
-    {
-      "type": "PushEvent",
-      "created_at": "2026-09-21T08:08:48Z",
-      "repo": "Karmanya03/Overthrone",
-      "url": "https://github.com/Karmanya03/Overthrone",
-      "payload": {
-        "repository_id": 1159769890,
-        "push_id": 44138665066,
-        "ref": "refs/heads/main",
-        "head": "48ecec3287d4baba5d7f9ea6e085a7ef5961f111",
-        "before": "bd33e426d6e58ac31109d83438733bc1e73c02bb"
-      },
-      "summary": "Pushed changes"
-    },
-    {
-      "type": "PushEvent",
-      "created_at": "2026-09-21T10:16:57Z",
-      "repo": "Karmanya03/Overthrone",
-      "url": "https://github.com/Karmanya03/Overthrone",
-      "payload": {
-        "repository_id": 1159769890,
-        "push_id": 44148466279,
-        "ref": "refs/heads/main",
-        "head": "c422dac575de9b72060ff9b9d9be0d167ecef6e8",
-        "before": "bd4577bb9a92d1de5d7058d51d7b5414b13c595f"
-      },
-      "summary": "Pushed changes"
     }
   ],
   "repository_selection": "stars",
@@ -881,6 +853,6 @@
         "levels": "00000000000000001421000000000010000000000000131141300111100110113314333212000100110000000000000000000000001100201002102212201110010112111001201011340101011003100010010000110100001000101001000000000001011001100111000000000000000000000000002010001000001111000001111110000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000"
       }
     ],
-    "updated_at": "2026-10-21T20:46Z"
+    "updated_at": "2026-10-21T23:43Z"
   }
 }
