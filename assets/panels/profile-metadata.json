@@ -3,7 +3,7 @@
   "name": "Karmanya Ravindra",
   "bio": "|| Offensive Security • Red Teaming • Security Engineering • Game Developement ||",
   "created_at": "2019-09-01T15:22:11Z",
-  "generated_at": "2026-10-24T01:52Z",
+  "generated_at": "2026-10-24T06:37Z",
   "totals": {
     "repos": 43,
     "stars": 42,
@@ -348,7 +348,7 @@
       }
     },
     "Karmanya03/Karmanya03": {
-      "pushed_at": "2026-10-23T23:28:19Z",
+      "pushed_at": "2026-10-24T01:52:35Z",
       "languages": {
         "Python": 84783
       }
@@ -423,6 +423,33 @@
     }
   ],
   "activity": [
+    {
+      "type": "DeleteEvent",
+      "created_at": "2026-10-23T04:21:15Z",
+      "repo": "Karmanya03/Overthrone",
+      "url": "https://github.com/Karmanya03/Overthrone",
+      "payload": {
+        "ref": "v0.5.0",
+        "ref_type": "tag",
+        "full_ref": "refs/tags/v0.5.0",
+        "pusher_type": "user"
+      },
+      "summary": "Delete"
+    },
+    {
+      "type": "PushEvent",
+      "created_at": "2026-10-23T03:52:38Z",
+      "repo": "Karmanya03/Overthrone",
+      "url": "https://github.com/Karmanya03/Overthrone",
+      "payload": {
+        "repository_id": 1159769890,
+        "push_id": 47472711829,
+        "ref": "refs/heads/main",
+        "head": "8f02a6e2012d2465b9a05a7b35d209c7c56b96e0",
+        "before": "595c37b3e88c3199374575f03367b6deea42c0fe"
+      },
+      "summary": "Pushed changes"
+    },
     {
       "type": "PushEvent",
       "created_at": "2026-10-23T04:38:55Z",
@@ -883,6 +910,6 @@
         "levels": "00000000000000001421000000000010000000000000131141300111100110113314333212000100110000000000000000000000001100201002102212201110010112111001201011340101011003100010010000110100001000101001000000000001011001100111000000000000000000000000002010001000001111000001111110000000000000000000000000010001000000000000000000000000000000000000000000000000000000000000000000000"
       }
     ],
-    "updated_at": "2026-10-24T01:52Z"
+    "updated_at": "2026-10-24T06:37Z"
   }
 }
