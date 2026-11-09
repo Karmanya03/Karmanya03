@@ -89,7 +89,7 @@
   <text x="63" y="198" class="small soft"><tspan x="63" dy="0">(WIP) Overthrone - The First All-Rust Active Directory</tspan><tspan x="63" dy="22">exploitation framework. A single st…</tspan></text>
   <path d="M63 237H571" class="rule"/>
   <text x="63" y="266" class="micro gold">RUST</text>
-  <text x="571" y="266" text-anchor="end" class="micro white">✳ 31   ⑂ 2</text>
+  <text x="571" y="266" text-anchor="end" class="micro white">✳ 32   ⑂ 2</text>
   <text x="571" y="290" text-anchor="end" class="micro soft">PUSHED 23 OCT</text>
 
   <path d="M607 136H1147V305H607Z" fill="#101011" stroke="#3b3630" stroke-width="1" class="card-edge"/>
