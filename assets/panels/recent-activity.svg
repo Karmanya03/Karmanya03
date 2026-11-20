@@ -128,11 +128,4 @@
   <a xlink:href="https://github.com/Karmanya03/Overthrone" target="_blank" rel="noopener noreferrer">
     <text x="1152" y="376" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
-
-  <rect x="62" y="410" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:2.17s"/>
-  <text x="91" y="418" class="micro red">19 OCT · 08:11 UTC</text>
-  <text x="286" y="418" class="small white">Pushed changes</text>
-  <a xlink:href="https://github.com/Karmanya03/Cinder" target="_blank" rel="noopener noreferrer">
-    <text x="1152" y="418" text-anchor="end" class="mono gold">Karmanya03/Cinder ↗</text>
-  </a>
 </svg>
