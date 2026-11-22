@@ -114,18 +114,4 @@
   <a xlink:href="https://github.com/Karmanya03/Overthrone" target="_blank" rel="noopener noreferrer">
     <text x="1152" y="292" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
   </a>
-
-  <rect x="62" y="326" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:1.55s"/>
-  <text x="91" y="334" class="micro red">23 OCT · 04:38 UTC</text>
-  <text x="286" y="334" class="small white">Delete</text>
-  <a xlink:href="https://github.com/Karmanya03/Overthrone" target="_blank" rel="noopener noreferrer">
-    <text x="1152" y="334" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
-  </a>
-
-  <rect x="62" y="368" width="8" height="8" rx="2" fill="#d5ad52" stroke="#09090a" stroke-width="1.4" class="heat-cell" style="--delay:1.86s"/>
-  <text x="91" y="376" class="micro red">23 OCT · 04:01 UTC</text>
-  <text x="286" y="376" class="small white">Pushed changes</text>
-  <a xlink:href="https://github.com/Karmanya03/Overthrone" target="_blank" rel="noopener noreferrer">
-    <text x="1152" y="376" text-anchor="end" class="mono gold">Karmanya03/Overthrone ↗</text>
-  </a>
 </svg>
